@@ -1,0 +1,21 @@
+:root{
+  --sumi:#15120d;
+  --sumi-2:#211b14;
+  --sumi-3:#332a1e;
+  --washi:#f2ead9;
+  --washi-2:#e8dbbc;
+  --washi-3:#d5c39a;
+  --vermillion:#9c3b26;
+  --vermillion-deep:#742a1b;
+  --igusa:#4c5a2b;
+  --igusa-deep:#37411d;
+  --gold:#a6864f;
+  --ink:#15120d;
+  --ink-70:rgba(21,18,13,.72);
+  --ink-45:rgba(21,18,13,.62);
+  --paper-70:rgba(242,234,217,.78);
+  --paper-45:rgba(242,234,217,.68);
+  --font-d:'Shippori Mincho', serif;
+  --font-b:'Zen Kaku Gothic New', sans-serif;
+  --maxw:1180px;
+}
