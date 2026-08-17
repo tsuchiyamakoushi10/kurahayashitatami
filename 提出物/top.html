@@ -1,0 +1,850 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>倉林畳店 | 妥協しない一枚が信頼をつくる</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --sumi:#15120d;
+  --sumi-2:#211b14;
+  --sumi-3:#332a1e;
+  --washi:#f2ead9;
+  --washi-2:#e8dbbc;
+  --washi-3:#d5c39a;
+  --vermillion:#9c3b26;
+  --vermillion-deep:#742a1b;
+  --igusa:#4c5a2b;
+  --igusa-deep:#37411d;
+  --gold:#a6864f;
+  --ink:#15120d;
+  --ink-70:rgba(21,18,13,.72);
+  --ink-45:rgba(21,18,13,.62);
+  --paper-70:rgba(242,234,217,.78);
+  --paper-45:rgba(242,234,217,.68);
+  --font-d:'Shippori Mincho', serif;
+  --font-b:'Zen Kaku Gothic New', sans-serif;
+  --maxw:1180px;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--washi);
+  color:var(--ink);
+  font-family:var(--font-b);
+  line-height:1.9;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img,svg{display:block; max-width:100%;}
+a{color:inherit; text-decoration:none;}
+button{font-family:inherit; cursor:pointer; border:none; background:none;}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+.eyebrow{
+  font-family:var(--font-d);
+  font-size:14px;
+  letter-spacing:.32em;
+  text-transform:uppercase;
+}
+
+/* texture: fibrous washi grain */
+.washi-tex{
+  position:relative;
+}
+.washi-tex::before{
+  content:"";
+  position:absolute; inset:0;
+  pointer-events:none;
+  opacity:.5;
+  mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='matrix' values='0 0 0 0 0.08  0 0 0 0 0.07  0 0 0 0 0.05  0 0 0 0.05 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-size:220px 220px;
+}
+/* texture: sumi ink grain */
+.sumi-tex{ background:var(--sumi); position:relative; color:var(--washi); }
+.sumi-tex::before{
+  content:"";
+  position:absolute; inset:0;
+  pointer-events:none;
+  opacity:.35;
+  mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='matrix' values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.06 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-size:220px 220px;
+}
+
+/* texture: igusa (tatami rush) grain */
+.igusa-tex{ background:linear-gradient(160deg,#3c4a26 0%,#2c3618 55%,#1a2110 100%); position:relative; color:var(--washi); }
+.igusa-tex::before{
+  content:"";
+  position:absolute; inset:0;
+  pointer-events:none;
+  opacity:.3;
+  mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='matrix' values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.06 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-size:220px 220px;
+}
+
+/* ============ HANKO STAMP (signature element) ============ */
+.hanko{
+  width:64px; height:64px;
+  border-radius:6px;
+  border:2.5px solid var(--vermillion);
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--font-d);
+  font-weight:700;
+  font-size:22px;
+  color:var(--vermillion);
+  letter-spacing:.05em;
+  writing-mode:vertical-rl;
+  transform:rotate(-4deg);
+  position:relative;
+  flex:none;
+  filter:saturate(1.05);
+}
+.hanko::after{
+  content:"";
+  position:absolute; inset:-3px;
+  border-radius:8px;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='90' height='90'><filter id='r'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/><feColorMatrix type='matrix' values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.5 0'/><feComposite operator='in' in2='SourceGraphic'/></filter><rect width='100%25' height='100%25' fill='white' filter='url(%23r)'/></svg>");
+  mix-blend-mode:multiply;
+  opacity:.5;
+  pointer-events:none;
+}
+.hanko.small{ width:38px; height:38px; font-size:13px; border-width:1.75px; }
+
+/* ============ HEADER ============ */
+.site-header{
+  position:fixed; inset:0 0 auto 0; z-index:100;
+  background:rgba(21,18,13,.86);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid rgba(166,134,79,.25);
+}
+.site-header .wrap{
+  height:76px; display:flex; align-items:center; justify-content:space-between;
+}
+.logo{
+  font-family:var(--font-d); font-weight:700; font-size:21px; color:var(--washi);
+  letter-spacing:.08em;
+}
+.logo small{
+  display:block; font-family:var(--font-b); font-weight:400; font-size:11px;
+  letter-spacing:.22em; color:var(--gold); margin-top:4px;
+}
+.header-right{ display:flex; align-items:center; gap:20px; }
+.tel-btn{
+  display:flex; align-items:center; gap:10px;
+  background:var(--igusa); color:var(--washi);
+  padding:10px 18px; border-radius:3px;
+  font-family:var(--font-b); font-weight:700; font-size:15px;
+  letter-spacing:.03em;
+  box-shadow:0 4px 14px rgba(0,0,0,.35);
+  transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+}
+.tel-btn:hover{ transform:translateY(-2px); box-shadow:0 8px 20px rgba(0,0,0,.4); background:var(--igusa-deep); }
+.tel-btn svg{ width:16px; height:16px; flex:none; }
+.tel-btn .num{ display:none; }
+@media(min-width:600px){ .tel-btn .num{ display:inline; } }
+
+.menu-btn{
+  width:44px; height:44px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px;
+  border:1px solid rgba(242,234,217,.35); border-radius:2px;
+}
+.menu-btn span{ width:20px; height:1px; background:var(--washi); transition:all .3s ease; }
+.menu-btn[aria-expanded="true"] span:nth-child(1){ transform:translateY(6px) rotate(45deg); }
+.menu-btn[aria-expanded="true"] span:nth-child(2){ opacity:0; }
+.menu-btn[aria-expanded="true"] span:nth-child(3){ transform:translateY(-6px) rotate(-45deg); }
+
+.nav-overlay{
+  position:fixed; inset:0; z-index:99;
+  background:var(--sumi);
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; visibility:hidden; transform:translateY(-12px);
+  transition:opacity .4s ease, transform .4s ease, visibility 0s linear .4s;
+}
+.nav-overlay.open{ opacity:1; visibility:visible; transform:translateY(0); transition:opacity .4s ease, transform .4s ease; }
+.nav-overlay ul{ list-style:none; text-align:center; }
+.nav-overlay li{ margin:20px 0; }
+.nav-overlay a{
+  font-family:var(--font-d); font-size:clamp(24px,5vw,38px); color:var(--washi); font-weight:600;
+  position:relative; padding-bottom:4px;
+}
+.nav-overlay a::after{
+  content:""; position:absolute; left:0; right:0; bottom:-2px; height:1px; background:var(--vermillion);
+  transform:scaleX(0); transform-origin:left; transition:transform .35s ease;
+}
+.nav-overlay a:hover::after{ transform:scaleX(1); }
+
+/* ============ HERO ============ */
+.hero{
+  position:relative; min-height:100svh;
+  display:flex; align-items:flex-end;
+  padding:150px 0 90px;
+  color:var(--washi);
+  overflow:hidden;
+}
+.hero-photo{
+  position:absolute; inset:0;
+  background:
+    linear-gradient(180deg, rgba(21,18,13,.35) 0%, rgba(21,18,13,.55) 55%, rgba(21,18,13,.94) 100%),
+    radial-gradient(ellipse at 30% 20%, #4a4034 0%, transparent 55%),
+    linear-gradient(135deg,#2b2419 0%, #1c1710 45%, #100d09 100%);
+}
+.hero-photo .grain{
+  position:absolute; inset:0; opacity:.4; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3'/></filter><rect width='100%25' height='100%25' filter='url(%23g)' opacity='0.5'/></svg>");
+}
+.photo-note{
+  position:absolute; top:24px; right:24px;
+  font-family:var(--font-b); font-size:12px; letter-spacing:.1em;
+  color:rgba(242,234,217,.55); border:1px solid rgba(242,234,217,.3);
+  padding:5px 9px; border-radius:2px;
+}
+.hero-inner{ position:relative; z-index:2; width:100%; }
+.hero-eyebrow{
+  display:flex; align-items:center; gap:14px; margin-bottom:26px;
+  color:var(--gold); letter-spacing:.28em; font-size:13px;
+}
+.hero-eyebrow .line{ width:44px; height:1px; background:var(--gold); }
+.catch{
+  font-family:var(--font-d); font-weight:800;
+  font-size:clamp(40px, 8vw, 96px);
+  line-height:1.25;
+  letter-spacing:.02em;
+  text-shadow:0 6px 30px rgba(0,0,0,.5);
+}
+.catch em{
+  font-style:normal; color:#c9a24a;
+  display:block;
+}
+.sub{
+  margin-top:26px; max-width:520px;
+  font-family:var(--font-d);
+  font-size:16px; color:rgba(242,234,217,.92); font-weight:600; letter-spacing:.02em;
+}
+.hero-cta{ display:flex; flex-wrap:wrap; gap:16px; margin-top:44px; }
+.btn{
+  display:inline-flex; align-items:center; gap:10px;
+  padding:16px 30px; border-radius:2px;
+  font-family:var(--font-b); font-weight:700; font-size:15px; letter-spacing:.03em;
+  transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+}
+.btn-primary{ background:var(--igusa); color:var(--washi); box-shadow:0 8px 24px rgba(0,0,0,.35); }
+.btn-primary:hover{ transform:translateY(-2px); background:var(--igusa-deep); }
+.btn-ghost{ border:1px solid rgba(242,234,217,.4); color:var(--washi); }
+.btn-ghost:hover{ border-color:var(--washi); background:rgba(242,234,217,.08); }
+.btn svg{ width:15px; height:15px; }
+
+.scroll-cue{
+  position:absolute; left:28px; bottom:26px; z-index:2;
+  display:flex; align-items:center; gap:10px; color:rgba(242,234,217,.6);
+  font-size:12px; letter-spacing:.22em;
+}
+.scroll-cue .stem{ width:1px; height:38px; background:linear-gradient(var(--gold), transparent); animation:drip 2.4s ease-in-out infinite; }
+@keyframes drip{ 0%{opacity:.2;} 50%{opacity:1;} 100%{opacity:.2;} }
+
+/* ============ SECTION SHELL ============ */
+section{ position:relative; padding:110px 0; }
+.section-head{ max-width:640px; margin-bottom:56px; }
+.section-head .eyebrow{ color:var(--vermillion); margin-bottom:16px; }
+.section-title{
+  font-family:var(--font-d); font-weight:700;
+  font-size:clamp(26px,3.6vw,40px);
+  line-height:1.55;
+}
+.reveal{ opacity:0; transform:translateY(28px); transition:opacity .8s ease, transform .8s ease; }
+.reveal.in{ opacity:1; transform:none; }
+
+/* ============ PAIN POINTS ============ */
+.pain-list{ list-style:none; display:grid; gap:0; }
+.pain-list li{
+  display:flex; align-items:baseline; gap:22px;
+  padding:26px 0; border-bottom:1px solid var(--washi-3);
+  font-family:var(--font-d); font-weight:700; font-size:clamp(17px,2.2vw,22px);
+}
+.pain-list li:first-child{ border-top:1px solid var(--washi-3); }
+.pain-list .mark{ color:var(--vermillion); font-size:22px; flex:none; }
+.pain-resolve{
+  margin-top:44px; font-family:var(--font-d); font-weight:700;
+  font-size:clamp(20px,2.8vw,28px); color:var(--vermillion);
+  text-align:center;
+}
+
+/* ============ MANIFESTO (熱を伝える) ============ */
+.manifesto{ padding:150px 0; }
+.manifesto .wrap{ text-align:center; }
+.manifesto-mark{ margin:0 auto 40px; }
+.manifesto-line{
+  font-family:var(--font-d); font-weight:800;
+  letter-spacing:.03em;
+}
+.manifesto-line.big{ font-size:clamp(34px,7vw,78px); line-height:1.35; }
+.manifesto-line.small{
+  font-size:clamp(15px,1.8vw,18px); font-family:var(--font-b); font-weight:500;
+  max-width:620px; margin:34px auto 0; color:rgba(242,234,217,.9); line-height:2;
+}
+.badge-row{
+  display:flex; flex-wrap:wrap; justify-content:center; gap:14px; margin-top:64px;
+}
+.badge{
+  display:flex; align-items:center; gap:12px;
+  border:1px solid rgba(166,134,79,.5); padding:16px 26px; border-radius:2px;
+  font-family:var(--font-d); font-size:16.5px; letter-spacing:.05em; color:var(--washi);
+}
+.badge .dot{ width:7px; height:7px; border-radius:50%; background:var(--vermillion); flex:none; }
+
+/* ============ ABOUT TATAMI SPLIT ============ */
+.split{ display:grid; gap:56px; align-items:center; }
+@media(min-width:880px){ .split{ grid-template-columns:1fr 1fr; gap:80px; } }
+.frame{
+  position:relative; aspect-ratio:4/5; border-radius:2px; overflow:hidden;
+  background:linear-gradient(150deg,#8c7a52 0%,#5f4f31 40%,#2c2419 100%);
+}
+.frame.landscape{ aspect-ratio:16/10; }
+.frame-tatami{ background:linear-gradient(155deg,#8a9a5c 0%,#5c6a37 45%,#2e3419 100%); }
+.frame::before{
+  content:""; position:absolute; inset:0; opacity:.5; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3'/></filter><rect width='100%25' height='100%25' filter='url(%23g)'/></svg>");
+}
+.frame .tag{
+  position:absolute; left:16px; bottom:16px; z-index:2;
+  color:rgba(242,234,217,.92); font-size:13px; letter-spacing:.08em;
+  border:1px solid rgba(242,234,217,.4); padding:5px 10px; border-radius:2px;
+  backdrop-filter:blur(3px);
+}
+.split-text .body-text{ margin-top:22px; max-width:480px; color:var(--ink-70); }
+.tatami-diagram{ margin-top:34px; display:grid; gap:14px; }
+.tatami-diagram div{
+  display:flex; justify-content:space-between; border-bottom:1px dashed var(--washi-3); padding-bottom:12px;
+  font-family:var(--font-d); font-size:15px;
+}
+.tatami-diagram span:last-child{ color:var(--ink-70); font-family:var(--font-b); font-size:14.5px; font-weight:400; }
+
+/* ============ REASONS (選ばれる理由) ============ */
+.reasons{ display:grid; gap:2px; background:var(--washi-3); border:1px solid var(--washi-3); }
+@media(min-width:880px){ .reasons{ grid-template-columns:repeat(3,1fr); } }
+.reason{ background:var(--washi); padding:44px 34px; position:relative; }
+.reason .hanko{ margin-bottom:26px; }
+.reason h3{ font-family:var(--font-d); font-size:20px; font-weight:700; margin-bottom:16px; }
+.reason p{ font-size:15.5px; color:var(--ink); opacity:.82; line-height:1.95; }
+
+/* ============ PRODUCTS ============ */
+.product-grid{ display:grid; gap:28px; }
+@media(min-width:760px){ .product-grid{ grid-template-columns:1fr 1fr; } }
+.product-card{
+  background:var(--sumi); color:var(--washi); border-radius:2px; overflow:hidden;
+  border:1px solid var(--sumi-3);
+}
+.product-swatch{ height:220px; position:relative; transition:background .4s ease; }
+.product-swatch::after{
+  content:""; position:absolute; inset:0; opacity:.35; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3'/></filter><rect width='100%25' height='100%25' filter='url(%23g)'/></svg>");
+}
+.swatch-igusa{ background:linear-gradient(160deg,#7a8a47 0%,#4c5a2b 55%,#252d14 100%); }
+.swatch-washi{ background:linear-gradient(160deg,#c9b689 0%,#93794f 55%,#4a3b23 100%); }
+.product-body{ padding:32px; }
+.product-body h3{ font-family:var(--font-d); font-size:24px; font-weight:700; }
+.product-body .price{ margin-top:6px; color:var(--gold); font-family:var(--font-b); font-weight:700; font-size:16px; letter-spacing:.03em; line-height:1.7; }
+.product-body p{ margin-top:16px; font-size:15.5px; color:rgba(242,234,217,.88); font-family:var(--font-b); font-weight:500; line-height:1.9; }
+.color-dots{ display:flex; gap:12px; margin-top:20px; align-items:center; flex-wrap:wrap; }
+.color-dots button{
+  width:26px; height:26px; border-radius:50%; border:2px solid rgba(242,234,217,.4);
+  padding:0; position:relative; transition:transform .2s ease, border-color .2s ease;
+}
+.color-dots button:hover{ transform:translateY(-2px); }
+.color-dots button:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
+.color-dots button[aria-pressed="true"]{
+  border-color:var(--washi); box-shadow:0 0 0 3px var(--sumi), 0 0 0 4px var(--gold);
+}
+.color-label{
+  margin-top:14px; font-family:var(--font-b); font-size:14px; font-weight:700; letter-spacing:.05em; color:rgba(242,234,217,.85);
+}
+.color-label .id{ color:var(--gold); font-family:var(--font-b); font-size:12px; margin-left:8px; }
+.price-note{ margin-top:30px; font-size:15.5px; color:var(--ink); font-family:var(--font-b); font-weight:500; text-align:center; }
+
+/* ============ CASES ============ */
+.case-grid{ display:grid; gap:40px; }
+@media(min-width:820px){ .case-grid{ grid-template-columns:1fr 1fr; } }
+.case-card{ background:var(--washi); border:1px solid var(--washi-3); }
+.case-card .frame{ aspect-ratio:16/10; border-radius:0; }
+.case-body{ padding:26px 28px 30px; }
+.case-body .cat{ font-size:18px; letter-spacing:.08em; color:var(--vermillion); font-weight:700; font-family:var(--font-d); }
+.case-body .work{ margin-top:8px; font-family:var(--font-d); font-weight:700; font-size:19px; color:var(--ink); }
+.case-detail{ list-style:none; margin-top:16px; display:grid; gap:10px; }
+.case-detail li{ display:flex; gap:12px; font-size:15px; font-weight:700; font-family:var(--font-d); color:var(--ink); }
+.case-detail li span:first-child{ flex:none; width:64px; color:var(--vermillion); font-weight:700; }
+.case-body blockquote{
+  margin-top:18px; padding-left:18px; border-left:2px solid var(--gold);
+  font-family:var(--font-d); font-size:17.5px; font-weight:700; color:var(--ink); line-height:1.85;
+}
+
+/* ============ CRAFTSPEOPLE ============ */
+.crafts-grid{ display:grid; gap:32px; }
+@media(min-width:760px){ .crafts-grid{ grid-template-columns:1fr 1fr; } }
+.craft-card{ display:flex; gap:24px; align-items:flex-start; }
+.craft-photo{ width:132px; aspect-ratio:3/4; flex:none; border-radius:2px; overflow:hidden; position:relative; }
+.craft-photo::after{
+  content:""; position:absolute; inset:0; opacity:.35; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3'/></filter><rect width='100%25' height='100%25' filter='url(%23g)'/></svg>");
+}
+.craft-photo.p1{ background:linear-gradient(160deg,#6b5a3c 0%,#382e1c 100%); }
+.craft-photo.p2{ background:linear-gradient(160deg,#7d6b47 0%,#40331d 100%); }
+.craft-role{ font-size:14px; letter-spacing:.1em; color:var(--vermillion); font-weight:700; font-family:var(--font-d); }
+.craft-name{ font-family:var(--font-d); font-weight:700; font-size:21px; margin-top:6px; }
+.craft-years{ font-size:16px; color:var(--ink); font-weight:700; margin-top:6px; font-family:var(--font-b); }
+.craft-quote{ margin-top:14px; font-size:15.5px; color:var(--ink); opacity:.85; line-height:1.9; font-family:var(--font-b); font-weight:500; }
+
+/* ============ FAQ ============ */
+.faq-item{ border-bottom:1px solid var(--washi-3); }
+.faq-item:first-child{ border-top:1px solid var(--washi-3); }
+.faq-q{
+  width:100%; display:flex; justify-content:space-between; align-items:center;
+  padding:24px 4px; text-align:left; font-family:var(--font-b); font-weight:700; font-size:16px;
+}
+.faq-q .plus{ font-size:20px; color:var(--vermillion); transition:transform .3s ease; flex:none; margin-left:20px; }
+.faq-item[data-open="true"] .plus{ transform:rotate(45deg); }
+.faq-a{ max-height:0; overflow:hidden; transition:max-height .35s ease; }
+.faq-item[data-open="true"] .faq-a{ max-height:220px; }
+.faq-a p{ padding:0 4px 24px; font-size:14.5px; color:var(--ink-70); max-width:600px; }
+
+/* ============ FINAL CTA ============ */
+.final-cta{ padding:140px 0; text-align:center; }
+.final-cta .catch2{
+  font-family:var(--font-d); font-weight:800; font-size:clamp(28px,5vw,52px); line-height:1.5;
+}
+.final-cta .catch2 span{ color:var(--washi); }
+.final-cta .cta-sub{ margin-top:20px; color:rgba(242,234,217,.9); font-family:var(--font-b); font-weight:500; }
+.big-tel{
+  margin-top:48px; display:inline-flex; flex-direction:column; align-items:center; gap:6px;
+  padding:34px 52px; border:1.5px solid var(--gold); border-radius:3px;
+}
+.big-tel .label{ font-size:14px; letter-spacing:.18em; color:var(--gold); font-weight:700; }
+.big-tel .number{ font-family:var(--font-d); font-weight:800; font-size:clamp(30px,5vw,44px); color:var(--washi); }
+.big-tel .hours{ font-size:15px; color:rgba(242,234,217,.92); margin-top:6px; font-family:var(--font-b); font-weight:500; }
+.final-note{ margin-top:26px; font-size:14.5px; color:rgba(242,234,217,.85); font-family:var(--font-b); font-weight:500; }
+
+/* ============ FOOTER ============ */
+footer{ background:var(--sumi-2); color:rgba(242,234,217,.7); padding:70px 0 30px; }
+.foot-grid{ display:grid; gap:40px; }
+@media(min-width:760px){ .foot-grid{ grid-template-columns:1.4fr 1fr 1fr; } }
+.foot-logo{ font-family:var(--font-d); font-size:20px; color:var(--washi); font-weight:700; }
+.foot-grid p{ font-size:14.5px; margin-top:14px; line-height:2; }
+.foot-links{ list-style:none; }
+.foot-links li{ margin-bottom:12px; font-size:14.5px; }
+.foot-links a:hover{ color:var(--gold); }
+.foot-links h4{ font-family:var(--font-d); font-size:14.5px; letter-spacing:.1em; color:var(--gold); margin-bottom:16px; }
+.copyright{ margin-top:56px; padding-top:24px; border-top:1px solid rgba(242,234,217,.12); font-size:12.5px; letter-spacing:.05em; opacity:.75; }
+.insta-row{ display:flex; justify-content:flex-start; margin-top:52px; }
+.insta-btn{
+  width:150px; height:52px; border-radius:8px;
+  background:radial-gradient(circle at 30% 110%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+  color:#fff;
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  font-family:var(--font-b); font-weight:700; font-size:15px; letter-spacing:.02em;
+  transition:transform .25s ease, box-shadow .25s ease;
+  box-shadow:0 6px 18px rgba(0,0,0,.35);
+}
+.insta-btn svg{ width:22px; height:22px; flex:none; }
+.insta-btn:hover{ transform:translateY(-2px); box-shadow:0 10px 24px rgba(0,0,0,.4); }
+.insta-btn:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation:none !important; transition:none !important; }
+  .reveal{ opacity:1; transform:none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="wrap">
+    <div class="logo">倉林畳店<small>KURAHAYASHI TATAMI — since 1943</small></div>
+    <div class="header-right">
+      <a class="tel-btn" href="tel:0274522966" aria-label="電話をかける">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span class="num">お問い合わせ</span>
+      </a>
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-label="メニュー">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="nav-overlay" id="navOverlay">
+  <ul>
+    <li><a href="#belief">私たちの想い</a></li>
+    <li><a href="#tatami">畳について</a></li>
+    <li><a href="#reasons">選ばれる理由</a></li>
+    <li><a href="#price">料金の目安</a></li>
+    <li><a href="#cases">施工事例</a></li>
+    <li><a href="#craftspeople">職人紹介</a></li>
+    <li><a href="#contact">お問い合わせ</a></li>
+  </ul>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-photo"><div class="grain"></div></div>
+  <span class="photo-note">写真枠 P-01 / 職人が畳表を裁断・縫い付ける姿</span>
+  <div class="wrap hero-inner">
+    <div class="hero-eyebrow"><span class="line"></span>KURAHAYASHI TATAMI</div>
+    <h1 class="catch">妥協しない<br>一枚が<em>信頼</em>をつくる</h1>
+    <p class="sub">創業83年。地域に根ざし、一枚一枚に真心を込めて<br>畳づくりを続けてきました。</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="tel:0274522966">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        まずはご相談ください
+      </a>
+      <a class="btn btn-ghost" href="#tatami">
+        畳について知りたい方はこちら
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="scroll-cue"><span class="stem"></span>SCROLL</div>
+</section>
+
+<!-- ============ PAIN POINTS ============ -->
+<section class="washi-tex">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow" style="font-weight:700;">こんなことに困っていませんか</div>
+      <h2 class="section-title">畳の"気になる"を、<br>そのままにしていませんか。</h2>
+    </div>
+    <ul class="pain-list reveal">
+      <li><span class="mark">・</span>畳が色あせてお部屋が古く見える</li>
+      <li><span class="mark">・</span>費用や張り替え時期が分からず、そのままになっている</li>
+      <li><span class="mark">・</span>子どもが安心して遊べる部屋にしたい</li>
+    </ul>
+    <p class="pain-resolve reveal">そのお悩み、畳を替えることで解決できます。</p>
+  </div>
+</section>
+
+<!-- ============ MANIFESTO ============ -->
+<section id="belief" class="sumi-tex manifesto">
+  <div class="wrap">
+    <!-- hanko removed -->
+    <p class="manifesto-line big reveal">妥協はしない。<br>一枚一枚に、<br>確かな技術とこだわりを。</p>
+    <p class="manifesto-line small reveal">本気で仕事をした、その先にあるお客様の「きれいになった」「頼んでよかった」という言葉のために。<br>ひと目で違いがわかる仕上がりを、一つひとつの畳に積み重ねています。</p>
+    <div class="badge-row reveal">
+      <div class="badge"><span class="dot"></span>創業83年</div>
+      <div class="badge"><span class="dot"></span>夜間対応</div>
+      <div class="badge"><span class="dot"></span>スピード対応</div>
+    </div>
+    <div class="badge-row reveal" style="margin-top:14px;">
+      <div class="badge"><span class="dot"></span>国産い草へのこだわり</div>
+      <div class="badge"><span class="dot"></span>和紙表 取扱</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT TATAMI ============ -->
+<section id="tatami" class="washi-tex">
+  <div class="wrap">
+    <div class="split">
+      <div class="reveal">
+        <div class="frame frame-tatami">
+          <div class="tag">写真枠 P-08 / 畳の目のアップ</div>
+        </div>
+      </div>
+      <div class="split-text reveal">
+        <div class="eyebrow" style="color:var(--vermillion); margin-bottom:16px; font-weight:700;">畳について知る</div>
+        <h2 class="section-title">畳表・畳床・畳縁からできる、<br>畳の構造。</h2>
+        <p class="body-text">見た目や香りだけでなく、クッション性や耐久性まで、<br>畳は幾つもの部材が重なって出来ています。<br>仕組みを知ると、選び方も変わってきます。</p>
+        <div class="tatami-diagram">
+          <div><span>畳表(たたみおもて)</span><span>肌触り・見た目・香りを左右</span></div>
+          <div><span>畳床(たたみどこ)</span><span>クッション性・断熱性を支える</span></div>
+          <div><span>畳縁(たたみべり)</span><span>デザイン性+耐久性を高める</span></div>
+        </div>
+        <div class="hero-cta" style="margin-top:34px;">
+          <a class="btn" style="background:var(--sumi); color:var(--washi);" href="#">
+            畳についてもっと詳しく見る
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REASONS ============ -->
+<section id="reasons" class="washi-tex">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow" style="font-weight:700;">選ばれる理由</div>
+      <h2 class="section-title">倉林畳店が、<br>選ばれ続けている理由。</h2>
+    </div>
+    <div class="reasons reveal">
+      <div class="reason">
+        <div class="hanko small">壱</div>
+        <h3>創業83年</h3>
+        <p>創業以来83年、多くのお客様に支えられながら、地域の住まいづくりに携わってきました。<br>長年培ってきた経験を活かし、お住まいやご要望に合わせた最適なご提案をいたします。</p>
+      </div>
+      <div class="reason">
+        <div class="hanko small">弐</div>
+        <h3>迅速、柔軟な対応力</h3>
+        <p>畳の傷みや急なご相談にも、できる限り迅速に対応いたします。営業時間外でも<br>ご相談いただけるよう柔軟な対応を心がけ、お客様の不安をできるだけ早く解消します。</p>
+      </div>
+      <div class="reason">
+        <div class="hanko small">参</div>
+        <h3>暮らしに合った畳をご提案</h3>
+        <p>「い草の香りを楽しみたい」「お手入れしやすい畳がいい」など、お客様のご要望や<br>ライフスタイルを丁寧にお伺いし、一人ひとりに合った畳をご提案します。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRODUCTS / PRICE ============ -->
+<section id="price" class="washi-tex">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow" style="font-weight:700;">畳の種類・料金の目安</div>
+      <h2 class="section-title">い草畳と和紙表、<br>あなたの暮らしに合う一枚を。</h2>
+    </div>
+    <div class="product-grid reveal">
+      <div class="product-card">
+        <div class="product-swatch swatch-igusa"></div>
+        <div class="product-body">
+          <h3>い草畳</h3>
+          <div class="price">裏返し 一律4,500円+税<br>表替え(国産) 7,000〜15,000円+税</div>
+          <p>天然素材ならではの香りと風合い。<br>使い始めは青々と、時間とともに黄金色へ変化していく、国産い草にこだわった一枚です。</p>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-swatch swatch-washi" id="washiSwatch">
+          <div class="tag" style="position:absolute; top:12px; right:12px;">写真枠 P-13〜P-16</div>
+        </div>
+        <div class="product-body">
+          <h3>和紙表</h3>
+          <div class="price">裏返し 一律4,500円+税<br>表替え 7,000〜15,000円+税</div>
+          <p>色あせ・汚れ・日焼けに強く、美しい見た目を長く保てる和紙表。<br>ここでは数あるカラーの中から4色を抜粋してご紹介しています。</p>
+          <div class="color-dots" id="colorDots" role="group" aria-label="和紙表のカラーバリエーション">
+            <button type="button" style="background:#3d4a6b;" data-color="#3d4a6b" data-name="藍" data-id="P-13" aria-pressed="true" aria-label="藍"></button>
+            <button type="button" style="background:#7a5c3d;" data-color="#7a5c3d" data-name="焦茶" data-id="P-14" aria-pressed="false" aria-label="焦茶"></button>
+            <button type="button" style="background:#8b9a6b;" data-color="#8b9a6b" data-name="若草" data-id="P-15" aria-pressed="false" aria-label="若草"></button>
+            <button type="button" style="background:#c9c2ad;" data-color="#c9c2ad" data-name="生成り" data-id="P-16" aria-pressed="false" aria-label="生成り"></button>
+          </div>
+          <div class="color-label" id="colorLabel">藍<span class="id">P-13</span></div>
+          <p style="margin-top:12px; font-size:14.5px; color:rgba(242,234,217,.85); font-family:var(--font-b); font-weight:500;">※上記は一部の色味です。他のカラーも<br>ございますので、お気軽にご相談ください。</p>
+        </div>
+      </div>
+    </div>
+    <p class="price-note reveal">正確な金額は畳のサイズ・状態により異なります。お見積りは無料ですので、<br>まずはお気軽にご相談ください。</p>
+    <div class="reveal" style="display:flex; justify-content:center; margin-top:34px;">
+      <a class="btn" style="background:var(--sumi); color:var(--washi);" href="/price/">
+        料金ページで詳しく見る
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CASES ============ -->
+<section id="cases" class="sumi-tex">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2 class="section-title" style="color:var(--washi); font-size:clamp(38px,5.5vw,64px);">施工事例</h2>
+    </div>
+    <div class="case-grid reveal">
+      <div class="case-card">
+        <div class="frame"><div class="tag">P-23 施工後</div></div>
+        <div class="case-body">
+          <div class="cat">表替え</div>
+          <div class="work">国産い草</div>
+          <ul class="case-detail">
+            <li><span>枚数</span><span>6畳2間</span></li>
+            <li><span>工期</span><span>2日</span></li>
+          </ul>
+          <blockquote>畳を替える時はまたぜひお願いしたいです。</blockquote>
+        </div>
+      </div>
+      <div class="case-card">
+        <div class="frame"><div class="tag">P-25 施工後</div></div>
+        <div class="case-body">
+          <div class="cat">表替え</div>
+          <div class="work">和紙表</div>
+          <ul class="case-detail">
+            <li><span>枚数</span><span>10畳</span></li>
+            <li><span>工期</span><span>1日</span></li>
+          </ul>
+          <blockquote>これで気持ちよく眠れます。部屋も明るくなりました。</blockquote>
+        </div>
+      </div>
+    </div>
+    <div class="reveal" style="display:flex; justify-content:center; margin-top:48px;">
+      <a class="btn btn-ghost" href="/works/">
+        施工事例をもっと見る
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CRAFTSPEOPLE ============ -->
+<section id="craftspeople" class="washi-tex">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow" style="font-weight:700;">職人・会社紹介</div>
+      <h2 class="section-title">この道を歩む、<br>ふたりの職人。</h2>
+    </div>
+    <div class="crafts-grid reveal">
+      <div class="craft-card">
+        <div class="craft-photo p1"></div>
+        <div>
+          <div class="craft-role">代表・3代目</div>
+          <div class="craft-name">倉林 俊之</div>
+          <div class="craft-years">職人歴 32年</div>
+          <p class="craft-quote">妥協のない仕事で、<br>畳と言ったら倉林と<br>思っていただけるような<br>施工をします。</p>
+        </div>
+      </div>
+      <div class="craft-card">
+        <div class="craft-photo p2"></div>
+        <div>
+          <div class="craft-role">4代目・修行中</div>
+          <div class="craft-name">倉林 尚輝</div>
+          <div class="craft-years">職人歴 4年</div>
+          <p class="craft-quote">お客様に喜んでいただける<br>施工を心がけています。</p>
+        </div>
+      </div>
+    </div>
+    <div class="reveal" style="display:flex; justify-content:center; margin-top:48px;">
+      <a class="btn" style="background:var(--sumi); color:var(--washi);" href="/company/">
+        会社概要をもっと見る
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="washi-tex">
+  <div class="wrap" style="max-width:760px;">
+    <div class="section-head reveal">
+      <div class="eyebrow" style="font-weight:700;">よくあるご質問</div>
+      <h2 class="section-title">ご相談の前に</h2>
+    </div>
+    <div class="reveal">
+      <div class="faq-item" data-open="false">
+        <button class="faq-q">対応エリアはどこまでですか?<span class="plus">+</span></button>
+        <div class="faq-a"><p>まずはお気軽にお問い合わせください。エリアを確認のうえご案内します。</p></div>
+      </div>
+      <div class="faq-item" data-open="false">
+        <button class="faq-q">見積もりは無料ですか?<span class="plus">+</span></button>
+        <div class="faq-a"><p>はい、無料です。まずはお気軽にご相談ください。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section id="contact" class="igusa-tex final-cta">
+  <div class="wrap">
+    <p class="reveal catch2">畳のことなら、<br>どんなに小さなことでも<br><span>お気軽にご相談ください。</span></p>
+    <p class="reveal cta-sub">見積もりは無料です。まずはお電話でお声がけください。</p>
+    <a class="big-tel reveal" href="tel:0274522966">
+      <span class="label">TEL / FAX</span>
+      <span class="number">0274-52-2966</span>
+      <span class="hours">受付時間 8:00〜20:00</span>
+    </a>
+    <p class="final-note reveal">ご来店をご希望の方も、まずは一度お電話にてご相談ください。</p>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-logo">倉林畳店</div>
+        <p>〒367-0301<br>埼玉県児玉郡神川町渡瀬638-7<br>TEL/FAX 0274-52-2966<br>受付時間 8:00〜20:00</p>
+      </div>
+      <div>
+        <h4>MENU</h4>
+        <ul class="foot-links">
+          <li><a href="#belief">私たちの想い</a></li>
+          <li><a href="#tatami">畳について</a></li>
+          <li><a href="#reasons">選ばれる理由</a></li>
+          <li><a href="#price">料金の目安</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>MENU</h4>
+        <ul class="foot-links">
+          <li><a href="#cases">施工事例</a></li>
+          <li><a href="#craftspeople">職人紹介</a></li>
+          <li><a href="#contact">お問い合わせ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="insta-row">
+      <a class="insta-btn" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagramを見る">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <rect x="2.5" y="2.5" width="19" height="19" rx="5"/>
+          <circle cx="12" cy="12" r="4.3"/>
+          <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/>
+        </svg>
+        <span>Instagram</span>
+      </a>
+    </div>
+    <div class="copyright">© Kurabayashi Tatami. All Rights Reserved.</div>
+  </div>
+</footer>
+
+<script>
+// menu toggle
+const menuBtn = document.getElementById('menuBtn');
+const navOverlay = document.getElementById('navOverlay');
+menuBtn.addEventListener('click', () => {
+  const open = navOverlay.classList.toggle('open');
+  menuBtn.setAttribute('aria-expanded', open);
+});
+navOverlay.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  navOverlay.classList.remove('open');
+  menuBtn.setAttribute('aria-expanded', 'false');
+}));
+
+// faq accordion
+document.querySelectorAll('.faq-item').forEach(item => {
+  item.querySelector('.faq-q').addEventListener('click', () => {
+    const isOpen = item.getAttribute('data-open') === 'true';
+    document.querySelectorAll('.faq-item').forEach(i => i.setAttribute('data-open','false'));
+    item.setAttribute('data-open', String(!isOpen));
+  });
+});
+
+// scroll reveal
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// washi-omote color swatch buttons
+const colorDots = document.getElementById('colorDots');
+const washiSwatch = document.getElementById('washiSwatch');
+const colorLabel = document.getElementById('colorLabel');
+function shade(hex, amt){
+  const n = parseInt(hex.slice(1),16);
+  const r = Math.min(255, Math.max(0, (n>>16) + amt));
+  const g = Math.min(255, Math.max(0, ((n>>8)&255) + amt));
+  const b = Math.min(255, Math.max(0, (n&255) + amt));
+  return '#' + (1<<24 | r<<16 | g<<8 | b).toString(16).slice(1);
+}
+if(colorDots){
+  colorDots.addEventListener('click', (e) => {
+    const btn = e.target.closest('button');
+    if(!btn) return;
+    colorDots.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed','false'));
+    btn.setAttribute('aria-pressed','true');
+    const color = btn.dataset.color;
+    washiSwatch.style.background = `linear-gradient(160deg, ${shade(color,40)} 0%, ${color} 55%, ${shade(color,-45)} 100%)`;
+    colorLabel.innerHTML = `${btn.dataset.name}<span class="id">${btn.dataset.id}</span>`;
+  });
+}
+</script>
+</body>
+</html>

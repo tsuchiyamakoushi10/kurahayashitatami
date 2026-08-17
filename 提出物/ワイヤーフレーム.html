@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>倉林畳店 TOPページ ワイヤーフレーム</title>
+<style>
+  :root{
+    --line:#9a9a9a; --line-dark:#555; --bg:#fff; --panel:#f4f4f4; --dark:#2b2b2b; --dark-panel:#3d3d3d; --text:#333; --text-light:#eee;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:"Hiragino Kaku Gothic ProN","Helvetica Neue",sans-serif; background:#e8e8e8; color:var(--text); padding:32px 0 80px;}
+  .page{max-width:900px; margin:0 auto; background:#fff; box-shadow:0 0 0 1px #ccc;}
+  .sec{border-bottom:2px dashed var(--line); padding:22px 24px; position:relative;}
+  .sec.dark{background:var(--dark); color:var(--text-light); border-bottom-color:#777;}
+  .tag{
+    position:absolute; top:8px; right:12px; font-size:10px; letter-spacing:.1em;
+    color:#888; background:#fff; border:1px solid #ccc; padding:2px 8px; border-radius:3px;
+  }
+  .sec.dark .tag{ background:#2b2b2b; color:#bbb; border-color:#666; }
+  h2{font-size:14px; margin-bottom:10px; font-weight:700;}
+  .note{font-size:11px; color:#888; margin-top:4px;}
+  .sec.dark .note{ color:#aaa; }
+  .row{display:flex; gap:12px; flex-wrap:wrap; margin-top:10px;}
+  .box{
+    border:1px dashed var(--line); background:var(--panel); flex:1; min-width:120px;
+    display:flex; align-items:center; justify-content:center; font-size:11px; color:#777; text-align:center; padding:8px;
+  }
+  .sec.dark .box{ background:var(--dark-panel); border-color:#777; color:#ccc; }
+  .photo{ height:110px; }
+  .photo.tall{ height:220px; }
+  .btn-ph{
+    border:1px solid var(--line-dark); padding:8px 18px; font-size:11px; display:inline-block; border-radius:2px; color:#444; margin-top:10px;
+  }
+  .sec.dark .btn-ph{ border-color:#aaa; color:#eee; }
+  .headline-ph{ height:26px; background:repeating-linear-gradient(90deg,#ccc 0 60%,transparent 60% 100%); background-size:70% 100%; background-repeat:no-repeat; width:80%; margin-bottom:8px; opacity:.6;}
+  .sec.dark .headline-ph{ background:repeating-linear-gradient(90deg,#888 0 60%,transparent 60% 100%); background-size:70% 100%; background-repeat:no-repeat; }
+  .line-ph{ height:8px; background:#ddd; margin-bottom:6px; border-radius:2px; }
+  .line-ph.w80{width:80%;} .line-ph.w60{width:60%;} .line-ph.w40{width:40%;}
+  .sec.dark .line-ph{ background:#666; }
+  .header-ph{ display:flex; justify-content:space-between; align-items:center; padding:14px 24px; border-bottom:2px solid #333; background:#1c1c1c; color:#eee; font-size:12px;}
+  .header-ph .r{display:flex; gap:14px; align-items:center;}
+  .pill{border:1px solid #888; padding:5px 12px; border-radius:3px; font-size:11px;}
+  .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:10px;}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:10px;}
+  .num{width:26px; height:26px; border:1px solid #999; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; margin-bottom:8px;}
+  .foot{background:#2b2618; color:#e8e0d0; padding:30px 24px;}
+  .foot .grid3{grid-template-columns:1.4fr 1fr 1fr;}
+  .foot .line-ph{background:#5a5240;}
+  .center{text-align:center;}
+  .sec-title-wrap{max-width:900px; margin:0 auto; padding:6px 24px 0;}
+  .stage{font-size:10px; letter-spacing:.15em; color:#999; text-transform:uppercase; margin:26px 0 4px 24px;}
+</style>
+</head>
+<body>
+
+<div style="max-width:900px;margin:0 auto 6px;padding:0 4px;">
+  <div style="font-size:13px;color:#555;">倉林畳店 TOPページ / ワイヤーフレーム(構成確認用・低精度)</div>
+</div>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header-ph">
+    <div>倉林畳店 <span style="opacity:.6;">(ロゴ)</span></div>
+    <div class="r">
+      <div class="pill">お問い合わせ</div>
+      <div class="pill">☰</div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="sec dark">
+    <span class="tag">1. HERO / KV</span>
+    <div class="box photo tall" style="max-width:100%;">写真枠 P-01(職人の作業カット・全面)</div>
+    <div style="margin-top:16px;">
+      <div class="headline-ph"></div>
+      <div class="headline-ph" style="width:55%;"></div>
+      <div class="line-ph w60" style="margin-top:10px;"></div>
+    </div>
+    <div class="row">
+      <div class="btn-ph">CTA:お問い合わせ(発信)</div>
+      <div class="btn-ph">CTA:畳について知る</div>
+    </div>
+    <div class="note">固定ヘッダーの電話/お問い合わせボタンは常時表示</div>
+  </div>
+
+  <!-- PAIN POINTS -->
+  <div class="sec">
+    <span class="tag">2. お悩み訴求</span>
+    <h2>こんなことに困っていませんか</h2>
+    <div class="line-ph w80"></div>
+    <div class="line-ph w60"></div>
+    <div style="margin-top:10px;">
+      <div class="line-ph w60">・畳が色あせて古く見える</div>
+      <div class="line-ph w80" style="margin-top:14px;">・費用や時期が分からずそのまま</div>
+      <div class="line-ph w40" style="margin-top:14px;">・子どもが安心して遊べる部屋に</div>
+    </div>
+    <div class="center" style="margin-top:16px;"><div class="line-ph w40" style="margin:0 auto;">そのお悩み、畳を替えることで解決できます</div></div>
+  </div>
+
+  <!-- MANIFESTO -->
+  <div class="sec dark center">
+    <span class="tag">3. 想い(妥協はしない)</span>
+    <div class="headline-ph" style="margin:0 auto 8px;"></div>
+    <div class="headline-ph" style="width:60%;margin:0 auto 8px;"></div>
+    <div class="line-ph w80" style="margin:16px auto 0;"></div>
+    <div class="line-ph w60" style="margin:0 auto;"></div>
+    <div class="row" style="justify-content:center; margin-top:20px;">
+      <div class="btn-ph">創業83年</div>
+      <div class="btn-ph">夜間対応</div>
+      <div class="btn-ph">スピード対応</div>
+      <div class="btn-ph">国産い草へのこだわり</div>
+      <div class="btn-ph">和紙表 取扱</div>
+    </div>
+  </div>
+
+  <!-- ABOUT TATAMI -->
+  <div class="sec">
+    <span class="tag">4. 畳について知る</span>
+    <div class="grid2">
+      <div class="box photo">写真枠 P-08(畳の目のアップ)</div>
+      <div>
+        <div class="headline-ph"></div>
+        <div class="line-ph w80"></div>
+        <div class="line-ph w60"></div>
+        <div style="margin-top:12px;">
+          <div class="line-ph w40">畳表 ― 肌触り・見た目・香り</div>
+          <div class="line-ph w40" style="margin-top:10px;">畳床 ― クッション性・断熱性</div>
+          <div class="line-ph w40" style="margin-top:10px;">畳縁 ― デザイン・耐久性</div>
+        </div>
+        <div class="line-ph w80" style="margin-top:14px;">国産い草へのこだわり(補足文)</div>
+        <div class="btn-ph">CTA:畳についてもっと見る</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REASONS -->
+  <div class="sec">
+    <span class="tag">5. 選ばれる理由</span>
+    <h2>選ばれ続けている理由</h2>
+    <div class="grid3">
+      <div class="box" style="flex-direction:column;align-items:flex-start;text-align:left;height:140px;">
+        <div class="num">壱</div><div class="line-ph w60"></div><div class="line-ph w80"></div><div class="line-ph w40"></div>
+      </div>
+      <div class="box" style="flex-direction:column;align-items:flex-start;text-align:left;height:140px;">
+        <div class="num">弐</div><div class="line-ph w60"></div><div class="line-ph w80"></div><div class="line-ph w40"></div>
+      </div>
+      <div class="box" style="flex-direction:column;align-items:flex-start;text-align:left;height:140px;">
+        <div class="num">参</div><div class="line-ph w60"></div><div class="line-ph w80"></div><div class="line-ph w40"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRICE -->
+  <div class="sec">
+    <span class="tag">6. 料金の目安</span>
+    <h2>い草畳・和紙表</h2>
+    <div class="grid2">
+      <div class="box" style="flex-direction:column; height:220px;">
+        <div class="box photo" style="width:100%;">い草畳 写真枠</div>
+        <div class="line-ph w60" style="margin-top:8px;">い草畳</div>
+        <div class="line-ph w80">裏返し/表替え 価格</div>
+      </div>
+      <div class="box" style="flex-direction:column; height:220px;">
+        <div class="box photo" style="width:100%;">和紙表 写真枠</div>
+        <div class="line-ph w60" style="margin-top:8px;">和紙表</div>
+        <div class="line-ph w80">裏返し/表替え 価格</div>
+        <div class="row" style="justify-content:center;"><div class="box" style="width:20px;height:20px;flex:none;border-radius:50%;">●</div><div class="box" style="width:20px;height:20px;flex:none;border-radius:50%;">●</div><div class="box" style="width:20px;height:20px;flex:none;border-radius:50%;">●</div><div class="box" style="width:20px;height:20px;flex:none;border-radius:50%;">●</div></div>
+      </div>
+    </div>
+    <div class="center" style="margin-top:14px;"><div class="line-ph w60" style="margin:0 auto;">正確な金額は状態により異なります(注記)</div></div>
+    <div class="center"><div class="btn-ph">CTA:料金ページで詳しく見る</div></div>
+  </div>
+
+  <!-- CASES -->
+  <div class="sec dark">
+    <span class="tag">7. 施工事例</span>
+    <div class="headline-ph"></div>
+    <div class="grid2">
+      <div class="box" style="flex-direction:column; height:220px;">
+        <div class="box photo" style="width:100%;">施工後 写真枠(P-23)</div>
+        <div class="line-ph w40" style="margin-top:8px;">表替え / 国産い草</div>
+        <div class="line-ph w40">枚数・工期</div>
+        <div class="line-ph w80">お客様の声</div>
+      </div>
+      <div class="box" style="flex-direction:column; height:220px;">
+        <div class="box photo" style="width:100%;">施工後 写真枠(P-25)</div>
+        <div class="line-ph w40" style="margin-top:8px;">表替え / 和紙表</div>
+        <div class="line-ph w40">枚数・工期</div>
+        <div class="line-ph w80">お客様の声</div>
+      </div>
+    </div>
+    <div class="center" style="margin-top:16px;"><div class="btn-ph">CTA:施工事例をもっと見る</div></div>
+  </div>
+
+  <!-- CRAFTSPEOPLE -->
+  <div class="sec">
+    <span class="tag">8. 職人・会社紹介</span>
+    <h2>ふたりの職人</h2>
+    <div class="grid2">
+      <div class="row">
+        <div class="box photo" style="width:110px; flex:none;">写真枠</div>
+        <div style="flex:1;">
+          <div class="line-ph w40">代表・3代目</div>
+          <div class="line-ph w60">倉林 俊之(職人歴32年)</div>
+          <div class="line-ph w80">コメント</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="box photo" style="width:110px; flex:none;">写真枠</div>
+        <div style="flex:1;">
+          <div class="line-ph w40">4代目・修行中</div>
+          <div class="line-ph w60">倉林 尚輝(職人歴4年)</div>
+          <div class="line-ph w80">コメント</div>
+        </div>
+      </div>
+    </div>
+    <div class="center" style="margin-top:16px;"><div class="btn-ph">CTA:会社概要をもっと見る</div></div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="sec">
+    <span class="tag">9. よくあるご質問</span>
+    <div class="box" style="justify-content:space-between; padding:14px;">対応エリアはどこまでですか? <span>＋</span></div>
+    <div class="box" style="justify-content:space-between; padding:14px; margin-top:8px;">見積もりは無料ですか? <span>＋</span></div>
+  </div>
+
+  <!-- FINAL CTA -->
+  <div class="sec dark center">
+    <span class="tag">10. 最終CTA</span>
+    <div class="headline-ph" style="margin:0 auto 8px;"></div>
+    <div class="headline-ph" style="width:50%;margin:0 auto;"></div>
+    <div class="line-ph w40" style="margin:14px auto;"></div>
+    <div class="box" style="max-width:220px;margin:20px auto 0; height:90px; flex-direction:column;">
+      <div>TEL / FAX</div><div style="font-size:16px;font-weight:700;">0274-52-2966</div><div>受付時間 8:00〜20:00</div>
+    </div>
+    <div class="line-ph w40" style="margin:14px auto 0;"></div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="foot">
+    <div class="tag" style="position:static; display:inline-block; margin-bottom:10px;">11. フッター</div>
+    <div class="grid3">
+      <div>
+        <div class="line-ph w60"></div>
+        <div class="line-ph w80"></div>
+        <div class="line-ph w60"></div>
+      </div>
+      <div>
+        <div class="line-ph w40"></div>
+        <div class="line-ph w40"></div>
+        <div class="line-ph w40"></div>
+      </div>
+      <div>
+        <div class="line-ph w40"></div>
+        <div class="line-ph w40"></div>
+        <div class="line-ph w40"></div>
+      </div>
+    </div>
+    <div class="center" style="margin-top:24px;">
+      <div class="box" style="width:150px; height:44px; margin:0 auto; background:#4a4030; border-color:#8a7a55; color:#e8e0d0;">Instagram</div>
+    </div>
+    <div class="center" style="margin-top:20px; font-size:10px; opacity:.6;">© Kurabayashi Tatami</div>
+  </div>
+
+</div>
+</body>
+</html>
