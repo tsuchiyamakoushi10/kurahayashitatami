@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CTA Button Component - 倉林畳店</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../design/tokens.css">
+  <style>
+    /* ============ RESET & BASE ============ */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-b);
+      background: var(--washi);
+      color: var(--ink);
+    }
+
+    a, button {
+      color: inherit;
+      text-decoration: none;
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+    }
+
+    /* ============ CONTAINER ============ */
+    .example-section {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 28px;
+      padding-top: 100px;
+      padding-bottom: 80px;
+    }
+
+    .example-group {
+      margin-bottom: 60px;
+    }
+
+    .example-group h2 {
+      font-family: var(--font-d);
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      color: var(--ink);
+      letter-spacing: .05em;
+    }
+
+    .example-group p {
+      font-size: 13px;
+      color: var(--ink-70);
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    /* ============ CTA BUTTON COMPONENT ============ */
+    /* Base Button Styles */
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--igusa);
+      color: var(--washi);
+      border-radius: 3px;
+      font-family: var(--font-b);
+      font-weight: 700;
+      letter-spacing: .03em;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, .35);
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+      white-space: nowrap;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      background: var(--igusa-deep);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, .4);
+    }
+
+    .cta-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .3);
+    }
+
+    /* Small Button (Normal Size) */
+    .cta-btn.small {
+      padding: 10px 18px;
+      font-size: 14px;
+    }
+
+    /* Large Button (Hero/Prominent Size) */
+    .cta-btn.large {
+      padding: 14px 28px;
+      font-size: 16px;
+    }
+
+    /* Icon (optional) */
+    .cta-btn .icon {
+      width: 16px;
+      height: 16px;
+      flex: 0 0 16px;
+      display: inline-block;
+    }
+
+    .cta-btn .label {
+      display: inline;
+    }
+
+    /* ============ DEMO LAYOUT ============ */
+    .demo-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .demo-row.stacked {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* Responsive: Stack buttons on mobile */
+    @media (max-width: 599px) {
+      .demo-row:not(.stacked) {
+        flex-direction: column;
+      }
+
+      .demo-row:not(.stacked) .cta-btn {
+        width: 100%;
+      }
+    }
+
+    /* ============ SECTION BACKGROUNDS ============ */
+    .dark-bg {
+      background: var(--sumi);
+      padding: 28px;
+      margin-top: 16px;
+      border-radius: 3px;
+    }
+
+    .dark-bg .example-group h3 {
+      font-family: var(--font-b);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--washi);
+      margin-bottom: 16px;
+    }
+
+    .dark-bg .demo-row {
+      margin-bottom: 16px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="example-section">
+
+  <!-- ============ SMALL BUTTON EXAMPLES ============ -->
+  <div class="example-group">
+    <h2>小サイズ お問い合わせボタン（通常セクション用）</h2>
+    <p>料金セクション、施工事例、その他一般的なセクションで使用</p>
+
+    <h3 style="font-family: var(--font-d); font-size: 13px; font-weight: 700; margin-bottom: 12px; color: var(--ink-70);">ページ内リンク（お問い合わせページ）</h3>
+    <div class="demo-row">
+      <a href="#contact" class="cta-btn small">お問い合わせ</a>
+    </div>
+
+    <h3 style="font-family: var(--font-d); font-size: 13px; font-weight: 700; margin-bottom: 12px; color: var(--ink-70);">電話発信リンク（tel:）</h3>
+    <div class="demo-row">
+      <a href="tel:0274522966" class="cta-btn small">お問い合わせ</a>
+    </div>
+
+    <h3 style="font-family: var(--font-d); font-size: 13px; font-weight: 700; margin-bottom: 12px; color: var(--ink-70);">ボタン要素（フォーム送信など）</h3>
+    <div class="demo-row">
+      <button type="button" class="cta-btn small">お問い合わせ</button>
+    </div>
+  </div>
+
+  <!-- ============ LARGE BUTTON EXAMPLES ============ -->
+  <div class="example-group">
+    <h2>大サイズ お問い合わせボタン（ヒーロー・大型セクション用）</h2>
+    <p>ヒーロー、最終 CTA など目立たせたい箇所で使用</p>
+
+    <h3 style="font-family: var(--font-d); font-size: 13px; font-weight: 700; margin-bottom: 12px; color: var(--ink-70);">ページ内リンク（お問い合わせページ）</h3>
+    <div class="demo-row">
+      <a href="#contact" class="cta-btn large">お問い合わせ</a>
+    </div>
+
+    <h3 style="font-family: var(--font-d); font-size: 13px; font-weight: 700; margin-bottom: 12px; color: var(--ink-70);">電話発信リンク</h3>
+    <div class="demo-row">
+      <a href="tel:0274522966" class="cta-btn large">お問い合わせ</a>
+    </div>
+
+    <h3 style="font-family: var(--font-d); font-size: 13px; font-weight: 700; margin-bottom: 12px; color: var(--ink-70);">複数ボタン配置（ヒーロー内）</h3>
+    <div class="demo-row">
+      <a href="tel:0274522966" class="cta-btn large">お問い合わせ(発信)</a>
+      <a href="#contact" class="cta-btn large">お問い合わせ</a>
+    </div>
+  </div>
+
+  <!-- ============ DARK BACKGROUND EXAMPLES ============ -->
+  <div class="example-group">
+    <h2>暗い背景での表示</h2>
+    <p>ヒーロー背景（写真等）上での表示例</p>
+
+    <div class="dark-bg">
+      <h3>ヒーロー セクション（背景: 暗い写真）</h3>
+
+      <h4 style="font-family: var(--font-b); font-size: 12px; font-weight: 600; color: var(--washi); margin-bottom: 12px; margin-top: 16px; opacity: .8;">小ボタン</h4>
+      <div class="demo-row">
+        <a href="#contact" class="cta-btn small">お問い合わせ</a>
+        <a href="tel:0274522966" class="cta-btn small">お問い合わせ</a>
+      </div>
+
+      <h4 style="font-family: var(--font-b); font-size: 12px; font-weight: 600; color: var(--washi); margin-bottom: 12px; margin-top: 16px; opacity: .8;">大ボタン</h4>
+      <div class="demo-row">
+        <a href="tel:0274522966" class="cta-btn large">お問い合わせ(発信)</a>
+        <a href="#contact" class="cta-btn large">お問い合わせ</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ USAGE NOTES ============ -->
+  <div class="example-group">
+    <h2>使用例とクラス指定</h2>
+
+    <div style="background: var(--washi-3); padding: 16px; border-radius: 3px; margin-top: 12px;">
+      <p style="font-family: var(--font-b); font-size: 12px; color: var(--ink); line-height: 1.8; white-space: pre-wrap;">
+<strong>小ボタン（通常セクション）:</strong>
+&lt;a href="#contact" class="cta-btn small"&gt;
+  お問い合わせ
+&lt;/a&gt;
+
+&lt;a href="tel:0274522966" class="cta-btn small"&gt;
+  お問い合わせ
+&lt;/a&gt;
+
+<strong>大ボタン（ヒーロー・最終CTA）:</strong>
+&lt;a href="#contact" class="cta-btn large"&gt;
+  お問い合わせ
+&lt;/a&gt;
+
+&lt;a href="tel:0274522966" class="cta-btn large"&gt;
+  お問い合わせ(発信)
+&lt;/a&gt;
+
+<strong>デザイン仕様:</strong>
+• メインカラー: var(--igusa) (#4c5a2b)
+• ホバーカラー: var(--igusa-deep) (#37411d)
+• テキスト色: var(--washi) (#f2ead9)
+• 小: padding 10px 18px、font-size 14px
+• 大: padding 14px 28px、font-size 16px
+• ホバー時上移動: -2px
+• シャドウ: 0 4px 14px rgba(0,0,0,.35)
+      </p>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

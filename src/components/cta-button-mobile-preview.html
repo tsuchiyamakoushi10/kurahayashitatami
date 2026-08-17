@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CTA Button Component - Mobile Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../design/tokens.css">
+  <style>
+    /* ============ PREVIEW CONTAINER (375px fixed) ============ */
+    html {
+      width: 375px;
+    }
+
+    /* ============ RESET & BASE ============ */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-b);
+      background: var(--washi);
+      color: var(--ink);
+      width: 375px;
+    }
+
+    a, button {
+      color: inherit;
+      text-decoration: none;
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+    }
+
+    /* ============ DEVICE LABEL ============ */
+    .device-label {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: var(--sumi);
+      color: var(--washi);
+      font-size: 10px;
+      padding: 4px 8px;
+      text-align: center;
+      letter-spacing: .1em;
+      z-index: 200;
+    }
+
+    /* ============ CONTENT ============ */
+    .content {
+      padding-top: 24px;
+      width: 100%;
+    }
+
+    .section {
+      padding: 0 20px;
+      margin-bottom: 40px;
+    }
+
+    .section h2 {
+      font-family: var(--font-d);
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--ink);
+      letter-spacing: .05em;
+    }
+
+    .section p {
+      font-size: 12px;
+      color: var(--ink-70);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .section h3 {
+      font-family: var(--font-b);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--ink-70);
+      margin-top: 12px;
+      margin-bottom: 10px;
+      letter-spacing: .05em;
+    }
+
+    /* ============ CTA BUTTON COMPONENT ============ */
+    .cta-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--igusa);
+      color: var(--washi);
+      border-radius: 3px;
+      font-family: var(--font-b);
+      font-weight: 700;
+      letter-spacing: .03em;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, .35);
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+      white-space: nowrap;
+      width: 100%;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      background: var(--igusa-deep);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, .4);
+    }
+
+    .cta-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .3);
+    }
+
+    /* Small Button (Normal Size) */
+    .cta-btn.small {
+      padding: 10px 18px;
+      font-size: 14px;
+    }
+
+    /* Large Button (Hero/Prominent Size) */
+    .cta-btn.large {
+      padding: 14px 28px;
+      font-size: 16px;
+    }
+
+    /* Button Stack */
+    .button-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    /* ============ DARK BACKGROUND ============ */
+    .dark-bg {
+      background: var(--sumi);
+      padding: 20px;
+      margin-top: 12px;
+      border-radius: 3px;
+    }
+
+    .dark-bg h3 {
+      font-family: var(--font-b);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--washi);
+      margin-bottom: 12px;
+      opacity: .8;
+    }
+
+    .dark-bg .button-stack {
+      margin-bottom: 12px;
+    }
+
+    /* ============ CODE EXAMPLE ============ */
+    .code-example {
+      background: var(--washi-3);
+      padding: 12px;
+      border-radius: 3px;
+      margin-top: 12px;
+      font-family: 'Courier New', monospace;
+      font-size: 10px;
+      color: var(--ink);
+      line-height: 1.4;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="device-label">MOBILE 375px</div>
+
+<div class="content">
+
+  <!-- ============ SMALL BUTTON EXAMPLES ============ -->
+  <div class="section">
+    <h2>小ボタン（通常用）</h2>
+    <p>料金、施工事例など一般的なセクションで使用</p>
+
+    <h3>ページ内リンク</h3>
+    <div class="button-stack">
+      <a href="#contact" class="cta-btn small">お問い合わせ</a>
+    </div>
+
+    <h3>電話リンク</h3>
+    <div class="button-stack">
+      <a href="tel:0274522966" class="cta-btn small">お問い合わせ</a>
+    </div>
+  </div>
+
+  <!-- ============ LARGE BUTTON EXAMPLES ============ -->
+  <div class="section">
+    <h2>大ボタン（ヒーロー用）</h2>
+    <p>ヒーロー、最終 CTA など目立たせたい箇所で使用</p>
+
+    <h3>ページ内リンク</h3>
+    <div class="button-stack">
+      <a href="#contact" class="cta-btn large">お問い合わせ</a>
+    </div>
+
+    <h3>複数ボタン配置</h3>
+    <div class="button-stack">
+      <a href="tel:0274522966" class="cta-btn large">お問い合わせ(発信)</a>
+      <a href="#contact" class="cta-btn large">お問い合わせ</a>
+    </div>
+  </div>
+
+  <!-- ============ DARK BACKGROUND ============ -->
+  <div class="section">
+    <h2>暗い背景での表示</h2>
+
+    <div class="dark-bg">
+      <h3>ヒーロー背景（写真上）</h3>
+      <div class="button-stack">
+        <a href="#contact" class="cta-btn small">お問い合わせ</a>
+        <a href="tel:0274522966" class="cta-btn small">お問い合わせ</a>
+      </div>
+
+      <h3 style="margin-top: 16px;">複数ボタン（大）</h3>
+      <div class="button-stack">
+        <a href="tel:0274522966" class="cta-btn large">お問い合わせ(発信)</a>
+        <a href="#contact" class="cta-btn large">お問い合わせ</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ USAGE GUIDE ============ -->
+  <div class="section">
+    <h2>使用方法</h2>
+
+    <p><strong>小ボタン:</strong></p>
+    <div class="code-example">&lt;a href="#contact"
+  class="cta-btn small"&gt;
+  お問い合わせ
+&lt;/a&gt;</div>
+
+    <p style="margin-top: 12px;"><strong>大ボタン:</strong></p>
+    <div class="code-example">&lt;a href="#contact"
+  class="cta-btn large"&gt;
+  お問い合わせ
+&lt;/a&gt;</div>
+
+    <p style="margin-top: 12px;"><strong>電話リンク:</strong></p>
+    <div class="code-example">&lt;a href="tel:0274522966"
+  class="cta-btn small"&gt;
+  お問い合わせ
+&lt;/a&gt;</div>
+
+    <p style="margin-top: 12px;"><strong>カラー仕様:</strong></p>
+    <div class="code-example">背景: var(--igusa)
+     (#4c5a2b)
+ホバー: var(--igusa-deep)
+     (#37411d)
+テキスト: var(--washi)
+     (#f2ead9)</div>
+  </div>
+
+  <!-- Spacer -->
+  <div style="height: 60px;"></div>
+
+</div>
+
+</body>
+</html>
