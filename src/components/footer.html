@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Footer Component - 倉林畳店</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    /* ============ DESIGN TOKENS ============ */
+    :root {
+      --sumi: #15120d;
+      --sumi-2: #211b14;
+      --sumi-3: #332a1e;
+      --washi: #f2ead9;
+      --washi-2: #e8dbbc;
+      --washi-3: #d5c39a;
+      --vermillion: #9c3b26;
+      --vermillion-deep: #742a1b;
+      --igusa: #4c5a2b;
+      --igusa-deep: #37411d;
+      --gold: #a6864f;
+      --ink: #15120d;
+      --ink-70: rgba(21, 18, 13, .72);
+      --ink-45: rgba(21, 18, 13, .62);
+      --paper-70: rgba(242, 234, 217, .78);
+      --paper-45: rgba(242, 234, 217, .68);
+      --font-d: 'Shippori Mincho', serif;
+      --font-b: 'Zen Kaku Gothic New', sans-serif;
+      --maxw: 1180px;
+    }
+
+    /* ============ RESET & BASE ============ */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-b);
+      background: var(--washi);
+      color: var(--ink);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:hover {
+      opacity: .8;
+    }
+
+    /* ============ FOOTER ============ */
+    footer {
+      background: var(--sumi-2);
+      color: rgba(242, 234, 217, .7);
+      padding: 70px 0 30px;
+    }
+
+    .footer-wrap {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    .footer-grid {
+      display: grid;
+      gap: 40px;
+      grid-template-columns: 1fr;
+      margin-bottom: 40px;
+    }
+
+    @media (min-width: 880px) {
+      .footer-grid {
+        grid-template-columns: 1.4fr 1fr 1fr;
+        gap: 60px;
+      }
+    }
+
+    /* ============ FOOTER COLUMN 1 (Company Info) ============ */
+    .footer-col-1 .company-name {
+      font-family: var(--font-d);
+      font-size: 20px;
+      color: var(--washi);
+      font-weight: 700;
+      margin-bottom: 14px;
+      letter-spacing: .05em;
+    }
+
+    .footer-col-1 .company-info {
+      font-size: 14.5px;
+      line-height: 2;
+      color: rgba(242, 234, 217, .7);
+    }
+
+    .footer-col-1 .company-info p {
+      margin-bottom: 8px;
+    }
+
+    .footer-col-1 .company-info strong {
+      font-weight: 700;
+      color: rgba(242, 234, 217, .85);
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .footer-col-1 .company-info .value {
+      font-family: var(--font-b);
+      font-weight: 500;
+      display: block;
+      margin-left: 0;
+    }
+
+    /* ============ FOOTER COLUMN 2 & 3 (Links) ============ */
+    .footer-col-2,
+    .footer-col-3 {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .footer-col-2 h4,
+    .footer-col-3 h4 {
+      font-family: var(--font-d);
+      font-size: 14.5px;
+      letter-spacing: .1em;
+      color: var(--gold);
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      font-size: 14.5px;
+      color: rgba(242, 234, 217, .7);
+      transition: color .25s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+
+    /* ============ INSTAGRAM BUTTON ============ */
+    .footer-instagram {
+      margin-top: 52px;
+      text-align: center;
+    }
+
+    .insta-btn {
+      width: 150px;
+      height: 52px;
+      border-radius: 8px;
+      background: radial-gradient(circle at 30% 110%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-family: var(--font-b);
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: .02em;
+      transition: transform .25s ease, box-shadow .25s ease;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, .35);
+    }
+
+    .insta-btn svg {
+      width: 22px;
+      height: 22px;
+      flex: 0 0 22px;
+    }
+
+    .insta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, .4);
+    }
+
+    /* ============ FOOTER BOTTOM ============ */
+    .footer-bottom {
+      margin-top: 56px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(242, 234, 217, .12);
+      font-size: 12.5px;
+      letter-spacing: .05em;
+      opacity: .75;
+      text-align: center;
+    }
+
+    /* ============ DEMO BODY ============ */
+    .demo-body {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 28px;
+      font-family: var(--font-b);
+      color: var(--ink);
+      line-height: 1.8;
+    }
+
+    .demo-body section {
+      padding: 100px 0;
+      border-bottom: 1px solid var(--washi-3);
+    }
+
+    .demo-body h1,
+    .demo-body h2 {
+      font-family: var(--font-d);
+      margin-bottom: 20px;
+    }
+
+    .demo-body h1 {
+      font-size: 32px;
+    }
+
+    .demo-body h2 {
+      font-size: 28px;
+    }
+
+    .demo-body p {
+      font-size: 15px;
+      color: var(--ink-70);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============ DEMO CONTENT ============ -->
+<div class="demo-body">
+  <section>
+    <h1>Demo Page</h1>
+    <p>これはフッターコンポーネントのデモページです。下部のフッターを確認してください。</p>
+  </section>
+  <section>
+    <h2>Section 2</h2>
+    <p>コンテンツがここに入ります。スクロールしてフッターを確認してください。</p>
+  </section>
+  <section>
+    <h2>Section 3</h2>
+    <p>フッターはPC版では3カラム表示、スマホ版では縦積み表示です。</p>
+  </section>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer-wrap">
+    <!-- Footer Grid -->
+    <div class="footer-grid">
+      <!-- Column 1: Company Info -->
+      <div class="footer-col-1">
+        <div class="company-name">倉林畳店</div>
+        <div class="company-info">
+          <p>
+            <strong>営業時間</strong>
+            <span class="value">8:00〜20:00</span>
+          </p>
+          <p>
+            <strong>定休日</strong>
+            <span class="value">不定休</span>
+          </p>
+          <p>
+            <strong>電話番号</strong>
+            <span class="value"><a href="tel:0274522966">0274-52-2966</a></span>
+          </p>
+          <p>
+            <strong>住所</strong>
+            <span class="value">〒367-0301<br>埼玉県児玉郡神川町渡瀬638-7</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Column 2: Links -->
+      <div class="footer-col-2">
+        <h4>会社情報</h4>
+        <ul class="footer-links">
+          <li><a href="#">会社概要</a></li>
+          <li><a href="#">アクセス</a></li>
+          <li><a href="#">お問い合わせ</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 3: Links -->
+      <div class="footer-col-3">
+        <h4>その他</h4>
+        <ul class="footer-links">
+          <li><a href="#">プライバシーポリシー</a></li>
+          <li><a href="#">利用規約</a></li>
+          <li><a href="#">サイトマップ</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Instagram Button -->
+    <div class="footer-instagram">
+      <a class="insta-btn" href="https://www.instagram.com/kurahayashitatamiten/" target="_blank" rel="noopener noreferrer" aria-label="Instagramを開く">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.69.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm4.965-10.322a1.44 1.44 0 1 1 2.881.001 1.44 1.44 0 0 1-2.881-.001z"/>
+        </svg>
+        <span>Instagram</span>
+      </a>
+    </div>
+
+    <!-- Copyright -->
+    <div class="footer-bottom">
+      © 2024 Kurahayashi Tatami. All Rights Reserved.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
