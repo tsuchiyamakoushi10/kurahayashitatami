@@ -494,6 +494,158 @@
         gap: 10px;
       }
     }
+
+    /* ============ ABOUT TATAMI ============ */
+    .split {
+      display: grid;
+      gap: 56px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (min-width: 880px) {
+      .split {
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+      }
+    }
+
+    .frame {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      border-radius: 2px;
+      overflow: hidden;
+      background: linear-gradient(150deg, var(--gold) 0%, var(--sumi-3) 40%, var(--sumi) 100%);
+    }
+
+    .frame-tatami {
+      background: linear-gradient(155deg, var(--igusa) 0%, var(--igusa-deep) 45%, var(--sumi) 100%);
+    }
+
+    .frame::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: .5;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3'/></filter><rect width='100%25' height='100%25' filter='url(%23g)'/></svg>");
+    }
+
+    .frame .tag {
+      position: absolute;
+      left: 16px;
+      bottom: 16px;
+      z-index: 2;
+      color: var(--paper-70);
+      font-family: var(--font-b);
+      font-size: 13px;
+      letter-spacing: .08em;
+      border: 1px solid var(--paper-45);
+      padding: 5px 10px;
+      border-radius: 2px;
+      backdrop-filter: blur(3px);
+    }
+
+    .split-text .eyebrow {
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: .32em;
+      color: var(--vermillion);
+      margin-bottom: 16px;
+    }
+
+    .split-text .body-text {
+      margin-top: 22px;
+      max-width: 480px;
+      font-family: var(--font-b);
+      font-size: 15.5px;
+      color: var(--ink-70);
+    }
+
+    .tatami-diagram {
+      margin-top: 34px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .tatami-diagram div {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      border-bottom: 1px dashed var(--washi-3);
+      padding-bottom: 12px;
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--ink);
+    }
+
+    .tatami-diagram span:last-child {
+      color: var(--ink-70);
+      font-family: var(--font-b);
+      font-size: 14.5px;
+      font-weight: 400;
+      text-align: right;
+    }
+
+    /* Tatami CTA (共通コンポーネント .cta-btn に準拠) */
+    .tatami-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 34px;
+    }
+
+    .tatami-cta .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--sumi);
+      color: var(--washi);
+      padding: 14px 28px;
+      border-radius: 3px;
+      font-family: var(--font-b);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: .03em;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, .35);
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+    }
+
+    .tatami-cta .cta-btn:hover {
+      transform: translateY(-2px);
+      background: var(--sumi-3);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, .4);
+    }
+
+    .tatami-cta .cta-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .3);
+    }
+
+    .tatami-cta .cta-btn svg {
+      width: 16px;
+      height: 16px;
+      flex: 0 0 16px;
+    }
+
+    @media (max-width: 599px) {
+      .tatami-diagram div {
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .tatami-diagram span:last-child {
+        text-align: left;
+      }
+
+      .tatami-cta .cta-btn {
+        width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
@@ -572,6 +724,36 @@
     <div class="badge-row" style="margin-top:14px;">
       <div class="badge"><span class="dot"></span>国産い草へのこだわり</div>
       <div class="badge"><span class="dot"></span>和紙表 取扱</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ ABOUT TATAMI ============ -->
+<section id="tatami" class="washi-tex">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <div class="frame frame-tatami">
+          <div class="tag">写真枠 P-08 / 畳の目のアップ</div>
+        </div>
+      </div>
+      <div class="split-text">
+        <div class="eyebrow">畳について知る</div>
+        <h2 class="section-title">畳表・畳床・畳縁からできる、<br>畳の構造。</h2>
+        <p class="body-text">見た目や香りだけでなく、クッション性や耐久性まで、<br>畳は幾つもの部材が重なって出来ています。<br>仕組みを知ると、選び方も変わってきます。</p>
+        <div class="tatami-diagram">
+          <div><span>畳表(たたみおもて)</span><span>肌触り・見た目・香りを左右</span></div>
+          <div><span>畳床(たたみどこ)</span><span>クッション性・断熱性を支える</span></div>
+          <div><span>畳縁(たたみべり)</span><span>デザイン性+耐久性を高める</span></div>
+        </div>
+        <div class="tatami-cta">
+          <a class="cta-btn" href="#">
+            畳についてもっと詳しく見る
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
