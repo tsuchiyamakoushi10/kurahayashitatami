@@ -1271,6 +1271,105 @@
       color: var(--ink-70);
       max-width: 600px;
     }
+
+    /* ============ FINAL CTA ============ */
+    .igusa-tex {
+      position: relative;
+      background: linear-gradient(160deg, var(--igusa) 0%, var(--igusa-deep) 55%, var(--sumi) 100%);
+      color: var(--washi);
+    }
+
+    .igusa-tex::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: .3;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='matrix' values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.06 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+      background-size: 220px 220px;
+    }
+
+    .final-cta {
+      padding: 140px 0;
+      text-align: center;
+    }
+
+    .final-cta .wrap {
+      position: relative;
+      z-index: 1;
+    }
+
+    .final-cta .catch2 {
+      font-family: var(--font-d);
+      font-weight: 800;
+      font-size: clamp(28px, 5vw, 52px);
+      line-height: 1.5;
+      color: var(--washi);
+    }
+
+    .final-cta .catch2 span {
+      color: var(--washi);
+    }
+
+    .final-cta .cta-sub {
+      margin-top: 20px;
+      font-family: var(--font-b);
+      font-weight: 500;
+      color: var(--paper-70);
+    }
+
+    .big-tel {
+      margin-top: 48px;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 34px 52px;
+      border: 1.5px solid var(--gold);
+      border-radius: 3px;
+    }
+
+    .big-tel .label {
+      font-family: var(--font-b);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: .18em;
+      color: var(--gold);
+    }
+
+    .big-tel .number {
+      font-family: var(--font-d);
+      font-weight: 800;
+      font-size: clamp(30px, 5vw, 44px);
+      color: var(--washi);
+    }
+
+    .big-tel .hours {
+      margin-top: 6px;
+      font-family: var(--font-b);
+      font-weight: 500;
+      font-size: 15px;
+      color: var(--paper-70);
+    }
+
+    .final-note {
+      margin-top: 26px;
+      font-family: var(--font-b);
+      font-weight: 500;
+      font-size: 14.5px;
+      color: var(--paper-70);
+    }
+
+    @media (max-width: 599px) {
+      .final-cta {
+        padding: 90px 0;
+      }
+
+      .big-tel {
+        padding: 28px 24px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1554,6 +1653,21 @@
         <div class="faq-a"><p>はい、無料です。まずはお気軽にご相談ください。</p></div>
       </div>
     </div>
+  </div>
+</section>
+
+
+<!-- ============ FINAL CTA ============ -->
+<section id="contact" class="igusa-tex final-cta">
+  <div class="wrap">
+    <p class="catch2">畳のことなら、<br>どんなに小さなことでも<br><span>お気軽にご相談ください。</span></p>
+    <p class="cta-sub">見積もりは無料です。まずはお電話でお声がけください。</p>
+    <a class="big-tel" href="tel:0274522966">
+      <span class="label">TEL / FAX</span>
+      <span class="number">0274-52-2966</span>
+      <span class="hours">受付時間 8:00〜20:00</span>
+    </a>
+    <p class="final-note">ご来店をご希望の方も、まずは一度お電話にてご相談ください。</p>
   </div>
 </section>
 
