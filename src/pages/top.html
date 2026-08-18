@@ -394,6 +394,106 @@
       position: relative;
       z-index: 1;
     }
+
+    /* ============ MANIFESTO ============ */
+    .sumi-tex {
+      position: relative;
+      background: var(--sumi);
+      color: var(--washi);
+    }
+
+    .sumi-tex::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: .35;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='matrix' values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.06 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+      background-size: 220px 220px;
+    }
+
+    .manifesto {
+      padding: 150px 0;
+    }
+
+    .manifesto .wrap {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .manifesto-line {
+      font-family: var(--font-d);
+      font-weight: 800;
+      letter-spacing: .03em;
+      color: var(--washi);
+    }
+
+    .manifesto-line.big {
+      font-size: clamp(34px, 7vw, 78px);
+      line-height: 1.35;
+    }
+
+    .manifesto-line.small {
+      font-family: var(--font-b);
+      font-weight: 500;
+      font-size: clamp(15px, 1.8vw, 18px);
+      max-width: 620px;
+      margin: 34px auto 0;
+      color: var(--paper-70);
+      line-height: 2;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 64px;
+    }
+
+    .badge {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border: 1px solid var(--gold);
+      padding: 16px 26px;
+      border-radius: 2px;
+      font-family: var(--font-d);
+      font-size: 16.5px;
+      letter-spacing: .05em;
+      color: var(--washi);
+    }
+
+    .badge .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--vermillion);
+      flex: none;
+    }
+
+    @media (max-width: 599px) {
+      .manifesto {
+        padding: 90px 0;
+      }
+
+      .manifesto-line.small {
+        margin-top: 28px;
+      }
+
+      .badge-row {
+        gap: 10px;
+        margin-top: 44px;
+      }
+
+      .badge {
+        padding: 13px 18px;
+        font-size: 14px;
+        gap: 10px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -455,6 +555,24 @@
     </ul>
 
     <p class="pain-resolve">そのお悩み、畳を替えることで解決できます。</p>
+  </div>
+</section>
+
+
+<!-- ============ MANIFESTO ============ -->
+<section id="belief" class="sumi-tex manifesto">
+  <div class="wrap">
+    <p class="manifesto-line big">妥協はしない。<br>一枚一枚に、<br>確かな技術とこだわりを。</p>
+    <p class="manifesto-line small">本気で仕事をした、その先にあるお客様の「きれいになった」「頼んでよかった」という言葉のために。<br>ひと目で違いがわかる仕上がりを、一つひとつの畳に積み重ねています。</p>
+    <div class="badge-row">
+      <div class="badge"><span class="dot"></span>創業83年</div>
+      <div class="badge"><span class="dot"></span>夜間対応</div>
+      <div class="badge"><span class="dot"></span>スピード対応</div>
+    </div>
+    <div class="badge-row" style="margin-top:14px;">
+      <div class="badge"><span class="dot"></span>国産い草へのこだわり</div>
+      <div class="badge"><span class="dot"></span>和紙表 取扱</div>
+    </div>
   </div>
 </section>
 
