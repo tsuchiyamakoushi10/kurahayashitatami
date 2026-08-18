@@ -646,6 +646,93 @@
         width: 100%;
       }
     }
+
+    /* ============ HANKO STAMP ============ */
+    .hanko {
+      width: 64px;
+      height: 64px;
+      border-radius: 6px;
+      border: 2.5px solid var(--vermillion);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 22px;
+      color: var(--vermillion);
+      letter-spacing: .05em;
+      writing-mode: vertical-rl;
+      transform: rotate(-4deg);
+      position: relative;
+      flex: none;
+      filter: saturate(1.05);
+    }
+
+    .hanko::after {
+      content: "";
+      position: absolute;
+      inset: -3px;
+      border-radius: 8px;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='90' height='90'><filter id='r'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/><feColorMatrix type='matrix' values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.5 0'/><feComposite operator='in' in2='SourceGraphic'/></filter><rect width='100%25' height='100%25' fill='white' filter='url(%23r)'/></svg>");
+      mix-blend-mode: multiply;
+      opacity: .5;
+      pointer-events: none;
+    }
+
+    .hanko.small {
+      width: 38px;
+      height: 38px;
+      font-size: 13px;
+      border-width: 1.75px;
+    }
+
+    /* ============ REASONS ============ */
+    .reasons {
+      display: grid;
+      gap: 2px;
+      background: var(--washi-3);
+      border: 1px solid var(--washi-3);
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (min-width: 880px) {
+      .reasons {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .reason {
+      background: var(--washi);
+      padding: 44px 34px;
+      position: relative;
+    }
+
+    .reason .hanko {
+      margin-bottom: 26px;
+    }
+
+    .reason h3 {
+      font-family: var(--font-d);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 16px;
+    }
+
+    .reason p {
+      font-family: var(--font-b);
+      font-size: 15.5px;
+      color: var(--ink);
+      opacity: .82;
+      line-height: 1.95;
+    }
+
+    @media (max-width: 599px) {
+      .reason {
+        padding: 36px 24px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -753,6 +840,34 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </a>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ REASONS ============ -->
+<section id="reasons" class="washi-tex">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">選ばれる理由</div>
+      <h2 class="section-title">倉林畳店が、<br>選ばれ続けている理由。</h2>
+    </div>
+    <div class="reasons">
+      <div class="reason">
+        <div class="hanko small">壱</div>
+        <h3>創業83年</h3>
+        <p>創業以来83年、多くのお客様に支えられながら、地域の住まいづくりに携わってきました。<br>長年培ってきた経験を活かし、お住まいやご要望に合わせた最適なご提案をいたします。</p>
+      </div>
+      <div class="reason">
+        <div class="hanko small">弐</div>
+        <h3>迅速、柔軟な対応力</h3>
+        <p>畳の傷みや急なご相談にも、できる限り迅速に対応いたします。営業時間外でも<br>ご相談いただけるよう柔軟な対応を心がけ、お客様の不安をできるだけ早く解消します。</p>
+      </div>
+      <div class="reason">
+        <div class="hanko small">参</div>
+        <h3>暮らしに合った畳をご提案</h3>
+        <p>「い草の香りを楽しみたい」「お手入れしやすい畳がいい」など、お客様のご要望や<br>ライフスタイルを丁寧にお伺いし、一人ひとりに合った畳をご提案します。</p>
       </div>
     </div>
   </div>
