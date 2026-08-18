@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>畳の種類・料金 | 倉林畳店</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../design/tokens.css">
+  <style>
+    /* ============ RESET & BASE ============ */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--washi);
+      color: var(--ink);
+      font-family: var(--font-b);
+      line-height: 1.9;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    img, svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    /* ============ LAYOUT ============ */
+    .wrap {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    /* ============ SECTION BASE ============ */
+    section {
+      position: relative;
+      padding: 110px 0;
+    }
+
+    .washi-tex {
+      position: relative;
+      background: var(--washi);
+    }
+
+    .washi-tex::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: .5;
+      mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='matrix' values='0 0 0 0 0.08  0 0 0 0 0.07  0 0 0 0 0.05  0 0 0 0.05 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+      background-size: 220px 220px;
+    }
+
+    .section-head {
+      max-width: 640px;
+      margin-bottom: 56px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-head .eyebrow {
+      color: var(--vermillion);
+      margin-bottom: 16px;
+      font-family: var(--font-d);
+      font-weight: 700;
+    }
+
+    .section-title {
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: clamp(26px, 3.6vw, 40px);
+      line-height: 1.55;
+      color: var(--ink);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ============ PAGE TITLE ============ */
+    .page-head {
+      padding-top: 140px;
+      padding-bottom: 0;
+    }
+
+    .page-head .section-head {
+      margin-bottom: 0;
+    }
+
+    /* ============ TYPES ============ */
+    .type-block {
+      display: grid;
+      gap: 40px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (min-width: 880px) {
+      .type-block {
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+      }
+    }
+
+    .type-block + .type-block {
+      margin-top: 90px;
+    }
+
+    .type-name {
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: clamp(22px, 2.6vw, 28px);
+      color: var(--ink);
+    }
+
+    .type-desc {
+      margin-top: 16px;
+      font-family: var(--font-b);
+      font-weight: 400;
+      font-size: 15.5px;
+      color: var(--ink-70);
+      line-height: 1.9;
+    }
+
+    .type-label {
+      margin-top: 22px;
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: .1em;
+      color: var(--vermillion);
+    }
+
+    .type-price {
+      margin-top: 26px;
+      font-family: var(--font-b);
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: .03em;
+      color: var(--vermillion);
+    }
+
+    .frame {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      border-radius: 2px;
+      overflow: hidden;
+      background: linear-gradient(150deg, var(--gold) 0%, var(--sumi-3) 40%, var(--sumi) 100%);
+    }
+
+    .frame::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: .5;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3'/></filter><rect width='100%25' height='100%25' filter='url(%23g)'/></svg>");
+    }
+
+    .frame-tatami {
+      background: linear-gradient(155deg, var(--igusa) 0%, var(--igusa-deep) 45%, var(--sumi) 100%);
+    }
+
+    .frame-washi {
+      background: linear-gradient(160deg, var(--washi-3) 0%, var(--gold) 55%, var(--sumi-3) 100%);
+    }
+
+    /* 左=写真 / 右=説明（スマホでは縦積み） */
+    .type-media {
+      order: -1;
+    }
+
+    .photo-scroller {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 12px;
+    }
+
+    .photo-scroller .frame {
+      flex: 0 0 100%;
+      scroll-snap-align: start;
+    }
+
+    .photo-scroller:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 4px;
+    }
+
+    .carousel-nav {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .carousel-btn {
+      width: 46px;
+      height: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--washi-3);
+      border-radius: 2px;
+      color: var(--ink);
+      transition: border-color .25s ease, color .25s ease, opacity .25s ease;
+    }
+
+    .carousel-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .carousel-btn:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+    }
+
+    .carousel-btn[disabled] {
+      opacity: .35;
+      cursor: default;
+    }
+
+    .carousel-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .types-note {
+      margin-top: 70px;
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: clamp(20px, 2.8vw, 28px);
+      color: var(--vermillion);
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ============ SERVICES (CASE CARDS) ============ */
+    .case-grid {
+      display: grid;
+      gap: 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (min-width: 820px) {
+      .case-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .case-card {
+      background: var(--washi);
+      border: 1px solid var(--washi-3);
+    }
+
+    .case-body {
+      padding: 26px 28px 30px;
+    }
+
+    .case-body .cat {
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: .08em;
+      color: var(--vermillion);
+    }
+
+    .case-body .work {
+      margin-top: 8px;
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 19px;
+      color: var(--ink);
+    }
+
+    .case-detail {
+      list-style: none;
+      margin-top: 16px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .case-detail li {
+      display: flex;
+      gap: 12px;
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--ink);
+    }
+
+    .case-detail li span:first-child {
+      flex: none;
+      width: 88px;
+      color: var(--vermillion);
+      font-weight: 700;
+    }
+
+    /* ============ STRENGTHS (REASON CARDS) ============ */
+    .reasons {
+      display: grid;
+      gap: 2px;
+      background: var(--washi-3);
+      border: 1px solid var(--washi-3);
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (min-width: 880px) {
+      .reasons {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .reason {
+      background: var(--washi);
+      padding: 44px 34px;
+      position: relative;
+    }
+
+    .reason h3 {
+      font-family: var(--font-d);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 16px;
+    }
+
+    .reason p {
+      font-family: var(--font-b);
+      font-size: 15.5px;
+      color: var(--ink);
+      opacity: .82;
+      line-height: 1.95;
+    }
+
+    /* ============ CTA (共通コンポーネント .cta-btn に準拠) ============ */
+    .price-cta {
+      display: flex;
+      justify-content: center;
+      margin-top: 34px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .price-cta .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--igusa);
+      color: var(--washi);
+      padding: 14px 28px;
+      border-radius: 3px;
+      font-family: var(--font-b);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: .03em;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, .35);
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+    }
+
+    .price-cta .cta-btn:hover {
+      transform: translateY(-2px);
+      background: var(--igusa-deep);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, .4);
+    }
+
+    .price-cta .cta-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .3);
+    }
+
+    .price-cta .cta-btn svg {
+      width: 16px;
+      height: 16px;
+      flex: 0 0 16px;
+    }
+
+    @media (max-width: 599px) {
+      .page-head {
+        padding-top: 110px;
+        padding-bottom: 0;
+      }
+
+      .type-block + .type-block {
+        margin-top: 64px;
+      }
+
+      .case-body {
+        padding: 22px 20px 26px;
+      }
+
+      .case-detail li {
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .reason {
+        padding: 36px 24px;
+      }
+
+      .price-cta .cta-btn {
+        width: 100%;
+      }
+    }
+
+    /* ============ HEADER (共通コンポーネント header.html) ============ */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(21, 18, 13, .95);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid rgba(166, 134, 79, .25);
+    }
+
+    .header-wrap {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 28px;
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* ============ LOGO ============ */
+    .logo {
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 21px;
+      color: var(--washi);
+      letter-spacing: .08em;
+      flex: 0 0 auto;
+    }
+
+    .logo small {
+      display: block;
+      font-family: var(--font-b);
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: .22em;
+      color: var(--gold);
+      margin-top: 4px;
+    }
+
+    @media (max-width: 599px) {
+      .logo {
+        min-width: 0;
+      }
+
+      .logo small {
+        display: none;
+      }
+    }
+
+    /* ============ HEADER RIGHT SECTION ============ */
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex: 0 0 auto;
+    }
+
+    /* ============ NAVIGATION (PC) ============ */
+    .nav-desktop {
+      display: none;
+    }
+
+    @media (min-width: 1024px) {
+      .nav-desktop {
+        display: flex;
+        gap: 0;
+        align-items: center;
+      }
+
+      .nav-desktop ul {
+        list-style: none;
+        display: flex;
+        gap: 0;
+        align-items: center;
+      }
+
+      .nav-desktop li {
+        margin: 0;
+      }
+
+      .nav-desktop a {
+        display: block;
+        font-family: var(--font-b);
+        font-weight: 500;
+        font-size: 15px;
+        color: var(--washi);
+        padding: 24px 18px;
+        border-bottom: 2px solid transparent;
+        transition: border-color .3s ease;
+        letter-spacing: .02em;
+      }
+
+      .nav-desktop a:hover {
+        border-bottom-color: var(--gold);
+      }
+
+      .nav-desktop a[aria-current="page"] {
+        border-bottom-color: var(--gold);
+      }
+    }
+
+    /* ============ CONTACT BUTTON ============ */
+    .contact-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--igusa);
+      color: var(--washi);
+      padding: 10px 18px;
+      border-radius: 3px;
+      font-family: var(--font-b);
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: .03em;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, .35);
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+      white-space: nowrap;
+    }
+
+    .contact-btn:hover {
+      transform: translateY(-2px);
+      background: var(--igusa-deep);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, .4);
+    }
+
+    .contact-btn svg {
+      width: 16px;
+      height: 16px;
+      flex: 0 0 16px;
+    }
+
+    .contact-btn .label {
+      display: none;
+    }
+
+    @media (min-width: 600px) {
+      .contact-btn .label {
+        display: inline;
+      }
+    }
+
+    /* ============ HAMBURGER MENU (Mobile) ============ */
+    .menu-btn {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      border: 1px solid rgba(242, 234, 217, .35);
+      border-radius: 2px;
+      background: transparent;
+    }
+
+    .menu-btn span {
+      width: 20px;
+      height: 1px;
+      background: var(--washi);
+      transition: all .3s ease;
+    }
+
+    .menu-btn[aria-expanded="true"] span:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    .menu-btn[aria-expanded="true"] span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-btn[aria-expanded="true"] span:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    @media (min-width: 1024px) {
+      .menu-btn {
+        display: none;
+      }
+    }
+
+    /* ============ MOBILE NAV OVERLAY ============ */
+    .nav-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 99;
+      background: var(--sumi);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-12px);
+      transition: opacity .4s ease, transform .4s ease, visibility 0s linear .4s;
+    }
+
+    .nav-overlay.open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      transition: opacity .4s ease, transform .4s ease;
+    }
+
+    .nav-overlay ul {
+      list-style: none;
+      text-align: center;
+    }
+
+    .nav-overlay li {
+      margin: 20px 0;
+    }
+
+    .nav-overlay a {
+      font-family: var(--font-d);
+      font-size: clamp(24px, 5vw, 38px);
+      color: var(--washi);
+      font-weight: 600;
+      position: relative;
+      padding-bottom: 4px;
+      display: inline-block;
+      transition: color .25s ease;
+    }
+
+    .nav-overlay a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -2px;
+      height: 1px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .35s ease;
+    }
+
+    .nav-overlay a:hover {
+      color: var(--gold);
+    }
+
+    .nav-overlay a:hover::after {
+      transform: scaleX(1);
+    }
+
+    .nav-overlay a[aria-current="page"]::after {
+      transform: scaleX(1);
+    }
+
+    @media (min-width: 1024px) {
+      .nav-overlay {
+        display: none;
+      }
+    }
+
+    /* ============ LAYOUT ADJUSTMENT ============ */
+    body {
+      padding-top: 76px;
+    }
+
+    /* ============ FOOTER (共通コンポーネント footer.html) ============ */
+    footer {
+      background: var(--sumi-2);
+      color: rgba(242, 234, 217, .7);
+      padding: 70px 0 30px;
+    }
+
+    .footer-wrap {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    .footer-grid {
+      display: grid;
+      gap: 40px;
+      grid-template-columns: 1fr;
+      margin-bottom: 40px;
+    }
+
+    @media (min-width: 880px) {
+      .footer-grid {
+        grid-template-columns: 1.4fr 1fr 1fr;
+        gap: 60px;
+      }
+    }
+
+    /* ============ FOOTER COLUMN 1 (Company Info) ============ */
+    .footer-col-1 .company-name {
+      font-family: var(--font-d);
+      font-size: 20px;
+      color: var(--washi);
+      font-weight: 700;
+      margin-bottom: 14px;
+      letter-spacing: .05em;
+    }
+
+    .footer-col-1 .company-info {
+      font-size: 14.5px;
+      line-height: 2;
+      color: rgba(242, 234, 217, .7);
+    }
+
+    .footer-col-1 .company-info p {
+      margin-bottom: 8px;
+    }
+
+    .footer-col-1 .company-info strong {
+      font-weight: 700;
+      color: rgba(242, 234, 217, .85);
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .footer-col-1 .company-info .value {
+      font-family: var(--font-b);
+      font-weight: 500;
+      display: block;
+      margin-left: 0;
+    }
+
+    /* ============ FOOTER COLUMN 2 & 3 (Links) ============ */
+    .footer-col-2,
+    .footer-col-3 {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .footer-col-2 h4,
+    .footer-col-3 h4 {
+      font-family: var(--font-d);
+      font-size: 14.5px;
+      letter-spacing: .1em;
+      color: var(--gold);
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      font-size: 14.5px;
+      color: rgba(242, 234, 217, .7);
+      transition: color .25s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+
+    /* ============ INSTAGRAM BUTTON ============ */
+    .footer-instagram {
+      margin-top: 52px;
+      text-align: center;
+    }
+
+    .insta-btn {
+      width: 150px;
+      height: 52px;
+      border-radius: 8px;
+      background: radial-gradient(circle at 30% 110%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-family: var(--font-b);
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: .02em;
+      transition: transform .25s ease, box-shadow .25s ease;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, .35);
+    }
+
+    .insta-btn svg {
+      width: 22px;
+      height: 22px;
+      flex: 0 0 22px;
+    }
+
+    .insta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, .4);
+    }
+
+    /* ============ FOOTER BOTTOM ============ */
+    .footer-bottom {
+      margin-top: 56px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(242, 234, 217, .12);
+      font-size: 12.5px;
+      letter-spacing: .05em;
+      opacity: .75;
+      text-align: center;
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- ============ HEADER (共通コンポーネント header.html) ============ -->
+<header class="site-header">
+  <div class="header-wrap">
+    <!-- Logo -->
+    <div class="logo">
+      倉林畳店
+      <small>KURAHAYASHI TATAMI — since 1943</small>
+    </div>
+
+    <!-- Desktop Navigation -->
+    <nav class="nav-desktop">
+      <ul>
+        <li><a href="top.html">TOP</a></li>
+        <li><a href="price.html" aria-current="page">畳の種類・料金</a></li>
+        <li><a href="top.html#cases">導入事例</a></li>
+        <li><a href="top.html#tatami">畳について</a></li>
+        <li><a href="top.html#craftspeople">会社概要</a></li>
+        <li><a href="top.html#contact">問い合わせ</a></li>
+      </ul>
+    </nav>
+
+    <!-- Header Right Section -->
+    <div class="header-right">
+      <!-- Contact Button -->
+      <a class="contact-btn" href="tel:0274522966" aria-label="電話をかける">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+        <span class="label">お問い合わせ</span>
+      </a>
+
+      <!-- Hamburger Menu Button (Mobile) -->
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-label="メニューを開く">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ MOBILE NAV OVERLAY ============ -->
+<nav class="nav-overlay" id="navOverlay">
+  <ul>
+    <li><a href="top.html">TOP</a></li>
+    <li><a href="price.html" aria-current="page">畳の種類・料金</a></li>
+    <li><a href="top.html#cases">導入事例</a></li>
+    <li><a href="top.html#tatami">畳について</a></li>
+    <li><a href="top.html#craftspeople">会社概要</a></li>
+    <li><a href="top.html#contact">問い合わせ</a></li>
+  </ul>
+</nav>
+
+<!-- ============ PAGE TITLE ============ -->
+<section class="washi-tex page-head">
+  <div class="wrap">
+    <div class="section-head">
+      <h1 class="section-title">畳の種類・料金</h1>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TYPES ============ -->
+<section id="types" class="washi-tex">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title">畳の種類</h2>
+    </div>
+    <div class="type-block">
+      <div class="type-text">
+        <h3 class="type-name">国産い草畳</h3>
+        <p class="type-desc">・香りが良く、色の変化を楽しめる<br>・青から茶色に変化していく</p>
+        <div class="type-label">こんな人におすすめ</div>
+        <p class="type-desc">・畳の香りを感じたい人<br>・和を感じたい方</p>
+        <div class="type-price">12000~20000  /1畳</div>
+      </div>
+      <div class="type-media">
+        <div class="frame frame-tatami"></div>
+      </div>
+    </div>
+
+    <div class="type-block type-block-stacked">
+      <div class="type-text">
+        <h3 class="type-name">和紙表</h3>
+        <p class="type-desc">・色の変化がない<br>・傷に強い<br>・シミになりにくくメンテナンスが楽<br>・カラーが選べる</p>
+        <div class="type-label">こんな人におすすめ</div>
+        <p class="type-desc">・ペットを飼っている人<br>・小さい子がいる人<br>・洋風な家にマッチさせたい人</p>
+        <div class="type-price">12000~25000 /1畳</div>
+      </div>
+      <div class="type-media">
+        <div class="photo-scroller" id="washiPhotos" tabindex="0" aria-label="和紙表のカラーバリエーション（横スクロール）">
+          <div class="frame frame-washi"></div>
+          <div class="frame frame-washi"></div>
+          <div class="frame frame-washi"></div>
+          <div class="frame frame-washi"></div>
+          <div class="frame frame-washi"></div>
+          <div class="frame frame-washi"></div>
+        </div>
+        <div class="carousel-nav">
+          <button class="carousel-btn" type="button" data-dir="-1" aria-label="前の写真を見る">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="carousel-btn" type="button" data-dir="1" aria-label="次の写真を見る">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <p class="types-note">そのほかも要望次第で対応可能</p>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section id="services" class="washi-tex">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title">サービス（作業）ごとの<br>内容と料金</h2>
+    </div>
+    <div class="case-grid">
+      <div class="case-card">
+        <div class="case-body">
+          <div class="cat">裏返し</div>
+          <ul class="case-detail">
+            <li><span>内容</span><span>畳表を裏返して再利用（3~8年で表面が擦れてきて服に着き始めたら　）</span></li>
+            <li><span>料金</span><span>1律4500円+税</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="case-card">
+        <div class="case-body">
+          <div class="cat">表替え</div>
+          <ul class="case-detail">
+            <li><span>内容</span><span>畳の表とへりを新しくする（裏返し後また同じような状況になってきたら）</span></li>
+            <li><span>料金</span><span>国産7000~15000+税</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="case-card">
+        <div class="case-body">
+          <div class="cat">新調</div>
+          <ul class="case-detail">
+            <li><span>内容</span><span>畳を新しく作り替える<br>畳を入れたい　畳が古いので変えたい</span></li>
+            <li><span>料金</span><span>国産い草畳 12,000〜20,000円+税 /1畳<br>和紙表 12,000〜25,000円+税 /1畳<br>作業代は一畳買う値段に込み込み</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="case-card">
+        <div class="case-body">
+          <div class="cat">和紙表の畳</div>
+          <ul class="case-detail">
+            <li><span>内容</span><span>扱える職人が少ない</span></li>
+            <li><span>料金</span><span>12,000〜25,000円+税 /1畳<br>作業代は一畳買う値段に込み込み</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STRENGTHS ============ -->
+<section id="support" class="washi-tex">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title">対応の強み</h2>
+    </div>
+    <div class="reasons">
+      <div class="reason">
+        <h3>スピード対応</h3>
+        <p>急な畳替えのご相談にもできる限り迅速に対応いたします。<br>お客様のご都合に合わせた柔軟な日程調整が可能です。</p>
+      </div>
+      <div class="reason">
+        <h3>夜間対応</h3>
+        <p>お仕事などで日中のお立ち会いが難しい方もお気軽にご相談ください。<br>事前にご相談いただければ、できる限りご都合に合わせて対応いたします。</p>
+      </div>
+      <div class="reason">
+        <h3>家具の移動もお任せ</h3>
+        <p>重たい家具の移動もスタッフが対応いたします。<br>お客様に無理をお願いすることはありませんので、ご安心ください。</p>
+      </div>
+    </div>
+    <div class="price-cta">
+      <a class="cta-btn" href="tel:0274522966">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        お問い合わせ
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER (共通コンポーネント footer.html) ============ -->
+<footer>
+  <div class="footer-wrap">
+    <!-- Footer Grid -->
+    <div class="footer-grid">
+      <!-- Column 1: Company Info -->
+      <div class="footer-col-1">
+        <div class="company-name">倉林畳店</div>
+        <div class="company-info">
+          <p>
+            <strong>営業時間</strong>
+            <span class="value">8:00〜20:00</span>
+          </p>
+          <p>
+            <strong>定休日</strong>
+            <span class="value">不定休</span>
+          </p>
+          <p>
+            <strong>電話番号</strong>
+            <span class="value"><a href="tel:0274522966">0274-52-2966</a></span>
+          </p>
+          <p>
+            <strong>住所</strong>
+            <span class="value">〒367-0301<br>埼玉県児玉郡神川町渡瀬638-7</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Column 2: Links -->
+      <div class="footer-col-2">
+        <h4>会社情報</h4>
+        <ul class="footer-links">
+          <li><a href="#">会社概要</a></li>
+          <li><a href="#">アクセス</a></li>
+          <li><a href="#">お問い合わせ</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 3: Links -->
+      <div class="footer-col-3">
+        <h4>その他</h4>
+        <ul class="footer-links">
+          <li><a href="#">プライバシーポリシー</a></li>
+          <li><a href="#">利用規約</a></li>
+          <li><a href="#">サイトマップ</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Instagram Button -->
+    <div class="footer-instagram">
+      <a class="insta-btn" href="https://www.instagram.com/kurahayashitatamiten/" target="_blank" rel="noopener noreferrer" aria-label="Instagramを開く">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.69.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm4.965-10.322a1.44 1.44 0 1 1 2.881.001 1.44 1.44 0 0 1-2.881-.001z"/>
+        </svg>
+        <span>Instagram</span>
+      </a>
+    </div>
+
+    <!-- Copyright -->
+    <div class="footer-bottom">
+      © 2024 Kurahayashi Tatami. All Rights Reserved.
+    </div>
+  </div>
+</footer>
+
+<script>
+  // 和紙表の写真の横スクロール（矢印で1枚ずつ）
+  (function () {
+    const track = document.getElementById('washiPhotos');
+    const btns = document.querySelectorAll('.carousel-btn');
+    const step = () => {
+      const photo = track.querySelector('.frame');
+      const gap = parseFloat(getComputedStyle(track).gap) || 0;
+      return photo.getBoundingClientRect().width + gap;
+    };
+    btns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        track.scrollBy({ left: Number(btn.dataset.dir) * step(), behavior: 'smooth' });
+      });
+    });
+    const update = () => {
+      const max = track.scrollWidth - track.clientWidth;
+      btns.forEach(btn => {
+        const dir = Number(btn.dataset.dir);
+        btn.disabled = dir < 0 ? track.scrollLeft <= 1 : track.scrollLeft >= max - 1;
+      });
+    };
+    track.addEventListener('scroll', update);
+    window.addEventListener('resize', update);
+    update();
+  })();
+</script>
+
+<!-- ============ HEADER SCRIPT (共通コンポーネント header.html) ============ -->
+<script>
+  // Hamburger menu toggle
+  const menuBtn = document.getElementById('menuBtn');
+  const navOverlay = document.getElementById('navOverlay');
+
+  // Menu button click handler
+  menuBtn.addEventListener('click', function () {
+    const isExpanded = this.getAttribute('aria-expanded') === 'true';
+    this.setAttribute('aria-expanded', !isExpanded);
+    navOverlay.classList.toggle('open');
+  });
+
+  // Navigation link click handler (close menu when link is clicked)
+  const navLinks = navOverlay.querySelectorAll('a');
+  navLinks.forEach(link => {
+    link.addEventListener('click', function () {
+      menuBtn.setAttribute('aria-expanded', 'false');
+      navOverlay.classList.remove('open');
+    });
+  });
+
+  // Close menu when clicking outside (on overlay background)
+  navOverlay.addEventListener('click', function (e) {
+    if (e.target === this) {
+      menuBtn.setAttribute('aria-expanded', 'false');
+      navOverlay.classList.remove('open');
+    }
+  });
+
+  // Close menu with Escape key
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      menuBtn.setAttribute('aria-expanded', 'false');
+      navOverlay.classList.remove('open');
+    }
+  });
+</script>
+
+</body>
+</html>
