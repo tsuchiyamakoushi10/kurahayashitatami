@@ -307,6 +307,93 @@
         height: 28px;
       }
     }
+
+    /* ============ PAIN POINTS ============ */
+    section {
+      position: relative;
+      padding: 110px 0;
+    }
+
+    .washi-tex {
+      position: relative;
+      background: var(--washi);
+    }
+
+    .washi-tex::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: .5;
+      mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='matrix' values='0 0 0 0 0.08  0 0 0 0 0.07  0 0 0 0 0.05  0 0 0 0.05 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+      background-size: 220px 220px;
+    }
+
+    .section-head {
+      max-width: 640px;
+      margin-bottom: 56px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-head .eyebrow {
+      color: var(--vermillion);
+      margin-bottom: 16px;
+      font-family: var(--font-d);
+      font-weight: 700;
+    }
+
+    .section-title {
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: clamp(26px, 3.6vw, 40px);
+      line-height: 1.55;
+      color: var(--ink);
+      position: relative;
+      z-index: 1;
+    }
+
+    .pain-list {
+      list-style: none;
+      display: grid;
+      gap: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pain-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 22px;
+      padding: 26px 0;
+      border-bottom: 1px solid var(--washi-3);
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: clamp(17px, 2.2vw, 22px);
+      color: var(--ink);
+    }
+
+    .pain-list li:first-child {
+      border-top: 1px solid var(--washi-3);
+    }
+
+    .pain-list .mark {
+      color: var(--vermillion);
+      font-size: 22px;
+      flex: none;
+    }
+
+    .pain-resolve {
+      margin-top: 44px;
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: clamp(20px, 2.8vw, 28px);
+      color: var(--vermillion);
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
   </style>
 </head>
 <body>
@@ -350,6 +437,24 @@
 
   <div class="scroll-cue">
     <span class="stem"></span>SCROLL
+  </div>
+</section>
+
+<!-- ============ PAIN POINTS ============ -->
+<section class="washi-tex">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">こんなことに困っていませんか</div>
+      <h2 class="section-title">畳の"気になる"を、<br>そのままにしていませんか。</h2>
+    </div>
+
+    <ul class="pain-list">
+      <li><span class="mark">・</span>畳が色あせてお部屋が古く見える</li>
+      <li><span class="mark">・</span>費用や張り替え時期が分からず、そのままになっている</li>
+      <li><span class="mark">・</span>子どもが安心して遊べる部屋にしたい</li>
+    </ul>
+
+    <p class="pain-resolve">そのお悩み、畳を替えることで解決できます。</p>
   </div>
 </section>
 
