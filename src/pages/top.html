@@ -939,6 +939,140 @@
         width: 100%;
       }
     }
+
+    /* ============ CASES ============ */
+    #cases .section-title {
+      color: var(--washi);
+      font-size: clamp(38px, 5.5vw, 64px);
+    }
+
+    .case-grid {
+      display: grid;
+      gap: 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (min-width: 820px) {
+      .case-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .case-card {
+      background: var(--washi);
+      border: 1px solid var(--washi-3);
+    }
+
+    .case-card .frame {
+      aspect-ratio: 16 / 10;
+      border-radius: 0;
+    }
+
+    .case-body {
+      padding: 26px 28px 30px;
+    }
+
+    .case-body .cat {
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: .08em;
+      color: var(--vermillion);
+    }
+
+    .case-body .work {
+      margin-top: 8px;
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 19px;
+      color: var(--ink);
+    }
+
+    .case-detail {
+      list-style: none;
+      margin-top: 16px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .case-detail li {
+      display: flex;
+      gap: 12px;
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--ink);
+    }
+
+    .case-detail li span:first-child {
+      flex: none;
+      width: 64px;
+      color: var(--vermillion);
+      font-weight: 700;
+    }
+
+    .case-body blockquote {
+      margin-top: 18px;
+      padding-left: 18px;
+      border-left: 2px solid var(--gold);
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 17.5px;
+      color: var(--ink);
+      line-height: 1.85;
+    }
+
+    /* Cases CTA (共通コンポーネントのゴーストボタンに準拠) */
+    .cases-cta {
+      display: flex;
+      justify-content: center;
+      margin-top: 48px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cases-cta .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border: 1px solid var(--paper-45);
+      border-radius: 3px;
+      color: var(--washi);
+      font-family: var(--font-b);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: .03em;
+      transition: transform .25s ease, border-color .25s ease, background .25s ease;
+    }
+
+    .cases-cta .btn-ghost:hover {
+      transform: translateY(-2px);
+      border-color: var(--washi);
+      background: var(--sumi-3);
+    }
+
+    .cases-cta .btn-ghost:active {
+      transform: translateY(0);
+    }
+
+    .cases-cta .btn-ghost svg {
+      width: 16px;
+      height: 16px;
+      flex: 0 0 16px;
+    }
+
+    @media (max-width: 599px) {
+      .case-body {
+        padding: 22px 20px 26px;
+      }
+
+      .cases-cta .btn-ghost {
+        width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1119,6 +1253,48 @@
     <div class="price-cta">
       <a class="cta-btn" href="/price/">
         料金ページで詳しく見る
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ CASES ============ -->
+<section id="cases" class="sumi-tex">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title">施工事例</h2>
+    </div>
+    <div class="case-grid">
+      <div class="case-card">
+        <div class="frame"><div class="tag">P-23 施工後</div></div>
+        <div class="case-body">
+          <div class="cat">表替え</div>
+          <div class="work">国産い草</div>
+          <ul class="case-detail">
+            <li><span>枚数</span><span>6畳2間</span></li>
+            <li><span>工期</span><span>2日</span></li>
+          </ul>
+          <blockquote>畳を替える時はまたぜひお願いしたいです。</blockquote>
+        </div>
+      </div>
+      <div class="case-card">
+        <div class="frame"><div class="tag">P-25 施工後</div></div>
+        <div class="case-body">
+          <div class="cat">表替え</div>
+          <div class="work">和紙表</div>
+          <ul class="case-detail">
+            <li><span>枚数</span><span>10畳</span></li>
+            <li><span>工期</span><span>1日</span></li>
+          </ul>
+          <blockquote>これで気持ちよく眠れます。部屋も明るくなりました。</blockquote>
+        </div>
+      </div>
+    </div>
+    <div class="cases-cta">
+      <a class="btn-ghost" href="/works/">
+        施工事例をもっと見る
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
     </div>
