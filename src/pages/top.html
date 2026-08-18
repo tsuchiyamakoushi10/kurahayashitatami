@@ -733,6 +733,212 @@
         padding: 36px 24px;
       }
     }
+
+    /* ============ PRICE (PRODUCTS) ============ */
+    .product-grid {
+      display: grid;
+      gap: 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (min-width: 760px) {
+      .product-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .product-card {
+      background: var(--sumi);
+      color: var(--washi);
+      border-radius: 2px;
+      overflow: hidden;
+      border: 1px solid var(--sumi-3);
+    }
+
+    .product-swatch {
+      height: 220px;
+      position: relative;
+    }
+
+    .product-swatch::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: .35;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3'/></filter><rect width='100%25' height='100%25' filter='url(%23g)'/></svg>");
+    }
+
+    .swatch-igusa {
+      background: linear-gradient(160deg, var(--igusa) 0%, var(--igusa-deep) 55%, var(--sumi) 100%);
+    }
+
+    .swatch-washi {
+      background: linear-gradient(160deg, var(--washi-3) 0%, var(--gold) 55%, var(--sumi-3) 100%);
+    }
+
+    .product-swatch .tag {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 2;
+      color: var(--paper-70);
+      font-family: var(--font-b);
+      font-size: 13px;
+      letter-spacing: .08em;
+      border: 1px solid var(--paper-45);
+      padding: 5px 10px;
+      border-radius: 2px;
+      backdrop-filter: blur(3px);
+    }
+
+    .product-body {
+      padding: 32px;
+    }
+
+    .product-body h3 {
+      font-family: var(--font-d);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--washi);
+    }
+
+    .product-body .price {
+      margin-top: 6px;
+      color: var(--gold);
+      font-family: var(--font-b);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: .03em;
+      line-height: 1.7;
+    }
+
+    .product-body p {
+      margin-top: 16px;
+      font-family: var(--font-b);
+      font-weight: 500;
+      font-size: 15.5px;
+      color: var(--paper-70);
+      line-height: 1.9;
+    }
+
+    .product-body .note {
+      margin-top: 12px;
+      font-size: 14.5px;
+    }
+
+    .color-dots {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .color-dots button {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 2px solid var(--paper-45);
+      padding: 0;
+      position: relative;
+      transition: transform .2s ease, border-color .2s ease;
+    }
+
+    .color-dots button:hover {
+      transform: translateY(-2px);
+    }
+
+    .color-dots button:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+    }
+
+    .color-dots button[aria-pressed="true"] {
+      border-color: var(--washi);
+      box-shadow: 0 0 0 3px var(--sumi), 0 0 0 4px var(--gold);
+    }
+
+    .color-label {
+      margin-top: 14px;
+      font-family: var(--font-b);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: .05em;
+      color: var(--paper-70);
+    }
+
+    .color-label .id {
+      color: var(--gold);
+      font-family: var(--font-b);
+      font-size: 12px;
+      margin-left: 8px;
+    }
+
+    .price-note {
+      margin-top: 30px;
+      font-family: var(--font-b);
+      font-weight: 500;
+      font-size: 15.5px;
+      color: var(--ink);
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Price CTA (共通コンポーネント .cta-btn に準拠) */
+    .price-cta {
+      display: flex;
+      justify-content: center;
+      margin-top: 34px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .price-cta .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--sumi);
+      color: var(--washi);
+      padding: 14px 28px;
+      border-radius: 3px;
+      font-family: var(--font-b);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: .03em;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, .35);
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+    }
+
+    .price-cta .cta-btn:hover {
+      transform: translateY(-2px);
+      background: var(--sumi-3);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, .4);
+    }
+
+    .price-cta .cta-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .3);
+    }
+
+    .price-cta .cta-btn svg {
+      width: 16px;
+      height: 16px;
+      flex: 0 0 16px;
+    }
+
+    @media (max-width: 599px) {
+      .product-body {
+        padding: 26px 22px;
+      }
+
+      .price-cta .cta-btn {
+        width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
@@ -869,6 +1075,52 @@
         <h3>暮らしに合った畳をご提案</h3>
         <p>「い草の香りを楽しみたい」「お手入れしやすい畳がいい」など、お客様のご要望や<br>ライフスタイルを丁寧にお伺いし、一人ひとりに合った畳をご提案します。</p>
       </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ PRICE ============ -->
+<section id="price" class="washi-tex">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">畳の種類・料金の目安</div>
+      <h2 class="section-title">い草畳と和紙表、<br>あなたの暮らしに合う一枚を。</h2>
+    </div>
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="product-swatch swatch-igusa"></div>
+        <div class="product-body">
+          <h3>い草畳</h3>
+          <div class="price">裏返し 一律4,500円+税<br>表替え(国産) 7,000〜15,000円+税</div>
+          <p>天然素材ならではの香りと風合い。<br>使い始めは青々と、時間とともに黄金色へ変化していく、国産い草にこだわった一枚です。</p>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-swatch swatch-washi">
+          <div class="tag">写真枠 P-13〜P-16</div>
+        </div>
+        <div class="product-body">
+          <h3>和紙表</h3>
+          <div class="price">裏返し 一律4,500円+税<br>表替え 7,000〜15,000円+税</div>
+          <p>色あせ・汚れ・日焼けに強く、美しい見た目を長く保てる和紙表。<br>ここでは数あるカラーの中から4色を抜粋してご紹介しています。</p>
+          <div class="color-dots" role="group" aria-label="和紙表のカラーバリエーション">
+            <button type="button" style="background:#3d4a6b;" data-name="藍" data-id="P-13" aria-pressed="true" aria-label="藍"></button>
+            <button type="button" style="background:#7a5c3d;" data-name="焦茶" data-id="P-14" aria-pressed="false" aria-label="焦茶"></button>
+            <button type="button" style="background:#8b9a6b;" data-name="若草" data-id="P-15" aria-pressed="false" aria-label="若草"></button>
+            <button type="button" style="background:#c9c2ad;" data-name="生成り" data-id="P-16" aria-pressed="false" aria-label="生成り"></button>
+          </div>
+          <div class="color-label">藍<span class="id">P-13</span></div>
+          <p class="note">※上記は一部の色味です。他のカラーも<br>ございますので、お気軽にご相談ください。</p>
+        </div>
+      </div>
+    </div>
+    <p class="price-note">正確な金額は畳のサイズ・状態により異なります。お見積りは無料ですので、<br>まずはお気軽にご相談ください。</p>
+    <div class="price-cta">
+      <a class="cta-btn" href="/price/">
+        料金ページで詳しく見る
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
     </div>
   </div>
 </section>
