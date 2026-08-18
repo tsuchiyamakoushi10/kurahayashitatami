@@ -1210,6 +1210,67 @@
         width: 100%;
       }
     }
+
+    /* ============ FAQ ============ */
+    .faq-wrap {
+      max-width: 760px;
+    }
+
+    .faq-list {
+      position: relative;
+      z-index: 1;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--washi-3);
+    }
+
+    .faq-item:first-child {
+      border-top: 1px solid var(--washi-3);
+    }
+
+    .faq-q {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 4px;
+      text-align: left;
+      font-family: var(--font-b);
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--ink);
+    }
+
+    .faq-q .plus {
+      font-size: 20px;
+      color: var(--vermillion);
+      transition: transform .3s ease;
+      flex: none;
+      margin-left: 20px;
+    }
+
+    .faq-item[data-open="true"] .plus {
+      transform: rotate(45deg);
+    }
+
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .35s ease;
+    }
+
+    .faq-item[data-open="true"] .faq-a {
+      max-height: 220px;
+    }
+
+    .faq-a p {
+      padding: 0 4px 24px;
+      font-family: var(--font-b);
+      font-size: 14.5px;
+      color: var(--ink-70);
+      max-width: 600px;
+    }
   </style>
 </head>
 <body>
@@ -1474,6 +1535,38 @@
     </div>
   </div>
 </section>
+
+
+<!-- ============ FAQ ============ -->
+<section class="washi-tex">
+  <div class="wrap faq-wrap">
+    <div class="section-head">
+      <div class="eyebrow">よくあるご質問</div>
+      <h2 class="section-title">ご相談の前に</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item" data-open="false">
+        <button class="faq-q" type="button">対応エリアはどこまでですか?<span class="plus">+</span></button>
+        <div class="faq-a"><p>まずはお気軽にお問い合わせください。エリアを確認のうえご案内します。</p></div>
+      </div>
+      <div class="faq-item" data-open="false">
+        <button class="faq-q" type="button">見積もりは無料ですか?<span class="plus">+</span></button>
+        <div class="faq-a"><p>はい、無料です。まずはお気軽にご相談ください。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // faq accordion
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-q').addEventListener('click', () => {
+      const isOpen = item.getAttribute('data-open') === 'true';
+      document.querySelectorAll('.faq-item').forEach(i => i.setAttribute('data-open', 'false'));
+      item.setAttribute('data-open', String(!isOpen));
+    });
+  });
+</script>
 
 </body>
 </html>
