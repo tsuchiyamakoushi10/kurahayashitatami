@@ -1073,6 +1073,143 @@
         width: 100%;
       }
     }
+
+    /* ============ CRAFTSPEOPLE ============ */
+    .crafts-grid {
+      display: grid;
+      gap: 32px;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (min-width: 760px) {
+      .crafts-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .craft-card {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+    }
+
+    .craft-photo {
+      width: 132px;
+      aspect-ratio: 3 / 4;
+      flex: none;
+      border-radius: 2px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .craft-photo::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: .35;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3'/></filter><rect width='100%25' height='100%25' filter='url(%23g)'/></svg>");
+    }
+
+    .craft-photo.p1 {
+      background: linear-gradient(160deg, var(--gold) 0%, var(--sumi-2) 100%);
+    }
+
+    .craft-photo.p2 {
+      background: linear-gradient(160deg, var(--gold) 0%, var(--sumi-3) 100%);
+    }
+
+    .craft-role {
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: .1em;
+      color: var(--vermillion);
+    }
+
+    .craft-name {
+      margin-top: 6px;
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 21px;
+      color: var(--ink);
+    }
+
+    .craft-years {
+      margin-top: 6px;
+      font-family: var(--font-b);
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--ink);
+    }
+
+    .craft-quote {
+      margin-top: 14px;
+      font-family: var(--font-b);
+      font-weight: 500;
+      font-size: 15.5px;
+      color: var(--ink);
+      opacity: .85;
+      line-height: 1.9;
+    }
+
+    /* Crafts CTA (共通コンポーネント .cta-btn に準拠) */
+    .crafts-cta {
+      display: flex;
+      justify-content: center;
+      margin-top: 48px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .crafts-cta .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--sumi);
+      color: var(--washi);
+      padding: 14px 28px;
+      border-radius: 3px;
+      font-family: var(--font-b);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: .03em;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, .35);
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+    }
+
+    .crafts-cta .cta-btn:hover {
+      transform: translateY(-2px);
+      background: var(--sumi-3);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, .4);
+    }
+
+    .crafts-cta .cta-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .3);
+    }
+
+    .crafts-cta .cta-btn svg {
+      width: 16px;
+      height: 16px;
+      flex: 0 0 16px;
+    }
+
+    @media (max-width: 599px) {
+      .craft-card {
+        gap: 18px;
+      }
+
+      .craft-photo {
+        width: 108px;
+      }
+
+      .crafts-cta .cta-btn {
+        width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1295,6 +1432,43 @@
     <div class="cases-cta">
       <a class="btn-ghost" href="/works/">
         施工事例をもっと見る
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ CRAFTSPEOPLE ============ -->
+<section id="craftspeople" class="washi-tex">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">職人・会社紹介</div>
+      <h2 class="section-title">この道を歩む、<br>ふたりの職人。</h2>
+    </div>
+    <div class="crafts-grid">
+      <div class="craft-card">
+        <div class="craft-photo p1"></div>
+        <div>
+          <div class="craft-role">代表・3代目</div>
+          <div class="craft-name">倉林 俊之</div>
+          <div class="craft-years">職人歴 32年</div>
+          <p class="craft-quote">妥協のない仕事で、<br>畳と言ったら倉林と<br>思っていただけるような<br>施工をします。</p>
+        </div>
+      </div>
+      <div class="craft-card">
+        <div class="craft-photo p2"></div>
+        <div>
+          <div class="craft-role">4代目・修行中</div>
+          <div class="craft-name">倉林 尚輝</div>
+          <div class="craft-years">職人歴 4年</div>
+          <p class="craft-quote">お客様に喜んでいただける<br>施工を心がけています。</p>
+        </div>
+      </div>
+    </div>
+    <div class="crafts-cta">
+      <a class="cta-btn" href="/company/">
+        会社概要をもっと見る
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
     </div>
