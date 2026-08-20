@@ -101,102 +101,131 @@
       z-index: 1;
     }
 
-    /* ============ HERO (TOPの .hero の型 / 画像を全面に敷き、テキストを左下へ) ============ */
+    /* ============ HERO (中央揃え・左右対称の題字) ============ */
     .hero {
-      position: relative;
-      /* ヘッダー(76px)を除いた高さで画面いっぱいに表示 */
       min-height: calc(100svh - 76px);
       display: flex;
-      align-items: stretch;
-      /* 見出しを上端、導入文を下端に置くための余白 */
-      padding: 56px 0 210px;
-      color: var(--washi);
-      overflow: hidden;
+      align-items: center;
+      /* 下は次のセクションへ自然につなぐため詰める */
+      padding: 120px 0 40px;
+      text-align: center;
     }
 
-    .hero-photo {
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(180deg, rgba(21, 18, 13, .35) 0%, rgba(21, 18, 13, .55) 55%, rgba(21, 18, 13, .94) 100%),
-        radial-gradient(ellipse at 30% 20%, #4a4034 0%, transparent 55%),
-        linear-gradient(135deg, #2b2419 0%, #1c1710 45%, #100d09 100%);
+    /* 導入部の直後は上余白も詰める */
+    .hero + section {
+      padding-top: 56px;
     }
 
-    .hero-photo .grain {
-      position: absolute;
-      inset: 0;
-      opacity: .4;
-      mix-blend-mode: overlay;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3'/></filter><rect width='100%25' height='100%25' filter='url(%23g)' opacity='0.5'/></svg>");
-    }
-
-    .photo-note {
-      position: absolute;
-      top: 24px;
-      right: 24px;
-      font-family: var(--font-b);
-      font-size: 12px;
-      letter-spacing: .1em;
-      color: rgba(242, 234, 217, .55);
-      border: 1px solid rgba(242, 234, 217, .3);
-      padding: 5px 9px;
-      border-radius: 2px;
-      z-index: 3;
-      line-height: 1.7;
-      max-width: 60%;
-      text-align: right;
-    }
-
-    /* テキストは画面の左下 */
     .hero-inner {
       position: relative;
-      z-index: 2;
-      width: 100%;
-      /* 見出し=左上 / 導入文=左下 */
+      z-index: 1;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .hero .catch {
-      color: var(--washi);
-      font-family: var(--font-d);
-      /* price / tatami / works の .section-title と同値に統一 */
-      font-weight: 700;
-      font-size: clamp(26px, 3.6vw, 40px);
-      line-height: 1.55;
-      letter-spacing: .02em;
-      text-shadow: 0 6px 30px rgba(0, 0, 0, .5);
-    }
-
-    .hero .sub {
-      margin-top: 26px;
-      max-width: 560px;
-      font-family: var(--font-d);
-      font-size: 18px;
-      color: var(--paper-70);
-      font-weight: 600;
-      letter-spacing: .02em;
-      line-height: 1.9;
-    }
-
-    /* ============ SPLIT + PHOTO FRAME (TOPの .split / .frame の型) ============ */
-    .split {
-      display: grid;
-      gap: 56px;
       align-items: center;
-      position: relative;
-      z-index: 1;
     }
 
-    @media (min-width: 880px) {
-      .split {
-        grid-template-columns: 1fr 1fr;
-        gap: 80px;
+    /* ページ名は細い金罫で左右から挟む */
+    .hero-label {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: .32em;
+      /* letter-spacing の分だけ右に寄るのを打ち消す */
+      text-indent: .32em;
+      color: var(--vermillion);
+    }
+
+    .hero-label::before,
+    .hero-label::after {
+      content: "";
+      width: 56px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .shop-name {
+      margin-top: 30px;
+      font-family: var(--font-d);
+      font-weight: 800;
+      font-size: clamp(44px, 12vw, 112px);
+      line-height: 1.3;
+      letter-spacing: .12em;
+      text-indent: .12em;
+      color: var(--ink);
+    }
+
+    /* 創業年は上下の細い金罫だけを添えたテキスト */
+    .founded {
+      margin-top: 28px;
+      display: flex;
+      align-items: baseline;
+      gap: 1.5em;
+      padding: 11px 2px;
+      border-top: 1px solid var(--gold);
+      border-bottom: 1px solid var(--gold);
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 13.5px;
+      letter-spacing: .18em;
+      text-indent: .18em;
+      line-height: 1.6;
+      color: var(--ink-70);
+    }
+
+    /* 読み込み時に上へ少しスライドしながら順に現れる */
+    @keyframes hero-in {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
       }
     }
 
+    .hero-inner > * {
+      animation: hero-in .8s cubic-bezier(.2, .7, .2, 1) both;
+    }
+
+    .hero-label { animation-delay: .1s; }
+    .shop-name  { animation-delay: .3s; }
+    .founded    { animation-delay: .5s; }
+    .hero-lead  { animation-delay: .7s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-inner > * {
+        animation: none;
+      }
+    }
+
+    .hero-lead a {
+      border-bottom: 1px solid var(--gold);
+      transition: color .25s ease, border-color .25s ease;
+    }
+
+    .hero-lead a:hover {
+      color: var(--vermillion);
+      border-bottom-color: var(--vermillion);
+    }
+
+    .hero-lead {
+      margin-top: 44px;
+      max-width: 620px;
+      font-family: var(--font-d);
+      font-weight: 600;
+      font-size: clamp(15.5px, 1.6vw, 18px);
+      line-height: 2;
+      letter-spacing: .02em;
+      color: var(--ink-70);
+      text-wrap: balance;
+    }
+
+    /* ============ PHOTO FRAME (TOPの .frame の型) ============ */
     .frame {
       position: relative;
       aspect-ratio: 4 / 5;
@@ -230,22 +259,49 @@
       line-height: 1.7;
     }
 
-    .split-text .eyebrow {
-      font-family: var(--font-d);
-      font-weight: 700;
-      font-size: 14px;
-      letter-spacing: .32em;
-      color: var(--vermillion);
-      margin-bottom: 16px;
-    }
-
-    /* ============ CRAFTSPEOPLE (TOPの .craft-card の型) ============ */
-    .craft-card {
-      display: flex;
-      gap: 24px;
-      align-items: flex-start;
+    /* ============ CRAFTSPEOPLE (左右対の二枚看板) ============ */
+    .craft-pair {
+      display: grid;
+      gap: 56px;
       position: relative;
       z-index: 1;
+    }
+
+    @media (min-width: 880px) {
+      .craft-pair {
+        grid-template-columns: 1fr 1fr;
+        gap: 72px;
+      }
+
+      /* 二枚を隔てる細い罫 (世代の継ぎ目) */
+      .craft-pair::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 1px;
+        background: linear-gradient(180deg, var(--gold) 0%, var(--washi-3) 55%, transparent 100%);
+      }
+    }
+
+    /* 看板の頭は細い金の罫のみ */
+    .craft-panel {
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid var(--gold);
+      padding-top: 26px;
+    }
+
+    /* 二枚を並べたときに一対として収まる正方の枠 */
+    .craft-panel .frame {
+      aspect-ratio: 1 / 1;
+      margin-bottom: 26px;
+    }
+
+    .craft-head {
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--washi-3);
     }
 
     .craft-role {
@@ -279,16 +335,6 @@
       color: var(--ink);
     }
 
-    .craft-quote {
-      margin-top: 14px;
-      font-family: var(--font-b);
-      font-weight: 500;
-      font-size: 15.5px;
-      color: var(--ink);
-      opacity: .85;
-      line-height: 1.9;
-    }
-
     /* 職人カード内の項目リスト (works.html の .case-detail と同じ型) */
     .craft-detail {
       list-style: none;
@@ -320,34 +366,61 @@
       line-height: 1.9;
     }
 
-    /* ============ COMPANY INFO (works.html の .case-detail と同じ型) ============ */
-    .info-list {
-      list-style: none;
-      border-top: 1px solid var(--washi-3);
+    /* ============ COMPANY INFO (罫線で区切った台帳形式) ============ */
+    .info-table {
+      width: 100%;
+      border-collapse: collapse;
       position: relative;
       z-index: 1;
+      font-family: var(--font-b);
+      /* 上下の締めだけ細い金の罫 */
+      border-top: 1px solid var(--gold);
+      border-bottom: 1px solid var(--gold);
     }
 
-    .info-list li {
-      display: flex;
-      gap: 24px;
-      padding: 18px 4px;
+    .info-table th,
+    .info-table td {
+      text-align: left;
+      vertical-align: top;
+      padding: 17px 0;
       border-bottom: 1px solid var(--washi-3);
-      font-family: var(--font-d);
-      font-weight: 700;
-      font-size: 15px;
-      color: var(--ink);
       line-height: 1.9;
     }
 
-    .info-list li span:first-child {
-      flex: none;
-      width: 180px;
+    .info-table tr:last-child th,
+    .info-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .info-table th {
+      width: 200px;
+      padding-right: 28px;
+      border-right: 1px solid var(--washi-3);
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: .1em;
+      color: var(--ink-70);
+      white-space: nowrap;
+    }
+
+    .info-table td {
+      padding-left: 28px;
+      font-weight: 500;
+      font-size: 15px;
+      color: var(--ink);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .info-table td a:hover {
       color: var(--vermillion);
     }
 
-    .info-list li span:last-child a:hover {
-      color: var(--vermillion);
+    .info-table rt {
+      font-family: var(--font-b);
+      font-weight: 400;
+      font-size: 10.5px;
+      letter-spacing: .04em;
+      color: var(--ink-70);
     }
 
     /* ============ CTA (共通コンポーネント .cta-btn に準拠) ============ */
@@ -503,40 +576,57 @@
       }
 
       .hero {
-        /* 上余白は写真枠ラベル(右上)と重ならない位置まで確保 */
-        padding: 100px 0 150px;
+        padding: 90px 0 32px;
         min-height: calc(100svh - 76px);
       }
 
-      .hero .sub {
-        margin-top: 18px;
-        font-size: 15.5px;
+      .hero + section {
+        padding-top: 46px;
+      }
+
+      .hero-label::before,
+      .hero-label::after {
+        width: 32px;
+      }
+
+      .shop-name {
+        margin-top: 24px;
+      }
+
+      .hero-lead {
+        margin-top: 34px;
         max-width: 100%;
       }
 
-      .photo-note {
-        top: 16px;
-        right: 16px;
-        font-size: 11px;
-        max-width: 70%;
+      .craft-pair {
+        gap: 44px;
       }
 
-      .split {
-        gap: 40px;
+      /* 台帳は項目名を値の上に積む */
+      .info-table tr {
+        display: block;
+        border-bottom: 1px solid var(--washi-3);
       }
 
-      .craft-card {
-        gap: 18px;
-        flex-direction: column;
+      .info-table tr:last-child {
+        border-bottom: 0;
       }
 
-      .info-list li {
-        flex-direction: column;
-        gap: 4px;
-      }
-
-      .info-list li span:first-child {
+      .info-table th,
+      .info-table td {
+        display: block;
         width: auto;
+        border: 0;
+        padding: 0;
+        white-space: normal;
+      }
+
+      .info-table th {
+        padding-top: 15px;
+      }
+
+      .info-table td {
+        padding-bottom: 15px;
       }
 
       .price-cta .cta-btn,
@@ -1012,48 +1102,42 @@
   </ul>
 </nav>
 
-<!-- ============ 1. ページ導入部 (HERO: 画像全面 + テキスト左下) ============ -->
-<section class="hero">
-  <!-- 写真枠 P-01 -->
-  <div class="hero-photo"><div class="grain"></div></div>
-  <span class="photo-note">写真枠 P-01 / 職人が作業している様子<br>(トップKVと共用のイメージ・引きの構図)</span>
-
+<!-- ============ 1. ページ導入部 (中央揃え・左右対称の題字) ============ -->
+<section class="hero washi-tex">
   <div class="wrap hero-inner">
-    <h1 class="catch">会社概要</h1>
-    <p class="sub">創業83年。妥協のない一枚を追い求め、畳一筋で歩んできた倉林畳店の想いと、これまでの歩みをご紹介します。</p>
+    <p class="hero-label">会社概要</p>
+    <h1 class="shop-name">倉林畳店</h1>
+
+    <!-- 創業年は細い金罫を上下に添えるのみ -->
+    <p class="founded">
+      <span>1943年創立</span>
+      <span>創業83年</span>
+    </p>
+
+    <p class="hero-lead">創業83年、畳一筋の倉林畳店です。ここでは店主・後継者のご紹介と会社概要をご案内します。私たちの想いや歩みについては、<a href="company-story.html">こちらのページ</a>でご紹介しています。</p>
   </div>
 </section>
 
-<!-- ============ 2. 想いと歩みページへの導線 ============ -->
-<section class="washi-tex">
-  <div class="wrap">
-    <div class="price-cta" style="margin-top:0;">
-      <a class="cta-btn" href="company-story.html">
-        想いと歩みページを見る
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 3. 職人紹介(店主) (TOPの .craft-card の型) ============ -->
-<section id="craft-owner" class="washi-tex">
+<!-- ============ 2. 職人紹介(店主・後継者) 左右対の二枚看板 ============ -->
+<section id="craftspeople" class="washi-tex">
   <div class="wrap">
     <div class="section-head">
       <div class="eyebrow">職人紹介</div>
       <h2 class="section-title">この道を歩む職人。</h2>
     </div>
-    <div class="split">
-      <div>
+
+    <div class="craft-pair">
+      <!-- 左: 3代目 -->
+      <article class="craft-panel">
         <!-- 写真枠 P-02 -->
         <div class="frame">
           <div class="tag">写真枠 P-02 / 店主の人物カット<br>(寄り〜中間の構図)</div>
         </div>
-      </div>
-      <div class="split-text">
-        <div class="craft-role">代表・3代目</div>
-        <div class="craft-name">倉林 俊之</div>
-        <div class="craft-years">職人歴 32年</div>
+        <div class="craft-head">
+          <div class="craft-role">代表・3代目</div>
+          <div class="craft-name"><ruby>倉林 俊之<rt>くらはやし としゆき</rt></ruby></div>
+          <div class="craft-years">職人歴 32年</div>
+        </div>
         <ul class="craft-detail">
           <li>
             <span>この仕事を選んだ理由・受け継いだ思い</span>
@@ -1072,25 +1156,19 @@
             <span>釣り、ゴルフ、御朱印巡りなど、古い建物を見て回ったりするのが好き。</span>
           </li>
         </ul>
-      </div>
-    </div>
-  </div>
-</section>
+      </article>
 
-<!-- ============ 4. 職人紹介(後継者) (TOPの .craft-card の型) ============ -->
-<section id="craft-successor" class="washi-tex">
-  <div class="wrap">
-    <div class="split">
-      <div>
+      <!-- 右: 4代目 -->
+      <article class="craft-panel">
         <!-- 写真枠 P-04 -->
         <div class="frame">
           <div class="tag">写真枠 P-04 / 後継者の作業中の表情<br>(寄り〜中間の構図)</div>
         </div>
-      </div>
-      <div class="split-text">
-        <div class="craft-role">4代目・修行中</div>
-        <div class="craft-name"><ruby>倉林 尚輝<rt>くらはやし なおあき</rt></ruby></div>
-        <div class="craft-years">職人歴 4年</div>
+        <div class="craft-head">
+          <div class="craft-role">4代目・修行中</div>
+          <div class="craft-name"><ruby>倉林 尚輝<rt>くらはやし なおあき</rt></ruby></div>
+          <div class="craft-years">職人歴 4年</div>
+        </div>
         <ul class="craft-detail">
           <li>
             <span>この仕事を選んだ理由・受け継いだ思い</span>
@@ -1109,30 +1187,32 @@
             <span>出身校の野球のコーチをやっている。</span>
           </li>
         </ul>
-      </div>
+      </article>
     </div>
   </div>
 </section>
 
-<!-- ============ 5. 会社概要(基本情報) ============ -->
+<!-- ============ 3. 会社概要(基本情報) ============ -->
 <section id="info" class="washi-tex">
   <div class="wrap">
     <div class="section-head">
       <div class="eyebrow">会社概要</div>
       <h2 class="section-title">基本情報</h2>
     </div>
-    <ul class="info-list">
-      <li><span>店名・屋号</span><span>倉林畳店</span></li>
-      <li><span>代表者名</span><span>倉林俊之</span></li>
-      <li><span>所在地</span><span>〒367-0301<br>埼玉県児玉郡神川町渡瀬638-7</span></li>
-      <li><span>電話番号</span><span><a href="tel:0274522966">TEL・FAX 0274-52-2966</a></span></li>
-      <li><span>受付時間</span><span>8時〜20時</span></li>
-      <li><span>定休日・営業日</span><span>不定休　お客様の要望に合わせて対応可能</span></li>
-      <li><span>対応エリア</span><span>関東圏内　交通費は問い合わせにて</span></li>
-      <li><span>資格・加盟団体</span><span>本庄児玉畳商工組合</span></li>
-      <li><span>支払い方法</span><span>振り込み、現金</span></li>
-      <li><span>駐車場・アクセス</span><span>丹荘駅から車で15分<br>駐車場3台</span></li>
-    </ul>
+    <table class="info-table">
+      <tbody>
+        <tr><th scope="row">店名・屋号</th><td>倉林畳店</td></tr>
+        <tr><th scope="row">代表者名</th><td><ruby>倉林俊之<rt>くらはやしとしゆき</rt></ruby></td></tr>
+        <tr><th scope="row">所在地</th><td>〒367-0301<br>埼玉県児玉郡神川町渡瀬638-7</td></tr>
+        <tr><th scope="row">電話番号</th><td><a href="tel:0274522966">TEL・FAX 0274-52-2966</a></td></tr>
+        <tr><th scope="row">受付時間</th><td>8時〜20時</td></tr>
+        <tr><th scope="row">定休日・営業日</th><td>不定休　お客様の要望に合わせて対応可能</td></tr>
+        <tr><th scope="row">対応エリア</th><td>関東圏内　交通費は問い合わせにて</td></tr>
+        <tr><th scope="row">資格・加盟団体</th><td>本庄児玉畳商工組合</td></tr>
+        <tr><th scope="row">支払い方法</th><td>振り込み、現金</td></tr>
+        <tr><th scope="row">駐車場・アクセス</th><td>丹荘駅から車で15分<br>駐車場3台</td></tr>
+      </tbody>
+    </table>
 
     <!-- CTA(2) 電話ボタン -->
     <div class="tel-cta">
@@ -1146,7 +1226,7 @@
   </div>
 </section>
 
-<!-- ============ 6. 畳についてページへの導線 ============ -->
+<!-- ============ 4. 畳についてページへの導線 ============ -->
 <section class="washi-tex">
   <div class="wrap">
     <div class="price-cta" style="margin-top:0;">
@@ -1158,7 +1238,7 @@
   </div>
 </section>
 
-<!-- ============ 7. お問い合わせ (TOPの .final-cta の型) ============ -->
+<!-- ============ 5. お問い合わせ (TOPの .final-cta の型) ============ -->
 <section id="contact" class="igusa-tex final-cta">
   <div class="wrap">
     <p class="catch2">畳のことなら<br>なんでもお答えさせて<br>いただきます。</p>
@@ -1182,7 +1262,7 @@
   </div>
 </section>
 
-<!-- ============ 8. FOOTER (共通コンポーネント footer.html) ============ -->
+<!-- ============ 6. FOOTER (共通コンポーネント footer.html) ============ -->
 <footer>
   <div class="footer-wrap">
     <!-- Footer Grid -->
