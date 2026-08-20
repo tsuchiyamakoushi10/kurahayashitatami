@@ -475,31 +475,20 @@
 
     /* ============ LOGO ============ */
     .logo {
-      font-family: var(--font-d);
-      font-weight: 700;
-      font-size: 21px;
-      color: var(--washi);
-      letter-spacing: .08em;
       flex: 0 0 auto;
     }
 
-    .logo small {
+    /* 元画像(1220x930)はそのまま、表示サイズのみCSSで調整。
+       ヘッダー(76px)の中で上下の余白を最小限にした高さ */
+    .logo-mark {
       display: block;
-      font-family: var(--font-b);
-      font-weight: 400;
-      font-size: 11px;
-      letter-spacing: .22em;
-      color: var(--gold);
-      margin-top: 4px;
+      height: 64px;
+      width: auto;
     }
 
     @media (max-width: 599px) {
       .logo {
         min-width: 0;
-      }
-
-      .logo small {
-        display: none;
       }
     }
 
@@ -864,8 +853,7 @@
   <div class="header-wrap">
     <!-- Logo -->
     <div class="logo">
-      倉林畳店
-      <small>KURAHAYASHI TATAMI — since 1943</small>
+      <img class="logo-mark" src="../../logo-white-transparent.png" alt="倉林畳店" width="1220" height="930">
     </div>
 
     <!-- Desktop Navigation -->

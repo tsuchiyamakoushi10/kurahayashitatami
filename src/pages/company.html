@@ -395,6 +395,93 @@
       color: var(--ink-70);
     }
 
+    /* ============ HP制作協力 (控えめな帯) ============ */
+    .credit {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 30px 0;
+      display: flex;
+      /* 写真の高さをテキストブロックに揃える */
+      align-items: stretch;
+      gap: 32px;
+      border-top: 1px solid var(--washi-3);
+      border-bottom: 1px solid var(--washi-3);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* 職人紹介カードより小さい写真枠。高さは名前〜リンクの範囲に合わせる */
+    .credit .frame {
+      flex: 0 0 138px;
+      width: 138px;
+      aspect-ratio: auto;
+      align-self: stretch;
+    }
+
+    .credit .frame .tag {
+      left: 8px;
+      bottom: 8px;
+      padding: 3px 6px;
+      font-size: 10.5px;
+      letter-spacing: .04em;
+      line-height: 1.5;
+    }
+
+    .credit-body {
+      min-width: 0;
+    }
+
+    .credit-name {
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 17px;
+      letter-spacing: .04em;
+      color: var(--ink);
+    }
+
+    .credit-name rt {
+      font-family: var(--font-b);
+      font-weight: 400;
+      font-size: 10px;
+      color: var(--ink-70);
+    }
+
+    .credit-quote {
+      margin-top: 12px;
+      font-family: var(--font-b);
+      font-weight: 500;
+      font-size: 14.5px;
+      line-height: 2.05;
+      color: var(--ink-70);
+      text-wrap: balance;
+    }
+
+    /* 会社名はリンクと分かる金の下線つき */
+    .credit-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 16px;
+      font-family: var(--font-b);
+      font-weight: 700;
+      font-size: 14.5px;
+      letter-spacing: .04em;
+      color: var(--ink);
+      border-bottom: 1px solid var(--gold);
+      transition: color .25s ease, border-color .25s ease;
+    }
+
+    .credit-link:hover {
+      color: var(--vermillion);
+      border-bottom-color: var(--vermillion);
+    }
+
+    .credit-link svg {
+      width: 13px;
+      height: 13px;
+      flex: 0 0 13px;
+    }
+
     /* ============ CTA (共通コンポーネント .cta-btn に準拠) ============ */
     .price-cta,
     .tel-cta {
@@ -622,6 +709,20 @@
         padding-bottom: 15px;
       }
 
+      .credit {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+      }
+
+      /* 縦積みでは高さの基準がなくなるため正方に戻す */
+      .credit .frame {
+        flex: 0 0 auto;
+        width: 128px;
+        aspect-ratio: 1 / 1;
+        align-self: flex-start;
+      }
+
       .price-cta .cta-btn,
       .tel-cta .cta-btn {
         width: 100%;
@@ -660,31 +761,20 @@
 
     /* ============ LOGO ============ */
     .logo {
-      font-family: var(--font-d);
-      font-weight: 700;
-      font-size: 21px;
-      color: var(--washi);
-      letter-spacing: .08em;
       flex: 0 0 auto;
     }
 
-    .logo small {
+    /* 元画像(1220x930)はそのまま、表示サイズのみCSSで調整。
+       ヘッダー(76px)の中で上下の余白を最小限にした高さ */
+    .logo-mark {
       display: block;
-      font-family: var(--font-b);
-      font-weight: 400;
-      font-size: 11px;
-      letter-spacing: .22em;
-      color: var(--gold);
-      margin-top: 4px;
+      height: 64px;
+      width: auto;
     }
 
     @media (max-width: 599px) {
       .logo {
         min-width: 0;
-      }
-
-      .logo small {
-        display: none;
       }
     }
 
@@ -1049,8 +1139,7 @@
   <div class="header-wrap">
     <!-- Logo -->
     <div class="logo">
-      倉林畳店
-      <small>KURAHAYASHI TATAMI — since 1943</small>
+      <img class="logo-mark" src="../../logo-white-transparent.png" alt="倉林畳店" width="1220" height="930">
     </div>
 
     <!-- Desktop Navigation -->
@@ -1235,7 +1324,30 @@
   </div>
 </section>
 
-<!-- ============ 5. お問い合わせ (TOPの .final-cta の型) ============ -->
+<!-- ============ 5. HP制作協力 ============ -->
+<section id="credit" class="washi-tex">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">HP制作協力</div>
+    </div>
+    <div class="credit reveal" style="--d:.12s">
+      <!-- 写真枠 P-09 -->
+      <div class="frame">
+        <div class="tag">写真枠 P-09</div>
+      </div>
+      <div class="credit-body">
+        <p class="credit-name"><ruby>木下凌太郎<rt>きのした りょうたろう</rt></ruby></p>
+        <p class="credit-quote">取材でお伺いするたびに感じたのは、畳への情熱と、お客様を大切にする温かさでした。これからのご活躍を心から応援しています。</p>
+        <a class="credit-link" href="https://x-edge-one.vercel.app/" target="_blank" rel="noopener noreferrer">
+          株式会社X-EDGE
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. お問い合わせ (TOPの .final-cta の型) ============ -->
 <section id="contact" class="igusa-tex final-cta">
   <div class="wrap">
     <p class="catch2 reveal">畳のことなら<br>なんでもお答えさせて<br>いただきます。</p>
@@ -1259,7 +1371,7 @@
   </div>
 </section>
 
-<!-- ============ 6. FOOTER (共通コンポーネント footer.html) ============ -->
+<!-- ============ 7. FOOTER (共通コンポーネント footer.html) ============ -->
 <footer>
   <div class="footer-wrap">
     <!-- Footer Grid -->
