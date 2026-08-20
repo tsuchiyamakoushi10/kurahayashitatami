@@ -430,6 +430,27 @@
       }
     }
 
+    /* ============ SCROLL REVEAL (IntersectionObserver で .is-in を付与) ============ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity .9s cubic-bezier(.2, .7, .2, 1), transform .9s cubic-bezier(.2, .7, .2, 1);
+      transition-delay: var(--d, 0s);
+    }
+
+    .reveal.is-in {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+
     /* ============ HEADER (共通コンポーネント header.html) ============ */
     .site-header {
       position: fixed;
@@ -495,7 +516,7 @@
       display: none;
     }
 
-    @media (min-width: 1024px) {
+    @media (min-width: 1180px) {
       .nav-desktop {
         display: flex;
         gap: 0;
@@ -519,10 +540,12 @@
         font-weight: 500;
         font-size: 15px;
         color: var(--washi);
-        padding: 24px 18px;
+        /* 項目が7つでも1段に収まる左右余白 */
+        padding: 24px 12px;
         border-bottom: 2px solid transparent;
         transition: border-color .3s ease;
         letter-spacing: .02em;
+        white-space: nowrap;
       }
 
       .nav-desktop a:hover {
@@ -607,7 +630,7 @@
       transform: translateY(-6px) rotate(-45deg);
     }
 
-    @media (min-width: 1024px) {
+    @media (min-width: 1180px) {
       .menu-btn {
         display: none;
       }
@@ -680,7 +703,7 @@
       transform: scaleX(1);
     }
 
-    @media (min-width: 1024px) {
+    @media (min-width: 1180px) {
       .nav-overlay {
         display: none;
       }
@@ -849,11 +872,12 @@
     <nav class="nav-desktop">
       <ul>
         <li><a href="top.html">TOP</a></li>
+        <li><a href="company-story.html">想いと歩み</a></li>
         <li><a href="price.html">畳の種類・料金</a></li>
         <li><a href="works.html" aria-current="page">導入事例</a></li>
         <li><a href="tatami.html">畳について</a></li>
-        <li><a href="top.html#craftspeople">会社概要</a></li>
-        <li><a href="top.html#contact">問い合わせ</a></li>
+        <li><a href="company.html">会社概要</a></li>
+        <li><a href="contact.html">お問い合わせ</a></li>
       </ul>
     </nav>
 
@@ -881,11 +905,12 @@
 <nav class="nav-overlay" id="navOverlay">
   <ul>
     <li><a href="top.html">TOP</a></li>
+    <li><a href="company-story.html">想いと歩み</a></li>
     <li><a href="price.html">畳の種類・料金</a></li>
     <li><a href="works.html" aria-current="page">導入事例</a></li>
     <li><a href="tatami.html">畳について</a></li>
-    <li><a href="top.html#craftspeople">会社概要</a></li>
-    <li><a href="top.html#contact">問い合わせ</a></li>
+    <li><a href="company.html">会社概要</a></li>
+    <li><a href="contact.html">お問い合わせ</a></li>
   </ul>
 </nav>
 
@@ -893,9 +918,9 @@
 <section class="washi-tex page-head">
   <div class="wrap">
     <div class="section-head">
-      <h1 class="section-title">導入事例・お客様の声</h1>
+      <h1 class="section-title reveal">導入事例・お客様の声</h1>
     </div>
-    <p class="lead lead-mincho">実際の施工と、お客様の言葉。写真とセットでご覧ください。</p>
+    <p class="lead lead-mincho reveal" style="--d:.12s">実際の施工と、お客様の言葉。写真とセットでご覧ください。</p>
   </div>
 </section>
 
@@ -903,7 +928,7 @@
 <section id="cases" class="washi-tex">
   <div class="wrap">
     <div class="case-grid">
-      <article class="case-card">
+      <article class="case-card reveal">
         <div class="case-photos">
           <button type="button" class="frame" data-photo="施工前" aria-label="施工前の写真を拡大表示"><span class="tag">施工前</span></button>
           <button type="button" class="frame" data-photo="施工後" aria-label="施工後の写真を拡大表示"><span class="tag">施工後</span></button>
@@ -919,7 +944,7 @@
           <blockquote>他の畳屋さんと仕事の仕方が違う<br>とても良かった</blockquote>
         </div>
       </article>
-      <article class="case-card">
+      <article class="case-card reveal" style="--d:.12s">
         <div class="case-photos">
           <button type="button" class="frame" data-photo="施工前" aria-label="施工前の写真を拡大表示"><span class="tag">施工前</span></button>
           <button type="button" class="frame" data-photo="施工後" aria-label="施工後の写真を拡大表示"><span class="tag">施工後</span></button>
@@ -935,7 +960,7 @@
           <blockquote>綺麗な畳をありがとうございます</blockquote>
         </div>
       </article>
-      <article class="case-card">
+      <article class="case-card reveal" style="--d:.24s">
         <div class="case-photos">
           <button type="button" class="frame" data-photo="施工前" aria-label="施工前の写真を拡大表示"><span class="tag">施工前</span></button>
           <button type="button" class="frame" data-photo="施工後" aria-label="施工後の写真を拡大表示"><span class="tag">施工後</span></button>
@@ -951,7 +976,7 @@
           <blockquote>新築になったみたい<br>匂いがとてもいい</blockquote>
         </div>
       </article>
-      <article class="case-card">
+      <article class="case-card reveal" style="--d:.36s">
         <div class="case-photos">
           <button type="button" class="frame" data-photo="施工前" aria-label="施工前の写真を拡大表示"><span class="tag">施工前</span></button>
           <button type="button" class="frame" data-photo="施工後" aria-label="施工後の写真を拡大表示"><span class="tag">施工後</span></button>
@@ -967,7 +992,7 @@
           <blockquote>倉林さんにやってもらえて良かった</blockquote>
         </div>
       </article>
-      <article class="case-card">
+      <article class="case-card reveal" style="--d:.48s">
         <div class="case-photos">
           <button type="button" class="frame" data-photo="施工前" aria-label="施工前の写真を拡大表示"><span class="tag">施工前</span></button>
           <button type="button" class="frame" data-photo="施工後" aria-label="施工後の写真を拡大表示"><span class="tag">施工後</span></button>
@@ -984,7 +1009,7 @@
         </div>
       </article>
     </div>
-    <div class="price-cta">
+    <div class="price-cta reveal" style="--d:.60s">
       <a class="cta-btn" href="top.html#contact">
         お問い合わせはこちら
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
@@ -1140,6 +1165,27 @@
       closeLightbox();
     }
   });
+</script>
+
+<!-- ============ SCROLL REVEAL SCRIPT ============ -->
+<script>
+  const revealItems = document.querySelectorAll('.reveal');
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+    revealItems.forEach(el => el.classList.add('is-in'));
+  } else {
+    const revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-in');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+
+    revealItems.forEach(el => revealObserver.observe(el));
+  }
 </script>
 
 </body>

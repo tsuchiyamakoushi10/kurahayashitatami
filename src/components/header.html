@@ -111,7 +111,7 @@
       display: none;
     }
 
-    @media (min-width: 1024px) {
+    @media (min-width: 1180px) {
       .nav-desktop {
         display: flex;
         gap: 0;
@@ -135,10 +135,12 @@
         font-weight: 500;
         font-size: 15px;
         color: var(--washi);
-        padding: 24px 18px;
+        /* 項目が7つでも1段に収まる左右余白 */
+        padding: 24px 12px;
         border-bottom: 2px solid transparent;
         transition: border-color .3s ease;
         letter-spacing: .02em;
+        white-space: nowrap;
       }
 
       .nav-desktop a:hover {
@@ -223,7 +225,7 @@
       transform: translateY(-6px) rotate(-45deg);
     }
 
-    @media (min-width: 1024px) {
+    @media (min-width: 1180px) {
       .menu-btn {
         display: none;
       }
@@ -296,7 +298,7 @@
       transform: scaleX(1);
     }
 
-    @media (min-width: 1024px) {
+    @media (min-width: 1180px) {
       .nav-overlay {
         display: none;
       }
@@ -323,6 +325,7 @@
     <nav class="nav-desktop">
       <ul>
         <li><a href="#top">TOP</a></li>
+        <li><a href="company-story.html">想いと歩み</a></li>
         <li><a href="#tatami-types">畳の種類・料金</a></li>
         <li><a href="#cases">導入事例</a></li>
         <li><a href="#about">畳について</a></li>
@@ -355,6 +358,7 @@
 <nav class="nav-overlay" id="navOverlay">
   <ul>
     <li><a href="#top">TOP</a></li>
+    <li><a href="company-story.html">想いと歩み</a></li>
     <li><a href="#tatami-types">畳の種類・料金</a></li>
     <li><a href="#cases">導入事例</a></li>
     <li><a href="#about">畳について</a></li>

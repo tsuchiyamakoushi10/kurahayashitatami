@@ -166,7 +166,7 @@
       background: var(--gold);
     }
 
-    /* リード文は一文字ずつ現れる */
+    /* リード文 */
     .lead-anim {
       margin-top: 40px;
       font-family: var(--font-d);
@@ -189,36 +189,6 @@
       font-weight: 500;
       color: var(--ink-70);
       letter-spacing: .06em;
-    }
-
-    .lead-anim .ch {
-      display: inline-block;
-      opacity: 0;
-    }
-
-    .lead-anim.play .ch {
-      animation: ch-in .7s cubic-bezier(.2, .7, .2, 1) forwards;
-      animation-delay: var(--d, 0s);
-    }
-
-    @keyframes ch-in {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-
-      to {
-        opacity: 1;
-        transform: none;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .lead-anim .ch,
-      .lead-anim.play .ch {
-        opacity: 1;
-        animation: none;
-      }
     }
 
     /* ============ 2. 対応の強み ============ */
@@ -846,7 +816,7 @@
       display: none;
     }
 
-    @media (min-width: 1024px) {
+    @media (min-width: 1180px) {
       .nav-desktop {
         display: flex;
         gap: 0;
@@ -870,10 +840,12 @@
         font-weight: 500;
         font-size: 15px;
         color: var(--washi);
-        padding: 24px 18px;
+        /* 項目が7つでも1段に収まる左右余白 */
+        padding: 24px 12px;
         border-bottom: 2px solid transparent;
         transition: border-color .3s ease;
         letter-spacing: .02em;
+        white-space: nowrap;
       }
 
       .nav-desktop a:hover {
@@ -958,7 +930,7 @@
       transform: translateY(-6px) rotate(-45deg);
     }
 
-    @media (min-width: 1024px) {
+    @media (min-width: 1180px) {
       .menu-btn {
         display: none;
       }
@@ -1031,7 +1003,7 @@
       transform: scaleX(1);
     }
 
-    @media (min-width: 1024px) {
+    @media (min-width: 1180px) {
       .nav-overlay {
         display: none;
       }
@@ -1200,11 +1172,12 @@
     <nav class="nav-desktop">
       <ul>
         <li><a href="top.html">TOP</a></li>
+        <li><a href="company-story.html">想いと歩み</a></li>
         <li><a href="price.html">畳の種類・料金</a></li>
         <li><a href="works.html">導入事例</a></li>
         <li><a href="tatami.html">畳について</a></li>
         <li><a href="company.html">会社概要</a></li>
-        <li><a href="contact.html" aria-current="page">問い合わせ</a></li>
+        <li><a href="contact.html" aria-current="page">お問い合わせ</a></li>
       </ul>
     </nav>
 
@@ -1232,19 +1205,20 @@
 <nav class="nav-overlay" id="navOverlay">
   <ul>
     <li><a href="top.html">TOP</a></li>
+    <li><a href="company-story.html">想いと歩み</a></li>
     <li><a href="price.html">畳の種類・料金</a></li>
     <li><a href="works.html">導入事例</a></li>
     <li><a href="tatami.html">畳について</a></li>
     <li><a href="company.html">会社概要</a></li>
-    <li><a href="contact.html" aria-current="page">問い合わせ</a></li>
+    <li><a href="contact.html" aria-current="page">お問い合わせ</a></li>
   </ul>
 </nav>
 
-<!-- ============ 1. ページ導入部 (リード文を一文字ずつ) ============ -->
+<!-- ============ 1. ページ導入部 ============ -->
 <section class="washi-tex intro">
   <div class="wrap">
-    <h1 class="eyebrow">お問い合わせ</h1>
-    <p class="lead-anim" id="lead">
+    <h1 class="eyebrow reveal">お問い合わせ</h1>
+    <p class="lead-anim reveal" id="lead" style="--d:.12s">
       <span class="ln">畳のことならなんでもお答えさせていただきます。</span>
       <span class="ln">どんな些細なことでもまずはお問い合わせください。</span>
     </p>
@@ -1311,11 +1285,11 @@
 <section id="form" class="washi-tex">
   <div class="wrap">
     <div class="section-head">
-      <div class="eyebrow">お問い合わせフォーム</div>
+      <div class="eyebrow reveal">お問い合わせフォーム</div>
     </div>
 
     <!-- CTA(2) フォーム / 送信処理は未実装 (送信先は別途相談) -->
-    <form class="form" id="contactForm">
+    <form class="form reveal" id="contactForm" style="--d:.12s">
       <div class="field">
         <label for="f-name">お名前</label>
         <input type="text" id="f-name" name="name" required>
@@ -1491,33 +1465,6 @@
   });
 </script>
 
-<!-- ============ リード文 (一文字ずつ / 1回のみ) ============ -->
-<script>
-  (function () {
-    const lead = document.getElementById('lead');
-    if (!lead) return;
-
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduce) return;
-
-    // 行ごとに1文字ずつ span へ分解し、順に遅延をかける
-    let i = 0;
-    lead.querySelectorAll('.ln').forEach(line => {
-      const text = line.textContent;
-      line.textContent = '';
-      for (const c of text) {
-        const span = document.createElement('span');
-        span.className = 'ch';
-        span.textContent = c;
-        span.style.setProperty('--d', (0.25 + i * 0.035).toFixed(3) + 's');
-        line.appendChild(span);
-        i++;
-      }
-    });
-
-    lead.classList.add('play');
-  })();
-</script>
 
 <!-- ============ SCROLL REVEAL SCRIPT ============ -->
 <script>

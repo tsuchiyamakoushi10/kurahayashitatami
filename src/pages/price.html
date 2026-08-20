@@ -433,6 +433,27 @@
       }
     }
 
+    /* ============ SCROLL REVEAL (IntersectionObserver で .is-in を付与) ============ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity .9s cubic-bezier(.2, .7, .2, 1), transform .9s cubic-bezier(.2, .7, .2, 1);
+      transition-delay: var(--d, 0s);
+    }
+
+    .reveal.is-in {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+
     /* ============ HEADER (共通コンポーネント header.html) ============ */
     .site-header {
       position: fixed;
@@ -498,7 +519,7 @@
       display: none;
     }
 
-    @media (min-width: 1024px) {
+    @media (min-width: 1180px) {
       .nav-desktop {
         display: flex;
         gap: 0;
@@ -522,10 +543,12 @@
         font-weight: 500;
         font-size: 15px;
         color: var(--washi);
-        padding: 24px 18px;
+        /* 項目が7つでも1段に収まる左右余白 */
+        padding: 24px 12px;
         border-bottom: 2px solid transparent;
         transition: border-color .3s ease;
         letter-spacing: .02em;
+        white-space: nowrap;
       }
 
       .nav-desktop a:hover {
@@ -610,7 +633,7 @@
       transform: translateY(-6px) rotate(-45deg);
     }
 
-    @media (min-width: 1024px) {
+    @media (min-width: 1180px) {
       .menu-btn {
         display: none;
       }
@@ -683,7 +706,7 @@
       transform: scaleX(1);
     }
 
-    @media (min-width: 1024px) {
+    @media (min-width: 1180px) {
       .nav-overlay {
         display: none;
       }
@@ -853,11 +876,12 @@
     <nav class="nav-desktop">
       <ul>
         <li><a href="top.html">TOP</a></li>
+        <li><a href="company-story.html">想いと歩み</a></li>
         <li><a href="price.html" aria-current="page">畳の種類・料金</a></li>
-        <li><a href="top.html#cases">導入事例</a></li>
-        <li><a href="top.html#tatami">畳について</a></li>
-        <li><a href="top.html#craftspeople">会社概要</a></li>
-        <li><a href="top.html#contact">問い合わせ</a></li>
+        <li><a href="works.html">導入事例</a></li>
+        <li><a href="tatami.html">畳について</a></li>
+        <li><a href="company.html">会社概要</a></li>
+        <li><a href="contact.html">お問い合わせ</a></li>
       </ul>
     </nav>
 
@@ -885,11 +909,12 @@
 <nav class="nav-overlay" id="navOverlay">
   <ul>
     <li><a href="top.html">TOP</a></li>
+    <li><a href="company-story.html">想いと歩み</a></li>
     <li><a href="price.html" aria-current="page">畳の種類・料金</a></li>
-    <li><a href="top.html#cases">導入事例</a></li>
-    <li><a href="top.html#tatami">畳について</a></li>
-    <li><a href="top.html#craftspeople">会社概要</a></li>
-    <li><a href="top.html#contact">問い合わせ</a></li>
+    <li><a href="works.html">導入事例</a></li>
+    <li><a href="tatami.html">畳について</a></li>
+    <li><a href="company.html">会社概要</a></li>
+    <li><a href="contact.html">お問い合わせ</a></li>
   </ul>
 </nav>
 
@@ -897,7 +922,7 @@
 <section class="washi-tex page-head">
   <div class="wrap">
     <div class="section-head">
-      <h1 class="section-title">畳の種類・料金</h1>
+      <h1 class="section-title reveal">畳の種類・料金</h1>
     </div>
   </div>
 </section>
@@ -906,9 +931,9 @@
 <section id="types" class="washi-tex">
   <div class="wrap">
     <div class="section-head">
-      <h2 class="section-title">畳の種類</h2>
+      <h2 class="section-title reveal">畳の種類</h2>
     </div>
-    <div class="type-block">
+    <div class="type-block reveal" style="--d:.12s">
       <div class="type-text">
         <h3 class="type-name">国産い草畳</h3>
         <p class="type-desc">・香りが良く、色の変化を楽しめる<br>・青から茶色に変化していく</p>
@@ -921,7 +946,7 @@
       </div>
     </div>
 
-    <div class="type-block type-block-stacked">
+    <div class="type-block type-block-stacked reveal" style="--d:.24s">
       <div class="type-text">
         <h3 class="type-name">和紙表</h3>
         <p class="type-desc">・色の変化がない<br>・傷に強い<br>・シミになりにくくメンテナンスが楽<br>・カラーが選べる</p>
@@ -948,7 +973,7 @@
         </div>
       </div>
     </div>
-    <p class="types-note">そのほかも要望次第で対応可能</p>
+    <p class="types-note reveal" style="--d:.36s">そのほかも要望次第で対応可能</p>
   </div>
 </section>
 
@@ -956,10 +981,10 @@
 <section id="services" class="washi-tex">
   <div class="wrap">
     <div class="section-head">
-      <h2 class="section-title">サービス（作業）ごとの<br>内容と料金</h2>
+      <h2 class="section-title reveal">サービス（作業）ごとの<br>内容と料金</h2>
     </div>
     <div class="case-grid">
-      <div class="case-card">
+      <div class="case-card reveal" style="--d:.12s">
         <div class="case-body">
           <div class="cat">裏返し</div>
           <ul class="case-detail">
@@ -968,7 +993,7 @@
           </ul>
         </div>
       </div>
-      <div class="case-card">
+      <div class="case-card reveal" style="--d:.24s">
         <div class="case-body">
           <div class="cat">表替え</div>
           <ul class="case-detail">
@@ -977,7 +1002,7 @@
           </ul>
         </div>
       </div>
-      <div class="case-card">
+      <div class="case-card reveal" style="--d:.36s">
         <div class="case-body">
           <div class="cat">新調</div>
           <ul class="case-detail">
@@ -986,7 +1011,7 @@
           </ul>
         </div>
       </div>
-      <div class="case-card">
+      <div class="case-card reveal" style="--d:.48s">
         <div class="case-body">
           <div class="cat">和紙表の畳</div>
           <ul class="case-detail">
@@ -1003,23 +1028,23 @@
 <section id="support" class="washi-tex">
   <div class="wrap">
     <div class="section-head">
-      <h2 class="section-title">対応の強み</h2>
+      <h2 class="section-title reveal">対応の強み</h2>
     </div>
     <div class="reasons">
-      <div class="reason">
+      <div class="reason reveal" style="--d:.12s">
         <h3>スピード対応</h3>
         <p>急な畳替えのご相談にもできる限り迅速に対応いたします。<br>お客様のご都合に合わせた柔軟な日程調整が可能です。</p>
       </div>
-      <div class="reason">
+      <div class="reason reveal" style="--d:.24s">
         <h3>夜間対応</h3>
         <p>お仕事などで日中のお立ち会いが難しい方もお気軽にご相談ください。<br>事前にご相談いただければ、できる限りご都合に合わせて対応いたします。</p>
       </div>
-      <div class="reason">
+      <div class="reason reveal" style="--d:.36s">
         <h3>家具の移動もお任せ</h3>
         <p>重たい家具の移動もスタッフが対応いたします。<br>お客様に無理をお願いすることはありませんので、ご安心ください。</p>
       </div>
     </div>
-    <div class="price-cta">
+    <div class="price-cta reveal" style="--d:.48s">
       <a class="cta-btn" href="tel:0274522966">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         お問い合わせ
@@ -1159,6 +1184,27 @@
       navOverlay.classList.remove('open');
     }
   });
+</script>
+
+<!-- ============ SCROLL REVEAL SCRIPT ============ -->
+<script>
+  const revealItems = document.querySelectorAll('.reveal');
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+    revealItems.forEach(el => el.classList.add('is-in'));
+  } else {
+    const revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-in');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+
+    revealItems.forEach(el => revealObserver.observe(el));
+  }
 </script>
 
 </body>

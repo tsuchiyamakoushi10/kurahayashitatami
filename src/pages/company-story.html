@@ -244,8 +244,8 @@
     /* ============ SCROLL REVEAL (IntersectionObserver で .is-in を付与) ============ */
     .reveal {
       opacity: 0;
-      transform: translateY(30px);
-      transition: opacity .95s cubic-bezier(.2, .7, .2, 1), transform .95s cubic-bezier(.2, .7, .2, 1);
+      transform: translateY(26px);
+      transition: opacity .9s cubic-bezier(.2, .7, .2, 1), transform .9s cubic-bezier(.2, .7, .2, 1);
       transition-delay: var(--d, 0s);
     }
 
@@ -966,7 +966,7 @@
       display: none;
     }
 
-    @media (min-width: 1024px) {
+    @media (min-width: 1180px) {
       .nav-desktop {
         display: flex;
         gap: 0;
@@ -990,10 +990,12 @@
         font-weight: 500;
         font-size: 15px;
         color: var(--washi);
-        padding: 24px 18px;
+        /* 項目が7つでも1段に収まる左右余白 */
+        padding: 24px 12px;
         border-bottom: 2px solid transparent;
         transition: border-color .3s ease;
         letter-spacing: .02em;
+        white-space: nowrap;
       }
 
       .nav-desktop a:hover {
@@ -1078,7 +1080,7 @@
       transform: translateY(-6px) rotate(-45deg);
     }
 
-    @media (min-width: 1024px) {
+    @media (min-width: 1180px) {
       .menu-btn {
         display: none;
       }
@@ -1151,7 +1153,7 @@
       transform: scaleX(1);
     }
 
-    @media (min-width: 1024px) {
+    @media (min-width: 1180px) {
       .nav-overlay {
         display: none;
       }
@@ -1329,11 +1331,12 @@
     <nav class="nav-desktop">
       <ul>
         <li><a href="top.html">TOP</a></li>
+        <li><a href="company-story.html" aria-current="page">想いと歩み</a></li>
         <li><a href="price.html">畳の種類・料金</a></li>
         <li><a href="works.html">導入事例</a></li>
         <li><a href="tatami.html">畳について</a></li>
         <li><a href="company.html">会社概要</a></li>
-        <li><a href="#contact">問い合わせ</a></li>
+        <li><a href="contact.html">お問い合わせ</a></li>
       </ul>
     </nav>
 
@@ -1361,11 +1364,12 @@
 <nav class="nav-overlay" id="navOverlay">
   <ul>
     <li><a href="top.html">TOP</a></li>
+    <li><a href="company-story.html" aria-current="page">想いと歩み</a></li>
     <li><a href="price.html">畳の種類・料金</a></li>
     <li><a href="works.html">導入事例</a></li>
     <li><a href="tatami.html">畳について</a></li>
     <li><a href="company.html">会社概要</a></li>
-    <li><a href="#contact">問い合わせ</a></li>
+    <li><a href="contact.html">お問い合わせ</a></li>
   </ul>
 </nav>
 
@@ -1376,8 +1380,8 @@
   <span class="photo-note">写真枠 P-07 / 本番画像は後日差し替え</span>
 
   <div class="wrap hero-inner">
-    <h1 class="catch">想いと歩み</h1>
-    <p class="sub">1943年創立、創業83年。倉林畳店が大切にしてきた想いと、受け継いできたものをご紹介します。</p>
+    <h1 class="catch reveal">想いと歩み</h1>
+    <p class="sub reveal" style="--d:.12s">1943年創立、創業83年。倉林畳店が大切にしてきた想いと、受け継いできたものをご紹介します。</p>
   </div>
 </section>
 
@@ -1497,7 +1501,7 @@
 <!-- ============ 6. 会社概要ページへの導線 ============ -->
 <section class="washi-tex">
   <div class="wrap">
-    <div class="price-cta" style="margin-top:0;">
+    <div class="price-cta reveal" style="margin-top:0;">
       <a class="cta-btn" href="company.html">
         会社概要ページを見る
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
@@ -1509,17 +1513,17 @@
 <!-- ============ 7. お問い合わせ (TOPの .final-cta の型) ============ -->
 <section id="contact" class="igusa-tex final-cta">
   <div class="wrap">
-    <p class="catch2">畳のことなら<br>なんでもお答えさせて<br>いただきます。</p>
-    <p class="cta-sub">どんな些細なことでもまずはお問い合わせください。</p>
+    <p class="catch2 reveal">畳のことなら<br>なんでもお答えさせて<br>いただきます。</p>
+    <p class="cta-sub reveal" style="--d:.12s">どんな些細なことでもまずはお問い合わせください。</p>
 
-    <a class="big-tel" href="tel:0274-52-2966">
+    <a class="big-tel reveal" href="tel:0274-52-2966" style="--d:.24s">
       <span class="label">TEL / FAX</span>
       <span class="number">0274-52-2966</span>
       <span class="hours">受付時間 8時〜20時</span>
     </a>
 
     <!-- CTA(3) 電話ボタン -->
-    <div class="tel-cta">
+    <div class="tel-cta reveal" style="--d:.36s">
       <a class="cta-btn" href="tel:0274-52-2966" aria-label="電話をかける">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
