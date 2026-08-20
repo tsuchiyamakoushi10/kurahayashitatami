@@ -1004,36 +1004,37 @@
 
     .footer-grid {
       display: grid;
-      gap: 40px;
+      gap: 44px;
       grid-template-columns: 1fr;
       margin-bottom: 40px;
     }
 
     @media (min-width: 880px) {
       .footer-grid {
-        grid-template-columns: 1.4fr 1fr 1fr;
-        gap: 60px;
+        /* 2カラムになったため、会社情報とリンクを寄せて配置 */
+        grid-template-columns: auto 1fr;
+        gap: 80px;
       }
     }
 
     /* ============ FOOTER COLUMN 1 (Company Info) ============ */
     .footer-col-1 .company-name {
       font-family: var(--font-d);
-      font-size: 20px;
+      font-size: 23px;
       color: var(--washi);
       font-weight: 700;
-      margin-bottom: 14px;
+      margin-bottom: 18px;
       letter-spacing: .05em;
     }
 
     .footer-col-1 .company-info {
-      font-size: 14.5px;
-      line-height: 2;
+      font-size: 16px;
+      line-height: 2.05;
       color: rgba(242, 234, 217, .7);
     }
 
     .footer-col-1 .company-info p {
-      margin-bottom: 8px;
+      margin-bottom: 12px;
     }
 
     .footer-col-1 .company-info strong {
@@ -1051,19 +1052,17 @@
     }
 
     /* ============ FOOTER COLUMN 2 & 3 (Links) ============ */
-    .footer-col-2,
-    .footer-col-3 {
+    .footer-col-2 {
       display: flex;
       flex-direction: column;
     }
 
-    .footer-col-2 h4,
-    .footer-col-3 h4 {
+    .footer-col-2 h4 {
       font-family: var(--font-d);
-      font-size: 14.5px;
+      font-size: 16.5px;
       letter-spacing: .1em;
       color: var(--gold);
-      margin-bottom: 16px;
+      margin-bottom: 20px;
       font-weight: 700;
     }
 
@@ -1072,11 +1071,11 @@
     }
 
     .footer-links li {
-      margin-bottom: 12px;
+      margin-bottom: 15px;
     }
 
     .footer-links a {
-      font-size: 14.5px;
+      font-size: 16px;
       color: rgba(242, 234, 217, .7);
       transition: color .25s ease;
     }
@@ -1125,7 +1124,7 @@
       margin-top: 56px;
       padding-top: 24px;
       border-top: 1px solid rgba(242, 234, 217, .12);
-      font-size: 12.5px;
+      font-size: 13.5px;
       letter-spacing: .05em;
       opacity: .75;
       text-align: center;
@@ -1403,19 +1402,10 @@
       <div class="footer-col-2">
         <h4>会社情報</h4>
         <ul class="footer-links">
-          <li><a href="#">会社概要</a></li>
-          <li><a href="#">アクセス</a></li>
-          <li><a href="#">お問い合わせ</a></li>
-        </ul>
-      </div>
-
-      <!-- Column 3: Links -->
-      <div class="footer-col-3">
-        <h4>その他</h4>
-        <ul class="footer-links">
-          <li><a href="#">プライバシーポリシー</a></li>
-          <li><a href="#">利用規約</a></li>
-          <li><a href="#">サイトマップ</a></li>
+          <li><a href="company.html">会社概要</a></li>
+          <li><a href="company-story.html">想いと歩み</a></li>
+          <li><a href="contact.html#access">アクセス</a></li>
+          <li><a href="contact.html">お問い合わせ</a></li>
         </ul>
       </div>
     </div>
