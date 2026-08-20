@@ -1,0 +1,1661 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>想いと歩み | 倉林畳店</title>
+  <!-- 公開URL: /company/story/ -->
+  <link rel="canonical" href="/company/story/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../design/tokens.css">
+  <style>
+    /* ============ RESET & BASE ============ */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--washi);
+      color: var(--ink);
+      font-family: var(--font-b);
+      line-height: 1.9;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    img, svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    /* ============ LAYOUT ============ */
+    .wrap {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    /* ============ SECTION BASE ============ */
+    section {
+      position: relative;
+      padding: 110px 0;
+    }
+
+    .washi-tex {
+      position: relative;
+      background: var(--washi);
+    }
+
+    .washi-tex::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: .5;
+      mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='matrix' values='0 0 0 0 0.08  0 0 0 0 0.07  0 0 0 0 0.05  0 0 0 0.05 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+      background-size: 220px 220px;
+    }
+
+    .section-head {
+      max-width: 640px;
+      margin-bottom: 56px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-head .eyebrow {
+      color: var(--vermillion);
+      margin-bottom: 16px;
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: .32em;
+    }
+
+    .section-title {
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: clamp(26px, 3.6vw, 40px);
+      line-height: 1.55;
+      color: var(--ink);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ============ HERO (TOPの .hero の型 / 画像を全面に敷き、テキストを左下へ) ============ */
+    .hero {
+      position: relative;
+      /* ヘッダー(76px)を除いた高さで画面いっぱいに表示 */
+      min-height: calc(100svh - 76px);
+      display: flex;
+      align-items: stretch;
+      /* 見出しを上端、導入文を下端に置くための余白 */
+      padding: 56px 0 210px;
+      color: var(--washi);
+      overflow: hidden;
+    }
+
+    .hero-photo {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(21, 18, 13, .35) 0%, rgba(21, 18, 13, .55) 55%, rgba(21, 18, 13, .94) 100%),
+        radial-gradient(ellipse at 30% 20%, #4a4034 0%, transparent 55%),
+        linear-gradient(135deg, #2b2419 0%, #1c1710 45%, #100d09 100%);
+    }
+
+    .hero-photo .grain {
+      position: absolute;
+      inset: 0;
+      opacity: .4;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3'/></filter><rect width='100%25' height='100%25' filter='url(%23g)' opacity='0.5'/></svg>");
+    }
+
+    .photo-note {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      font-family: var(--font-b);
+      font-size: 12px;
+      letter-spacing: .1em;
+      color: rgba(242, 234, 217, .55);
+      border: 1px solid rgba(242, 234, 217, .3);
+      padding: 5px 9px;
+      border-radius: 2px;
+      z-index: 3;
+      line-height: 1.7;
+      max-width: 60%;
+      text-align: right;
+    }
+
+    /* テキストは画面の左下 */
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      /* 見出し=左上 / 導入文=左下 */
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .hero .catch {
+      color: var(--washi);
+      font-family: var(--font-d);
+      /* price / tatami / works の .section-title と同値に統一 */
+      font-weight: 700;
+      font-size: clamp(26px, 3.6vw, 40px);
+      line-height: 1.55;
+      letter-spacing: .02em;
+      text-shadow: 0 6px 30px rgba(0, 0, 0, .5);
+    }
+
+    .hero .sub {
+      margin-top: 26px;
+      max-width: 560px;
+      font-family: var(--font-d);
+      font-size: 18px;
+      color: var(--paper-70);
+      font-weight: 600;
+      letter-spacing: .02em;
+      line-height: 1.9;
+    }
+
+    /* ============ SPLIT + PHOTO FRAME (TOPの .split / .frame の型) ============ */
+    .split {
+      display: grid;
+      gap: 56px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (min-width: 880px) {
+      .split {
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+      }
+    }
+
+    .frame {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      border-radius: 2px;
+      overflow: hidden;
+      background: linear-gradient(150deg, var(--gold) 0%, var(--sumi-3) 40%, var(--sumi) 100%);
+    }
+
+    .frame::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: .5;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3'/></filter><rect width='100%25' height='100%25' filter='url(%23g)'/></svg>");
+    }
+
+    .frame .tag {
+      position: absolute;
+      left: 16px;
+      bottom: 16px;
+      z-index: 2;
+      color: var(--paper-70);
+      font-family: var(--font-b);
+      font-size: 13px;
+      letter-spacing: .08em;
+      border: 1px solid var(--paper-45);
+      padding: 5px 10px;
+      border-radius: 2px;
+      backdrop-filter: blur(3px);
+      line-height: 1.7;
+    }
+
+    .split-text .eyebrow {
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: .32em;
+      color: var(--vermillion);
+      margin-bottom: 16px;
+    }
+
+    /* ============ SCROLL REVEAL (IntersectionObserver で .is-in を付与) ============ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .95s cubic-bezier(.2, .7, .2, 1), transform .95s cubic-bezier(.2, .7, .2, 1);
+      transition-delay: var(--d, 0s);
+    }
+
+    .reveal.is-in {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+
+    /* ============ 私たちの想い (見出しを画面いっぱいに / 背景 washi) ============ */
+    .belief {
+      min-height: calc(100svh - 76px);
+      display: flex;
+      align-items: center;
+      padding: 100px 0;
+    }
+
+    .belief .wrap {
+      /* flex アイテムとして幅が縮まないよう固定 (中央寄せの max-width は .wrap 側で担保) */
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .ph-eyebrow {
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: .32em;
+      color: var(--vermillion);
+      margin-bottom: 32px;
+    }
+
+    .ph-title {
+      font-family: var(--font-d);
+      font-weight: 800;
+      /* 画面いっぱいの見出し (375pxで1行7文字が収まる下限に設定) */
+      font-size: clamp(36px, 9vw, 104px);
+      line-height: 1.24;
+      letter-spacing: .02em;
+      color: var(--ink);
+    }
+
+    .ph-title span {
+      display: block;
+    }
+
+    .ph-creed {
+      margin-top: 48px;
+      max-width: 760px;
+      padding-left: 24px;
+      border-left: 2px solid var(--gold);
+      font-family: var(--font-b);
+      font-weight: 500;
+      font-size: clamp(15.5px, 2.2vw, 19px);
+      line-height: 2.1;
+      color: var(--ink-70);
+    }
+
+    /* ============ 代表挨拶 (背景 sumi / 文字 washi / 左右非対称) ============ */
+    .sumi-tex {
+      position: relative;
+      background: var(--sumi);
+      color: var(--washi);
+    }
+
+    .sumi-tex::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: .35;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='matrix' values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.06 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+      background-size: 220px 220px;
+    }
+
+    .message-sec {
+      padding: 130px 0;
+    }
+
+    /* 代表挨拶は左右非対称 (テキストを広く) */
+    @media (min-width: 880px) {
+      .split-asym {
+        grid-template-columns: 1.08fr .92fr;
+      }
+    }
+
+    .message-sec .eyebrow {
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: .32em;
+      color: var(--gold);
+      margin-bottom: 22px;
+    }
+
+    .rule-gold {
+      width: 56px;
+      height: 1px;
+      background: var(--gold);
+      margin-bottom: 30px;
+    }
+
+    .message-text {
+      font-family: var(--font-d);
+      font-weight: 700;
+      /* 1280pxで指定の改行位置(3行)が保てる上限に設定 */
+      font-size: clamp(19px, 2.6vw, 27px);
+      line-height: 1.95;
+      color: var(--washi);
+      letter-spacing: .02em;
+    }
+
+    /* 1文を1ブロックとして扱う。折り返す幅では行の長さを均して
+       末尾に1〜2文字だけ残らないようにする */
+    .message-text span {
+      display: block;
+      text-wrap: balance;
+    }
+
+    .signature {
+      margin-top: 34px;
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 17px;
+      color: var(--washi);
+      letter-spacing: .06em;
+    }
+
+    .signature .role {
+      font-family: var(--font-b);
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--paper-70);
+      margin-left: 12px;
+      letter-spacing: .08em;
+    }
+
+    /* ============ 創業からの歩み (縦のタイムライン) ============ */
+    .mind-head {
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: .32em;
+      color: var(--vermillion);
+      position: relative;
+      z-index: 1;
+    }
+
+    .mind-text {
+      margin-top: 12px;
+      margin-bottom: 64px;
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: clamp(19px, 2.6vw, 24px);
+      line-height: 1.85;
+      color: var(--ink);
+      position: relative;
+      z-index: 1;
+    }
+
+    .timeline {
+      list-style: none;
+      position: relative;
+      z-index: 1;
+      padding-left: 34px;
+    }
+
+    /* 世代をつなぐ縦線 */
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 7px;
+      top: 10px;
+      bottom: 10px;
+      width: 1px;
+      background: linear-gradient(180deg, var(--vermillion) 0%, var(--washi-3) 100%);
+    }
+
+    .tl-item {
+      position: relative;
+      padding-bottom: 46px;
+    }
+
+    .tl-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .tl-item::before {
+      content: "";
+      position: absolute;
+      left: -34px;
+      top: 8px;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: var(--washi);
+      border: 2px solid var(--vermillion);
+    }
+
+    .tl-gen {
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: clamp(18px, 2.4vw, 22px);
+      letter-spacing: .06em;
+      color: var(--ink);
+    }
+
+    .tl-gen small {
+      font-family: var(--font-b);
+      font-weight: 500;
+      font-size: 13.5px;
+      letter-spacing: .06em;
+      color: var(--ink-70);
+      margin-left: 12px;
+    }
+
+    .tl-text {
+      margin-top: 10px;
+      max-width: 620px;
+      font-family: var(--font-b);
+      font-size: 15.5px;
+      line-height: 1.95;
+      color: var(--ink);
+      opacity: .85;
+    }
+
+    /* 教え方の哲学 (年表とは別の独立した強調ブロック) */
+    .teaching {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin-top: 72px;
+      padding: 46px 40px 46px 46px;
+      background: var(--washi);
+      border: 1px solid var(--washi-3);
+    }
+
+    /* 書道の一筆のような朱の縦線 */
+    .teaching::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(180deg, var(--vermillion) 0%, var(--vermillion-deep) 100%);
+    }
+
+    .teaching .label {
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: .32em;
+      color: var(--vermillion);
+      margin-bottom: 18px;
+    }
+
+    .teaching p {
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: clamp(18px, 2.5vw, 26px);
+      line-height: 1.95;
+      color: var(--ink);
+    }
+
+    /* 1文を1ブロックとして扱う。折り返す幅では行の長さを均して
+       末尾に1〜2文字だけ残らないようにする */
+    .teaching .quote span {
+      display: block;
+      text-wrap: balance;
+    }
+
+    /* ============ HANKO STAMP (TOPの .hanko の型) ============ */
+    .hanko {
+      width: 38px;
+      height: 38px;
+      border-radius: 6px;
+      border: 1.75px solid var(--vermillion);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--vermillion);
+      letter-spacing: .05em;
+      writing-mode: vertical-rl;
+      transform: rotate(-4deg);
+      position: relative;
+      flex: none;
+      filter: saturate(1.05);
+    }
+
+    .hanko::after {
+      content: "";
+      position: absolute;
+      inset: -3px;
+      border-radius: 8px;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='90' height='90'><filter id='r'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/><feColorMatrix type='matrix' values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.5 0'/><feComposite operator='in' in2='SourceGraphic'/></filter><rect width='100%25' height='100%25' fill='white' filter='url(%23r)'/></svg>");
+      mix-blend-mode: multiply;
+      opacity: .5;
+      pointer-events: none;
+    }
+
+    /* ============ 強み・こだわり (igusa を薄く敷いたカード) ============ */
+    .igusa-soft {
+      position: relative;
+      background: var(--washi);
+    }
+
+    .igusa-soft::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: var(--igusa);
+      opacity: .12;
+    }
+
+    .igusa-soft .wrap {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* 道具・機械の写真枠 (横長) */
+    .frame-tool {
+      background: linear-gradient(155deg, var(--igusa) 0%, var(--igusa-deep) 45%, var(--sumi) 100%);
+    }
+
+    .frame-wide {
+      aspect-ratio: 21 / 9;
+    }
+
+    .cards {
+      display: grid;
+      gap: 20px;
+      margin-top: 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (min-width: 880px) {
+      .cards {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+    }
+
+    .card {
+      position: relative;
+      overflow: hidden;
+      background: var(--washi);
+      border: 1px solid var(--washi-3);
+      padding: 40px 32px 36px;
+      transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+    }
+
+    /* ホバーで上端に金〜朱のラインが伸びる */
+    .card::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold) 0%, var(--vermillion) 100%);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .45s cubic-bezier(.2, .7, .2, 1);
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: var(--gold);
+      box-shadow: 0 14px 30px rgba(21, 18, 13, .16);
+    }
+
+    .card:hover::after {
+      transform: scaleX(1);
+    }
+
+    .card .hanko {
+      margin-bottom: 24px;
+    }
+
+    .card h3 {
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 1.65;
+      color: var(--ink);
+      margin-bottom: 16px;
+    }
+
+    .card p {
+      font-family: var(--font-b);
+      font-size: 15px;
+      line-height: 1.95;
+      color: var(--ink);
+      opacity: .82;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .card,
+      .card::after {
+        transition: none;
+      }
+    }
+
+    /* ============ CTA (共通コンポーネント .cta-btn に準拠) ============ */
+    .price-cta,
+    .tel-cta {
+      display: flex;
+      justify-content: center;
+      margin-top: 48px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .price-cta .cta-btn,
+    .tel-cta .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--igusa);
+      color: var(--washi);
+      padding: 14px 28px;
+      border-radius: 3px;
+      font-family: var(--font-b);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: .03em;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, .35);
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+    }
+
+    .price-cta .cta-btn:hover,
+    .tel-cta .cta-btn:hover {
+      transform: translateY(-2px);
+      background: var(--igusa-deep);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, .4);
+    }
+
+    .price-cta .cta-btn:active,
+    .tel-cta .cta-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .3);
+    }
+
+    .price-cta .cta-btn svg,
+    .tel-cta .cta-btn svg {
+      width: 16px;
+      height: 16px;
+      flex: 0 0 16px;
+    }
+
+    /* ページ内リンクのボタンは墨色 (TOPの .tatami-cta / .price-cta と同型) */
+    .price-cta .cta-btn {
+      background: var(--sumi);
+    }
+
+    .price-cta .cta-btn:hover {
+      background: var(--sumi-3);
+    }
+
+    /* ============ FINAL CTA (TOPの .final-cta の型) ============ */
+    .igusa-tex {
+      position: relative;
+      background: linear-gradient(160deg, var(--igusa) 0%, var(--igusa-deep) 55%, var(--sumi) 100%);
+      color: var(--washi);
+    }
+
+    .igusa-tex::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: .3;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='matrix' values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.06 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+      background-size: 220px 220px;
+    }
+
+    .final-cta {
+      padding: 140px 0;
+      text-align: center;
+    }
+
+    .final-cta .wrap {
+      position: relative;
+      z-index: 1;
+    }
+
+    .final-cta .catch2 {
+      font-family: var(--font-d);
+      font-weight: 800;
+      font-size: clamp(28px, 5vw, 52px);
+      line-height: 1.5;
+      color: var(--washi);
+    }
+
+    .final-cta .cta-sub {
+      margin-top: 20px;
+      font-family: var(--font-b);
+      font-weight: 500;
+      color: var(--paper-70);
+    }
+
+    .big-tel {
+      margin-top: 48px;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 34px 52px;
+      border: 1.5px solid var(--gold);
+      border-radius: 3px;
+    }
+
+    .big-tel .label {
+      font-family: var(--font-b);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: .18em;
+      color: var(--gold);
+    }
+
+    .big-tel .number {
+      font-family: var(--font-d);
+      font-weight: 800;
+      font-size: clamp(30px, 5vw, 44px);
+      color: var(--washi);
+    }
+
+    .big-tel .hours {
+      margin-top: 6px;
+      font-family: var(--font-b);
+      font-weight: 500;
+      font-size: 15px;
+      color: var(--paper-70);
+    }
+
+    .final-cta .tel-cta .cta-btn {
+      background: var(--sumi);
+    }
+
+    .final-cta .tel-cta .cta-btn:hover {
+      background: var(--sumi-3);
+    }
+
+    /* ============ MOBILE (375px) ============ */
+    @media (max-width: 599px) {
+      section {
+        padding: 80px 0;
+      }
+
+      .wrap {
+        padding: 0 20px;
+      }
+
+      .hero {
+        /* 上余白は写真枠ラベル(右上)と重ならない位置まで確保 */
+        padding: 100px 0 150px;
+        min-height: calc(100svh - 76px);
+      }
+
+      .hero .sub {
+        margin-top: 18px;
+        font-size: 15.5px;
+        max-width: 100%;
+      }
+
+      .photo-note {
+        top: 16px;
+        right: 16px;
+        font-size: 11px;
+        max-width: 70%;
+      }
+
+      .split {
+        gap: 40px;
+      }
+
+      .belief {
+        padding: 110px 0;
+      }
+
+      .ph-eyebrow {
+        margin-bottom: 28px;
+      }
+
+      .ph-creed {
+        margin-top: 40px;
+        padding-left: 18px;
+      }
+
+      .message-sec {
+        padding: 90px 0;
+      }
+
+      .message-text {
+        /* 375pxで1文が1〜2行に収まる大きさ */
+        font-size: 18px;
+        line-height: 1.9;
+      }
+
+      .message-text span + span {
+        margin-top: .5em;
+      }
+
+      .mind-text {
+        margin-bottom: 48px;
+      }
+
+      .teaching {
+        margin-top: 52px;
+        padding: 32px 24px 32px 28px;
+      }
+
+      .teaching .quote span + span {
+        margin-top: .5em;
+      }
+
+      .frame-wide {
+        aspect-ratio: 4 / 3;
+      }
+
+      .card {
+        padding: 32px 24px;
+      }
+
+      .price-cta .cta-btn,
+      .tel-cta .cta-btn {
+        width: 100%;
+      }
+
+      .final-cta {
+        padding: 90px 0;
+      }
+
+      .big-tel {
+        padding: 28px 24px;
+      }
+    }
+
+    /* ============ HEADER (共通コンポーネント header.html) ============ */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(21, 18, 13, .95);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid rgba(166, 134, 79, .25);
+    }
+
+    .header-wrap {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 28px;
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* ============ LOGO ============ */
+    .logo {
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 21px;
+      color: var(--washi);
+      letter-spacing: .08em;
+      flex: 0 0 auto;
+    }
+
+    .logo small {
+      display: block;
+      font-family: var(--font-b);
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: .22em;
+      color: var(--gold);
+      margin-top: 4px;
+    }
+
+    @media (max-width: 599px) {
+      .logo {
+        min-width: 0;
+      }
+
+      .logo small {
+        display: none;
+      }
+    }
+
+    /* ============ HEADER RIGHT SECTION ============ */
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex: 0 0 auto;
+    }
+
+    /* ============ NAVIGATION (PC) ============ */
+    .nav-desktop {
+      display: none;
+    }
+
+    @media (min-width: 1024px) {
+      .nav-desktop {
+        display: flex;
+        gap: 0;
+        align-items: center;
+      }
+
+      .nav-desktop ul {
+        list-style: none;
+        display: flex;
+        gap: 0;
+        align-items: center;
+      }
+
+      .nav-desktop li {
+        margin: 0;
+      }
+
+      .nav-desktop a {
+        display: block;
+        font-family: var(--font-b);
+        font-weight: 500;
+        font-size: 15px;
+        color: var(--washi);
+        padding: 24px 18px;
+        border-bottom: 2px solid transparent;
+        transition: border-color .3s ease;
+        letter-spacing: .02em;
+      }
+
+      .nav-desktop a:hover {
+        border-bottom-color: var(--gold);
+      }
+
+      .nav-desktop a[aria-current="page"] {
+        border-bottom-color: var(--gold);
+      }
+    }
+
+    /* ============ CONTACT BUTTON ============ */
+    .contact-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--igusa);
+      color: var(--washi);
+      padding: 10px 18px;
+      border-radius: 3px;
+      font-family: var(--font-b);
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: .03em;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, .35);
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+      white-space: nowrap;
+    }
+
+    .contact-btn:hover {
+      transform: translateY(-2px);
+      background: var(--igusa-deep);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, .4);
+    }
+
+    .contact-btn svg {
+      width: 16px;
+      height: 16px;
+      flex: 0 0 16px;
+    }
+
+    .contact-btn .label {
+      display: none;
+    }
+
+    @media (min-width: 600px) {
+      .contact-btn .label {
+        display: inline;
+      }
+    }
+
+    /* ============ HAMBURGER MENU (Mobile) ============ */
+    .menu-btn {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      border: 1px solid rgba(242, 234, 217, .35);
+      border-radius: 2px;
+      background: transparent;
+    }
+
+    .menu-btn span {
+      width: 20px;
+      height: 1px;
+      background: var(--washi);
+      transition: all .3s ease;
+    }
+
+    .menu-btn[aria-expanded="true"] span:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    .menu-btn[aria-expanded="true"] span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-btn[aria-expanded="true"] span:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    @media (min-width: 1024px) {
+      .menu-btn {
+        display: none;
+      }
+    }
+
+    /* ============ MOBILE NAV OVERLAY ============ */
+    .nav-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 99;
+      background: var(--sumi);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-12px);
+      transition: opacity .4s ease, transform .4s ease, visibility 0s linear .4s;
+    }
+
+    .nav-overlay.open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      transition: opacity .4s ease, transform .4s ease;
+    }
+
+    .nav-overlay ul {
+      list-style: none;
+      text-align: center;
+    }
+
+    .nav-overlay li {
+      margin: 20px 0;
+    }
+
+    .nav-overlay a {
+      font-family: var(--font-d);
+      font-size: clamp(24px, 5vw, 38px);
+      color: var(--washi);
+      font-weight: 600;
+      position: relative;
+      padding-bottom: 4px;
+      display: inline-block;
+      transition: color .25s ease;
+    }
+
+    .nav-overlay a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -2px;
+      height: 1px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .35s ease;
+    }
+
+    .nav-overlay a:hover {
+      color: var(--gold);
+    }
+
+    .nav-overlay a:hover::after {
+      transform: scaleX(1);
+    }
+
+    .nav-overlay a[aria-current="page"]::after {
+      transform: scaleX(1);
+    }
+
+    @media (min-width: 1024px) {
+      .nav-overlay {
+        display: none;
+      }
+    }
+
+    /* ============ LAYOUT ADJUSTMENT ============ */
+    body {
+      padding-top: 76px;
+    }
+
+    /* ============ FOOTER (共通コンポーネント footer.html) ============ */
+    footer {
+      background: var(--sumi-2);
+      color: rgba(242, 234, 217, .7);
+      padding: 70px 0 30px;
+    }
+
+    .footer-wrap {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    .footer-grid {
+      display: grid;
+      gap: 40px;
+      grid-template-columns: 1fr;
+      margin-bottom: 40px;
+    }
+
+    @media (min-width: 880px) {
+      .footer-grid {
+        grid-template-columns: 1.4fr 1fr 1fr;
+        gap: 60px;
+      }
+    }
+
+    /* ============ FOOTER COLUMN 1 (Company Info) ============ */
+    .footer-col-1 .company-name {
+      font-family: var(--font-d);
+      font-size: 20px;
+      color: var(--washi);
+      font-weight: 700;
+      margin-bottom: 14px;
+      letter-spacing: .05em;
+    }
+
+    .footer-col-1 .company-info {
+      font-size: 14.5px;
+      line-height: 2;
+      color: rgba(242, 234, 217, .7);
+    }
+
+    .footer-col-1 .company-info p {
+      margin-bottom: 8px;
+    }
+
+    .footer-col-1 .company-info strong {
+      font-weight: 700;
+      color: rgba(242, 234, 217, .85);
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .footer-col-1 .company-info .value {
+      font-family: var(--font-b);
+      font-weight: 500;
+      display: block;
+      margin-left: 0;
+    }
+
+    /* ============ FOOTER COLUMN 2 & 3 (Links) ============ */
+    .footer-col-2,
+    .footer-col-3 {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .footer-col-2 h4,
+    .footer-col-3 h4 {
+      font-family: var(--font-d);
+      font-size: 14.5px;
+      letter-spacing: .1em;
+      color: var(--gold);
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      font-size: 14.5px;
+      color: rgba(242, 234, 217, .7);
+      transition: color .25s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+
+    /* ============ INSTAGRAM BUTTON ============ */
+    .footer-instagram {
+      margin-top: 52px;
+      text-align: center;
+    }
+
+    .insta-btn {
+      width: 150px;
+      height: 52px;
+      border-radius: 8px;
+      background: radial-gradient(circle at 30% 110%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-family: var(--font-b);
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: .02em;
+      transition: transform .25s ease, box-shadow .25s ease;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, .35);
+    }
+
+    .insta-btn svg {
+      width: 22px;
+      height: 22px;
+      flex: 0 0 22px;
+    }
+
+    .insta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, .4);
+    }
+
+    /* ============ FOOTER BOTTOM ============ */
+    .footer-bottom {
+      margin-top: 56px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(242, 234, 217, .12);
+      font-size: 12.5px;
+      letter-spacing: .05em;
+      opacity: .75;
+      text-align: center;
+    }
+  </style>
+  <!-- JS 無効時はフェードイン前提の非表示を解除する -->
+  <noscript>
+    <style>
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    </style>
+  </noscript>
+</head>
+<body>
+
+<!-- ============ 0. HEADER (共通コンポーネント header.html) ============ -->
+<header class="site-header">
+  <div class="header-wrap">
+    <!-- Logo -->
+    <div class="logo">
+      倉林畳店
+      <small>KURAHAYASHI TATAMI — since 1943</small>
+    </div>
+
+    <!-- Desktop Navigation -->
+    <nav class="nav-desktop">
+      <ul>
+        <li><a href="top.html">TOP</a></li>
+        <li><a href="price.html">畳の種類・料金</a></li>
+        <li><a href="works.html">導入事例</a></li>
+        <li><a href="tatami.html">畳について</a></li>
+        <li><a href="company.html">会社概要</a></li>
+        <li><a href="#contact">問い合わせ</a></li>
+      </ul>
+    </nav>
+
+    <!-- Header Right Section -->
+    <div class="header-right">
+      <!-- CTA(1) Contact Button -->
+      <a class="contact-btn" href="tel:0274522966" aria-label="電話をかける">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+        <span class="label">お問い合わせ</span>
+      </a>
+
+      <!-- Hamburger Menu Button (Mobile) -->
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-label="メニューを開く">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ MOBILE NAV OVERLAY ============ -->
+<nav class="nav-overlay" id="navOverlay">
+  <ul>
+    <li><a href="top.html">TOP</a></li>
+    <li><a href="price.html">畳の種類・料金</a></li>
+    <li><a href="works.html">導入事例</a></li>
+    <li><a href="tatami.html">畳について</a></li>
+    <li><a href="company.html">会社概要</a></li>
+    <li><a href="#contact">問い合わせ</a></li>
+  </ul>
+</nav>
+
+<!-- ============ 1. ページ導入部 (HERO: 画像全面 + テキスト左下) ============ -->
+<section class="hero">
+  <!-- 写真枠 P-07 (本番画像は後日差し替え) -->
+  <div class="hero-photo" role="img" aria-label="写真枠 P-07 / 本番画像は後日差し替え"><div class="grain"></div></div>
+  <span class="photo-note">写真枠 P-07 / 本番画像は後日差し替え</span>
+
+  <div class="wrap hero-inner">
+    <h1 class="catch">想いと歩み</h1>
+    <p class="sub">1943年創立、創業83年。倉林畳店が大切にしてきた想いと、受け継いできたものをご紹介します。</p>
+  </div>
+</section>
+
+<!-- ============ 2. 私たちの想い (背景 washi / 画面いっぱいの見出し + フェードイン) ============ -->
+<section id="belief" class="washi-tex belief">
+  <div class="wrap">
+    <p class="ph-eyebrow reveal">私たちの想い</p>
+    <h2 class="ph-title">
+      <span class="reveal" style="--d:.05s">妥協はしない。</span>
+      <span class="reveal" style="--d:.20s">一枚一枚に、</span>
+      <span class="reveal" style="--d:.35s">確かな技術と</span>
+      <span class="reveal" style="--d:.50s">こだわりを。</span>
+    </h2>
+    <p class="ph-creed reveal" style="--d:.70s">本気で仕事をした、その先にあるお客様の「きれいになった」「頼んでよかった」という言葉のために、一つひとつの仕事を丁寧に積み重ねています。</p>
+  </div>
+</section>
+
+<!-- ============ 3. 代表挨拶 (背景 sumi / 文字 washi / 左右非対称) ============ -->
+<section id="message" class="sumi-tex message-sec">
+  <div class="wrap">
+    <div class="split split-asym">
+      <div class="split-text reveal">
+        <div class="eyebrow">代表挨拶</div>
+        <div class="rule-gold"></div>
+        <p class="message-text">
+          <span>人によって考えはみんな千差万別です。</span>
+          <span>代々伝えられてきたことを大切にしつつ、</span>
+          <span>お客様の要望に幅広く答えていきたいです。</span>
+        </p>
+        <p class="signature">倉林 俊之<span class="role">代表</span></p>
+      </div>
+      <div class="reveal" style="--d:.15s">
+        <!-- 写真枠 P-03 -->
+        <div class="frame">
+          <div class="tag">写真枠 P-03 / 店主の作業中の表情<br>(寄り〜中間の構図)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. 創業からの歩み (背景 washi / 縦のタイムライン) ============ -->
+<section id="history" class="washi-tex">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">創業からの歩み</div>
+      <h2 class="section-title">1943年創立、創業83年。<br>受け継いできたもの。</h2>
+    </div>
+
+    <p class="mind-head">倉林畳店のマインド</p>
+    <p class="mind-text">抜きを一切せず、常に挑み続ける姿勢。</p>
+
+    <ol class="timeline">
+      <li class="tl-item reveal">
+        <div class="tl-gen">初代</div>
+        <p class="tl-text">群馬・藤岡での修行を経て、この渡瀬の地に店を構えたのが、すべての始まりです。(1943年)</p>
+      </li>
+      <li class="tl-item reveal">
+        <div class="tl-gen">2代目</div>
+        <p class="tl-text">技術だけでなく、畳づくりへの想いも大切に受け継がれてきました。</p>
+      </li>
+      <li class="tl-item reveal">
+        <div class="tl-gen">3代目<small>現店主・倉林俊之</small></div>
+        <p class="tl-text">幼い頃から自然と「継ぐもの」だと思っていました。今は店主として、先代から受け継いだ心を大切にしながら、日々畳と向き合っています。</p>
+      </li>
+      <li class="tl-item reveal">
+        <div class="tl-gen">4代目<small>尚輝・修行中</small></div>
+        <p class="tl-text">父の背中を見て育ち、同じ道を歩みたいと思うようになりました。今はその想いを胸に、修行を重ねています。</p>
+      </li>
+    </ol>
+
+    <!-- 教え方の哲学 (年表とは別の独立した強調ブロック) -->
+    <blockquote class="teaching reveal">
+      <p class="label">教え方の哲学</p>
+      <p class="quote">
+        <span>答えを一から教えるのではなく、自分の手と目で覚える。</span>
+        <span>間違えたら、直せばいい。</span>
+        <span>それが、倉林畳店に代々受け継がれてきた学び方です。</span>
+      </p>
+    </blockquote>
+  </div>
+</section>
+
+<!-- ============ 5. 強み・こだわり (背景 igusa を薄く / カード形式) ============ -->
+<section id="strength" class="igusa-soft">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">強み・こだわり</div>
+      <h2 class="section-title">倉林畳店が<br>こだわり続けていること。</h2>
+    </div>
+
+    <!-- 写真枠 P-05 -->
+    <div class="frame frame-tool frame-wide reveal">
+      <div class="tag">写真枠 P-05 / 機械のディテール、<br>または道具のアップ(寄りの構図)</div>
+    </div>
+
+    <div class="cards">
+      <div class="card reveal">
+        <div class="hanko">壱</div>
+        <h3>和紙表に力を入れている</h3>
+        <p>和紙表を扱える職人は、実はそう多くありません。当店では確かな技術を持つ職人が、一枚一枚丁寧に施工いたします。畳表を仕入れる問屋とも長年の信頼関係があり、良質な畳表を安定してお届けできる体制を整えています。</p>
+      </div>
+      <div class="card reveal" style="--d:.12s">
+        <div class="hanko">弐</div>
+        <h3>国産のい草へのこだわり</h3>
+        <p>国産のい草は、時間とともに緑から黄金色へと美しく色を変えていきます。この経年変化こそが、畳の魅力のひとつだと考えており、できる限り国産の畳表をおすすめしています。もちろん、ご予算やご要望に応じて、他の選択肢もご提案いたします。</p>
+      </div>
+      <div class="card reveal" style="--d:.24s">
+        <div class="hanko">参</div>
+        <h3>幅広く要望に応えられる</h3>
+        <p>どのようなお部屋の形にも、正確に寸法を合わせる技術には自信があります。また、フローリングのお部屋にも「置き畳」という形でご提案できるなど、住まいの形に合わせた柔軟なご提案を心がけています。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. 会社概要ページへの導線 ============ -->
+<section class="washi-tex">
+  <div class="wrap">
+    <div class="price-cta" style="margin-top:0;">
+      <a class="cta-btn" href="company.html">
+        会社概要ページを見る
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7. お問い合わせ (TOPの .final-cta の型) ============ -->
+<section id="contact" class="igusa-tex final-cta">
+  <div class="wrap">
+    <p class="catch2">畳のことなら<br>なんでもお答えさせて<br>いただきます。</p>
+    <p class="cta-sub">どんな些細なことでもまずはお問い合わせください。</p>
+
+    <a class="big-tel" href="tel:0274-52-2966">
+      <span class="label">TEL / FAX</span>
+      <span class="number">0274-52-2966</span>
+      <span class="hours">受付時間 8時〜20時</span>
+    </a>
+
+    <!-- CTA(3) 電話ボタン -->
+    <div class="tel-cta">
+      <a class="cta-btn" href="tel:0274-52-2966" aria-label="電話をかける">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+        <span>お問い合わせ</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8. FOOTER (共通コンポーネント footer.html) ============ -->
+<footer>
+  <div class="footer-wrap">
+    <!-- Footer Grid -->
+    <div class="footer-grid">
+      <!-- Column 1: Company Info -->
+      <div class="footer-col-1">
+        <div class="company-name">倉林畳店</div>
+        <div class="company-info">
+          <p>
+            <strong>営業時間</strong>
+            <span class="value">8:00〜20:00</span>
+          </p>
+          <p>
+            <strong>定休日</strong>
+            <span class="value">不定休</span>
+          </p>
+          <p>
+            <strong>電話番号</strong>
+            <span class="value"><a href="tel:0274522966">0274-52-2966</a></span>
+          </p>
+          <p>
+            <strong>住所</strong>
+            <span class="value">〒367-0301<br>埼玉県児玉郡神川町渡瀬638-7</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Column 2: Links -->
+      <div class="footer-col-2">
+        <h4>会社情報</h4>
+        <ul class="footer-links">
+          <li><a href="#">会社概要</a></li>
+          <li><a href="#">アクセス</a></li>
+          <li><a href="#">お問い合わせ</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 3: Links -->
+      <div class="footer-col-3">
+        <h4>その他</h4>
+        <ul class="footer-links">
+          <li><a href="#">プライバシーポリシー</a></li>
+          <li><a href="#">利用規約</a></li>
+          <li><a href="#">サイトマップ</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Instagram Button -->
+    <div class="footer-instagram">
+      <a class="insta-btn" href="https://www.instagram.com/kurahayashitatamiten/" target="_blank" rel="noopener noreferrer" aria-label="Instagramを開く">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.69.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm4.965-10.322a1.44 1.44 0 1 1 2.881.001 1.44 1.44 0 0 1-2.881-.001z"/>
+        </svg>
+        <span>Instagram</span>
+      </a>
+    </div>
+
+    <!-- Copyright -->
+    <div class="footer-bottom">
+      © 2024 Kurahayashi Tatami. All Rights Reserved.
+    </div>
+  </div>
+</footer>
+
+<!-- ============ HEADER SCRIPT (共通コンポーネント header.html) ============ -->
+<script>
+  // Hamburger menu toggle
+  const menuBtn = document.getElementById('menuBtn');
+  const navOverlay = document.getElementById('navOverlay');
+
+  // Menu button click handler
+  menuBtn.addEventListener('click', function () {
+    const isExpanded = this.getAttribute('aria-expanded') === 'true';
+    this.setAttribute('aria-expanded', !isExpanded);
+    navOverlay.classList.toggle('open');
+  });
+
+  // Navigation link click handler (close menu when link is clicked)
+  const navLinks = navOverlay.querySelectorAll('a');
+  navLinks.forEach(link => {
+    link.addEventListener('click', function () {
+      menuBtn.setAttribute('aria-expanded', 'false');
+      navOverlay.classList.remove('open');
+    });
+  });
+
+  // Close menu when clicking outside (on overlay background)
+  navOverlay.addEventListener('click', function (e) {
+    if (e.target === this) {
+      menuBtn.setAttribute('aria-expanded', 'false');
+      navOverlay.classList.remove('open');
+    }
+  });
+
+  // Close menu with Escape key
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      menuBtn.setAttribute('aria-expanded', 'false');
+      navOverlay.classList.remove('open');
+    }
+  });
+</script>
+
+<!-- ============ SCROLL REVEAL SCRIPT ============ -->
+<script>
+  // Scroll reveal (私たちの想いの見出し / タイムライン / カード)
+  const revealItems = document.querySelectorAll('.reveal');
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+    revealItems.forEach(el => el.classList.add('is-in'));
+  } else {
+    const revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-in');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+
+    revealItems.forEach(el => revealObserver.observe(el));
+  }
+</script>
+
+</body>
+</html>
