@@ -207,6 +207,17 @@
       background: linear-gradient(150deg, var(--gold) 0%, var(--sumi-3) 40%, var(--sumi) 100%);
     }
 
+    /* 本番写真: 枠の比率のままトリミング表示 */
+    .frame > img {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
     .frame::before {
       content: "";
       position: absolute;
@@ -1403,7 +1414,7 @@
       <div class="reveal" style="--d:.15s">
         <!-- 写真枠 P-26 -->
         <div class="frame">
-          <div class="tag">写真枠 P-26 / 店主の作業中の表情<br>(寄り〜中間の構図)</div>
+          <img src="../../photos/output_photos/p-26-owner-working-smile.jpg" alt="作業場で畳を仕上げながら笑顔で話す店主" loading="lazy">
         </div>
       </div>
     </div>
@@ -1462,7 +1473,7 @@
 
     <!-- 写真枠 P-07 -->
     <div class="frame frame-tool frame-wide reveal">
-      <div class="tag">写真枠 P-07 / 機械のディテール、<br>または道具のアップ(寄りの構図)</div>
+      <img src="../../photos/output_photos/p-07-tools-closeup.jpg" alt="畳の上に並べられた畳包丁や針など、職人の道具のアップ" loading="lazy">
     </div>
 
     <div class="cards">

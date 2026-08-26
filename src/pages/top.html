@@ -69,8 +69,11 @@
       inset: 0;
       background:
         linear-gradient(180deg, rgba(21, 18, 13, .35) 0%, rgba(21, 18, 13, .55) 55%, rgba(21, 18, 13, .94) 100%),
+        url("../../photos/output_photos/p-01-hero-craftsman-sewing.jpg") 32% 50% / cover no-repeat,
         radial-gradient(ellipse at 30% 20%, #4a4034 0%, transparent 55%),
         linear-gradient(135deg, #2b2419 0%, #1c1710 45%, #100d09 100%);
+      /* 写真(P-01)を左右反転。暗幕は縦方向グラデーションのため反転の影響を受けない */
+      transform: scaleX(-1);
     }
 
     .hero-photo .grain {
@@ -508,6 +511,19 @@
 
     .frame-tatami {
       background: linear-gradient(155deg, var(--igusa) 0%, var(--igusa-deep) 45%, var(--sumi) 100%);
+    }
+
+    /* 本番写真: 枠の比率のままトリミング表示 */
+    .frame > img,
+    .product-swatch > img,
+    .craft-photo > img {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .frame::before {
@@ -1810,8 +1826,7 @@
 
 <!-- ============ HERO SECTION ============ -->
 <section class="hero">
-  <div class="hero-photo"><div class="grain"></div></div>
-  <span class="photo-note">写真枠 P-01 / 職人が畳表を裁断・縫い付ける姿</span>
+  <div class="hero-photo" role="img" aria-label="職人が畳表を裁断・縫い付ける様子"><div class="grain"></div></div>
 
   <div class="wrap hero-inner">
     <div class="hero-eyebrow reveal">
@@ -1885,7 +1900,7 @@
     <div class="split">
       <div>
         <div class="frame frame-tatami">
-          <div class="tag">写真枠 P-08 / 畳の目のアップ</div>
+          <img src="../../photos/output_photos/p-37-tatami-detail-alt.jpg" alt="畳表の目と畳縁の質感が分かるクローズアップ" loading="lazy" style="object-position: 25% 50%;">
         </div>
       </div>
       <div class="split-text">
@@ -1947,7 +1962,7 @@
     <div class="product-grid">
       <div class="product-card reveal" style="--d:.24s">
         <div class="product-swatch swatch-igusa">
-          <div class="tag">写真枠 P-08</div>
+          <img src="../../photos/output_photos/p-08-igusa-tatami-detail.jpg" alt="国産い草の畳表のアップ" loading="lazy">
         </div>
         <div class="product-body">
           <h3>い草畳</h3>
@@ -1957,17 +1972,17 @@
       </div>
       <div class="product-card reveal" style="--d:.36s">
         <div class="product-swatch swatch-washi">
-          <div class="tag">写真枠 P-13〜P-16</div>
+          <img src="../../photos/output_photos/p-13-washi-color-navy.jpg" alt="和紙表 藍色の畳表のアップ" loading="lazy">
         </div>
         <div class="product-body">
           <h3>和紙表</h3>
           <div class="price">裏返し 一律4,500円+税<br>表替え 7,000〜15,000円+税</div>
           <p>色あせ・汚れ・日焼けに強く、美しい見た目を長く保てる和紙表。<br>ここでは数あるカラーの中から4色を抜粋してご紹介しています。</p>
           <div class="color-dots" role="group" aria-label="和紙表のカラーバリエーション">
-            <button type="button" style="background:#3d4a6b;" data-name="藍" data-id="P-13" aria-pressed="true" aria-label="藍"></button>
-            <button type="button" style="background:#7a5c3d;" data-name="焦茶" data-id="P-14" aria-pressed="false" aria-label="焦茶"></button>
-            <button type="button" style="background:#8b9a6b;" data-name="若草" data-id="P-15" aria-pressed="false" aria-label="若草"></button>
-            <button type="button" style="background:#c9c2ad;" data-name="生成り" data-id="P-16" aria-pressed="false" aria-label="生成り"></button>
+            <button type="button" style="background:#3d4a6b;" data-name="藍" data-id="P-13" data-src="../../photos/output_photos/p-13-washi-color-navy.jpg" data-alt="和紙表 藍色の畳表のアップ" aria-pressed="true" aria-label="藍"></button>
+            <button type="button" style="background:#7a5c3d;" data-name="焦茶" data-id="P-14" data-src="../../photos/output_photos/p-14-washi-color-brown.jpg" data-alt="和紙表 焦茶色の畳表のアップ" aria-pressed="false" aria-label="焦茶"></button>
+            <button type="button" style="background:#8b9a6b;" data-name="若草" data-id="P-15" data-src="../../photos/output_photos/p-15-washi-color-wakakusa.jpg" data-alt="和紙表 若草色の畳表のアップ" aria-pressed="false" aria-label="若草"></button>
+            <button type="button" style="background:#c9c2ad;" data-name="生成り" data-id="P-16" data-src="../../photos/output_photos/p-16-washi-color-kinari.jpg" data-alt="和紙表 生成り色の畳表のアップ" aria-pressed="false" aria-label="生成り"></button>
           </div>
           <div class="color-label">藍<span class="id">P-13</span></div>
           <p class="note">※上記は一部の色味です。他のカラーも<br>ございますので、お気軽にご相談ください。</p>
@@ -1993,7 +2008,7 @@
     </div>
     <div class="case-grid">
       <div class="case-card reveal" style="--d:.12s">
-        <div class="frame"><div class="tag">P-23 施工後</div></div>
+        <div class="frame"><img src="../../photos/output_photos/p-23-case-longtime-customer-after.jpg" alt="施工後：国産い草の畳表に張り替えられた和室" loading="lazy"></div>
         <div class="case-body">
           <div class="cat">表替え</div>
           <div class="work">国産い草</div>
@@ -2005,7 +2020,7 @@
         </div>
       </div>
       <div class="case-card reveal" style="--d:.24s">
-        <div class="frame"><div class="tag">P-25 施工後</div></div>
+        <div class="frame"><img src="../../photos/output_photos/p-25-case-customer2-after-alt.jpg" alt="施工後：和紙表に張り替えた10畳の和室" loading="lazy"></div>
         <div class="case-body">
           <div class="cat">表替え</div>
           <div class="work">和紙表</div>
@@ -2037,7 +2052,7 @@
     <div class="crafts-grid">
       <div class="craft-card reveal" style="--d:.24s">
         <!-- 写真枠 P-04 / 代表・3代目 倉林俊之 -->
-        <div class="craft-photo p1"></div>
+        <div class="craft-photo p1"><img src="../../photos/output_photos/p-04-owner-portrait.jpg" alt="代表・3代目 倉林俊之が作業場で笑顔で立つ人物カット" loading="lazy"></div>
         <div>
           <div class="craft-role">代表・3代目</div>
           <div class="craft-name">倉林 俊之</div>
@@ -2047,7 +2062,7 @@
       </div>
       <div class="craft-card reveal" style="--d:.36s">
         <!-- 写真枠 P-05 / 4代目 倉林尚輝 -->
-        <div class="craft-photo p2"></div>
+        <div class="craft-photo p2"><img src="../../photos/output_photos/p-05-successor-portrait.jpg" alt="4代目 倉林尚輝が作業場で笑顔で立つ人物カット" loading="lazy"></div>
         <div>
           <div class="craft-role">4代目・修行中</div>
           <div class="craft-name">倉林 尚輝</div>
@@ -2195,6 +2210,38 @@
       navOverlay.classList.remove('open');
     }
   });
+</script>
+
+<script>
+  // 和紙表のカラードット: クリックで写真とラベルを切り替える
+  (function () {
+    const dots = document.querySelectorAll('.color-dots button');
+    if (!dots.length) return;
+    const card = dots[0].closest('.product-card');
+    const photo = card.querySelector('.product-swatch img');
+    const label = card.querySelector('.color-label');
+    if (!photo || !label) return;
+
+    // 初回クリック時のちらつきを防ぐため、他の色を先読みしておく
+    dots.forEach(function (dot) {
+      if (dot.dataset.src !== photo.getAttribute('src')) {
+        const pre = new Image();
+        pre.src = dot.dataset.src;
+      }
+    });
+
+    dots.forEach(function (dot) {
+      dot.addEventListener('click', function () {
+        dots.forEach(function (d) {
+          d.setAttribute('aria-pressed', String(d === dot));
+        });
+        photo.src = dot.dataset.src;
+        photo.alt = dot.dataset.alt;
+        label.firstChild.nodeValue = dot.dataset.name;
+        label.querySelector('.id').textContent = dot.dataset.id;
+      });
+    });
+  })();
 </script>
 
 <script>

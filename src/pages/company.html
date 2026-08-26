@@ -206,6 +206,17 @@
       background: linear-gradient(150deg, var(--gold) 0%, var(--sumi-3) 40%, var(--sumi) 100%);
     }
 
+    /* 本番写真: 枠の比率のままトリミング表示 */
+    .frame > img {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
     .frame::before {
       content: "";
       position: absolute;
@@ -1216,7 +1227,7 @@
       <article class="craft-panel reveal" style="--d:.24s">
         <!-- 写真枠 P-04 -->
         <div class="frame">
-          <div class="tag">写真枠 P-04 / 店主の人物カット<br>(寄り〜中間の構図)</div>
+          <img src="../../photos/output_photos/p-04-owner-portrait.jpg" alt="代表・3代目 倉林俊之が作業場で笑顔で立つ人物カット" loading="lazy">
         </div>
         <div class="craft-head">
           <div class="craft-role">代表・3代目</div>
@@ -1247,7 +1258,7 @@
       <article class="craft-panel reveal" style="--d:.36s">
         <!-- 写真枠 P-05 -->
         <div class="frame">
-          <div class="tag">写真枠 P-05 / 後継者の作業中の表情<br>(寄り〜中間の構図)</div>
+          <img src="../../photos/output_photos/p-05-successor-portrait.jpg" alt="4代目 倉林尚輝が作業場で笑顔で立つ人物カット" loading="lazy">
         </div>
         <div class="craft-head">
           <div class="craft-role">4代目・修行中</div>
