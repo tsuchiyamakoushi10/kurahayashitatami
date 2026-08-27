@@ -59,7 +59,8 @@
       min-height: 100svh;
       display: flex;
       align-items: flex-end;
-      padding: 150px 0 90px;
+      /* 下余白は、削除したボタンが占めていたぶんを含めて導入文と SCROLL の間隔を確保する値 */
+      padding: 150px 0 150px;
       color: var(--washi);
       overflow: hidden;
     }
@@ -67,18 +68,85 @@
     .hero-photo {
       position: absolute;
       inset: 0;
+      /* 独自の重なり文脈をつくり、内側のレイヤーが .hero-inner / .scroll-cue (z-index:2) を覆わないようにする */
+      z-index: 0;
+      /* 写真の読み込み前・読み込み失敗時のフォールバック */
       background:
-        linear-gradient(180deg, rgba(21, 18, 13, .35) 0%, rgba(21, 18, 13, .55) 55%, rgba(21, 18, 13, .94) 100%),
-        url("../../photos/output_photos/p-01-hero-craftsman-sewing.jpg") 32% 50% / cover no-repeat,
         radial-gradient(ellipse at 30% 20%, #4a4034 0%, transparent 55%),
         linear-gradient(135deg, #2b2419 0%, #1c1710 45%, #100d09 100%);
-      /* 写真(P-01)を左右反転。暗幕は縦方向グラデーションのため反転の影響を受けない */
+    }
+
+    /* ============ HERO スライドショー ============ */
+    /* 4枚を同じ位置に重ね、opacity のクロスフェードで切り替える。
+       切り替え中は下の1枚を不透明のまま残すため(JSがz-indexを付け替え)、
+       背景のフォールバックが透けることはない。 */
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background-position: 50% 50%;
+      background-size: cover;
+      background-repeat: no-repeat;
+      opacity: 0;
+      transition: opacity 1.6s ease-in-out;
+    }
+
+    /* 表示中の1枚。表示されている間ずっと 100%→110% へゆっくり拡大する(Ken Burns)。
+       .is-active が外れて付け直されるとアニメーションも作り直されるため、
+       切り替わるたびに拡大率が 100% にリセットされる。
+       5.6s = 切り替え間隔4.0s + フェード1.6s = 1枚が画面に映っている実時間。 */
+    .hero-slide.is-active {
+      opacity: 1;
+      animation: heroZoom 5.6s linear both;
+    }
+
+    /* P-01 のみ従来どおり左右反転して表示 */
+    .hero-slide-flip {
       transform: scaleX(-1);
+    }
+
+    /* 反転している P-01 は、反転を保ったまま拡大する必要があるため専用のキーフレームを使う */
+    .hero-slide-flip.is-active {
+      animation-name: heroZoomFlip;
+    }
+
+    /* transform と opacity だけを動かすので、レイアウトも再描画も発生しない(コンポジタ処理) */
+    @keyframes heroZoom {
+      from { transform: scale(1); }
+      to   { transform: scale(1.1); }
+    }
+
+    @keyframes heroZoomFlip {
+      from { transform: scale(-1, 1); }
+      to   { transform: scale(-1.1, 1.1); }
+    }
+
+    /* 暗幕グラデーション(従来 .hero-photo の背景先頭にあったものと同一)。写真より前面に置く */
+    .hero-photo::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 10;
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(21, 18, 13, .35) 0%, rgba(21, 18, 13, .55) 55%, rgba(21, 18, 13, .94) 100%);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-slide {
+        transition: none;
+      }
+
+      /* 動きを減らす設定ではズームも止める(反転表示だけは維持する) */
+      .hero-slide.is-active,
+      .hero-slide-flip.is-active {
+        animation: none;
+      }
     }
 
     .hero-photo .grain {
       position: absolute;
       inset: 0;
+      z-index: 11;
       opacity: .4;
       mix-blend-mode: overlay;
       background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3'/></filter><rect width='100%25' height='100%25' filter='url(%23g)' opacity='0.5'/></svg>");
@@ -146,53 +214,6 @@
       letter-spacing: .02em;
     }
 
-    /* ============ HERO CTA BUTTONS ============ */
-    .hero-cta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      margin-top: 44px;
-    }
-
-    /* Contact Button (共通コンポーネント .cta-btn) */
-    .hero-cta .cta-btn,
-    .hero-cta .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: var(--igusa);
-      color: var(--washi);
-      padding: 14px 28px;
-      border-radius: 3px;
-      font-family: var(--font-b);
-      font-weight: 700;
-      font-size: 16px;
-      letter-spacing: .03em;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, .35);
-      transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
-      white-space: nowrap;
-    }
-
-    .hero-cta .cta-btn:hover,
-    .hero-cta .btn-primary:hover {
-      transform: translateY(-2px);
-      background: var(--igusa-deep);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, .4);
-    }
-
-    .hero-cta .cta-btn:active,
-    .hero-cta .btn-primary:active {
-      transform: translateY(0);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, .3);
-    }
-
-    .hero-cta .cta-btn svg,
-    .hero-cta .btn-primary svg {
-      width: 15px;
-      height: 15px;
-      flex: 0 0 15px;
-    }
-
     /* ============ SCROLL REVEAL (IntersectionObserver で .is-in を付与) ============ */
     .reveal {
       opacity: 0;
@@ -244,7 +265,7 @@
     /* ============ RESPONSIVE ============ */
     @media (max-width: 599px) {
       .hero {
-        padding: 100px 0 60px;
+        padding: 100px 0 110px;
         min-height: auto;
       }
 
@@ -268,19 +289,6 @@
         max-width: 100%;
       }
 
-      .hero-cta {
-        flex-direction: column;
-        gap: 10px;
-        margin-top: 32px;
-      }
-
-      .hero-cta .cta-btn {
-        width: 100%;
-        justify-content: center;
-        padding: 12px 20px;
-        font-size: 14px;
-      }
-
       .photo-note {
         top: 16px;
         right: 16px;
@@ -298,7 +306,7 @@
       }
     }
 
-    /* ============ PAIN POINTS ============ */
+    /* ============ SECTION BASE ============ */
     section {
       position: relative;
       padding: 110px 0;
@@ -344,47 +352,6 @@
       z-index: 1;
     }
 
-    .pain-list {
-      list-style: none;
-      display: grid;
-      gap: 0;
-      position: relative;
-      z-index: 1;
-    }
-
-    .pain-list li {
-      display: flex;
-      align-items: baseline;
-      gap: 22px;
-      padding: 26px 0;
-      border-bottom: 1px solid var(--washi-3);
-      font-family: var(--font-d);
-      font-weight: 700;
-      font-size: clamp(17px, 2.2vw, 22px);
-      color: var(--ink);
-    }
-
-    .pain-list li:first-child {
-      border-top: 1px solid var(--washi-3);
-    }
-
-    .pain-list .mark {
-      color: var(--vermillion);
-      font-size: 22px;
-      flex: none;
-    }
-
-    .pain-resolve {
-      margin-top: 44px;
-      font-family: var(--font-d);
-      font-weight: 700;
-      font-size: clamp(20px, 2.8vw, 28px);
-      color: var(--vermillion);
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
-
     /* ============ MANIFESTO ============ */
     .sumi-tex {
       position: relative;
@@ -421,7 +388,8 @@
     }
 
     .manifesto-line.big {
-      font-size: clamp(34px, 7vw, 78px);
+      /* 従来 clamp(34px, 7vw, 78px) の約70% */
+      font-size: clamp(24px, 4.9vw, 55px);
       line-height: 1.35;
     }
 
@@ -464,21 +432,50 @@
       flex: none;
     }
 
+    /* 想いと歩みページへの導線。バッジ列と同じ 64px の間隔でセクション下部に置く */
+    .belief-cta {
+      display: flex;
+      justify-content: center;
+      margin-top: 64px;
+      position: relative;
+      z-index: 1;
+    }
+
     @media (max-width: 599px) {
       .manifesto {
         padding: 90px 0;
+      }
+
+      /* スマホではバッジ列の上マージン(44px)と揃える */
+      .belief-cta {
+        margin-top: 44px;
+      }
+
+      .belief-cta .btn-ghost {
+        width: 100%;
       }
 
       .manifesto-line.small {
         margin-top: 28px;
       }
 
+      /* スマホでは5枚を横幅いっぱいの縦一列に揃える(2枚並び・1枚単独の混在を解消) */
       .badge-row {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: stretch;
         gap: 10px;
         margin-top: 44px;
       }
 
+      /* 2行目の上マージンをカード間の gap と同じ値にし、5枚すべての間隔を10pxで統一する */
+      .badge-row + .badge-row {
+        margin-top: 10px;
+      }
+
       .badge {
+        /* 枠が横幅いっぱいになるため、ドットと文字は従来どおり中央に見えるようそろえる */
+        justify-content: center;
         padding: 13px 18px;
         font-size: 14px;
         gap: 10px;
@@ -636,6 +633,16 @@
     }
 
     @media (max-width: 599px) {
+      /* スマホでは写真だけ .wrap の左右パディング(28px)を打ち消し、画面幅いっぱいに広げる。
+         幅だけが変わり aspect-ratio 4/5 はそのまま効くので、写真の比率は崩れない。
+         .frame-tatami はこのセクションの写真だけに付いているクラスなので、
+         施工事例カルーセルの .frame や職人紹介の .craft-photo には影響しない。 */
+      .frame-tatami {
+        margin-left: -28px;
+        margin-right: -28px;
+        border-radius: 0;
+      }
+
       .tatami-diagram div {
         flex-direction: column;
         gap: 4px;
@@ -650,93 +657,6 @@
       }
     }
 
-    /* ============ HANKO STAMP ============ */
-    .hanko {
-      width: 64px;
-      height: 64px;
-      border-radius: 6px;
-      border: 2.5px solid var(--vermillion);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-d);
-      font-weight: 700;
-      font-size: 22px;
-      color: var(--vermillion);
-      letter-spacing: .05em;
-      writing-mode: vertical-rl;
-      transform: rotate(-4deg);
-      position: relative;
-      flex: none;
-      filter: saturate(1.05);
-    }
-
-    .hanko::after {
-      content: "";
-      position: absolute;
-      inset: -3px;
-      border-radius: 8px;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='90' height='90'><filter id='r'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/><feColorMatrix type='matrix' values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.5 0'/><feComposite operator='in' in2='SourceGraphic'/></filter><rect width='100%25' height='100%25' fill='white' filter='url(%23r)'/></svg>");
-      mix-blend-mode: multiply;
-      opacity: .5;
-      pointer-events: none;
-    }
-
-    .hanko.small {
-      width: 38px;
-      height: 38px;
-      font-size: 13px;
-      border-width: 1.75px;
-    }
-
-    /* ============ REASONS ============ */
-    .reasons {
-      display: grid;
-      gap: 2px;
-      background: var(--washi-3);
-      border: 1px solid var(--washi-3);
-      position: relative;
-      z-index: 1;
-    }
-
-    @media (min-width: 880px) {
-      .reasons {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    .reason {
-      background: var(--washi);
-      padding: 44px 34px;
-      position: relative;
-    }
-
-    .reason .hanko {
-      margin-bottom: 26px;
-    }
-
-    .reason h3 {
-      font-family: var(--font-d);
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--ink);
-      margin-bottom: 16px;
-    }
-
-    .reason p {
-      font-family: var(--font-b);
-      font-size: 15.5px;
-      color: var(--ink);
-      opacity: .82;
-      line-height: 1.95;
-    }
-
-    @media (max-width: 599px) {
-      .reason {
-        padding: 36px 24px;
-      }
-    }
-
     /* ============ PRICE (PRODUCTS) ============ */
     .product-grid {
       display: grid;
@@ -748,6 +668,10 @@
     @media (min-width: 760px) {
       .product-grid {
         grid-template-columns: 1fr 1fr;
+        /* 2枚を並べたときは高さを完全に揃える(grid 既定の stretch)。
+           中身の少ないい草畳カードは、余った分が下側の余白になる。
+           1カラム表示のときは各行が1枚ずつなので、カードは中身なりの高さになる。 */
+        align-items: stretch;
       }
     }
 
@@ -805,16 +729,6 @@
       font-size: 24px;
       font-weight: 700;
       color: var(--washi);
-    }
-
-    .product-body .price {
-      margin-top: 6px;
-      color: var(--gold);
-      font-family: var(--font-b);
-      font-weight: 700;
-      font-size: 16px;
-      letter-spacing: .03em;
-      line-height: 1.7;
     }
 
     .product-body p {
@@ -949,16 +863,126 @@
       font-size: clamp(38px, 5.5vw, 64px);
     }
 
-    .case-grid {
-      display: grid;
-      gap: 40px;
+    /* --- 施工事例カルーセル(1枚ずつ表示 / 自動スライド + 左右矢印) --- */
+    .case-carousel {
       position: relative;
+      max-width: 560px; /* 旧2カラム時のカード1枚分の幅に合わせている */
+      margin: 0 auto;
       z-index: 1;
     }
 
+    .case-viewport {
+      overflow: hidden;
+    }
+
+    /* 3枚を横一列に並べ、translateX で1枚分ずつ動かす */
+    .case-track {
+      display: flex;
+      transition: transform .6s cubic-bezier(.4, 0, .2, 1);
+      will-change: transform;
+    }
+
+    /* flex の stretch で3枚の高さが揃うため、切り替えても高さが飛ばない */
+    .case-slide {
+      flex: 0 0 100%;
+      min-width: 0;
+      display: flex;
+    }
+
+    .case-slide > .case-card {
+      width: 100%;
+    }
+
+    /* 矢印は写真と同じ 16:10 のレイヤーに載せ、写真の高さの中央に揃える */
+    .case-nav-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      aspect-ratio: 16 / 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 10px;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .case-nav {
+      pointer-events: auto;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--paper-45);
+      border-radius: 50%;
+      background: rgba(21, 18, 13, .55);
+      color: var(--washi);
+      font-family: var(--font-b);
+      font-size: 26px;
+      line-height: 1;
+      padding-bottom: 3px; /* ‹ › の字面が上寄りなので光学的に中央へ寄せる */
+      transition: background .25s ease, border-color .25s ease, transform .25s ease;
+    }
+
+    .case-nav:hover {
+      background: rgba(21, 18, 13, .82);
+      border-color: var(--washi);
+    }
+
+    .case-nav:active {
+      transform: scale(.94);
+    }
+
+    .case-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      margin-top: 12px;
+    }
+
+    /* 見た目は9pxのドット、タップ領域は44px角で確保する */
+    .case-dot {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .case-dot::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      border: 1px solid var(--paper-45);
+      transition: background .25s ease, border-color .25s ease;
+    }
+
+    .case-dot[aria-selected="true"]::before {
+      background: var(--washi);
+      border-color: var(--washi);
+    }
+
     @media (min-width: 820px) {
-      .case-grid {
-        grid-template-columns: 1fr 1fr;
+      /* 画面に余裕があるときは矢印をカードの外側に出す */
+      .case-nav-layer {
+        left: -74px;
+        right: -74px;
+        padding: 0;
+      }
+
+      .case-nav {
+        width: 52px;
+        height: 52px;
+        font-size: 28px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .case-track {
+        transition: none;
       }
     }
 
@@ -1035,7 +1059,8 @@
       z-index: 1;
     }
 
-    .cases-cta .btn-ghost {
+    .cases-cta .btn-ghost,
+    .belief-cta .btn-ghost {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -1051,17 +1076,20 @@
       transition: transform .25s ease, border-color .25s ease, background .25s ease;
     }
 
-    .cases-cta .btn-ghost:hover {
+    .cases-cta .btn-ghost:hover,
+    .belief-cta .btn-ghost:hover {
       transform: translateY(-2px);
       border-color: var(--washi);
       background: var(--sumi-3);
     }
 
-    .cases-cta .btn-ghost:active {
+    .cases-cta .btn-ghost:active,
+    .belief-cta .btn-ghost:active {
       transform: translateY(0);
     }
 
-    .cases-cta .btn-ghost svg {
+    .cases-cta .btn-ghost svg,
+    .belief-cta .btn-ghost svg {
       width: 16px;
       height: 16px;
       flex: 0 0 16px;
@@ -1080,25 +1108,34 @@
     /* ============ CRAFTSPEOPLE ============ */
     .crafts-grid {
       display: grid;
-      gap: 32px;
+      gap: 48px;
       position: relative;
       z-index: 1;
     }
 
-    @media (min-width: 760px) {
+    @media (min-width: 900px) {
       .crafts-grid {
         grid-template-columns: 1fr 1fr;
+        /* 項目を減らして横に余りが出たぶん、2枚を寄せて見出しの左揃えに合わせる */
+        max-width: 880px;
       }
     }
 
     .craft-card {
       display: flex;
-      gap: 24px;
-      align-items: flex-start;
+      gap: 32px;
+      align-items: center;
+      justify-content: center;
     }
 
+    /* 代/役職・名前・職人歴の各行を左右中央に揃える */
+    .craft-info {
+      text-align: center;
+    }
+
+    /* 3:4 のままなので写真のトリミングは変わらない */
     .craft-photo {
-      width: 132px;
+      width: 220px;
       aspect-ratio: 3 / 4;
       flex: none;
       border-radius: 2px;
@@ -1126,35 +1163,26 @@
     .craft-role {
       font-family: var(--font-d);
       font-weight: 700;
-      font-size: 14px;
+      font-size: 17px;
       letter-spacing: .1em;
       color: var(--vermillion);
     }
 
     .craft-name {
-      margin-top: 6px;
+      margin-top: 10px;
       font-family: var(--font-d);
       font-weight: 700;
-      font-size: 21px;
+      font-size: 27px;
+      line-height: 1.5;
       color: var(--ink);
     }
 
     .craft-years {
-      margin-top: 6px;
+      margin-top: 10px;
       font-family: var(--font-b);
       font-weight: 700;
-      font-size: 16px;
+      font-size: 18px;
       color: var(--ink);
-    }
-
-    .craft-quote {
-      margin-top: 14px;
-      font-family: var(--font-b);
-      font-weight: 500;
-      font-size: 15.5px;
-      color: var(--ink);
-      opacity: .85;
-      line-height: 1.9;
     }
 
     /* Crafts CTA (共通コンポーネント .cta-btn に準拠) */
@@ -1202,11 +1230,16 @@
 
     @media (max-width: 599px) {
       .craft-card {
-        gap: 18px;
+        gap: 20px;
       }
 
       .craft-photo {
-        width: 108px;
+        width: 156px;
+      }
+
+      /* 写真を大きくしたぶん、狭い画面では代/役職だけ1段抑えて折り返しを防ぐ */
+      .craft-role {
+        font-size: 16px;
       }
 
       .crafts-cta .cta-btn {
@@ -1214,65 +1247,56 @@
       }
     }
 
-    /* ============ FAQ ============ */
-    .faq-wrap {
-      max-width: 760px;
+    /* 360px 未満の端末では「4代目・修行中」が折り返すので、そこだけ一段詰める */
+    @media (max-width: 359px) {
+      .craft-card {
+        gap: 16px;
+      }
+
+      .craft-photo {
+        width: 132px;
+      }
+
+      .craft-role {
+        font-size: 15.5px;
+      }
     }
 
-    .faq-list {
+    /* ============ ACCESS (contact.html から移動) ============ */
+    /* 見出し・本文・ボタンの見え方は contact.html にあったときと同じになるよう、
+       このセクションにスコープして指定する(TOPの他セクションの見出しには影響しない) */
+    #access .section-head {
+      max-width: none;
+      margin-bottom: 46px;
+      text-align: center;
+    }
+
+    #access .section-head .eyebrow {
+      margin-bottom: 0;
+      font-size: 14px;
+      letter-spacing: .32em;
+      text-indent: .32em;
+    }
+
+    .access {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
       position: relative;
       z-index: 1;
     }
 
-    .faq-item {
-      border-bottom: 1px solid var(--washi-3);
-    }
-
-    .faq-item:first-child {
-      border-top: 1px solid var(--washi-3);
-    }
-
-    .faq-q {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 24px 4px;
-      text-align: left;
-      font-family: var(--font-b);
+    .access-line {
+      font-family: var(--font-d);
       font-weight: 700;
-      font-size: 16px;
+      font-size: clamp(17px, 2.2vw, 22px);
+      letter-spacing: .06em;
       color: var(--ink);
     }
 
-    .faq-q .plus {
-      font-size: 20px;
-      color: var(--vermillion);
-      transition: transform .3s ease;
-      flex: none;
-      margin-left: 20px;
-    }
-
-    .faq-item[data-open="true"] .plus {
-      transform: rotate(45deg);
-    }
-
-    .faq-a {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height .35s ease;
-    }
-
-    .faq-item[data-open="true"] .faq-a {
-      max-height: 220px;
-    }
-
-    .faq-a p {
-      padding: 0 4px 24px;
-      font-family: var(--font-b);
-      font-size: 14.5px;
-      color: var(--ink-70);
-      max-width: 600px;
+    /* contact.html での値。TOPの料金セクションの .price-cta(34px)には影響させない */
+    #access .price-cta {
+      margin-top: 48px;
     }
 
     /* ============ FINAL CTA ============ */
@@ -1826,7 +1850,14 @@
 
 <!-- ============ HERO SECTION ============ -->
 <section class="hero">
-  <div class="hero-photo" role="img" aria-label="職人が畳表を裁断・縫い付ける様子"><div class="grain"></div></div>
+  <div class="hero-photo" role="img" aria-label="倉林畳店の職人が畳をつくる仕事風景">
+    <!-- スライドショー: P-01 → p-059 → p-094 → p-069 の順に4秒ごとクロスフェードし、最後はP-01へ戻ってループ -->
+    <div class="hero-slide hero-slide-flip is-active" style="background-image: url('../../photos/output_photos/p-01-hero-craftsman-sewing.jpg'); background-position: 32% 50%;"></div>
+    <div class="hero-slide" style="background-image: url('../../photos/output_photos/p-059.jpg'); background-position: 40% 50%;"></div>
+    <div class="hero-slide" style="background-image: url('../../photos/output_photos/p-094.jpg'); background-position: 45% 50%;"></div>
+    <div class="hero-slide" style="background-image: url('../../photos/output_photos/p-069.jpg'); background-position: 55% 50%;"></div>
+    <div class="grain"></div>
+  </div>
 
   <div class="wrap hero-inner">
     <div class="hero-eyebrow reveal">
@@ -1841,37 +1872,10 @@
       創業83年。地域に根ざし、一枚一枚に真心を込めて<br>畳づくりを続けてきました。
     </p>
 
-    <div class="hero-cta reveal" style="--d:.36s">
-      <!-- Contact Button - Using .cta-btn from shared component -->
-      <a href="tel:0274522966" class="cta-btn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
-        </svg>
-        <span>まずはご相談ください</span>
-      </a>
-    </div>
   </div>
 
   <div class="scroll-cue">
     <span class="stem"></span>SCROLL
-  </div>
-</section>
-
-<!-- ============ PAIN POINTS ============ -->
-<section class="washi-tex">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow reveal">こんなことに困っていませんか</div>
-      <h2 class="section-title reveal" style="--d:.12s">畳の"気になる"を、<br>そのままにしていませんか。</h2>
-    </div>
-
-    <ul class="pain-list">
-      <li style="--d:.24s"><span class="mark reveal">・</span>畳が色あせてお部屋が古く見える</li>
-      <li style="--d:.36s"><span class="mark reveal">・</span>費用や張り替え時期が分からず、そのままになっている</li>
-      <li style="--d:.48s"><span class="mark reveal">・</span>子どもが安心して遊べる部屋にしたい</li>
-    </ul>
-
-    <p class="pain-resolve reveal" style="--d:.60s">そのお悩み、畳を替えることで解決できます。</p>
   </div>
 </section>
 
@@ -1889,6 +1893,12 @@
     <div style="--d:.36s" class="badge-row reveal" style="margin-top:14px;">
       <div class="badge"><span class="dot"></span>国産い草へのこだわり</div>
       <div class="badge"><span class="dot"></span>和紙表 取扱</div>
+    </div>
+    <div class="belief-cta reveal" style="--d:.48s">
+      <a class="btn-ghost" href="company-story.html">
+        想いと歩みを見る
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
     </div>
   </div>
 </section>
@@ -1924,34 +1934,6 @@
 </section>
 
 
-<!-- ============ REASONS ============ -->
-<section id="reasons" class="washi-tex">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow reveal">選ばれる理由</div>
-      <h2 class="section-title reveal" style="--d:.12s">倉林畳店が、<br>選ばれ続けている理由。</h2>
-    </div>
-    <div class="reasons">
-      <div class="reason reveal" style="--d:.24s">
-        <div class="hanko small">壱</div>
-        <h3>創業83年</h3>
-        <p>創業以来83年、多くのお客様に支えられながら、地域の住まいづくりに携わってきました。<br>長年培ってきた経験を活かし、お住まいやご要望に合わせた最適なご提案をいたします。</p>
-      </div>
-      <div class="reason reveal" style="--d:.36s">
-        <div class="hanko small">弐</div>
-        <h3>迅速、柔軟な対応力</h3>
-        <p>畳の傷みや急なご相談にも、できる限り迅速に対応いたします。営業時間外でも<br>ご相談いただけるよう柔軟な対応を心がけ、お客様の不安をできるだけ早く解消します。</p>
-      </div>
-      <div class="reason reveal" style="--d:.48s">
-        <div class="hanko small">参</div>
-        <h3>暮らしに合った畳をご提案</h3>
-        <p>「い草の香りを楽しみたい」「お手入れしやすい畳がいい」など、お客様のご要望や<br>ライフスタイルを丁寧にお伺いし、一人ひとりに合った畳をご提案します。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
 <!-- ============ PRICE ============ -->
 <section id="price" class="washi-tex">
   <div class="wrap">
@@ -1966,7 +1948,6 @@
         </div>
         <div class="product-body">
           <h3>い草畳</h3>
-          <div class="price">裏返し 一律4,500円+税<br>表替え(国産) 7,000〜15,000円+税</div>
           <p>天然素材ならではの香りと風合い。<br>使い始めは青々と、時間とともに黄金色へ変化していく、国産い草にこだわった一枚です。</p>
         </div>
       </div>
@@ -1976,15 +1957,14 @@
         </div>
         <div class="product-body">
           <h3>和紙表</h3>
-          <div class="price">裏返し 一律4,500円+税<br>表替え 7,000〜15,000円+税</div>
-          <p>色あせ・汚れ・日焼けに強く、美しい見た目を長く保てる和紙表。<br>ここでは数あるカラーの中から4色を抜粋してご紹介しています。</p>
+          <p>色あせ・汚れ・日焼けに強く、美しい見た目を長く保てる和紙表。</p>
           <div class="color-dots" role="group" aria-label="和紙表のカラーバリエーション">
             <button type="button" style="background:#3d4a6b;" data-name="藍" data-id="P-13" data-src="../../photos/output_photos/p-13-washi-color-navy.jpg" data-alt="和紙表 藍色の畳表のアップ" aria-pressed="true" aria-label="藍"></button>
             <button type="button" style="background:#7a5c3d;" data-name="焦茶" data-id="P-14" data-src="../../photos/output_photos/p-14-washi-color-brown.jpg" data-alt="和紙表 焦茶色の畳表のアップ" aria-pressed="false" aria-label="焦茶"></button>
             <button type="button" style="background:#8b9a6b;" data-name="若草" data-id="P-15" data-src="../../photos/output_photos/p-15-washi-color-wakakusa.jpg" data-alt="和紙表 若草色の畳表のアップ" aria-pressed="false" aria-label="若草"></button>
             <button type="button" style="background:#c9c2ad;" data-name="生成り" data-id="P-16" data-src="../../photos/output_photos/p-16-washi-color-kinari.jpg" data-alt="和紙表 生成り色の畳表のアップ" aria-pressed="false" aria-label="生成り"></button>
           </div>
-          <div class="color-label">藍<span class="id">P-13</span></div>
+          <div class="color-label">藍</div>
           <p class="note">※上記は一部の色味です。他のカラーも<br>ございますので、お気軽にご相談ください。</p>
         </div>
       </div>
@@ -2006,30 +1986,61 @@
     <div class="section-head">
       <h2 class="section-title reveal">施工事例</h2>
     </div>
-    <div class="case-grid">
-      <div class="case-card reveal" style="--d:.12s">
-        <div class="frame"><img src="../../photos/output_photos/p-23-case-longtime-customer-after.jpg" alt="施工後：国産い草の畳表に張り替えられた和室" loading="lazy"></div>
-        <div class="case-body">
-          <div class="cat">表替え</div>
-          <div class="work">国産い草</div>
-          <ul class="case-detail">
-            <li><span>枚数</span><span>6畳2間</span></li>
-            <li><span>工期</span><span>2日</span></li>
-          </ul>
-          <blockquote>畳を替える時はまたぜひお願いしたいです。</blockquote>
+    <div class="case-carousel reveal" style="--d:.12s" role="group" aria-roledescription="カルーセル" aria-label="施工事例">
+      <div class="case-viewport">
+        <div class="case-track">
+          <div class="case-slide" role="group" aria-roledescription="スライド" aria-label="1 / 3">
+            <div class="case-card">
+              <div class="frame"><img src="../../photos/output_photos/p-23-case-longtime-customer-after.jpg" alt="施工後：国産い草の畳表に張り替えられた和室" loading="lazy"></div>
+              <div class="case-body">
+                <div class="cat">表替え</div>
+                <div class="work">国産い草</div>
+                <ul class="case-detail">
+                  <li><span>枚数</span><span>6畳2間</span></li>
+                  <li><span>工期</span><span>2日</span></li>
+                </ul>
+                <blockquote>畳を替える時はまたぜひお願いしたいです。</blockquote>
+              </div>
+            </div>
+          </div>
+          <div class="case-slide" role="group" aria-roledescription="スライド" aria-label="2 / 3">
+            <div class="case-card">
+              <div class="frame"><img src="../../photos/output_photos/p-25-case-customer2-after-alt.jpg" alt="施工後：和紙表に張り替えた10畳の和室" loading="lazy"></div>
+              <div class="case-body">
+                <div class="cat">表替え</div>
+                <div class="work">和紙表</div>
+                <ul class="case-detail">
+                  <li><span>枚数</span><span>10畳</span></li>
+                  <li><span>工期</span><span>1日</span></li>
+                </ul>
+                <blockquote>これで気持ちよく眠れます。部屋も明るくなりました。</blockquote>
+              </div>
+            </div>
+          </div>
+          <div class="case-slide" role="group" aria-roledescription="スライド" aria-label="3 / 3">
+            <div class="case-card">
+              <div class="frame"><img src="../../photos/output_photos/p-32-case-tearoom-after.jpg" alt="施工後：国産い草の畳表に張り替えられた8畳の和室" loading="lazy"></div>
+              <div class="case-body">
+                <div class="cat">表替え</div>
+                <div class="work">国産い草</div>
+                <ul class="case-detail">
+                  <li><span>枚数</span><span>8畳</span></li>
+                  <li><span>工期</span><span>4日</span></li>
+                </ul>
+                <blockquote>他の畳屋さんと仕事の仕方が違う<br>とても良かった</blockquote>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="case-card reveal" style="--d:.24s">
-        <div class="frame"><img src="../../photos/output_photos/p-25-case-customer2-after-alt.jpg" alt="施工後：和紙表に張り替えた10畳の和室" loading="lazy"></div>
-        <div class="case-body">
-          <div class="cat">表替え</div>
-          <div class="work">和紙表</div>
-          <ul class="case-detail">
-            <li><span>枚数</span><span>10畳</span></li>
-            <li><span>工期</span><span>1日</span></li>
-          </ul>
-          <blockquote>これで気持ちよく眠れます。部屋も明るくなりました。</blockquote>
-        </div>
+      <div class="case-nav-layer">
+        <button type="button" class="case-nav case-prev" aria-label="前の施工事例を表示">‹</button>
+        <button type="button" class="case-nav case-next" aria-label="次の施工事例を表示">›</button>
+      </div>
+      <div class="case-dots" role="tablist" aria-label="施工事例の切り替え">
+        <button type="button" class="case-dot" role="tab" aria-selected="true" aria-label="1件目を表示"></button>
+        <button type="button" class="case-dot" role="tab" aria-selected="false" aria-label="2件目を表示"></button>
+        <button type="button" class="case-dot" role="tab" aria-selected="false" aria-label="3件目を表示"></button>
       </div>
     </div>
     <div class="cases-cta reveal" style="--d:.36s">
@@ -2046,28 +2057,26 @@
 <section id="craftspeople" class="washi-tex">
   <div class="wrap">
     <div class="section-head">
-      <div class="eyebrow reveal">職人・会社紹介</div>
+      <div class="eyebrow reveal">職人紹介</div>
       <h2 class="section-title reveal" style="--d:.12s">この道を歩む、<br>ふたりの職人。</h2>
     </div>
     <div class="crafts-grid">
       <div class="craft-card reveal" style="--d:.24s">
         <!-- 写真枠 P-04 / 代表・3代目 倉林俊之 -->
         <div class="craft-photo p1"><img src="../../photos/output_photos/p-04-owner-portrait.jpg" alt="代表・3代目 倉林俊之が作業場で笑顔で立つ人物カット" loading="lazy"></div>
-        <div>
-          <div class="craft-role">代表・3代目</div>
+        <div class="craft-info">
+          <div class="craft-role">3代目・代表</div>
           <div class="craft-name">倉林 俊之</div>
           <div class="craft-years">職人歴 32年</div>
-          <p class="craft-quote">妥協のない仕事で、<br>畳と言ったら倉林と<br>思っていただけるような<br>施工をします。</p>
         </div>
       </div>
       <div class="craft-card reveal" style="--d:.36s">
         <!-- 写真枠 P-05 / 4代目 倉林尚輝 -->
-        <div class="craft-photo p2"><img src="../../photos/output_photos/p-05-successor-portrait.jpg" alt="4代目 倉林尚輝が作業場で笑顔で立つ人物カット" loading="lazy"></div>
-        <div>
+        <div class="craft-photo p2"><img src="../../photos/output_photos/p-099.jpg" alt="4代目 倉林尚輝が作業場で笑顔で立つ人物カット" loading="lazy" style="object-position: 40% 50%;"></div>
+        <div class="craft-info">
           <div class="craft-role">4代目・修行中</div>
           <div class="craft-name">倉林 尚輝</div>
           <div class="craft-years">職人歴 4年</div>
-          <p class="craft-quote">お客様に喜んでいただける<br>施工を心がけています。</p>
         </div>
       </div>
     </div>
@@ -2076,27 +2085,6 @@
         会社概要をもっと見る
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
-    </div>
-  </div>
-</section>
-
-
-<!-- ============ FAQ ============ -->
-<section class="washi-tex">
-  <div class="wrap faq-wrap">
-    <div class="section-head">
-      <div class="eyebrow reveal">よくあるご質問</div>
-      <h2 class="section-title reveal" style="--d:.12s">ご相談の前に</h2>
-    </div>
-    <div class="faq-list">
-      <div class="faq-item reveal" data-open="false" style="--d:.24s">
-        <button class="faq-q" type="button">対応エリアはどこまでですか?<span class="plus">+</span></button>
-        <div class="faq-a"><p>まずはお気軽にお問い合わせください。エリアを確認のうえご案内します。</p></div>
-      </div>
-      <div class="faq-item reveal" data-open="false" style="--d:.36s">
-        <button class="faq-q" type="button">見積もりは無料ですか?<span class="plus">+</span></button>
-        <div class="faq-a"><p>はい、無料です。まずはお気軽にご相談ください。</p></div>
-      </div>
     </div>
   </div>
 </section>
@@ -2115,6 +2103,25 @@
     <p class="final-note reveal" style="--d:.36s">ご来店をご希望の方も、まずは一度お電話にてご相談ください。</p>
   </div>
 </section>
+
+<!-- ============ ACCESS (contact.html から移動) ============ -->
+<section id="access" class="washi-tex">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">アクセス</div>
+    </div>
+    <div class="access">
+      <p class="access-line reveal">丹荘駅から車で15分</p>
+      <div class="price-cta reveal" style="--d:.12s">
+        <a class="cta-btn" href="https://www.google.com/maps/place/%E5%80%89%E6%9E%97%E7%95%B3%E5%BA%97/@36.171459,139.0607641,17z/data=!3m1!4b1!4m6!3m5!1s0x601ec05dda129be5:0x60b5bc5057f51a4!8m2!3d36.171459!4d139.063339!16s%2Fg%2F1tfjfmjk?entry=ttu&amp;g_ep=EgoyMDI2MDcyMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">
+          Googleマップで見る
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <!-- ============ FOOTER (共通コンポーネント footer.html) ============ -->
 <footer>
@@ -2151,7 +2158,6 @@
           <li><a href="company.html">会社概要</a></li>
           <li><a href="company-story.html">想いと歩み</a></li>
           <li><a href="contact.html#access">アクセス</a></li>
-          <li><a href="contact.html">お問い合わせ</a></li>
         </ul>
       </div>
     </div>
@@ -2238,21 +2244,137 @@
         photo.src = dot.dataset.src;
         photo.alt = dot.dataset.alt;
         label.firstChild.nodeValue = dot.dataset.name;
-        label.querySelector('.id').textContent = dot.dataset.id;
       });
     });
   })();
 </script>
 
+<!-- ============ HERO スライドショー ============ -->
 <script>
-  // faq accordion
-  document.querySelectorAll('.faq-item').forEach(item => {
-    item.querySelector('.faq-q').addEventListener('click', () => {
-      const isOpen = item.getAttribute('data-open') === 'true';
-      document.querySelectorAll('.faq-item').forEach(i => i.setAttribute('data-open', 'false'));
-      item.setAttribute('data-open', String(!isOpen));
+  (function () {
+    var slides = document.querySelectorAll('.hero-slide');
+    if (slides.length < 2) return;
+
+    var INTERVAL = 4000; /* 1枚あたりの表示間隔 */
+    var FADE = 1600;     /* .hero-slide の transition と同じ長さ */
+
+    /* 2枚目以降を先読みし、初回の切り替えでちらつかないようにする */
+    Array.prototype.forEach.call(slides, function (el, i) {
+      if (i === 0) return;
+      var m = /url\(["']?(.*?)["']?\)/.exec(el.style.backgroundImage);
+      if (m) { var img = new Image(); img.src = m[1]; }
     });
-  });
+
+    /* 動きを減らす設定のときは自動切り替えせず、1枚目のみを表示する */
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var index = 0;
+    setInterval(function () {
+      var prev = index;
+      index = (index + 1) % slides.length;
+
+      /* 次の1枚だけを最前面に置いてフェードイン。下の1枚は不透明のまま残す */
+      Array.prototype.forEach.call(slides, function (el, k) {
+        el.style.zIndex = (k === index) ? '2' : '1';
+      });
+      slides[index].classList.add('is-active');
+
+      /* フェード完了後に前の1枚を消す(先に消すと背景が透ける) */
+      setTimeout(function () {
+        slides[prev].classList.remove('is-active');
+      }, FADE);
+    }, INTERVAL);
+  })();
+</script>
+
+<!-- ============ 施工事例カルーセル ============ -->
+<script>
+  (function () {
+    var carousel = document.querySelector('.case-carousel');
+    if (!carousel) return;
+
+    var track = carousel.querySelector('.case-track');
+    var slides = carousel.querySelectorAll('.case-slide');
+    var dots = carousel.querySelectorAll('.case-dot');
+    var prevBtn = carousel.querySelector('.case-prev');
+    var nextBtn = carousel.querySelector('.case-next');
+    if (!track || slides.length < 2) return;
+
+    var INTERVAL = 5000; /* 自動で次のカードへ切り替わる間隔 */
+    var SWIPE = 40;      /* スワイプと判定する横移動量(px) */
+
+    var index = 0;
+    var timer = null;
+    var paused = false; /* ポインタが乗っている / フォーカス中は自動送りを止める */
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function render() {
+      track.style.transform = 'translateX(' + (-index * 100) + '%)';
+      Array.prototype.forEach.call(slides, function (el, i) {
+        el.setAttribute('aria-hidden', i === index ? 'false' : 'true');
+      });
+      Array.prototype.forEach.call(dots, function (el, i) {
+        el.setAttribute('aria-selected', i === index ? 'true' : 'false');
+      });
+    }
+
+    function go(n, fromUser) {
+      index = (n + slides.length) % slides.length;
+      render();
+      /* 手動で送った直後は、次の自動送りまでの時間を測り直す */
+      if (fromUser) { stop(); start(); }
+    }
+
+    function start() {
+      if (reduceMotion || paused || timer) return;
+      timer = setInterval(function () { go(index + 1); }, INTERVAL);
+    }
+
+    function stop() {
+      if (timer) { clearInterval(timer); timer = null; }
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', function () { go(index - 1, true); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { go(index + 1, true); });
+
+    Array.prototype.forEach.call(dots, function (el, i) {
+      el.addEventListener('click', function () { go(i, true); });
+    });
+
+    carousel.addEventListener('mouseenter', function () { paused = true; stop(); });
+    carousel.addEventListener('mouseleave', function () { paused = false; start(); });
+    carousel.addEventListener('focusin', function () { paused = true; stop(); });
+    carousel.addEventListener('focusout', function () { paused = false; start(); });
+
+    /* スマホのスワイプ操作 */
+    var touchX = null;
+    var touchY = null;
+
+    carousel.addEventListener('touchstart', function (e) {
+      touchX = e.touches[0].clientX;
+      touchY = e.touches[0].clientY;
+      stop();
+    }, { passive: true });
+
+    carousel.addEventListener('touchend', function (e) {
+      if (touchX === null) return;
+      var dx = e.changedTouches[0].clientX - touchX;
+      var dy = e.changedTouches[0].clientY - touchY;
+      /* 縦スクロールと取り違えないよう、横方向の動きが大きいときだけ送る */
+      if (Math.abs(dx) > SWIPE && Math.abs(dx) > Math.abs(dy)) go(index + (dx < 0 ? 1 : -1));
+      touchX = null;
+      touchY = null;
+      start();
+    }, { passive: true });
+
+    /* 別タブに移っている間は動かさない */
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) stop(); else start();
+    });
+
+    render();
+    start();
+  })();
 </script>
 
 <!-- ============ SCROLL REVEAL SCRIPT ============ -->

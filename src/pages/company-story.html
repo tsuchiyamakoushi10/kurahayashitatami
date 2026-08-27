@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>想いと歩み | 倉林畳店</title>
   <!-- 公開URL: /company/story/ -->
-  <link rel="canonical" href="/company/story/">
+  <link rel="canonical" href="/company-story">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@300;400;500;700;900&display=swap" rel="stylesheet">
@@ -120,8 +120,17 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(180deg, rgba(21, 18, 13, .35) 0%, rgba(21, 18, 13, .55) 55%, rgba(21, 18, 13, .94) 100%),
-        radial-gradient(ellipse at 30% 20%, #4a4034 0%, transparent 55%),
+        /* 1枚目(最前面): 暗幕グラデーション。写真の上に重なり、白文字の可読性を確保する。
+           上端は見出しが白い壁に重なるため濃いめ(.62)から始め、26%で従来の濃度に戻す。
+           55%(.55)と100%(.94)は従来と同じ値で、下半分の見え方は変わらない。 */
+        linear-gradient(180deg,
+          rgba(21, 18, 13, .62) 0%,
+          rgba(21, 18, 13, .5) 26%,
+          rgba(21, 18, 13, .55) 55%,
+          rgba(21, 18, 13, .94) 100%),
+        /* 2枚目: 背景写真 p-058 (枠の比率のままトリミング表示) */
+        url("../../photos/output_photos/p-058.jpg") 70% 50% / cover no-repeat,
+        /* 3枚目: 写真が読み込めないときのフォールバック(従来の下地と同一) */
         linear-gradient(135deg, #2b2419 0%, #1c1710 45%, #100d09 100%);
     }
 
@@ -275,10 +284,22 @@
 
     /* ============ 私たちの想い (見出しを画面いっぱいに / 背景 washi) ============ */
     .belief {
-      min-height: calc(100svh - 76px);
+      /* ヘッダー(76px)を除いた高さから、さらに 60px 低くしている。
+         中身は align-items:center で上下中央に置かれるため、単に低くすると中身も上に動いて
+         「強み・こだわり」との間の余白まで変わってしまう。
+         そこで上下の padding を 30px ずつずらし(100→130 / 100→70)、
+         中身の位置を据え置いたまま、下の空きだけを 60px 減らしている。 */
+      min-height: calc(100svh - 136px);
       display: flex;
       align-items: center;
-      padding: 100px 0;
+      padding: 130px 0 70px;
+    }
+
+    /* 「私たちの想い」とは背景が同じで空白が繋がって見えるため、この境目だけ上余白を詰める。
+       .belief 側は min-height + align-items:center のため padding を変えると中身が上下に動き、
+       「強み・こだわり」との間の余白まで変わってしまうので、こちらだけで調整する。 */
+    #history {
+      padding-top: 20px;
     }
 
     .belief .wrap {
@@ -300,8 +321,8 @@
     .ph-title {
       font-family: var(--font-d);
       font-weight: 800;
-      /* 画面いっぱいの見出し (375pxで1行7文字が収まる下限に設定) */
-      font-size: clamp(36px, 9vw, 104px);
+      /* 従来 clamp(36px, 9vw, 104px) の約70% */
+      font-size: clamp(25px, 6.3vw, 73px);
       line-height: 1.24;
       letter-spacing: .02em;
       color: var(--ink);
@@ -323,7 +344,7 @@
       color: var(--ink-70);
     }
 
-    /* ============ 代表挨拶 (背景 sumi / 文字 washi / 左右非対称) ============ */
+    /* ============ 背景テクスチャ (墨) ============ */
     .sumi-tex {
       position: relative;
       background: var(--sumi);
@@ -339,68 +360,6 @@
       mix-blend-mode: overlay;
       background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='matrix' values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.06 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
       background-size: 220px 220px;
-    }
-
-    .message-sec {
-      padding: 130px 0;
-    }
-
-    /* 代表挨拶は左右非対称 (テキストを広く) */
-    @media (min-width: 880px) {
-      .split-asym {
-        grid-template-columns: 1.08fr .92fr;
-      }
-    }
-
-    .message-sec .eyebrow {
-      font-family: var(--font-d);
-      font-weight: 700;
-      font-size: 14px;
-      letter-spacing: .32em;
-      color: var(--gold);
-      margin-bottom: 22px;
-    }
-
-    .rule-gold {
-      width: 56px;
-      height: 1px;
-      background: var(--gold);
-      margin-bottom: 30px;
-    }
-
-    .message-text {
-      font-family: var(--font-d);
-      font-weight: 700;
-      /* 1280pxで指定の改行位置(3行)が保てる上限に設定 */
-      font-size: clamp(19px, 2.6vw, 27px);
-      line-height: 1.95;
-      color: var(--washi);
-      letter-spacing: .02em;
-    }
-
-    /* 1文を1ブロックとして扱う。折り返す幅では行の長さを均して
-       末尾に1〜2文字だけ残らないようにする */
-    .message-text span {
-      display: block;
-      text-wrap: balance;
-    }
-
-    .signature {
-      margin-top: 34px;
-      font-family: var(--font-d);
-      font-weight: 700;
-      font-size: 17px;
-      color: var(--washi);
-      letter-spacing: .06em;
-    }
-
-    .signature .role {
-      font-family: var(--font-b);
-      font-weight: 500;
-      font-size: 14px;
-      color: var(--paper-70);
-      margin-left: 12px;
-      letter-spacing: .08em;
     }
 
     /* ============ 創業からの歩み (縦のタイムライン) ============ */
@@ -597,6 +556,14 @@
 
     .frame-wide {
       aspect-ratio: 21 / 9;
+      /* .wrap の中央寄せと左右パディングを打ち消して、画面幅いっぱい(フルブリード)に広げる。
+         50% は .wrap の内側の幅の半分、50vw は画面幅の半分なので、
+         PC(中央寄せ+28px)でもスマホ(20px)でも、ちょうど画面の左右端まで届く。
+         幅だけが変わり aspect-ratio はそのまま効くので、写真の比率は崩れない。
+         body に overflow-x: hidden があるため、スクロールバー分のはみ出しも起きない。 */
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      border-radius: 0;
     }
 
     .cards {
@@ -676,8 +643,7 @@
     }
 
     /* ============ CTA (共通コンポーネント .cta-btn に準拠) ============ */
-    .price-cta,
-    .tel-cta {
+    .price-cta {
       display: flex;
       justify-content: center;
       margin-top: 48px;
@@ -685,8 +651,7 @@
       z-index: 1;
     }
 
-    .price-cta .cta-btn,
-    .tel-cta .cta-btn {
+    .price-cta .cta-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -703,21 +668,18 @@
       transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
     }
 
-    .price-cta .cta-btn:hover,
-    .tel-cta .cta-btn:hover {
+    .price-cta .cta-btn:hover {
       transform: translateY(-2px);
       background: var(--igusa-deep);
       box-shadow: 0 8px 20px rgba(0, 0, 0, .4);
     }
 
-    .price-cta .cta-btn:active,
-    .tel-cta .cta-btn:active {
+    .price-cta .cta-btn:active {
       transform: translateY(0);
       box-shadow: 0 2px 8px rgba(0, 0, 0, .3);
     }
 
-    .price-cta .cta-btn svg,
-    .tel-cta .cta-btn svg {
+    .price-cta .cta-btn svg {
       width: 16px;
       height: 16px;
       flex: 0 0 16px;
@@ -730,6 +692,200 @@
 
     .price-cta .cta-btn:hover {
       background: var(--sumi-3);
+    }
+
+    /* ============ CRAFTSPEOPLE (左右対の二枚看板) ============ */
+    .craft-pair {
+      display: grid;
+      gap: 56px;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (min-width: 880px) {
+      .craft-pair {
+        grid-template-columns: 1fr 1fr;
+        gap: 72px;
+      }
+
+      /* 二枚を隔てる細い罫 (世代の継ぎ目) */
+      .craft-pair::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 1px;
+        background: linear-gradient(180deg, var(--gold) 0%, var(--washi-3) 55%, transparent 100%);
+      }
+    }
+
+    /* 看板の頭は細い金の罫のみ */
+    .craft-panel {
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid var(--gold);
+      padding-top: 26px;
+    }
+
+    /* 二枚を並べたときに一対として収まる正方の枠 */
+    .craft-panel .frame {
+      aspect-ratio: 1 / 1;
+      margin-bottom: 26px;
+    }
+
+    .craft-head {
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--washi-3);
+    }
+
+    .craft-role {
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: .1em;
+      color: var(--vermillion);
+    }
+
+    .craft-name {
+      margin-top: 6px;
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 21px;
+      color: var(--ink);
+    }
+
+    .craft-name rt {
+      font-family: var(--font-b);
+      font-weight: 500;
+      font-size: 11px;
+      color: var(--ink-70);
+    }
+
+    .craft-years {
+      margin-top: 6px;
+      font-family: var(--font-b);
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--ink);
+    }
+
+    /* 職人カード内の項目リスト (works.html の .case-detail と同じ型) */
+    .craft-detail {
+      list-style: none;
+      margin-top: 22px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .craft-detail li {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .craft-detail li span:first-child {
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: .1em;
+      color: var(--vermillion);
+    }
+
+    .craft-detail li span:last-child {
+      font-family: var(--font-b);
+      font-weight: 500;
+      font-size: 15.5px;
+      color: var(--ink);
+      opacity: .85;
+      line-height: 1.9;
+    }
+
+    /* ============ HP制作協力 (控えめな帯) ============ */
+    .credit {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 30px 0;
+      display: flex;
+      /* 写真の高さをテキストブロックに揃える */
+      align-items: stretch;
+      gap: 32px;
+      border-top: 1px solid var(--washi-3);
+      border-bottom: 1px solid var(--washi-3);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* 職人紹介カードより小さい写真枠。高さは名前〜リンクの範囲に合わせる */
+    .credit .frame {
+      flex: 0 0 138px;
+      width: 138px;
+      aspect-ratio: auto;
+      align-self: stretch;
+    }
+
+    .credit .frame .tag {
+      left: 8px;
+      bottom: 8px;
+      padding: 3px 6px;
+      font-size: 10.5px;
+      letter-spacing: .04em;
+      line-height: 1.5;
+    }
+
+    .credit-body {
+      min-width: 0;
+    }
+
+    .credit-name {
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 17px;
+      letter-spacing: .04em;
+      color: var(--ink);
+    }
+
+    .credit-name rt {
+      font-family: var(--font-b);
+      font-weight: 400;
+      font-size: 10px;
+      color: var(--ink-70);
+    }
+
+    .credit-quote {
+      margin-top: 12px;
+      font-family: var(--font-b);
+      font-weight: 500;
+      font-size: 14.5px;
+      line-height: 2.05;
+      color: var(--ink-70);
+      text-wrap: balance;
+    }
+
+    /* 会社名はリンクと分かる金の下線つき */
+    .credit-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 16px;
+      font-family: var(--font-b);
+      font-weight: 700;
+      font-size: 14.5px;
+      letter-spacing: .04em;
+      color: var(--ink);
+      border-bottom: 1px solid var(--gold);
+      transition: color .25s ease, border-color .25s ease;
+    }
+
+    .credit-link:hover {
+      color: var(--vermillion);
+      border-bottom-color: var(--vermillion);
+    }
+
+    .credit-link svg {
+      width: 13px;
+      height: 13px;
+      flex: 0 0 13px;
     }
 
     /* ============ FINAL CTA (TOPの .final-cta の型) ============ */
@@ -809,14 +965,6 @@
       color: var(--paper-70);
     }
 
-    .final-cta .tel-cta .cta-btn {
-      background: var(--sumi);
-    }
-
-    .final-cta .tel-cta .cta-btn:hover {
-      background: var(--sumi-3);
-    }
-
     /* ============ MOBILE (375px) ============ */
     @media (max-width: 599px) {
       section {
@@ -831,6 +979,16 @@
         /* 上余白は写真枠ラベル(右上)と重ならない位置まで確保 */
         padding: 100px 0 150px;
         min-height: calc(100svh - 76px);
+      }
+
+      /* スマホの縦長トリミングでは cover だと写真の横 35% ほどしか映らず、
+         左右に離れて立つ2人(全幅の 19%〜83%)が同時に入らない。
+         そこで横幅に合わせて縮小し、2人とも収まるようにする。
+         写真が届かない上下は 3枚目のフォールバック下地が見える。
+         暗幕グラデーション(1枚目)は auto のまま HERO 全面に掛かるので可読性は変わらない。 */
+      .hero-photo {
+        background-size: auto, 150% auto, auto;
+        background-position: 0% 0%, 50% 40%, 0% 0%;
       }
 
       .hero .sub {
@@ -851,7 +1009,12 @@
       }
 
       .belief {
-        padding: 110px 0;
+        /* PC と同じ考え方で、上下 30px ずつずらして中身の位置を保つ */
+        padding: 140px 0 80px;
+      }
+
+      #history {
+        padding-top: 15px;
       }
 
       .ph-eyebrow {
@@ -861,20 +1024,6 @@
       .ph-creed {
         margin-top: 40px;
         padding-left: 18px;
-      }
-
-      .message-sec {
-        padding: 90px 0;
-      }
-
-      .message-text {
-        /* 375pxで1文が1〜2行に収まる大きさ */
-        font-size: 18px;
-        line-height: 1.9;
-      }
-
-      .message-text span + span {
-        margin-top: .5em;
       }
 
       .mind-text {
@@ -891,6 +1040,7 @@
       }
 
       .frame-wide {
+        /* 横幅いっぱいの指定は共通ルール側で効いている。ここでは比率だけを縦長寄りに変える */
         aspect-ratio: 4 / 3;
       }
 
@@ -898,8 +1048,7 @@
         padding: 32px 24px;
       }
 
-      .price-cta .cta-btn,
-      .tel-cta .cta-btn {
+      .price-cta .cta-btn {
         width: 100%;
       }
 
@@ -950,6 +1099,34 @@
     @media (max-width: 599px) {
       .logo {
         min-width: 0;
+      }
+
+      .craft-pair {
+        gap: 44px;
+      }
+
+      .credit {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+      }
+
+      /* 縦積みでは高さの基準がなくなるため正方に戻す */
+      .credit .frame {
+        flex: 0 0 auto;
+        width: 128px;
+        aspect-ratio: 1 / 1;
+        align-self: flex-start;
+      }
+    }
+
+    /* 360px 未満では文字量が増えて .belief の高さが min-height を上回るため、
+       上下 padding をずらす方式が成立しない(中身が下へ動いてしまう)。
+       この幅だけは元の指定に戻し、余白の調整は #history 側だけで行う。 */
+    @media (max-width: 359px) {
+      .belief {
+        min-height: calc(100svh - 76px);
+        padding: 110px 0;
       }
     }
 
@@ -1373,9 +1550,8 @@
 
 <!-- ============ 1. ページ導入部 (HERO: 画像全面 + テキスト左下) ============ -->
 <section class="hero">
-  <!-- 写真枠 P-27 / 道具のカット (本番画像は後日差し替え) -->
-  <div class="hero-photo" role="img" aria-label="写真枠 P-27 / 道具のカット"><div class="grain"></div></div>
-  <span class="photo-note">写真枠 P-27 / 道具のカット</span>
+  <!-- 写真枠 P-27 / 作業場の親子 (p-058.jpg) -->
+  <div class="hero-photo" role="img" aria-label="作業場で畳を仕上げる4代目と、その手元を見守る3代目"><div class="grain"></div></div>
 
   <div class="wrap hero-inner">
     <h1 class="catch reveal">想いと歩み</h1>
@@ -1383,7 +1559,40 @@
   </div>
 </section>
 
-<!-- ============ 2. 私たちの想い (背景 washi / 画面いっぱいの見出し + フェードイン) ============ -->
+<!-- ============ 2. 強み・こだわり (背景 igusa を薄く / カード形式) ============ -->
+<section id="strength" class="igusa-soft">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">強み・こだわり</div>
+      <h2 class="section-title">倉林畳店が<br>こだわり続けていること。</h2>
+    </div>
+
+    <!-- 写真枠 P-07 -->
+    <div class="frame frame-tool frame-wide reveal">
+      <img src="../../photos/output_photos/p-07-tools-closeup.jpg" alt="畳の上に並べられた畳包丁や針など、職人の道具のアップ" loading="lazy">
+    </div>
+
+    <div class="cards">
+      <div class="card reveal">
+        <div class="hanko">壱</div>
+        <h3>和紙表に力を入れている</h3>
+        <p>和紙表を扱える職人は、実はそう多くありません。当店では確かな技術を持つ職人が、一枚一枚丁寧に施工いたします。畳表を仕入れる問屋とも長年の信頼関係があり、良質な畳表を安定してお届けできる体制を整えています。</p>
+      </div>
+      <div class="card reveal" style="--d:.12s">
+        <div class="hanko">弐</div>
+        <h3>国産のい草へのこだわり</h3>
+        <p>国産のい草は、時間とともに緑から黄金色へと美しく色を変えていきます。この経年変化こそが、畳の魅力のひとつだと考えており、できる限り国産の畳表をおすすめしています。もちろん、ご予算やご要望に応じて、他の選択肢もご提案いたします。</p>
+      </div>
+      <div class="card reveal" style="--d:.24s">
+        <div class="hanko">参</div>
+        <h3>幅広く要望に応えられる</h3>
+        <p>どのようなお部屋の形にも、正確に寸法を合わせる技術には自信があります。また、フローリングのお部屋にも「置き畳」という形でご提案できるなど、住まいの形に合わせた柔軟なご提案を心がけています。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. 私たちの想い (背景 washi / 画面いっぱいの見出し + フェードイン) ============ -->
 <section id="belief" class="washi-tex belief">
   <div class="wrap">
     <p class="ph-eyebrow reveal">私たちの想い</p>
@@ -1394,30 +1603,6 @@
       <span class="reveal" style="--d:.50s">こだわりを。</span>
     </h2>
     <p class="ph-creed reveal" style="--d:.70s">本気で仕事をした、その先にあるお客様の「きれいになった」「頼んでよかった」という言葉のために、一つひとつの仕事を丁寧に積み重ねています。</p>
-  </div>
-</section>
-
-<!-- ============ 3. 代表挨拶 (背景 sumi / 文字 washi / 左右非対称) ============ -->
-<section id="message" class="sumi-tex message-sec">
-  <div class="wrap">
-    <div class="split split-asym">
-      <div class="split-text reveal">
-        <div class="eyebrow">代表挨拶</div>
-        <div class="rule-gold"></div>
-        <p class="message-text">
-          <span>人によって考えはみんな千差万別です。</span>
-          <span>代々伝えられてきたことを大切にしつつ、</span>
-          <span>お客様の要望に幅広く答えていきたいです。</span>
-        </p>
-        <p class="signature">倉林 俊之<span class="role">代表</span></p>
-      </div>
-      <div class="reveal" style="--d:.15s">
-        <!-- 写真枠 P-26 -->
-        <div class="frame">
-          <img src="../../photos/output_photos/p-26-owner-working-smile.jpg" alt="作業場で畳を仕上げながら笑顔で話す店主" loading="lazy">
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -1463,40 +1648,7 @@
   </div>
 </section>
 
-<!-- ============ 5. 強み・こだわり (背景 igusa を薄く / カード形式) ============ -->
-<section id="strength" class="igusa-soft">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">強み・こだわり</div>
-      <h2 class="section-title">倉林畳店が<br>こだわり続けていること。</h2>
-    </div>
-
-    <!-- 写真枠 P-07 -->
-    <div class="frame frame-tool frame-wide reveal">
-      <img src="../../photos/output_photos/p-07-tools-closeup.jpg" alt="畳の上に並べられた畳包丁や針など、職人の道具のアップ" loading="lazy">
-    </div>
-
-    <div class="cards">
-      <div class="card reveal">
-        <div class="hanko">壱</div>
-        <h3>和紙表に力を入れている</h3>
-        <p>和紙表を扱える職人は、実はそう多くありません。当店では確かな技術を持つ職人が、一枚一枚丁寧に施工いたします。畳表を仕入れる問屋とも長年の信頼関係があり、良質な畳表を安定してお届けできる体制を整えています。</p>
-      </div>
-      <div class="card reveal" style="--d:.12s">
-        <div class="hanko">弐</div>
-        <h3>国産のい草へのこだわり</h3>
-        <p>国産のい草は、時間とともに緑から黄金色へと美しく色を変えていきます。この経年変化こそが、畳の魅力のひとつだと考えており、できる限り国産の畳表をおすすめしています。もちろん、ご予算やご要望に応じて、他の選択肢もご提案いたします。</p>
-      </div>
-      <div class="card reveal" style="--d:.24s">
-        <div class="hanko">参</div>
-        <h3>幅広く要望に応えられる</h3>
-        <p>どのようなお部屋の形にも、正確に寸法を合わせる技術には自信があります。また、フローリングのお部屋にも「置き畳」という形でご提案できるなど、住まいの形に合わせた柔軟なご提案を心がけています。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 6. 会社概要ページへの導線 ============ -->
+<!-- ============ 5. 会社概要ページへの導線 ============ -->
 <section class="washi-tex">
   <div class="wrap">
     <div class="price-cta reveal" style="margin-top:0;">
@@ -1508,7 +1660,107 @@
   </div>
 </section>
 
-<!-- ============ 7. お問い合わせ (TOPの .final-cta の型) ============ -->
+<!-- ============ 6. 職人紹介(店主・後継者) 左右対の二枚看板 ============ -->
+<section id="craftspeople" class="washi-tex">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow reveal">職人紹介</div>
+      <h2 class="section-title reveal" style="--d:.12s">この道を歩む職人。</h2>
+    </div>
+
+    <div class="craft-pair">
+      <!-- 左: 3代目 -->
+      <article class="craft-panel reveal" style="--d:.24s">
+        <!-- 写真枠 P-04 -->
+        <div class="frame">
+          <img src="../../photos/output_photos/p-04-owner-portrait.jpg" alt="代表・3代目 倉林俊之が作業場で笑顔で立つ人物カット" loading="lazy">
+        </div>
+        <div class="craft-head">
+          <div class="craft-role">代表・3代目</div>
+          <div class="craft-name"><ruby>倉林 俊之<rt>くらはやし としゆき</rt></ruby></div>
+          <div class="craft-years">職人歴 32年</div>
+        </div>
+        <ul class="craft-detail">
+          <li>
+            <span>代表挨拶</span>
+            <span>人によって考えはみんな千差万別です。<br>代々伝えられてきたことを大切にしつつ、<br>お客様の要望に幅広く答えていきたいです。</span>
+          </li>
+          <li>
+            <span>この仕事を選んだ理由・受け継いだ思い</span>
+            <span>継ぐことは幼少期から決めていた。<br>畳一本でやると決めていた。</span>
+          </li>
+          <li>
+            <span>仕事のこだわり・やりがい</span>
+            <span>難しい仕事ほどやりがいを感じる。<br>どんな仕事でも対応できる。</span>
+          </li>
+          <li>
+            <span>お客様への一言</span>
+            <span>妥協のない仕事で、畳と言ったら倉林と思っていただけるような施工をします。</span>
+          </li>
+          <li>
+            <span>趣味・好きなこと</span>
+            <span>釣り、ゴルフ、御朱印巡りなど、古い建物を見て回ったりするのが好き。</span>
+          </li>
+        </ul>
+      </article>
+
+      <!-- 右: 4代目 -->
+      <article class="craft-panel reveal" style="--d:.36s">
+        <!-- 写真枠 P-05 -->
+        <div class="frame">
+          <img src="../../photos/output_photos/p-099.jpg" alt="4代目 倉林尚輝が作業場で笑顔で立つ人物カット" loading="lazy" style="object-position: 35% 50%;">
+        </div>
+        <div class="craft-head">
+          <div class="craft-role">4代目・修行中</div>
+          <div class="craft-name"><ruby>倉林 尚輝<rt>くらはやし なおあき</rt></ruby></div>
+          <div class="craft-years">職人歴 4年</div>
+        </div>
+        <ul class="craft-detail">
+          <li>
+            <span>この仕事を選んだ理由・受け継いだ思い</span>
+            <span>父の背中を見て、同じ道を歩みたくなった。</span>
+          </li>
+          <li>
+            <span>仕事のこだわり・やりがい</span>
+            <span>使い古した畳などを綺麗にした時、お客さんに感謝してもらえた時、やってよかったと思う。</span>
+          </li>
+          <li>
+            <span>お客様への一言</span>
+            <span>お客様に喜んでいただける施工を心がけています。</span>
+          </li>
+          <li>
+            <span>趣味・好きなこと</span>
+            <span>出身校の野球のコーチをやっている。</span>
+          </li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7. HP制作協力 ============ -->
+<section id="credit" class="washi-tex">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">HP制作協力</div>
+    </div>
+    <div class="credit reveal" style="--d:.12s">
+      <!-- 写真枠 P-28 -->
+      <div class="frame">
+      </div>
+      <div class="credit-body">
+        <p class="credit-name"><ruby>木下凌太郎<rt>きのした りょうたろう</rt></ruby></p>
+        <p class="credit-quote">取材でお伺いするたびに感じたのは、畳への情熱と、お客様を大切にする温かさでした。これからのご活躍を心から応援しています。</p>
+        <a class="credit-link" href="https://x-edge-one.vercel.app/" target="_blank" rel="noopener noreferrer">
+          株式会社X-EDGE
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8. お問い合わせ (TOPの .final-cta の型) ============ -->
 <section id="contact" class="igusa-tex final-cta">
   <div class="wrap">
     <p class="catch2 reveal">畳のことなら<br>なんでもお答えさせて<br>いただきます。</p>
@@ -1519,20 +1771,10 @@
       <span class="number">0274-52-2966</span>
       <span class="hours">受付時間 8時〜20時</span>
     </a>
-
-    <!-- CTA(3) 電話ボタン -->
-    <div class="tel-cta reveal" style="--d:.36s">
-      <a class="cta-btn" href="tel:0274-52-2966" aria-label="電話をかける">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
-        </svg>
-        <span>お問い合わせ</span>
-      </a>
-    </div>
   </div>
 </section>
 
-<!-- ============ 8. FOOTER (共通コンポーネント footer.html) ============ -->
+<!-- ============ 9. FOOTER (共通コンポーネント footer.html) ============ -->
 <footer>
   <div class="footer-wrap">
     <!-- Footer Grid -->
@@ -1567,7 +1809,6 @@
           <li><a href="company.html">会社概要</a></li>
           <li><a href="company-story.html">想いと歩み</a></li>
           <li><a href="contact.html#access">アクセス</a></li>
-          <li><a href="contact.html">お問い合わせ</a></li>
         </ul>
       </div>
     </div>

@@ -229,6 +229,8 @@
       margin-top: 34px;
       display: grid;
       gap: 14px;
+      /* 項目名と年数だけの短い内容なので、幅を内容量に合わせて詰める */
+      max-width: 300px;
     }
 
     .tatami-diagram div {
@@ -320,6 +322,33 @@
       width: 88px;
       color: var(--vermillion);
       font-weight: 700;
+    }
+
+    /* ============ 「畳とは」構造イラスト ============ */
+    /* .wrap 直下のブロック。幅は .reasons(3枚のカード)の外形に対する75%で、常にカード幅を超えない */
+    /* 注: 目安時期テーブルの .tatami-diagram とは別物なので、クラス名を分けている */
+    .tatami-structure {
+      width: 75%;
+      max-width: 840px;
+      margin: 0 auto 28px;
+      border: 1px solid var(--washi-3);
+      background: var(--washi);
+      position: relative;
+      z-index: 1;
+    }
+
+    .tatami-structure img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    /* スマホではカード幅自体が十分に狭いため、これ以上縮めず横幅に合わせる */
+    @media (max-width: 599px) {
+      .tatami-structure {
+        width: 100%;
+        margin-bottom: 20px;
+      }
     }
 
     /* ============ STRENGTHS (REASON CARDS) ============ */
@@ -561,13 +590,8 @@
         padding: 26px 22px;
       }
 
-      .tatami-diagram div {
-        flex-direction: column;
-        gap: 4px;
-      }
-
-      .tatami-diagram span:last-child {
-        text-align: left;
+      .tatami-diagram {
+        max-width: 100%;
       }
 
       .price-cta .cta-btn {
@@ -1063,6 +1087,11 @@
       <h2 class="section-title reveal">畳とは</h2>
       <p class="lead lead-mincho reveal" style="--d:.12s">畳は、大きく3つの部材でできています。</p>
     </div>
+    <figure class="tatami-structure reveal" style="--d:.18s">
+      <img src="../../photos/output_photos/p-113.jpg"
+           alt="畳の断面構造。表面の畳表（たたみおもて）、芯となる畳床（たたみどこ）、端を保護する畳縁（たたみべり）の3つの部材からなることを示すイラスト"
+           width="1536" height="1024" loading="lazy" decoding="async">
+    </figure>
     <div class="reasons">
       <div class="reason reveal" style="--d:.24s">
         <h3>畳表（たたみおもて）</h3>
@@ -1311,7 +1340,6 @@
           <li><a href="company.html">会社概要</a></li>
           <li><a href="company-story.html">想いと歩み</a></li>
           <li><a href="contact.html#access">アクセス</a></li>
-          <li><a href="contact.html">お問い合わせ</a></li>
         </ul>
       </div>
     </div>

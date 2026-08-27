@@ -242,113 +242,6 @@
       line-height: 1.7;
     }
 
-    /* ============ CRAFTSPEOPLE (左右対の二枚看板) ============ */
-    .craft-pair {
-      display: grid;
-      gap: 56px;
-      position: relative;
-      z-index: 1;
-    }
-
-    @media (min-width: 880px) {
-      .craft-pair {
-        grid-template-columns: 1fr 1fr;
-        gap: 72px;
-      }
-
-      /* 二枚を隔てる細い罫 (世代の継ぎ目) */
-      .craft-pair::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 50%;
-        width: 1px;
-        background: linear-gradient(180deg, var(--gold) 0%, var(--washi-3) 55%, transparent 100%);
-      }
-    }
-
-    /* 看板の頭は細い金の罫のみ */
-    .craft-panel {
-      display: flex;
-      flex-direction: column;
-      border-top: 1px solid var(--gold);
-      padding-top: 26px;
-    }
-
-    /* 二枚を並べたときに一対として収まる正方の枠 */
-    .craft-panel .frame {
-      aspect-ratio: 1 / 1;
-      margin-bottom: 26px;
-    }
-
-    .craft-head {
-      padding-bottom: 20px;
-      border-bottom: 1px solid var(--washi-3);
-    }
-
-    .craft-role {
-      font-family: var(--font-d);
-      font-weight: 700;
-      font-size: 14px;
-      letter-spacing: .1em;
-      color: var(--vermillion);
-    }
-
-    .craft-name {
-      margin-top: 6px;
-      font-family: var(--font-d);
-      font-weight: 700;
-      font-size: 21px;
-      color: var(--ink);
-    }
-
-    .craft-name rt {
-      font-family: var(--font-b);
-      font-weight: 500;
-      font-size: 11px;
-      color: var(--ink-70);
-    }
-
-    .craft-years {
-      margin-top: 6px;
-      font-family: var(--font-b);
-      font-weight: 700;
-      font-size: 16px;
-      color: var(--ink);
-    }
-
-    /* 職人カード内の項目リスト (works.html の .case-detail と同じ型) */
-    .craft-detail {
-      list-style: none;
-      margin-top: 22px;
-      display: grid;
-      gap: 18px;
-    }
-
-    .craft-detail li {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .craft-detail li span:first-child {
-      font-family: var(--font-d);
-      font-weight: 700;
-      font-size: 14px;
-      letter-spacing: .1em;
-      color: var(--vermillion);
-    }
-
-    .craft-detail li span:last-child {
-      font-family: var(--font-b);
-      font-weight: 500;
-      font-size: 15.5px;
-      color: var(--ink);
-      opacity: .85;
-      line-height: 1.9;
-    }
-
     /* ============ COMPANY INFO (罫線で区切った台帳形式) ============ */
     .info-table {
       width: 100%;
@@ -404,93 +297,6 @@
       font-size: 10.5px;
       letter-spacing: .04em;
       color: var(--ink-70);
-    }
-
-    /* ============ HP制作協力 (控えめな帯) ============ */
-    .credit {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 30px 0;
-      display: flex;
-      /* 写真の高さをテキストブロックに揃える */
-      align-items: stretch;
-      gap: 32px;
-      border-top: 1px solid var(--washi-3);
-      border-bottom: 1px solid var(--washi-3);
-      position: relative;
-      z-index: 1;
-    }
-
-    /* 職人紹介カードより小さい写真枠。高さは名前〜リンクの範囲に合わせる */
-    .credit .frame {
-      flex: 0 0 138px;
-      width: 138px;
-      aspect-ratio: auto;
-      align-self: stretch;
-    }
-
-    .credit .frame .tag {
-      left: 8px;
-      bottom: 8px;
-      padding: 3px 6px;
-      font-size: 10.5px;
-      letter-spacing: .04em;
-      line-height: 1.5;
-    }
-
-    .credit-body {
-      min-width: 0;
-    }
-
-    .credit-name {
-      font-family: var(--font-d);
-      font-weight: 700;
-      font-size: 17px;
-      letter-spacing: .04em;
-      color: var(--ink);
-    }
-
-    .credit-name rt {
-      font-family: var(--font-b);
-      font-weight: 400;
-      font-size: 10px;
-      color: var(--ink-70);
-    }
-
-    .credit-quote {
-      margin-top: 12px;
-      font-family: var(--font-b);
-      font-weight: 500;
-      font-size: 14.5px;
-      line-height: 2.05;
-      color: var(--ink-70);
-      text-wrap: balance;
-    }
-
-    /* 会社名はリンクと分かる金の下線つき */
-    .credit-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      margin-top: 16px;
-      font-family: var(--font-b);
-      font-weight: 700;
-      font-size: 14.5px;
-      letter-spacing: .04em;
-      color: var(--ink);
-      border-bottom: 1px solid var(--gold);
-      transition: color .25s ease, border-color .25s ease;
-    }
-
-    .credit-link:hover {
-      color: var(--vermillion);
-      border-bottom-color: var(--vermillion);
-    }
-
-    .credit-link svg {
-      width: 13px;
-      height: 13px;
-      flex: 0 0 13px;
     }
 
     /* ============ CTA (共通コンポーネント .cta-btn に準拠) ============ */
@@ -689,10 +495,6 @@
         max-width: 100%;
       }
 
-      .craft-pair {
-        gap: 44px;
-      }
-
       /* 台帳は項目名を値の上に積む */
       .info-table tr {
         display: block;
@@ -718,20 +520,6 @@
 
       .info-table td {
         padding-bottom: 15px;
-      }
-
-      .credit {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 20px;
-      }
-
-      /* 縦積みでは高さの基準がなくなるため正方に戻す */
-      .credit .frame {
-        flex: 0 0 auto;
-        width: 128px;
-        aspect-ratio: 1 / 1;
-        align-self: flex-start;
       }
 
       .price-cta .cta-btn,
@@ -1214,81 +1002,7 @@
   </div>
 </section>
 
-<!-- ============ 2. 職人紹介(店主・後継者) 左右対の二枚看板 ============ -->
-<section id="craftspeople" class="washi-tex">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow reveal">職人紹介</div>
-      <h2 class="section-title reveal" style="--d:.12s">この道を歩む職人。</h2>
-    </div>
-
-    <div class="craft-pair">
-      <!-- 左: 3代目 -->
-      <article class="craft-panel reveal" style="--d:.24s">
-        <!-- 写真枠 P-04 -->
-        <div class="frame">
-          <img src="../../photos/output_photos/p-04-owner-portrait.jpg" alt="代表・3代目 倉林俊之が作業場で笑顔で立つ人物カット" loading="lazy">
-        </div>
-        <div class="craft-head">
-          <div class="craft-role">代表・3代目</div>
-          <div class="craft-name"><ruby>倉林 俊之<rt>くらはやし としゆき</rt></ruby></div>
-          <div class="craft-years">職人歴 32年</div>
-        </div>
-        <ul class="craft-detail">
-          <li>
-            <span>この仕事を選んだ理由・受け継いだ思い</span>
-            <span>継ぐことは幼少期から決めていた。<br>畳一本でやると決めていた。</span>
-          </li>
-          <li>
-            <span>仕事のこだわり・やりがい</span>
-            <span>難しい仕事ほどやりがいを感じる。<br>どんな仕事でも対応できる。</span>
-          </li>
-          <li>
-            <span>お客様への一言</span>
-            <span>妥協のない仕事で、畳と言ったら倉林と思っていただけるような施工をします。</span>
-          </li>
-          <li>
-            <span>趣味・好きなこと</span>
-            <span>釣り、ゴルフ、御朱印巡りなど、古い建物を見て回ったりするのが好き。</span>
-          </li>
-        </ul>
-      </article>
-
-      <!-- 右: 4代目 -->
-      <article class="craft-panel reveal" style="--d:.36s">
-        <!-- 写真枠 P-05 -->
-        <div class="frame">
-          <img src="../../photos/output_photos/p-05-successor-portrait.jpg" alt="4代目 倉林尚輝が作業場で笑顔で立つ人物カット" loading="lazy">
-        </div>
-        <div class="craft-head">
-          <div class="craft-role">4代目・修行中</div>
-          <div class="craft-name"><ruby>倉林 尚輝<rt>くらはやし なおあき</rt></ruby></div>
-          <div class="craft-years">職人歴 4年</div>
-        </div>
-        <ul class="craft-detail">
-          <li>
-            <span>この仕事を選んだ理由・受け継いだ思い</span>
-            <span>父の背中を見て、同じ道を歩みたくなった。</span>
-          </li>
-          <li>
-            <span>仕事のこだわり・やりがい</span>
-            <span>使い古した畳などを綺麗にした時、お客さんに感謝してもらえた時、やってよかったと思う。</span>
-          </li>
-          <li>
-            <span>お客様への一言</span>
-            <span>お客様に喜んでいただける施工を心がけています。</span>
-          </li>
-          <li>
-            <span>趣味・好きなこと</span>
-            <span>出身校の野球のコーチをやっている。</span>
-          </li>
-        </ul>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 3. 会社概要(基本情報) ============ -->
+<!-- ============ 2. 会社概要(基本情報) ============ -->
 <section id="info" class="washi-tex">
   <div class="wrap">
     <div class="section-head">
@@ -1322,7 +1036,7 @@
   </div>
 </section>
 
-<!-- ============ 4. 畳についてページへの導線 ============ -->
+<!-- ============ 3. 畳についてページへの導線 ============ -->
 <section class="washi-tex">
   <div class="wrap">
     <div class="price-cta reveal" style="margin-top:0;">
@@ -1334,30 +1048,7 @@
   </div>
 </section>
 
-<!-- ============ 5. HP制作協力 ============ -->
-<section id="credit" class="washi-tex">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="eyebrow">HP制作協力</div>
-    </div>
-    <div class="credit reveal" style="--d:.12s">
-      <!-- 写真枠 P-28 -->
-      <div class="frame">
-        <div class="tag">写真枠 P-28</div>
-      </div>
-      <div class="credit-body">
-        <p class="credit-name"><ruby>木下凌太郎<rt>きのした りょうたろう</rt></ruby></p>
-        <p class="credit-quote">取材でお伺いするたびに感じたのは、畳への情熱と、お客様を大切にする温かさでした。これからのご活躍を心から応援しています。</p>
-        <a class="credit-link" href="https://x-edge-one.vercel.app/" target="_blank" rel="noopener noreferrer">
-          株式会社X-EDGE
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 6. お問い合わせ (TOPの .final-cta の型) ============ -->
+<!-- ============ 4. お問い合わせ (TOPの .final-cta の型) ============ -->
 <section id="contact" class="igusa-tex final-cta">
   <div class="wrap">
     <p class="catch2 reveal">畳のことなら<br>なんでもお答えさせて<br>いただきます。</p>
@@ -1381,7 +1072,7 @@
   </div>
 </section>
 
-<!-- ============ 7. FOOTER (共通コンポーネント footer.html) ============ -->
+<!-- ============ 5. FOOTER (共通コンポーネント footer.html) ============ -->
 <footer>
   <div class="footer-wrap">
     <!-- Footer Grid -->
@@ -1416,7 +1107,6 @@
           <li><a href="company.html">会社概要</a></li>
           <li><a href="company-story.html">想いと歩み</a></li>
           <li><a href="contact.html#access">アクセス</a></li>
-          <li><a href="contact.html">お問い合わせ</a></li>
         </ul>
       </div>
     </div>

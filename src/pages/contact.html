@@ -498,32 +498,6 @@
       outline-offset: 3px;
     }
 
-    /* ============ 7. アクセス ============ */
-    .access {
-      max-width: 720px;
-      margin: 0 auto;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
-
-    .access-line {
-      font-family: var(--font-d);
-      font-weight: 700;
-      font-size: clamp(17px, 2.2vw, 22px);
-      letter-spacing: .06em;
-      color: var(--ink);
-    }
-
-    .access-addr {
-      margin-top: 14px;
-      font-family: var(--font-b);
-      font-weight: 500;
-      font-size: 15px;
-      line-height: 1.9;
-      color: var(--ink-70);
-    }
-
     /* ============ 8. 信頼ブロック ============ */
     .trust {
       display: grid;
@@ -544,13 +518,9 @@
       aspect-ratio: 4 / 5;
     }
 
-    .trust-years {
-      font-family: var(--font-d);
-      font-weight: 700;
-      font-size: 14px;
-      letter-spacing: .32em;
-      text-indent: .32em;
-      color: var(--vermillion);
+    /* 「創業83年」を削除したことで先頭要素になったため、上の余白を打ち消す */
+    .trust-copy:first-child {
+      margin-top: 0;
     }
 
     .trust-copy {
@@ -1307,24 +1277,6 @@
   </div>
 </section>
 
-<!-- ============ 7. アクセス ============ -->
-<section id="access" class="washi-tex">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">アクセス</div>
-    </div>
-    <div class="access">
-      <p class="access-line reveal">丹荘駅から車で15分</p>
-      <div class="price-cta reveal" style="--d:.12s">
-        <a class="cta-btn" href="https://www.google.com/maps/place/%E5%80%89%E6%9E%97%E7%95%B3%E5%BA%97/@36.171459,139.0607641,17z/data=!3m1!4b1!4m6!3m5!1s0x601ec05dda129be5:0x60b5bc5057f51a4!8m2!3d36.171459!4d139.063339!16s%2Fg%2F1tfjfmjk?entry=ttu&amp;g_ep=EgoyMDI2MDcyMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">
-          Googleマップで見る
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ============ 8. 信頼ブロック (共通・全ページ下部) ============ -->
 <section id="trust" class="washi-tex">
   <div class="wrap">
@@ -1332,11 +1284,9 @@
       <div class="reveal">
         <!-- 写真枠 P-06 -->
         <div class="frame">
-          <div class="tag">写真枠 P-06 / 職人の写真<br>(本番画像は後日差し替え)</div>
         </div>
       </div>
       <div class="reveal" style="--d:.14s">
-        <p class="trust-years">創業83年</p>
         <p class="trust-copy">まずはお気軽にご相談ください</p>
         <div class="trust-actions">
           <a class="text-link" href="price.html">畳の種類・料金を見る</a>
@@ -1382,7 +1332,6 @@
           <li><a href="company.html">会社概要</a></li>
           <li><a href="company-story.html">想いと歩み</a></li>
           <li><a href="#access">アクセス</a></li>
-          <li><a href="contact.html">お問い合わせ</a></li>
         </ul>
       </div>
     </div>

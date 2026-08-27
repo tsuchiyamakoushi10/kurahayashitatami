@@ -109,6 +109,48 @@
       margin-bottom: 0;
     }
 
+    /* ============ PAIN POINTS ============ */
+    .pain-list {
+      list-style: none;
+      display: grid;
+      gap: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pain-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 22px;
+      padding: 26px 0;
+      border-bottom: 1px solid var(--washi-3);
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: clamp(17px, 2.2vw, 22px);
+      color: var(--ink);
+    }
+
+    .pain-list li:first-child {
+      border-top: 1px solid var(--washi-3);
+    }
+
+    .pain-list .mark {
+      color: var(--vermillion);
+      font-size: 22px;
+      flex: none;
+    }
+
+    .pain-resolve {
+      margin-top: 44px;
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: clamp(20px, 2.8vw, 28px);
+      color: var(--vermillion);
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
     /* ============ TYPES ============ */
     .type-block {
       display: grid;
@@ -925,6 +967,24 @@
   </div>
 </section>
 
+<!-- ============ PAIN POINTS ============ -->
+<section class="washi-tex">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow reveal">こんなことに困っていませんか</div>
+      <h2 class="section-title reveal" style="--d:.12s">畳の"気になる"を、<br>そのままにしていませんか。</h2>
+    </div>
+
+    <ul class="pain-list">
+      <li style="--d:.24s"><span class="mark reveal">・</span>畳が色あせてお部屋が古く見える</li>
+      <li style="--d:.36s"><span class="mark reveal">・</span>費用や張り替え時期が分からず、そのままになっている</li>
+      <li style="--d:.48s"><span class="mark reveal">・</span>子どもが安心して遊べる部屋にしたい</li>
+    </ul>
+
+    <p class="pain-resolve reveal" style="--d:.60s">そのお悩み、畳を替えることで解決できます。</p>
+  </div>
+</section>
+
 <!-- ============ TYPES ============ -->
 <section id="types" class="washi-tex">
   <div class="wrap">
@@ -935,9 +995,9 @@
       <div class="type-text">
         <h3 class="type-name">国産い草畳</h3>
         <p class="type-desc">・香りが良く、色の変化を楽しめる<br>・青から茶色に変化していく</p>
-        <div class="type-label">こんな人におすすめ</div>
-        <p class="type-desc">・畳の香りを感じたい人<br>・和を感じたい方</p>
-        <div class="type-price">12000~20000  /1畳</div>
+        <div class="type-label">こんな方におすすめ</div>
+        <p class="type-desc">・畳の香りを感じたい方<br>・和を感じたい方</p>
+        <div class="type-price">12,000〜20,000円 /1畳</div>
       </div>
       <div class="type-media">
         <!-- 写真枠 P-08 / 国産い草畳 -->
@@ -949,9 +1009,9 @@
       <div class="type-text">
         <h3 class="type-name">和紙表</h3>
         <p class="type-desc">・色の変化がない<br>・傷に強い<br>・シミになりにくくメンテナンスが楽<br>・カラーが選べる</p>
-        <div class="type-label">こんな人におすすめ</div>
-        <p class="type-desc">・ペットを飼っている人<br>・小さい子がいる人<br>・洋風な家にマッチさせたい人</p>
-        <div class="type-price">12000~25000 /1畳</div>
+        <div class="type-label">こんな方におすすめ</div>
+        <p class="type-desc">・ペットを飼っている方<br>・小さい子がいる方<br>・洋風な家にマッチさせたい方</p>
+        <div class="type-price">12,000〜25,000円 /1畳</div>
       </div>
       <div class="type-media">
         <div class="photo-scroller" id="washiPhotos" tabindex="0" aria-label="和紙表のカラーバリエーション（横スクロール）">
@@ -978,7 +1038,7 @@
         </div>
       </div>
     </div>
-    <p class="types-note reveal" style="--d:.36s">そのほかも要望次第で対応可能</p>
+    <p class="types-note reveal" style="--d:.36s">そのほかも、ご要望に応じて対応いたします。</p>
   </div>
 </section>
 
@@ -993,8 +1053,8 @@
         <div class="case-body">
           <div class="cat">裏返し</div>
           <ul class="case-detail">
-            <li><span>内容</span><span>畳表を裏返して再利用（3~8年で表面が擦れてきて服に着き始めたら　）</span></li>
-            <li><span>料金</span><span>1律4500円+税</span></li>
+            <li><span>内容</span><span>畳表を裏返して再利用（3〜8年で表面が擦れてきて服に付き始めたら）</span></li>
+            <li><span>料金</span><span>一律4,500円+税</span></li>
           </ul>
         </div>
       </div>
@@ -1003,7 +1063,7 @@
           <div class="cat">表替え</div>
           <ul class="case-detail">
             <li><span>内容</span><span>畳の表とへりを新しくする（裏返し後また同じような状況になってきたら）</span></li>
-            <li><span>料金</span><span>国産7000~15000+税</span></li>
+            <li><span>料金</span><span>国産 7,000〜15,000円+税</span></li>
           </ul>
         </div>
       </div>
@@ -1011,8 +1071,8 @@
         <div class="case-body">
           <div class="cat">新調</div>
           <ul class="case-detail">
-            <li><span>内容</span><span>畳を新しく作り替える<br>畳を入れたい　畳が古いので変えたい</span></li>
-            <li><span>料金</span><span>国産い草畳 12,000〜20,000円+税 /1畳<br>和紙表 12,000〜25,000円+税 /1畳<br>作業代は一畳買う値段に込み込み</span></li>
+            <li><span>内容</span><span>畳を新しく作り替える</span></li>
+            <li><span>料金</span><span>国産い草畳 12,000〜20,000円+税 /1畳<br>和紙表 12,000〜25,000円+税 /1畳<br>施工費は畳表の価格に含んでおります</span></li>
           </ul>
         </div>
       </div>
@@ -1020,8 +1080,8 @@
         <div class="case-body">
           <div class="cat">和紙表の畳</div>
           <ul class="case-detail">
-            <li><span>内容</span><span>扱える職人が少ない</span></li>
-            <li><span>料金</span><span>12,000〜25,000円+税 /1畳<br>作業代は一畳買う値段に込み込み</span></li>
+            <li><span>内容</span><span>扱える職人が少ない畳です。</span></li>
+            <li><span>料金</span><span>12,000〜25,000円+税 /1畳<br>施工費は畳表の価格に含んでおります</span></li>
           </ul>
         </div>
       </div>
@@ -1093,7 +1153,6 @@
           <li><a href="company.html">会社概要</a></li>
           <li><a href="company-story.html">想いと歩み</a></li>
           <li><a href="contact.html#access">アクセス</a></li>
-          <li><a href="contact.html">お問い合わせ</a></li>
         </ul>
       </div>
     </div>
