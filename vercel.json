@@ -1,0 +1,39 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/", "destination": "/src/pages/top.html" },
+    { "source": "/tatami", "destination": "/src/pages/tatami.html" },
+    { "source": "/works", "destination": "/src/pages/works.html" },
+    { "source": "/price", "destination": "/src/pages/price.html" },
+    { "source": "/company", "destination": "/src/pages/company.html" },
+    { "source": "/company-story", "destination": "/src/pages/company-story.html" },
+    { "source": "/contact", "destination": "/src/pages/contact.html" }
+  ],
+  "redirects": [
+    { "source": "/top", "destination": "/", "permanent": true },
+    { "source": "/top.html", "destination": "/", "permanent": true },
+    { "source": "/tatami.html", "destination": "/tatami", "permanent": true },
+    { "source": "/works.html", "destination": "/works", "permanent": true },
+    { "source": "/price.html", "destination": "/price", "permanent": true },
+    { "source": "/company.html", "destination": "/company", "permanent": true },
+    { "source": "/company-story.html", "destination": "/company-story", "permanent": true },
+    { "source": "/contact.html", "destination": "/contact", "permanent": true },
+    { "source": "/src/pages/top.html", "destination": "/", "permanent": true },
+    { "source": "/src/pages/:page.html", "destination": "/:page", "permanent": true }
+  ],
+  "headers": [
+    {
+      "source": "/photos/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/design/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=3600" }
+      ]
+    }
+  ]
+}
