@@ -9,3 +9,7 @@ npm-debug.log*
 .DS_Store
 Thumbs.db
 *.swp
+
+# スクリーンショット（作業用・公開不要）
+スクリーンショット*.png
+Screenshot*.png
