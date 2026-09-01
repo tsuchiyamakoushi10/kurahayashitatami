@@ -1795,6 +1795,101 @@
       opacity: .75;
       text-align: center;
     }
+
+    /* ============ BUTTON HOVER (い草色→黄金色 / それ以外→い草色) ============ */
+    /* 色が滑らかに変わるよう transition に color / border-color を追加 */
+    .contact-btn {
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease;
+    }
+
+    /* い草色のボタン → 黄金色（文字は視認性のため墨色へ） */
+    .contact-btn:hover {
+      background: var(--gold);
+      color: var(--sumi);
+    }
+
+    /* ハンバーガーメニュー（枠線のみ）→ い草色 */
+    .menu-btn {
+      transition: background .25s ease, border-color .25s ease;
+    }
+
+    .menu-btn:hover {
+      background: var(--igusa);
+      border-color: var(--igusa);
+    }
+
+    /* Instagram（ブランドのグラデーション）→ い草色をフェードで重ねる */
+    .insta-btn {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .insta-btn::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: var(--igusa);
+      opacity: 0;
+      transition: opacity .28s ease;
+    }
+
+    .insta-btn:hover::after {
+      opacity: 1;
+    }
+
+    .insta-btn svg,
+    .insta-btn span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .tatami-cta .cta-btn,
+    .price-cta .cta-btn,
+    .crafts-cta .cta-btn {
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease;
+    }
+
+    /* 墨色のCTAボタン → い草色 */
+    .tatami-cta .cta-btn:hover,
+    .price-cta .cta-btn:hover,
+    .crafts-cta .cta-btn:hover {
+      background: var(--igusa);
+      color: var(--washi);
+    }
+
+    /* 枠線のみのボタン → い草色 */
+    .cases-cta .btn-ghost,
+    .belief-cta .btn-ghost,
+    .btn-ghost {
+      transition: transform .25s ease, border-color .25s ease, background .25s ease, color .25s ease;
+    }
+
+    .cases-cta .btn-ghost:hover,
+    .belief-cta .btn-ghost:hover,
+    .btn-ghost:hover {
+      background: var(--igusa);
+      border-color: var(--igusa);
+      color: var(--washi);
+    }
+
+    /* 導入事例カルーセルの矢印 → い草色 */
+    .case-nav {
+      transition: background .25s ease, border-color .25s ease, transform .25s ease, color .25s ease;
+    }
+
+    .case-nav:hover {
+      background: var(--igusa);
+      border-color: var(--igusa);
+      color: var(--washi);
+    }
+
+    /* 導入事例カルーセルのドット → い草色 */
+    .case-dot:hover::before {
+      background: var(--igusa);
+      border-color: var(--igusa);
+    }
+
   </style>
 </head>
 <body>
@@ -1814,7 +1909,7 @@
       <ul>
         <li><a href="#">TOP</a></li>
         <li><a href="company-story.html">想いと歩み</a></li>
-        <li><a href="price.html">サービス内容</a></li>
+        <li><a href="service.html">サービス内容</a></li>
         <li><a href="works.html">導入事例</a></li>
         <li><a href="tatami.html">畳について</a></li>
         <li><a href="company.html">会社概要</a></li>
@@ -1847,7 +1942,7 @@
   <ul>
     <li><a href="#">TOP</a></li>
     <li><a href="company-story.html">想いと歩み</a></li>
-    <li><a href="price.html">サービス内容</a></li>
+    <li><a href="service.html">サービス内容</a></li>
     <li><a href="works.html">導入事例</a></li>
     <li><a href="tatami.html">畳について</a></li>
     <li><a href="company.html">会社概要</a></li>

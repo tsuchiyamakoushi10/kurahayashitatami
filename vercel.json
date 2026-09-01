@@ -23,6 +23,18 @@
       "destination": "/src/pages/price.html"
     },
     {
+      "source": "/service",
+      "destination": "/src/pages/service.html"
+    },
+    {
+      "source": "/concerns",
+      "destination": "/src/pages/concerns.html"
+    },
+    {
+      "source": "/types",
+      "destination": "/src/pages/types.html"
+    },
+    {
       "source": "/company",
       "destination": "/src/pages/company.html"
     },
@@ -59,6 +71,21 @@
     {
       "source": "/price.html",
       "destination": "/price",
+      "permanent": true
+    },
+    {
+      "source": "/service.html",
+      "destination": "/service",
+      "permanent": true
+    },
+    {
+      "source": "/concerns.html",
+      "destination": "/concerns",
+      "permanent": true
+    },
+    {
+      "source": "/types.html",
+      "destination": "/types",
       "permanent": true
     },
     {

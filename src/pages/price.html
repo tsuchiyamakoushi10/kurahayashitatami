@@ -101,7 +101,9 @@
 
     /* ============ PAGE TITLE ============ */
     .page-head {
-      padding-top: 140px;
+      /* 見出しを置かないため、タブ上端が従来の見出し上端と同じ位置(140px)に来るよう
+         タブ側の上余白 44px を差し引く */
+      padding-top: 96px;
       padding-bottom: 0;
     }
 
@@ -109,210 +111,62 @@
       margin-bottom: 0;
     }
 
-    /* ============ PAIN POINTS ============ */
-    .pain-list {
+    /* ============ SERVICE TABS ============ */
+    .service-tabs {
+      position: relative;
+      padding: 44px 0 0;
+    }
+
+    .service-tabs ul {
       list-style: none;
-      display: grid;
-      gap: 0;
-      position: relative;
-      z-index: 1;
-    }
-
-    .pain-list li {
       display: flex;
-      align-items: baseline;
-      gap: 22px;
-      padding: 26px 0;
       border-bottom: 1px solid var(--washi-3);
-      font-family: var(--font-d);
-      font-weight: 700;
-      font-size: clamp(17px, 2.2vw, 22px);
-      color: var(--ink);
-    }
-
-    .pain-list li:first-child {
-      border-top: 1px solid var(--washi-3);
-    }
-
-    .pain-list .mark {
-      color: var(--vermillion);
-      font-size: 22px;
-      flex: none;
-    }
-
-    .pain-resolve {
-      margin-top: 44px;
-      font-family: var(--font-d);
-      font-weight: 700;
-      font-size: clamp(20px, 2.8vw, 28px);
-      color: var(--vermillion);
-      text-align: center;
       position: relative;
       z-index: 1;
     }
 
-    /* ============ TYPES ============ */
-    .type-block {
-      display: grid;
-      gap: 40px;
-      align-items: center;
-      position: relative;
-      z-index: 1;
+    .service-tabs li {
+      flex: 1;
     }
 
-    @media (min-width: 880px) {
-      .type-block {
-        grid-template-columns: 1fr 1fr;
-        gap: 80px;
-      }
-    }
-
-    .type-block + .type-block {
-      margin-top: 90px;
-    }
-
-    .type-name {
-      font-family: var(--font-d);
-      font-weight: 700;
-      font-size: clamp(22px, 2.6vw, 28px);
-      color: var(--ink);
-    }
-
-    .type-desc {
-      margin-top: 16px;
-      font-family: var(--font-b);
-      font-weight: 400;
-      font-size: 15.5px;
-      color: var(--ink-70);
-      line-height: 1.9;
-    }
-
-    .type-label {
-      margin-top: 22px;
-      font-family: var(--font-d);
-      font-weight: 700;
-      font-size: 14px;
-      letter-spacing: .1em;
-      color: var(--vermillion);
-    }
-
-    .type-price {
-      margin-top: 26px;
-      font-family: var(--font-b);
-      font-weight: 700;
-      font-size: 18px;
-      letter-spacing: .03em;
-      color: var(--vermillion);
-    }
-
-    .frame {
-      position: relative;
-      aspect-ratio: 4 / 5;
-      border-radius: 2px;
-      overflow: hidden;
-      background: linear-gradient(150deg, var(--gold) 0%, var(--sumi-3) 40%, var(--sumi) 100%);
-    }
-
-    /* 本番写真: 枠の比率のままトリミング表示 */
-    .frame > img {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .service-tabs a {
       display: block;
-    }
-
-    .frame::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      opacity: .5;
-      mix-blend-mode: overlay;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3'/></filter><rect width='100%25' height='100%25' filter='url(%23g)'/></svg>");
-    }
-
-    .frame-tatami {
-      background: linear-gradient(155deg, var(--igusa) 0%, var(--igusa-deep) 45%, var(--sumi) 100%);
-    }
-
-    .frame-washi {
-      background: linear-gradient(160deg, var(--washi-3) 0%, var(--gold) 55%, var(--sumi-3) 100%);
-    }
-
-    /* 左=写真 / 右=説明（スマホでは縦積み） */
-    .type-media {
-      order: -1;
-    }
-
-    .photo-scroller {
-      display: flex;
-      gap: 12px;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
-      padding-bottom: 12px;
-    }
-
-    .photo-scroller .frame {
-      flex: 0 0 100%;
-      scroll-snap-align: start;
-    }
-
-    .photo-scroller:focus-visible {
-      outline: 2px solid var(--gold);
-      outline-offset: 4px;
-    }
-
-    .carousel-nav {
-      display: flex;
-      gap: 12px;
-      margin-top: 16px;
-    }
-
-    .carousel-btn {
-      width: 46px;
-      height: 46px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid var(--washi-3);
-      border-radius: 2px;
-      color: var(--ink);
-      transition: border-color .25s ease, color .25s ease, opacity .25s ease;
-    }
-
-    .carousel-btn:hover {
-      border-color: var(--gold);
-      color: var(--gold);
-    }
-
-    .carousel-btn:focus-visible {
-      outline: 2px solid var(--gold);
-      outline-offset: 3px;
-    }
-
-    .carousel-btn[disabled] {
-      opacity: .35;
-      cursor: default;
-    }
-
-    .carousel-btn svg {
-      width: 18px;
-      height: 18px;
-    }
-
-    .types-note {
-      margin-top: 70px;
+      margin-bottom: -1px;
+      padding: 16px 6px;
+      border-bottom: 2px solid transparent;
+      text-align: center;
+      white-space: nowrap;
       font-family: var(--font-d);
       font-weight: 700;
-      font-size: clamp(20px, 2.8vw, 28px);
+      font-size: clamp(12px, 3.1vw, 18px);
+      color: var(--ink-70);
+      transition: color .25s ease, border-color .25s ease;
+    }
+
+    .service-tabs a:hover {
+      color: var(--ink);
+    }
+
+    .service-tabs a[aria-current="page"] {
       color: var(--vermillion);
-      text-align: center;
-      position: relative;
-      z-index: 1;
+      border-bottom-color: var(--vermillion);
+    }
+
+    @media (max-width: 599px) {
+      /* タブが4つになるとスマホ幅では1行に収まらないため、折り返しを許可して縦中央に揃える */
+      .service-tabs li {
+        display: flex;
+      }
+
+      .service-tabs a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 12px 4px;
+        white-space: normal;
+        line-height: 1.5;
+      }
     }
 
     /* ============ SERVICES (CASE CARDS) ============ */
@@ -377,95 +231,11 @@
       font-weight: 700;
     }
 
-    /* ============ STRENGTHS (REASON CARDS) ============ */
-    .reasons {
-      display: grid;
-      gap: 2px;
-      background: var(--washi-3);
-      border: 1px solid var(--washi-3);
-      position: relative;
-      z-index: 1;
-    }
-
-    @media (min-width: 880px) {
-      .reasons {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    .reason {
-      background: var(--washi);
-      padding: 44px 34px;
-      position: relative;
-    }
-
-    .reason h3 {
-      font-family: var(--font-d);
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--ink);
-      margin-bottom: 16px;
-    }
-
-    .reason p {
-      font-family: var(--font-b);
-      font-size: 15.5px;
-      color: var(--ink);
-      opacity: .82;
-      line-height: 1.95;
-    }
-
-    /* ============ CTA (共通コンポーネント .cta-btn に準拠) ============ */
-    .price-cta {
-      display: flex;
-      justify-content: center;
-      margin-top: 34px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .price-cta .cta-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      background: var(--igusa);
-      color: var(--washi);
-      padding: 14px 28px;
-      border-radius: 3px;
-      font-family: var(--font-b);
-      font-weight: 700;
-      font-size: 16px;
-      letter-spacing: .03em;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, .35);
-      transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
-    }
-
-    .price-cta .cta-btn:hover {
-      transform: translateY(-2px);
-      background: var(--igusa-deep);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, .4);
-    }
-
-    .price-cta .cta-btn:active {
-      transform: translateY(0);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, .3);
-    }
-
-    .price-cta .cta-btn svg {
-      width: 16px;
-      height: 16px;
-      flex: 0 0 16px;
-    }
-
+    /* ============ MOBILE ADJUST (599px以下) ============ */
     @media (max-width: 599px) {
       .page-head {
-        padding-top: 110px;
+        padding-top: 66px;
         padding-bottom: 0;
-      }
-
-      .type-block + .type-block {
-        margin-top: 64px;
       }
 
       .case-body {
@@ -475,14 +245,6 @@
       .case-detail li {
         flex-direction: column;
         gap: 2px;
-      }
-
-      .reason {
-        padding: 36px 24px;
-      }
-
-      .price-cta .cta-btn {
-        width: 100%;
       }
     }
 
@@ -905,6 +667,148 @@
       text-align: center;
     }
 
+
+    /* ============ 信頼セクション (TOPの .final-cta の型) ============ */
+    .igusa-tex {
+      position: relative;
+      background: linear-gradient(160deg, var(--igusa) 0%, var(--igusa-deep) 55%, var(--sumi) 100%);
+      color: var(--washi);
+    }
+
+    .igusa-tex::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: .3;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='matrix' values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.06 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+      background-size: 220px 220px;
+    }
+
+    .final-cta {
+      padding: 140px 0;
+      text-align: center;
+    }
+
+    .final-cta .wrap {
+      position: relative;
+      z-index: 1;
+    }
+
+    .final-cta .catch2 {
+      font-family: var(--font-d);
+      font-weight: 800;
+      font-size: clamp(28px, 5vw, 52px);
+      line-height: 1.5;
+      color: var(--washi);
+    }
+
+    .final-cta .cta-sub {
+      margin-top: 20px;
+      font-family: var(--font-b);
+      font-weight: 500;
+      color: var(--paper-70);
+    }
+
+    .big-tel {
+      margin-top: 48px;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 34px 52px;
+      border: 1.5px solid var(--gold);
+      border-radius: 3px;
+    }
+
+    .big-tel .label {
+      font-family: var(--font-b);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: .18em;
+      color: var(--gold);
+    }
+
+    .big-tel .number {
+      font-family: var(--font-d);
+      font-weight: 800;
+      font-size: clamp(30px, 5vw, 44px);
+      color: var(--washi);
+    }
+
+    .big-tel .hours {
+      margin-top: 6px;
+      font-family: var(--font-b);
+      font-weight: 500;
+      font-size: 15px;
+      color: var(--paper-70);
+    }
+
+    @media (max-width: 599px) {
+      .final-cta {
+        padding: 90px 0;
+      }
+
+      .big-tel {
+        padding: 28px 24px;
+      }
+    }
+
+    /* ============ BUTTON HOVER (い草色→黄金色 / それ以外→い草色) ============ */
+    /* 色が滑らかに変わるよう transition に color / border-color を追加 */
+    .contact-btn {
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease;
+    }
+
+    /* い草色のボタン → 黄金色（文字は視認性のため墨色へ） */
+    .contact-btn:hover {
+      background: var(--gold);
+      color: var(--sumi);
+    }
+
+    /* ハンバーガーメニュー（枠線のみ）→ い草色 */
+    .menu-btn {
+      transition: background .25s ease, border-color .25s ease;
+    }
+
+    .menu-btn:hover {
+      background: var(--igusa);
+      border-color: var(--igusa);
+    }
+
+    /* Instagram（ブランドのグラデーション）→ い草色をフェードで重ねる */
+    .insta-btn {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .insta-btn::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: var(--igusa);
+      opacity: 0;
+      transition: opacity .28s ease;
+    }
+
+    .insta-btn:hover::after {
+      opacity: 1;
+    }
+
+    .insta-btn svg,
+    .insta-btn span {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* タブナビ（現在地のタブは赤茶のまま維持）→ い草色 */
+    .service-tabs a:not([aria-current="page"]):hover {
+      color: var(--igusa);
+      border-bottom-color: var(--igusa);
+    }
+
   </style>
 </head>
 <body>
@@ -924,7 +828,7 @@
       <ul>
         <li><a href="top.html">TOP</a></li>
         <li><a href="company-story.html">想いと歩み</a></li>
-        <li><a href="price.html" aria-current="page">サービス内容</a></li>
+        <li><a href="service.html" aria-current="page">サービス内容</a></li>
         <li><a href="works.html">導入事例</a></li>
         <li><a href="tatami.html">畳について</a></li>
         <li><a href="company.html">会社概要</a></li>
@@ -957,7 +861,7 @@
   <ul>
     <li><a href="top.html">TOP</a></li>
     <li><a href="company-story.html">想いと歩み</a></li>
-    <li><a href="price.html" aria-current="page">サービス内容</a></li>
+    <li><a href="service.html" aria-current="page">サービス内容</a></li>
     <li><a href="works.html">導入事例</a></li>
     <li><a href="tatami.html">畳について</a></li>
     <li><a href="company.html">会社概要</a></li>
@@ -969,98 +873,33 @@
 <section class="washi-tex page-head">
   <div class="wrap">
     <div class="section-head">
-      <h1 class="section-title reveal">サービス内容</h1>
     </div>
   </div>
 </section>
 
-<!-- ============ PAIN POINTS ============ -->
-<section class="washi-tex">
+<!-- ============ SERVICE TABS ============ -->
+<nav class="service-tabs washi-tex" aria-label="サービス内容">
   <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow reveal">こんなことに困っていませんか</div>
-      <h2 class="section-title reveal" style="--d:.12s">畳の"気になる"を、<br>そのままにしていませんか。</h2>
-    </div>
-
-    <ul class="pain-list">
-      <li style="--d:.24s"><span class="mark reveal">・</span>畳が色あせてお部屋が古く見える</li>
-      <li style="--d:.36s"><span class="mark reveal">・</span>費用や張り替え時期が分からず、そのままになっている</li>
-      <li style="--d:.48s"><span class="mark reveal">・</span>子どもが安心して遊べる部屋にしたい</li>
+    <ul>
+      <li><a href="service.html">サービスについて</a></li>
+      <li><a href="concerns.html">お困りの方</a></li>
+      <li><a href="types.html">畳の種類</a></li>
+      <li><a href="price.html" aria-current="page">料金について</a></li>
     </ul>
-
-    <p class="pain-resolve reveal" style="--d:.60s">そのお悩み、畳を替えることで解決できます。</p>
   </div>
-</section>
-
-<!-- ============ TYPES ============ -->
-<section id="types" class="washi-tex">
-  <div class="wrap">
-    <div class="section-head">
-      <h2 class="section-title reveal">畳の種類</h2>
-    </div>
-    <div class="type-block reveal" style="--d:.12s">
-      <div class="type-text">
-        <h3 class="type-name">国産い草畳</h3>
-        <p class="type-desc">・香りが良く、色の変化を楽しめる<br>・青から茶色に変化していく</p>
-        <div class="type-label">こんな方におすすめ</div>
-        <p class="type-desc">・畳の香りを感じたい方<br>・和を感じたい方</p>
-        <div class="type-price">12,000〜20,000円 /1畳</div>
-      </div>
-      <div class="type-media">
-        <!-- 写真枠 P-08 / 国産い草畳 -->
-        <div class="frame frame-tatami"><img src="../../photos/output_photos/p-08-igusa-tatami-detail.jpg" alt="国産い草の畳表を間近で写した畳の目のアップ" loading="lazy"></div>
-      </div>
-    </div>
-
-    <div class="type-block type-block-stacked reveal" style="--d:.24s">
-      <div class="type-text">
-        <h3 class="type-name">和紙表</h3>
-        <p class="type-desc">・色の変化がない<br>・傷に強い<br>・シミになりにくくメンテナンスが楽<br>・カラーが選べる</p>
-        <div class="type-label">こんな方におすすめ</div>
-        <p class="type-desc">・ペットを飼っている方<br>・小さい子がいる方<br>・洋風な家にマッチさせたい方</p>
-        <div class="type-price">12,000〜25,000円 /1畳</div>
-      </div>
-      <div class="type-media">
-        <div class="photo-scroller" id="washiPhotos" tabindex="0" aria-label="和紙表のカラーバリエーション（横スクロール）">
-          <!-- 写真枠 P-13 / 藍 -->
-          <div class="frame frame-washi"><img src="../../photos/output_photos/p-13-washi-color-navy.jpg" alt="和紙表 藍色の畳表のアップ" loading="lazy"></div>
-          <!-- 写真枠 P-14 / 焦茶 -->
-          <div class="frame frame-washi"><img src="../../photos/output_photos/p-14-washi-color-brown.jpg" alt="和紙表 焦茶色の畳表のアップ" loading="lazy"></div>
-          <!-- 写真枠 P-15 / 若草 -->
-          <div class="frame frame-washi"><img src="../../photos/output_photos/p-15-washi-color-wakakusa.jpg" alt="和紙表 若草色の畳表のアップ" loading="lazy"></div>
-          <!-- 写真枠 P-16 / 生成り -->
-          <div class="frame frame-washi"><img src="../../photos/output_photos/p-16-washi-color-kinari.jpg" alt="和紙表 生成り色の畳表のアップ" loading="lazy"></div>
-          <!-- 写真枠 P-29 -->
-          <div class="frame frame-washi"><img src="../../photos/output_photos/p-29-washi-color-yellow.jpg" alt="和紙表 黄色（山吹）の畳表のアップ" loading="lazy"></div>
-          <!-- 写真枠 P-30 -->
-          <div class="frame frame-washi"><img src="../../photos/output_photos/p-30-washi-color-pink.jpg" alt="和紙表 桃色の畳表のアップ" loading="lazy"></div>
-        </div>
-        <div class="carousel-nav">
-          <button class="carousel-btn" type="button" data-dir="-1" aria-label="前の写真を見る">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
-          </button>
-          <button class="carousel-btn" type="button" data-dir="1" aria-label="次の写真を見る">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </button>
-        </div>
-      </div>
-    </div>
-    <p class="types-note reveal" style="--d:.36s">そのほかも、ご要望に応じて対応いたします。</p>
-  </div>
-</section>
+</nav>
 
 <!-- ============ SERVICES ============ -->
 <section id="services" class="washi-tex">
   <div class="wrap">
     <div class="section-head">
-      <h2 class="section-title reveal">サービス（作業）ごとの<br>内容と料金</h2>
+      <h2 class="section-title reveal">各種料金</h2>
     </div>
     <div class="case-grid">
       <div class="case-card reveal" style="--d:.12s">
         <div class="case-body">
           <div class="cat">裏返し</div>
           <ul class="case-detail">
-            <li><span>内容</span><span>畳表を裏返して再利用（3〜8年で表面が擦れてきて服に付き始めたら）</span></li>
             <li><span>料金</span><span>一律4,500円+税</span></li>
           </ul>
         </div>
@@ -1069,7 +908,6 @@
         <div class="case-body">
           <div class="cat">表替え</div>
           <ul class="case-detail">
-            <li><span>内容</span><span>畳の表とへりを新しくする（裏返し後また同じような状況になってきたら）</span></li>
             <li><span>料金</span><span>国産 7,000〜15,000円+税</span></li>
           </ul>
         </div>
@@ -1078,7 +916,6 @@
         <div class="case-body">
           <div class="cat">新調</div>
           <ul class="case-detail">
-            <li><span>内容</span><span>畳を新しく作り替える</span></li>
             <li><span>料金</span><span>国産い草畳 12,000〜20,000円+税 /1畳<br>和紙表 12,000〜25,000円+税 /1畳<br>施工費は畳表の価格に含んでおります</span></li>
           </ul>
         </div>
@@ -1087,7 +924,6 @@
         <div class="case-body">
           <div class="cat">和紙表の畳</div>
           <ul class="case-detail">
-            <li><span>内容</span><span>扱える職人が少ない畳です。</span></li>
             <li><span>料金</span><span>12,000〜25,000円+税 /1畳<br>施工費は畳表の価格に含んでおります</span></li>
           </ul>
         </div>
@@ -1096,32 +932,17 @@
   </div>
 </section>
 
-<!-- ============ STRENGTHS ============ -->
-<section id="support" class="washi-tex">
+<!-- ============ 信頼 (TOPの .final-cta の型) ============ -->
+<section id="contact" class="igusa-tex final-cta">
   <div class="wrap">
-    <div class="section-head">
-      <h2 class="section-title reveal">対応の強み</h2>
-    </div>
-    <div class="reasons">
-      <div class="reason reveal" style="--d:.12s">
-        <h3>スピード対応</h3>
-        <p>急な畳替えのご相談にもできる限り迅速に対応いたします。<br>お客様のご都合に合わせた柔軟な日程調整が可能です。</p>
-      </div>
-      <div class="reason reveal" style="--d:.24s">
-        <h3>夜間対応</h3>
-        <p>お仕事などで日中のお立ち会いが難しい方もお気軽にご相談ください。<br>事前にご相談いただければ、できる限りご都合に合わせて対応いたします。</p>
-      </div>
-      <div class="reason reveal" style="--d:.36s">
-        <h3>家具の移動もお任せ</h3>
-        <p>重たい家具の移動もスタッフが対応いたします。<br>お客様に無理をお願いすることはありませんので、ご安心ください。</p>
-      </div>
-    </div>
-    <div class="price-cta reveal" style="--d:.48s">
-      <a class="cta-btn" href="tel:0274522966">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        お問い合わせ
-      </a>
-    </div>
+    <p class="catch2 reveal">畳のことなら<br>なんでもお答えさせて<br>いただきます。</p>
+    <p class="cta-sub reveal" style="--d:.12s">どんな些細なことでもまずはお問い合わせください。</p>
+
+    <a class="big-tel reveal" href="tel:0274522966" style="--d:.24s">
+      <span class="label">TEL / FAX</span>
+      <span class="number">0274-52-2966</span>
+      <span class="hours">受付時間 8時〜20時</span>
+    </a>
   </div>
 </section>
 
@@ -1180,34 +1001,6 @@
     </div>
   </div>
 </footer>
-
-<script>
-  // 和紙表の写真の横スクロール（矢印で1枚ずつ）
-  (function () {
-    const track = document.getElementById('washiPhotos');
-    const btns = document.querySelectorAll('.carousel-btn');
-    const step = () => {
-      const photo = track.querySelector('.frame');
-      const gap = parseFloat(getComputedStyle(track).gap) || 0;
-      return photo.getBoundingClientRect().width + gap;
-    };
-    btns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        track.scrollBy({ left: Number(btn.dataset.dir) * step(), behavior: 'smooth' });
-      });
-    });
-    const update = () => {
-      const max = track.scrollWidth - track.clientWidth;
-      btns.forEach(btn => {
-        const dir = Number(btn.dataset.dir);
-        btn.disabled = dir < 0 ? track.scrollLeft <= 1 : track.scrollLeft >= max - 1;
-      });
-    };
-    track.addEventListener('scroll', update);
-    window.addEventListener('resize', update);
-    update();
-  })();
-</script>
 
 <!-- ============ HEADER SCRIPT (共通コンポーネント header.html) ============ -->
 <script>
