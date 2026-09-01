@@ -1088,6 +1088,11 @@
       flex: 0 0 auto;
     }
 
+    /* ロゴはトップページへのリンク。インライン要素による余白を出さないため block 化 */
+    .logo-link {
+      display: block;
+    }
+
     /* 元画像(1220x930)はそのまま、表示サイズのみCSSで調整。
        ヘッダー(76px)の中で上下の余白を最小限にした高さ */
     .logo-mark {
@@ -1499,7 +1504,9 @@
   <div class="header-wrap">
     <!-- Logo -->
     <div class="logo">
-      <img class="logo-mark" src="../../logo-white-transparent.png" alt="倉林畳店" width="1220" height="930">
+      <a class="logo-link" href="top.html">
+        <img class="logo-mark" src="../../logo-white-transparent.png" alt="倉林畳店" width="1220" height="930">
+      </a>
     </div>
 
     <!-- Desktop Navigation -->
