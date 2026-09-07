@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@300;400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../design/tokens.css">
+  <link rel="stylesheet" href="../../design/components.css">
   <style>
     /* ============ RESET & BASE ============ */
     * {
@@ -27,6 +28,8 @@
       line-height: 1.9;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
+      /* 日本語を文節の区切りで折り返す（対応ブラウザのみ。非対応時は従来の折り返し） */
+      word-break: auto-phrase;
     }
 
     img, svg {
@@ -624,7 +627,15 @@
 
     /* ============ FOOTER (共通コンポーネント footer.html) ============ */
     footer {
-      background: var(--sumi-2);
+      /* 背景写真 + 暗幕。写真はフッターの高さ・幅に合わせて cover でトリミング表示する */
+      background:
+        /* 1枚目(最前面): 暗幕。写真の上に重なり、文字の可読性を確保する
+           (他ページの HERO の暗幕と同程度の濃さ) */
+        linear-gradient(rgba(21, 18, 13, .86), rgba(21, 18, 13, .86)),
+        /* 2枚目: 背景写真 P-046 */
+        url("../../photos/output_photos/p-046.jpg") 50% 50% / cover no-repeat,
+        /* 3枚目: 写真が読み込めないときのフォールバック(従来の背景色) */
+        var(--sumi-2);
       color: rgba(242, 234, 217, .7);
       padding: 70px 0 30px;
     }
@@ -783,7 +794,7 @@
     }
 
     .final-cta {
-      padding: 140px 0;
+      padding: 90px 0;
       text-align: center;
     }
 
@@ -808,7 +819,7 @@
     }
 
     .big-tel {
-      margin-top: 48px;
+      margin-top: 31px;
       display: inline-flex;
       flex-direction: column;
       align-items: center;
@@ -843,11 +854,37 @@
 
     @media (max-width: 599px) {
       .final-cta {
-        padding: 90px 0;
+        padding: 58px 0;
       }
 
       .big-tel {
         padding: 28px 24px;
+      }
+    }
+
+    @media (max-width: 599px) {
+      section {
+        padding: 80px 0;
+      }
+    }
+
+    /* ============ 改行位置の調整（スマホ表示を優先） ============ */
+    /* .nw: 意味の切れ目でない位置での改行を防ぐ */
+    .nw {
+      white-space: nowrap;
+    }
+
+    /* .pc-br: PC専用の改行（スマホでは無効） */
+    @media (max-width: 599px) {
+      .pc-br {
+        display: none;
+      }
+    }
+
+    /* .sp-br: スマホ専用の改行（PCでは無効） */
+    @media (min-width: 600px) {
+      .sp-br {
+        display: none;
       }
     }
 
@@ -932,7 +969,7 @@
         <li><a href="top.html">TOP</a></li>
         <li><a href="company-story.html">想いと歩み</a></li>
         <li><a href="service.html" aria-current="page">サービス内容</a></li>
-        <li><a href="works.html">導入事例</a></li>
+        <li><a href="works.html">施工事例</a></li>
         <li><a href="tatami.html">畳について</a></li>
         <li><a href="company.html">会社概要</a></li>
         <li><a href="contact.html">お問い合わせ</a></li>
@@ -965,7 +1002,7 @@
     <li><a href="top.html">TOP</a></li>
     <li><a href="company-story.html">想いと歩み</a></li>
     <li><a href="service.html" aria-current="page">サービス内容</a></li>
-    <li><a href="works.html">導入事例</a></li>
+    <li><a href="works.html">施工事例</a></li>
     <li><a href="tatami.html">畳について</a></li>
     <li><a href="company.html">会社概要</a></li>
     <li><a href="contact.html">お問い合わせ</a></li>
@@ -984,10 +1021,10 @@
 <nav class="service-tabs washi-tex" aria-label="サービス内容">
   <div class="wrap">
     <ul>
-      <li><a href="service.html">サービスについて</a></li>
+      <li><a href="service.html">サービス<br class="sp-br">について</a></li>
       <li><a href="concerns.html">お困りの方</a></li>
       <li><a href="types.html" aria-current="page">畳の種類</a></li>
-      <li><a href="price.html">料金について</a></li>
+      <li><a href="price.html">料金<br class="sp-br">について</a></li>
     </ul>
   </div>
 </nav>

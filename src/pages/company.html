@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@300;400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../design/tokens.css">
+  <link rel="stylesheet" href="../../design/components.css">
   <style>
     /* ============ RESET & BASE ============ */
     * {
@@ -27,6 +28,8 @@
       line-height: 1.9;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
+      /* 日本語を文節の区切りで折り返す（対応ブラウザのみ。非対応時は従来の折り返し） */
+      word-break: auto-phrase;
     }
 
     img, svg {
@@ -107,13 +110,8 @@
       display: flex;
       align-items: center;
       /* 下は次のセクションへ自然につなぐため詰める */
-      padding: 120px 0 40px;
+      padding: 120px 0 110px;
       text-align: center;
-    }
-
-    /* 導入部の直後は上余白も詰める */
-    .hero + section {
-      padding-top: 56px;
     }
 
     .hero-inner {
@@ -147,7 +145,8 @@
     }
 
     .shop-name {
-      margin-top: 30px;
+      /* 上のページ名ラベルが無くなったため、上余白は hero の padding が担う */
+      margin-top: 0;
       font-family: var(--font-d);
       font-weight: 800;
       font-size: clamp(44px, 12vw, 112px);
@@ -375,7 +374,7 @@
     }
 
     .final-cta {
-      padding: 140px 0;
+      padding: 90px 0;
       text-align: center;
     }
 
@@ -400,7 +399,7 @@
     }
 
     .big-tel {
-      margin-top: 48px;
+      margin-top: 31px;
       display: inline-flex;
       flex-direction: column;
       align-items: center;
@@ -473,21 +472,13 @@
       }
 
       .hero {
-        padding: 90px 0 32px;
+        padding: 90px 0 80px;
         min-height: calc(100svh - 76px);
-      }
-
-      .hero + section {
-        padding-top: 46px;
       }
 
       .hero-label::before,
       .hero-label::after {
         width: 32px;
-      }
-
-      .shop-name {
-        margin-top: 24px;
       }
 
       .hero-lead {
@@ -528,7 +519,7 @@
       }
 
       .final-cta {
-        padding: 90px 0;
+        padding: 58px 0;
       }
 
       .big-tel {
@@ -795,7 +786,15 @@
 
     /* ============ FOOTER (共通コンポーネント footer.html) ============ */
     footer {
-      background: var(--sumi-2);
+      /* 背景写真 + 暗幕。写真はフッターの高さ・幅に合わせて cover でトリミング表示する */
+      background:
+        /* 1枚目(最前面): 暗幕。写真の上に重なり、文字の可読性を確保する
+           (他ページの HERO の暗幕と同程度の濃さ) */
+        linear-gradient(rgba(21, 18, 13, .86), rgba(21, 18, 13, .86)),
+        /* 2枚目: 背景写真 P-046 */
+        url("../../photos/output_photos/p-046.jpg") 50% 50% / cover no-repeat,
+        /* 3枚目: 写真が読み込めないときのフォールバック(従来の背景色) */
+        var(--sumi-2);
       color: rgba(242, 234, 217, .7);
       padding: 70px 0 30px;
     }
@@ -934,6 +933,26 @@
       text-align: center;
     }
 
+    /* ============ 改行位置の調整（スマホ表示を優先） ============ */
+    /* .nw: 意味の切れ目でない位置での改行を防ぐ */
+    .nw {
+      white-space: nowrap;
+    }
+
+    /* .pc-br: PC専用の改行（スマホでは無効） */
+    @media (max-width: 599px) {
+      .pc-br {
+        display: none;
+      }
+    }
+
+    /* .sp-br: スマホ専用の改行（PCでは無効） */
+    @media (min-width: 600px) {
+      .sp-br {
+        display: none;
+      }
+    }
+
     /* ============ BUTTON HOVER (い草色→黄金色 / それ以外→い草色) ============ */
     /* 色が滑らかに変わるよう transition に color / border-color を追加 */
     .contact-btn {
@@ -1020,7 +1039,7 @@
         <li><a href="top.html">TOP</a></li>
         <li><a href="company-story.html">想いと歩み</a></li>
         <li><a href="service.html">サービス内容</a></li>
-        <li><a href="works.html">導入事例</a></li>
+        <li><a href="works.html">施工事例</a></li>
         <li><a href="tatami.html">畳について</a></li>
         <li><a href="company.html" aria-current="page">会社概要</a></li>
         <li><a href="contact.html">お問い合わせ</a></li>
@@ -1053,7 +1072,7 @@
     <li><a href="top.html">TOP</a></li>
     <li><a href="company-story.html">想いと歩み</a></li>
     <li><a href="service.html">サービス内容</a></li>
-    <li><a href="works.html">導入事例</a></li>
+    <li><a href="works.html">施工事例</a></li>
     <li><a href="tatami.html">畳について</a></li>
     <li><a href="company.html" aria-current="page">会社概要</a></li>
     <li><a href="contact.html">お問い合わせ</a></li>
@@ -1063,7 +1082,6 @@
 <!-- ============ 1. ページ導入部 (中央揃え・左右対称の題字) ============ -->
 <section class="hero washi-tex">
   <div class="wrap hero-inner">
-    <p class="hero-label reveal">会社概要</p>
     <h1 class="shop-name reveal" style="--d:.12s">倉林畳店</h1>
 
     <!-- 創業年は細い金罫を上下に添えるのみ -->
@@ -1072,7 +1090,7 @@
       <span>創業83年</span>
     </p>
 
-    <p class="hero-lead reveal" style="--d:.36s">創業83年、畳一筋の倉林畳店です。ここでは店主・後継者のご紹介と会社概要をご案内します。私たちの想いや歩みについては、<a href="company-story.html">こちらのページ</a>でご紹介しています。</p>
+    <p class="hero-lead reveal" style="--d:.36s">創業83年、畳一筋の倉林畳店です。ここでは店主・後継者のご紹介と会社概要をご案内します。私たちの想いや歩みについては、<span class="nw"><a href="company-story.html">こちらのページ</a>で</span>ご紹介しています。</p>
   </div>
 </section>
 
@@ -1080,7 +1098,6 @@
 <section id="info" class="washi-tex">
   <div class="wrap">
     <div class="section-head">
-      <div class="eyebrow reveal">会社概要</div>
       <h2 class="section-title reveal" style="--d:.12s">基本情報</h2>
     </div>
     <table class="info-table reveal" style="--d:.24s">

@@ -1,0 +1,377 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>料金のご案内｜倉林畳店</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink: #262117;
+    --ink-soft: #55503f;
+    --washi: #efe9d8;
+    --washi-panel: #f8f4e7;
+    --igusa: #4b5d3a;
+    --igusa-deep: #38492b;
+    --kakishibu: #8a3d2a;
+    --line: #c9bd97;
+    --line-soft: #ddd3ae;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--washi);
+    color: var(--ink);
+    font-family: "Noto Sans JP", sans-serif;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a{ color: inherit; }
+
+  .wrap{
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding: 64px 0 44px;
+  }
+  .hero h1{
+    font-family: "Noto Serif JP", serif;
+    font-weight: 700;
+    font-size: clamp(2.1rem, 5vw, 2.9rem);
+    line-height: 1.5;
+    margin: 0 0 20px;
+  }
+  .hero p{
+    max-width: 34em;
+    color: var(--ink-soft);
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  /* ---------- Section shell ---------- */
+  section.block{
+    padding: 52px 0;
+    border-top: 1px solid var(--line-soft);
+  }
+  .block-head{
+    display:flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 30px;
+  }
+  .block-head .mark{
+    width: 9px;
+    height: 9px;
+    background: var(--igusa);
+    flex: 0 0 auto;
+    transform: rotate(45deg);
+  }
+  .block-head h2{
+    font-family: "Noto Serif JP", serif;
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin: 0;
+  }
+  .block-head .sub{
+    font-size: .85rem;
+    color: var(--ink-soft);
+  }
+  .lead{
+    color: var(--ink-soft);
+    font-size: .94rem;
+    margin: -14px 0 28px;
+    max-width: 38em;
+  }
+
+  /* ---------- Price groups ---------- */
+  .omote-group{
+    margin-bottom: 30px;
+  }
+  .omote-group:last-child{ margin-bottom: 0; }
+
+  .omote-title{
+    display:flex;
+    align-items: baseline;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 8px;
+    margin-bottom: 14px;
+  }
+  .omote-title h3{
+    font-family: "Noto Serif JP", serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+    margin: 0;
+  }
+  .omote-title span{
+    font-size: .78rem;
+    color: var(--ink-soft);
+  }
+
+  .grade-row{
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 18px;
+    padding: 13px 4px;
+    border-bottom: 1px dashed var(--line-soft);
+  }
+  .grade-row:last-child{ border-bottom: none; }
+
+  .grade-tag{
+    font-size: .82rem;
+    color: var(--igusa-deep);
+    font-weight: 500;
+    letter-spacing: .02em;
+  }
+  .grade-tag.mid{ color: var(--ink-soft); }
+  .grade-tag.top{ color: var(--kakishibu); }
+
+  .price{
+    font-family: "Noto Serif JP", serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .price small{
+    font-family: "Noto Sans JP", sans-serif;
+    font-size: .68rem;
+    font-weight: 400;
+    color: var(--ink-soft);
+    margin-left: 3px;
+  }
+
+  .single-row{
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 18px;
+    padding: 13px 4px;
+  }
+
+  .footnote{
+    margin-top: 14px;
+    font-size: .8rem;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- 裏返し flat rate ---------- */
+  .flat-card{
+    background: var(--washi-panel);
+    border: 1px solid var(--line);
+    padding: 30px 32px;
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .flat-card .label{
+    font-size: .92rem;
+    color: var(--ink-soft);
+  }
+  .flat-card .label strong{
+    display:block;
+    font-family: "Noto Serif JP", serif;
+    font-size: 1.05rem;
+    color: var(--ink);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .flat-card .amount{
+    font-family: "Noto Serif JP", serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--igusa-deep);
+  }
+  .flat-card .amount small{
+    font-family: "Noto Sans JP", sans-serif;
+    font-size: .8rem;
+    font-weight: 400;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- Model case cards ---------- */
+  .case-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .case-card{
+    background: var(--washi-panel);
+    padding: 26px 22px;
+  }
+  .case-card .service{
+    font-size: .82rem;
+    color: var(--ink-soft);
+    margin-bottom: 10px;
+  }
+  .case-card .amount{
+    font-family: "Noto Serif JP", serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .case-card .amount small{
+    font-family: "Noto Sans JP", sans-serif;
+    font-size: .68rem;
+    font-weight: 400;
+    color: var(--ink-soft);
+  }
+  @media (max-width: 640px){
+    .case-grid{ grid-template-columns: 1fr; }
+  }
+
+  .tbd{
+    color: var(--kakishibu);
+  }
+
+  section.block:last-of-type{
+    padding-bottom: 80px;
+  }
+</style>
+</head>
+<body>
+
+<main class="wrap">
+
+  <section class="hero">
+    <h1>料金について</h1>
+  </section>
+
+  <section class="block" id="omotegae">
+    <div class="block-head">
+      <span class="mark"></span>
+      <h2>表替え</h2>
+      <span class="sub">畳表のみを新しいものに交換</span>
+    </div>
+    <p class="lead">畳床(芯材)はそのまま使い、表面の畳表だけを張り替えます。工賃はすべて価格に含まれています。</p>
+
+    <div class="omote-group">
+      <div class="omote-title">
+        <h3>国産い草</h3>
+      </div>
+      <div class="grade-row">
+        <span class="grade-tag mid">中級</span>
+        <span class="price">9,000円<small>/畳</small></span>
+      </div>
+      <div class="grade-row">
+        <span class="grade-tag">上級</span>
+        <span class="price">12,000円<small>/畳</small></span>
+      </div>
+      <div class="grade-row">
+        <span class="grade-tag top">特上</span>
+        <span class="price">15,000円<small>/畳</small></span>
+      </div>
+    </div>
+
+    <div class="omote-group">
+      <div class="omote-title">
+        <h3>和紙表</h3>
+      </div>
+      <div class="single-row">
+        <span class="grade-tag mid">標準</span>
+        <span class="price">9,000〜15,000円<small>/畳</small></span>
+      </div>
+    </div>
+
+    <p class="footnote">畳縁の有無に関しては価格の変動がございますのでお問い合わせにて対応させていただきます。</p>
+  </section>
+
+  <section class="block" id="shinchou">
+    <div class="block-head">
+      <span class="mark"></span>
+      <h2>新調</h2>
+      <span class="sub">畳床から丸ごと新しく作り替え</span>
+    </div>
+    <p class="lead">畳床・畳表・畳縁をすべて新しくします。表替えよりも価格は高くなりますが、畳の芯からしっかりと作り直せます。</p>
+
+    <div class="omote-group">
+      <div class="omote-title">
+        <h3>国産い草</h3>
+      </div>
+      <div class="grade-row">
+        <span class="grade-tag mid">中級</span>
+        <span class="price">12,000円<small>/畳</small></span>
+      </div>
+      <div class="grade-row">
+        <span class="grade-tag">上級</span>
+        <span class="price">16,000円<small>/畳</small></span>
+      </div>
+      <div class="grade-row">
+        <span class="grade-tag top">特上</span>
+        <span class="price">20,000円<small>/畳</small></span>
+      </div>
+    </div>
+
+    <div class="omote-group">
+      <div class="omote-title">
+        <h3>和紙表</h3>
+      </div>
+      <div class="single-row">
+        <span class="grade-tag mid">標準</span>
+        <span class="price">12,000〜25,000円<small>/畳</small></span>
+      </div>
+    </div>
+
+    <p class="footnote">※古い畳の引き上げ・処分費は別途 <span class="tbd">(金額は後日ご案内いたします)</span>。</p>
+  </section>
+
+  <section class="block" id="urakaeshi">
+    <div class="block-head">
+      <span class="mark"></span>
+      <h2>裏返し</h2>
+      <span class="sub">畳表を裏返して再利用</span>
+    </div>
+    <p class="lead">今ある畳表をひっくり返して張り直します。材料をほとんど使わないため、種類やグレードに関わらず定額です。</p>
+
+    <div class="flat-card">
+      <div class="label">
+        <strong>畳表の種類・グレードにかかわらず一律</strong>
+        1畳あたりの料金
+      </div>
+      <div class="amount">4,500円<small>+税 /畳</small></div>
+    </div>
+  </section>
+
+  <section class="block" id="model">
+    <div class="block-head">
+      <span class="mark"></span>
+      <h2>6畳1間の目安</h2>
+      <span class="sub">よくあるお部屋の広さで換算した概算金額</span>
+    </div>
+
+    <div class="case-grid">
+      <div class="case-card">
+        <div class="service">裏返し</div>
+        <div class="amount">17,000<small>〜</small>27,000円</div>
+      </div>
+      <div class="case-card">
+        <div class="service">表替え(並〜上物)</div>
+        <div class="amount">30,000<small>円前後</small></div>
+      </div>
+      <div class="case-card">
+        <div class="service">新調(い草)</div>
+        <div class="amount">120,000<small>円前後</small></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+</body>
+</html>

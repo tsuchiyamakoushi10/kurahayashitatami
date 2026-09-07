@@ -55,7 +55,15 @@
 
     /* ============ FOOTER ============ */
     footer {
-      background: var(--sumi-2);
+      /* 背景写真 + 暗幕。写真はフッターの高さ・幅に合わせて cover でトリミング表示する */
+      background:
+        /* 1枚目(最前面): 暗幕。写真の上に重なり、文字の可読性を確保する
+           (他ページの HERO の暗幕と同程度の濃さ) */
+        linear-gradient(rgba(21, 18, 13, .86), rgba(21, 18, 13, .86)),
+        /* 2枚目: 背景写真 P-046 */
+        url("../../photos/output_photos/p-046.jpg") 50% 50% / cover no-repeat,
+        /* 3枚目: 写真が読み込めないときのフォールバック(従来の背景色) */
+        var(--sumi-2);
       color: rgba(242, 234, 217, .7);
       padding: 70px 0 30px;
     }

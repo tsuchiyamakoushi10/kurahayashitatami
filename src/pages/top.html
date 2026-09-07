@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@300;400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../design/tokens.css">
+  <link rel="stylesheet" href="../../design/components.css">
   <style>
     /* ============ RESET & BASE ============ */
     * {
@@ -27,6 +28,8 @@
       line-height: 1.9;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
+      /* 日本語を文節の区切りで折り返す（対応ブラウザのみ。非対応時は従来の折り返し） */
+      word-break: auto-phrase;
     }
 
     img, svg {
@@ -60,7 +63,7 @@
       display: flex;
       align-items: flex-end;
       /* 下余白は、削除したボタンが占めていたぶんを含めて導入文と SCROLL の間隔を確保する値 */
-      padding: 150px 0 150px;
+      padding: 150px 0 110px;
       color: var(--washi);
       overflow: hidden;
     }
@@ -265,7 +268,7 @@
     /* ============ RESPONSIVE ============ */
     @media (max-width: 599px) {
       .hero {
-        padding: 100px 0 110px;
+        padding: 100px 0 80px;
         min-height: auto;
       }
 
@@ -371,7 +374,7 @@
     }
 
     .manifesto {
-      padding: 150px 0;
+      padding: 110px 0;
     }
 
     .manifesto .wrap {
@@ -443,7 +446,7 @@
 
     @media (max-width: 599px) {
       .manifesto {
-        padding: 90px 0;
+        padding: 80px 0;
       }
 
       /* スマホではバッジ列の上マージン(44px)と揃える */
@@ -808,6 +811,9 @@
     .price-cta {
       display: flex;
       justify-content: center;
+      /* ボタンが複数並ぶときのための折り返しと間隔(1つのときは効かない) */
+      flex-wrap: wrap;
+      gap: 14px;
       margin-top: 34px;
       position: relative;
       z-index: 1;
@@ -863,16 +869,60 @@
       font-size: clamp(38px, 5.5vw, 64px);
     }
 
-    /* --- 施工事例カルーセル(1枚ずつ表示 / 自動スライド + 左右矢印) --- */
+    /* --- 施工事例カルーセル(中央のカードを強調 / 自動スライド + 左右矢印) --- */
     .case-carousel {
       position: relative;
-      max-width: 560px; /* 旧2カラム時のカード1枚分の幅に合わせている */
       margin: 0 auto;
       z-index: 1;
+      /* カード1枚の幅と、カード間の余白(いずれも器の幅に対する割合)。
+         スマホは幅が足りないため、両隣のカードを中央カードの後ろに重ね(--gap を負に)、
+         カードが画面端で切られず、外側の縁まで見えている状態にする */
+      --card: 60%;
+      --gap: -27%;
+      /* 中央のカードを拡大したときの倍率と、両端カードの倍率・明るさ。
+         スマホは両隣を大きく縮めることで、3枚とも画面内に収める */
+      --focus-scale: 1.03;
+      --side-scale: .45;
+      --side-opacity: .45;
+    }
+
+    /* 幅に余裕がある画面では、両隣のカードを重ねずゆったり並べる */
+    @media (min-width: 820px) {
+      .case-carousel {
+        --card: 29%;
+        --gap: 3.5%;
+        --side-scale: .9;
+      }
     }
 
     .case-viewport {
       overflow: hidden;
+      /* 中央のカードを拡大しても上下が切れないよう、クリップ範囲に余白を持たせる */
+      padding: 14px 0;
+      /* 縦スクロールはブラウザに任せ、横方向のドラッグだけをスクリプトで拾う */
+      touch-action: pan-y;
+      cursor: grab;
+    }
+
+    .case-viewport.is-dragging {
+      cursor: grabbing;
+    }
+
+    /* ドラッグ中(指に追従させる)と、端をまたいだ後に実物へ位置を戻すときはアニメーションを切る */
+    .case-track.is-dragging,
+    .case-track.no-anim {
+      transition: none;
+    }
+
+    /* ドラッグ中に写真のゴーストや文字選択が出ないようにする */
+    .case-track img {
+      -webkit-user-drag: none;
+      user-select: none;
+    }
+
+    .case-viewport.is-dragging,
+    .case-viewport.is-dragging * {
+      user-select: none;
     }
 
     /* 3枚を横一列に並べ、translateX で1枚分ずつ動かす */
@@ -882,23 +932,42 @@
       will-change: transform;
     }
 
-    /* flex の stretch で3枚の高さが揃うため、切り替えても高さが飛ばない */
+    /* flex の stretch で高さが揃うため、切り替えても高さが飛ばない。
+       通常は奥に引いた状態で、中央に来たカードだけ手前に出す */
     .case-slide {
-      flex: 0 0 100%;
+      flex: 0 0 var(--card);
       min-width: 0;
       display: flex;
+      /* gap ではなく左右のマージンで間隔をとる(負の値=重ねる、を使えるようにするため) */
+      margin-inline: calc(var(--gap) / 2);
+      transform: scale(var(--side-scale));
+      opacity: var(--side-opacity);
+      transition: transform .6s cubic-bezier(.4, 0, .2, 1), opacity .6s ease;
+    }
+
+    .case-slide.is-focus {
+      transform: scale(var(--focus-scale));
+      opacity: 1;
+      /* 拡大した分、隣のカードより手前に重ねる */
+      z-index: 2;
     }
 
     .case-slide > .case-card {
       width: 100%;
+      transition: box-shadow .6s ease;
     }
 
-    /* 矢印は写真と同じ 16:10 のレイヤーに載せ、写真の高さの中央に揃える */
+    .case-slide.is-focus > .case-card {
+      box-shadow: 0 18px 44px rgba(0, 0, 0, .45);
+    }
+
+    /* 矢印は中央のカードの写真と同じ 16:10 のレイヤーに載せ、写真の高さの中央に揃える */
     .case-nav-layer {
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 14px; /* .case-viewport の上余白ぶん下げる */
+      left: 50%;
+      width: var(--card);
+      transform: translateX(-50%);
       aspect-ratio: 16 / 10;
       display: flex;
       align-items: center;
@@ -966,10 +1035,9 @@
     }
 
     @media (min-width: 820px) {
-      /* 画面に余裕があるときは矢印をカードの外側に出す */
+      /* 画面に余裕があるときは矢印をカードの外側(74px)に出す */
       .case-nav-layer {
-        left: -74px;
-        right: -74px;
+        width: calc(var(--card) + 148px);
         padding: 0;
       }
 
@@ -981,7 +1049,9 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .case-track {
+      .case-track,
+      .case-slide,
+      .case-slide > .case-card {
         transition: none;
       }
     }
@@ -1318,7 +1388,7 @@
     }
 
     .final-cta {
-      padding: 140px 0;
+      padding: 90px 0;
       text-align: center;
     }
 
@@ -1347,7 +1417,7 @@
     }
 
     .big-tel {
-      margin-top: 48px;
+      margin-top: 31px;
       display: inline-flex;
       flex-direction: column;
       align-items: center;
@@ -1390,7 +1460,7 @@
 
     @media (max-width: 599px) {
       .final-cta {
-        padding: 90px 0;
+        padding: 58px 0;
       }
 
       .big-tel {
@@ -1657,7 +1727,15 @@
 
     /* ============ FOOTER (共通コンポーネント footer.html) ============ */
     footer {
-      background: var(--sumi-2);
+      /* 背景写真 + 暗幕。写真はフッターの高さ・幅に合わせて cover でトリミング表示する */
+      background:
+        /* 1枚目(最前面): 暗幕。写真の上に重なり、文字の可読性を確保する
+           (他ページの HERO の暗幕と同程度の濃さ) */
+        linear-gradient(rgba(21, 18, 13, .86), rgba(21, 18, 13, .86)),
+        /* 2枚目: 背景写真 P-046 */
+        url("../../photos/output_photos/p-046.jpg") 50% 50% / cover no-repeat,
+        /* 3枚目: 写真が読み込めないときのフォールバック(従来の背景色) */
+        var(--sumi-2);
       color: rgba(242, 234, 217, .7);
       padding: 70px 0 30px;
     }
@@ -1796,6 +1874,173 @@
       text-align: center;
     }
 
+    @media (max-width: 599px) {
+      section {
+        padding: 80px 0;
+      }
+    }
+
+    /* ============ 改行位置の調整（スマホ表示を優先） ============ */
+    /* .nw: 意味の切れ目でない位置での改行を防ぐ */
+    .nw {
+      white-space: nowrap;
+    }
+
+    /* .pc-br: PC専用の改行（スマホでは無効） */
+    @media (max-width: 599px) {
+      .pc-br {
+        display: none;
+      }
+    }
+
+    /* .sp-br: スマホ専用の改行（PCでは無効） */
+    @media (min-width: 600px) {
+      .sp-br {
+        display: none;
+      }
+    }
+
+    /* ============ OPENING (読み込み時の演出 / 和紙パネル → 墨色+ロゴ) ============ */
+    /* 演出中はページをスクロールさせない */
+    html.opening-lock,
+    html.opening-lock body {
+      overflow: hidden;
+    }
+
+    .opening {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      overflow: hidden;
+      /* 演出中はヘッダー等に触れないようにする */
+      touch-action: none;
+    }
+
+    /* パネルが開いた先に見える層(墨色 + ロゴ)。最後にこの層がフェードアウトする */
+    .opening-stage {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--sumi);
+      animation: op-stage-out 1.4s ease 2.45s forwards;
+    }
+
+    /* 墨色+ロゴの層は演出の開始時点から完成した状態で、パネルの裏に置いておく */
+    .opening-logo {
+      /* 画面高さの約28%。極端な画面でも破綻しないよう上下に幅を持たせる */
+      height: clamp(120px, 28vh, 320px);
+      width: auto;
+    }
+
+    /* 左右の和紙パネル。開始時は画面全体を覆っている */
+    .opening-panel {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 50%;
+      background: var(--washi);
+      will-change: transform;
+    }
+
+    /* 紙のざらつき(SVGフィルターのノイズ) */
+    .opening-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: .55;
+      mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='matrix' values='0 0 0 0 0.08  0 0 0 0 0.07  0 0 0 0 0.05  0 0 0 0.05 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+      background-size: 220px 220px;
+    }
+
+    /* 中央の線が分かれた後、各パネルの内側の端に貼り付く2本の線。
+       中央の線(4px)を左右2pxずつに分け合うので、分かれた瞬間もずれない */
+    .opening-panel::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--vermillion);
+      opacity: 0;
+      animation: op-edge 0s linear .9s forwards;
+    }
+
+    .opening-panel-l {
+      left: 0;
+      animation: op-open-l 1s cubic-bezier(.4, 0, .2, 1) 1.1s forwards;
+    }
+
+    /* 左パネルの内側は右端 */
+    .opening-panel-l::after {
+      right: 0;
+    }
+
+    .opening-panel-r {
+      right: 0;
+      animation: op-open-r 1s cubic-bezier(.4, 0, .2, 1) 1.1s forwards;
+    }
+
+    /* 右パネルの内側は左端 */
+    .opening-panel-r::after {
+      left: 0;
+    }
+
+    /* 画面中央を上から下へ伸びる朱色の線 */
+    .opening-line {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 4px;
+      height: 0;
+      margin-left: -2px;
+      background: var(--vermillion);
+      animation:
+        op-line .9s linear forwards,
+        op-line-hand 0s linear .9s forwards; /* 伸びきったらパネル側の2本へ受け渡す */
+    }
+
+    @keyframes op-line {
+      from { height: 0; }
+      to { height: 100%; }
+    }
+
+    @keyframes op-line-hand {
+      to { opacity: 0; }
+    }
+
+    @keyframes op-edge {
+      to { opacity: 1; }
+    }
+
+    @keyframes op-open-l {
+      to { transform: translateX(-100%); }
+    }
+
+    @keyframes op-open-r {
+      to { transform: translateX(100%); }
+    }
+
+    @keyframes op-stage-out {
+      to { opacity: 0; visibility: hidden; }
+    }
+
+    /* 動きを抑える設定のときは、墨色+ロゴを短く見せて終わる */
+    @media (prefers-reduced-motion: reduce) {
+      .opening-panel,
+      .opening-line {
+        display: none;
+      }
+
+      .opening-stage {
+        animation: op-stage-out .6s ease .6s forwards;
+      }
+    }
+
+
     /* ============ BUTTON HOVER (い草色→黄金色 / それ以外→い草色) ============ */
     /* 色が滑らかに変わるよう transition に color / border-color を追加 */
     .contact-btn {
@@ -1873,7 +2118,7 @@
       color: var(--washi);
     }
 
-    /* 導入事例カルーセルの矢印 → い草色 */
+    /* 施工事例カルーセルの矢印 → い草色 */
     .case-nav {
       transition: background .25s ease, border-color .25s ease, transform .25s ease, color .25s ease;
     }
@@ -1884,7 +2129,7 @@
       color: var(--washi);
     }
 
-    /* 導入事例カルーセルのドット → い草色 */
+    /* 施工事例カルーセルのドット → い草色 */
     .case-dot:hover::before {
       background: var(--igusa);
       border-color: var(--igusa);
@@ -1893,6 +2138,29 @@
   </style>
 </head>
 <body>
+
+<!-- ============ OPENING (読み込み時の演出) ============ -->
+<div class="opening" id="opening" aria-hidden="true">
+  <!-- パネルが開いた先に見える層 -->
+  <div class="opening-stage">
+    <img class="opening-logo" src="../../logo-white-transparent.png" alt="" width="1220" height="930">
+  </div>
+  <!-- 画面を覆う左右の和紙パネル -->
+  <div class="opening-panel opening-panel-l"></div>
+  <div class="opening-panel opening-panel-r"></div>
+  <!-- 中央を上から下へ伸びる朱色の線 -->
+  <span class="opening-line"></span>
+</div>
+<!-- JavaScript が無い環境では演出を出さない(消せなくなるため) -->
+<noscript>
+  <style>
+    .opening { display: none; }
+  </style>
+</noscript>
+<script>
+  /* 演出中のスクロールを止める。終了時の解除は本文末尾のスクリプトで行う */
+  document.documentElement.classList.add('opening-lock');
+</script>
 
 <!-- ============ HEADER (共通コンポーネント header.html) ============ -->
 <header class="site-header">
@@ -1910,7 +2178,7 @@
         <li><a href="#">TOP</a></li>
         <li><a href="company-story.html">想いと歩み</a></li>
         <li><a href="service.html">サービス内容</a></li>
-        <li><a href="works.html">導入事例</a></li>
+        <li><a href="works.html">施工事例</a></li>
         <li><a href="tatami.html">畳について</a></li>
         <li><a href="company.html">会社概要</a></li>
         <li><a href="contact.html">お問い合わせ</a></li>
@@ -1943,7 +2211,7 @@
     <li><a href="#">TOP</a></li>
     <li><a href="company-story.html">想いと歩み</a></li>
     <li><a href="service.html">サービス内容</a></li>
-    <li><a href="works.html">導入事例</a></li>
+    <li><a href="works.html">施工事例</a></li>
     <li><a href="tatami.html">畳について</a></li>
     <li><a href="company.html">会社概要</a></li>
     <li><a href="contact.html">お問い合わせ</a></li>
@@ -2016,8 +2284,7 @@
         </div>
       </div>
       <div class="split-text">
-        <div class="eyebrow reveal">畳について知る</div>
-        <h2 class="section-title reveal" style="--d:.12s">畳表・畳床・畳縁からできる、<br>畳の構造。</h2>
+        <h2 class="section-title reveal" style="--d:.12s">畳表・畳床・畳縁から<span class="nw">できる、<br class="pc-br">畳の構造。</span></h2>
         <p class="body-text reveal" style="--d:.24s">見た目や香りだけでなく、クッション性や耐久性まで、<br>畳は幾つもの部材が重なって出来ています。<br>仕組みを知ると、選び方も変わってきます。</p>
         <div class="tatami-diagram reveal" style="--d:.36s">
           <div><span>畳表(たたみおもて)</span><span>肌触り・見た目・香りを左右</span></div>
@@ -2040,7 +2307,6 @@
 <section id="price" class="washi-tex">
   <div class="wrap">
     <div class="section-head">
-      <div class="eyebrow reveal">畳の種類・料金の目安</div>
       <h2 class="section-title reveal" style="--d:.12s">い草畳と和紙表、<br>あなたの暮らしに合う一枚を。</h2>
     </div>
     <div class="product-grid">
@@ -2075,6 +2341,10 @@
     <div class="price-cta reveal" style="--d:.60s">
       <a class="cta-btn" href="price.html">
         料金ページで詳しく見る
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a class="cta-btn" href="tatami.html">
+        畳について知る
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
     </div>
@@ -2129,7 +2399,7 @@
                   <li><span>枚数</span><span>8畳</span></li>
                   <li><span>工期</span><span>4日</span></li>
                 </ul>
-                <blockquote>他の畳屋さんと仕事の仕方が違う<br>とても良かった</blockquote>
+                <blockquote>他の畳屋さんと<br class="sp-br">仕事の仕方が違う<br>とても良かった</blockquote>
               </div>
             </div>
           </div>
@@ -2159,7 +2429,6 @@
 <section id="craftspeople" class="washi-tex">
   <div class="wrap">
     <div class="section-head">
-      <div class="eyebrow reveal">職人紹介</div>
       <h2 class="section-title reveal" style="--d:.12s">この道を歩む、<br>ふたりの職人。</h2>
     </div>
     <div class="crafts-grid">
@@ -2209,9 +2478,6 @@
 <!-- ============ ACCESS (contact.html から移動) ============ -->
 <section id="access" class="washi-tex">
   <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">アクセス</div>
-    </div>
     <div class="access">
       <p class="access-line reveal">丹荘駅から車で15分</p>
       <div class="price-cta reveal" style="--d:.12s">
@@ -2395,6 +2661,7 @@
     var carousel = document.querySelector('.case-carousel');
     if (!carousel) return;
 
+    var viewport = carousel.querySelector('.case-viewport');
     var track = carousel.querySelector('.case-track');
     var slides = carousel.querySelectorAll('.case-slide');
     var dots = carousel.querySelectorAll('.case-dot');
@@ -2405,24 +2672,133 @@
     var INTERVAL = 5000; /* 自動で次のカードへ切り替わる間隔 */
     var SWIPE = 40;      /* スワイプと判定する横移動量(px) */
 
-    var index = 0;
+    var count = slides.length;
+    var originals = Array.prototype.slice.call(slides);
+    var index = 0;    /* 中央に置いているカード番号 */
+    var pos = 0;      /* クローンを含めたトラック上の位置 */
+    var edge = 0;     /* 左右それぞれに置くクローンの枚数 */
+    var clones = [];
     var timer = null;
     var paused = false; /* ポインタが乗っている / フォーカス中は自動送りを止める */
+    var settleTimer = null;
     var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    function render() {
-      track.style.transform = 'translateX(' + (-index * 100) + '%)';
-      Array.prototype.forEach.call(slides, function (el, i) {
-        el.setAttribute('aria-hidden', i === index ? 'false' : 'true');
+    /* --- 位置の計算 --- */
+    /* カードは拡大・縮小しているため、見た目の幅(getBoundingClientRect)ではなく
+       変形前のレイアウト上の幅を使う */
+    function slideWidth() {
+      var pct = parseFloat(getComputedStyle(carousel).getPropertyValue('--card'));
+      if (pct) return track.clientWidth * pct / 100;
+      return originals[0].offsetWidth;
+    }
+
+    function stepWidth() {
+      /* 間隔は左右マージンで取っている(重ねるために負の値も使う) */
+      var cs = getComputedStyle(originals[0]);
+      var gap = (parseFloat(cs.marginLeft) || 0) + (parseFloat(cs.marginRight) || 0);
+      return slideWidth() + gap;
+    }
+
+    /* 中央のカードが画面の中央に来る位置。
+       先頭カードの左マージンぶんトラック全体がずれるので、それも差し引く */
+    function offsetFor(p) {
+      var lead = parseFloat(getComputedStyle(originals[0]).marginLeft) || 0;
+      return -p * stepWidth() - lead + (track.clientWidth - slideWidth()) / 2;
+    }
+
+    /* --- クローン --- */
+    /* 端をまたぐときに逆戻りして見えないよう、また両端に空白ができないよう、
+       画面の端まで埋められる枚数だけ前後にクローンを置く */
+    function neededEdge() {
+      var need = Math.ceil(((track.clientWidth - slideWidth()) / 2) / stepWidth()) + 1;
+      return Math.max(1, Math.min(count, need));
+    }
+
+    function buildClones() {
+      clones.forEach(function (c) { c.remove(); });
+      clones = [];
+      edge = neededEdge();
+      for (var i = 0; i < edge; i++) {
+        var head = originals[count - edge + i].cloneNode(true);
+        var tail = originals[i % count].cloneNode(true);
+        [head, tail].forEach(function (c) {
+          c.classList.remove('is-focus');
+          c.setAttribute('aria-hidden', 'true');
+          c.removeAttribute('role');
+          c.removeAttribute('aria-roledescription');
+          c.removeAttribute('aria-label');
+        });
+        clones.push(head, tail);
+        track.insertBefore(head, track.children[i]);
+        track.appendChild(tail);
+      }
+    }
+
+    /* --- 描画 --- */
+    function paint(animate) {
+      if (animate === false) track.classList.add('no-anim');
+      track.style.transform = 'translateX(' + offsetFor(pos) + 'px)';
+      if (animate === false) {
+        void track.offsetWidth; /* 位置を確定させてからアニメーションを戻す */
+        track.classList.remove('no-anim');
+      }
+    }
+
+    /* 中央に来ているカードだけを強調する */
+    function marks() {
+      Array.prototype.forEach.call(track.children, function (el, i) {
+        el.classList.toggle('is-focus', i === pos);
+        /* 重ねて表示する幅のとき、中央に近いカードほど手前に置く */
+        el.style.zIndex = String(20 - Math.abs(i - pos));
+      });
+      Array.prototype.forEach.call(originals, function (el, i) {
+        /* 中央と、その左右に見えているカードは読み上げの対象に残す */
+        var near = Math.min(Math.abs(i - index), count - Math.abs(i - index));
+        el.setAttribute('aria-hidden', near <= 1 ? 'false' : 'true');
       });
       Array.prototype.forEach.call(dots, function (el, i) {
         el.setAttribute('aria-selected', i === index ? 'true' : 'false');
       });
     }
 
+    function render(animate) {
+      pos = index + edge;
+      paint(animate);
+      marks();
+    }
+
+    /* クローンの上で止まっていたら、実物の同じ絵へアニメーションなしで移す */
+    function settle() {
+      var want = index + edge;
+      if (pos === want) return;
+      pos = want;
+      paint(false);
+      marks();
+    }
+
+    function scheduleSettle() {
+      clearTimeout(settleTimer);
+      if (pos === index + edge) return;
+      var dur = parseFloat(getComputedStyle(track).transitionDuration) || 0;
+      if (dur === 0) settle(); /* アニメーションしない設定のときは即座に */
+      else settleTimer = setTimeout(settle, dur * 1000 + 100);
+    }
+
+    track.addEventListener('transitionend', function (e) {
+      if (e.target !== track || e.propertyName !== 'transform') return;
+      settle();
+    });
+
     function go(n, fromUser) {
-      index = (n + slides.length) % slides.length;
-      render();
+      var next = (n + count) % count;
+      /* 端をまたぐときだけ、進んでいる向きのままクローンへ動かす */
+      if (n >= count) pos = count + edge;      /* 最後 → 最初(そのまま前へ) */
+      else if (n < 0) pos = edge - 1;          /* 最初 → 最後(そのまま後ろへ) */
+      else pos = next + edge;
+      index = next;
+      paint(true);
+      marks();
+      scheduleSettle();
       /* 手動で送った直後は、次の自動送りまでの時間を測り直す */
       if (fromUser) { stop(); start(); }
     }
@@ -2448,34 +2824,163 @@
     carousel.addEventListener('focusin', function () { paused = true; stop(); });
     carousel.addEventListener('focusout', function () { paused = false; start(); });
 
-    /* スマホのスワイプ操作 */
-    var touchX = null;
-    var touchY = null;
+    /* --- スマホの指スワイプ / PC のドラッグ (指の動きにカードが追従する) --- */
+    var dragging = false;  /* ポインタを押している最中か */
+    var locked = false;    /* 横方向のドラッグと確定したか */
+    var startX = 0;
+    var startY = 0;
+    var moveX = 0;
+    var pointerId = null;
 
-    carousel.addEventListener('touchstart', function (e) {
-      touchX = e.touches[0].clientX;
-      touchY = e.touches[0].clientY;
+    function onDown(e) {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      dragging = true;
+      locked = false;
+      moveX = 0;
+      pointerId = e.pointerId;
+      startX = e.clientX;
+      startY = e.clientY;
       stop();
-    }, { passive: true });
+    }
 
-    carousel.addEventListener('touchend', function (e) {
-      if (touchX === null) return;
-      var dx = e.changedTouches[0].clientX - touchX;
-      var dy = e.changedTouches[0].clientY - touchY;
-      /* 縦スクロールと取り違えないよう、横方向の動きが大きいときだけ送る */
-      if (Math.abs(dx) > SWIPE && Math.abs(dx) > Math.abs(dy)) go(index + (dx < 0 ? 1 : -1));
-      touchX = null;
-      touchY = null;
-      start();
-    }, { passive: true });
+    function onMove(e) {
+      if (!dragging || e.pointerId !== pointerId) return;
+      var dx = e.clientX - startX;
+      var dy = e.clientY - startY;
+
+      if (!locked) {
+        /* 動きが小さいうちは、縦スクロールかドラッグかを判定しない */
+        if (Math.abs(dx) < 6 && Math.abs(dy) < 6) return;
+        /* 縦の動きが勝っていれば、ページのスクロールとしてそのまま流す */
+        if (Math.abs(dy) >= Math.abs(dx)) { endDrag(false); return; }
+        locked = true;
+        if (viewport.setPointerCapture) viewport.setPointerCapture(pointerId);
+        track.classList.add('is-dragging');
+        viewport.classList.add('is-dragging');
+      }
+
+      moveX = dx;
+      track.style.transform = 'translateX(' + (offsetFor(pos) + dx) + 'px)';
+    }
+
+    function endDrag(commit) {
+      if (!dragging) return;
+      dragging = false;
+
+      if (locked) {
+        if (viewport.releasePointerCapture && viewport.hasPointerCapture && viewport.hasPointerCapture(pointerId)) {
+          viewport.releasePointerCapture(pointerId);
+        }
+        track.classList.remove('is-dragging');
+        viewport.classList.remove('is-dragging');
+      }
+
+      var dx = moveX;
+      var wasLocked = locked;
+      moveX = 0;
+      locked = false;
+      pointerId = null;
+
+      /* 1枚の幅の18%かSWIPE(40px)のどちらか小さい方を超えたら隣のカードへ送る */
+      var threshold = Math.min(SWIPE, stepWidth() * 0.18);
+      if (commit && wasLocked && Math.abs(dx) > threshold) {
+        go(index + (dx < 0 ? 1 : -1), true);
+      } else {
+        paint(true); /* 動かした分を元の位置へ戻す */
+        scheduleSettle();
+        stop();
+        start();
+      }
+    }
+
+    if (window.PointerEvent) {
+      viewport.addEventListener('pointerdown', onDown);
+      viewport.addEventListener('pointermove', onMove);
+      window.addEventListener('pointerup', function () { endDrag(true); });
+      window.addEventListener('pointercancel', function () { endDrag(false); });
+      /* 写真をつかんだときのブラウザ既定のドラッグを抑える */
+      viewport.addEventListener('dragstart', function (e) { e.preventDefault(); });
+    } else {
+      /* PointerEvent 非対応の古いブラウザ向け(しきい値だけのスワイプ) */
+      var touchX = null;
+      var touchY = null;
+
+      viewport.addEventListener('touchstart', function (e) {
+        touchX = e.touches[0].clientX;
+        touchY = e.touches[0].clientY;
+        stop();
+      }, { passive: true });
+
+      viewport.addEventListener('touchend', function (e) {
+        if (touchX === null) return;
+        var dx = e.changedTouches[0].clientX - touchX;
+        var dy = e.changedTouches[0].clientY - touchY;
+        if (Math.abs(dx) > SWIPE && Math.abs(dx) > Math.abs(dy)) go(index + (dx < 0 ? 1 : -1));
+        touchX = null;
+        touchY = null;
+        start();
+      }, { passive: true });
+    }
 
     /* 別タブに移っている間は動かさない */
     document.addEventListener('visibilitychange', function () {
       if (document.hidden) stop(); else start();
     });
 
-    render();
+    /* 画面幅が変わったらカードの幅・クローンの枚数・位置を取り直す */
+    var resizeTimer = null;
+    var lastWidth = 0;
+    function relayout() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        /* 高さだけの変化(写真の遅延読み込み等)では組み直さない。
+           組み直すと高さがまた動き、監視が止まらなくなるため */
+        if (track.clientWidth === lastWidth) return;
+        lastWidth = track.clientWidth;
+        buildClones();
+        render(false);
+      }, 150);
+    }
+
+    window.addEventListener('resize', relayout);
+
+    /* 読み込み途中にスクロールバーが出る等で幅が変わっても中央がずれないよう、
+       ビューポートの寸法そのものを見張る */
+    if (window.ResizeObserver) new ResizeObserver(relayout).observe(viewport);
+
+    buildClones();
+    render(false);
+    lastWidth = track.clientWidth;
     start();
+  })();
+</script>
+
+<!-- ============ OPENING SCRIPT (演出の後始末) ============ -->
+<script>
+  (function () {
+    var opening = document.getElementById('opening');
+    var html = document.documentElement;
+    if (!opening) { html.classList.remove('opening-lock'); return; }
+
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    /* CSS 側の最後のアニメーション(墨色の層のフェードアウト)が終わるまでの時間 */
+    var DURATION = reduceMotion ? 1200 : 3900;
+    var done = false;
+
+    function finish() {
+      if (done) return;
+      done = true;
+      html.classList.remove('opening-lock');
+      if (opening.parentNode) opening.parentNode.removeChild(opening);
+    }
+
+    /* 演出の終わりに合わせて片付ける(アニメーションの開始時刻とずれないよう
+       animationend を主に使い、届かなかった場合に備えてタイマーも置く) */
+    opening.addEventListener('animationend', function (e) {
+      if (e.animationName === 'op-stage-out') finish();
+    });
+
+    setTimeout(finish, DURATION + 900);
   })();
 </script>
 
