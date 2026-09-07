@@ -2841,6 +2841,16 @@
       return -p * stepWidth() - lead + (track.clientWidth - slideWidth()) / 2;
     }
 
+    /* いま実際に描かれているトラックの横位置(アニメーションの途中でも取れる) */
+    function currentX() {
+      var t = getComputedStyle(track).transform;
+      if (!t || t === 'none') return 0;
+      var m = t.match(/matrix3?d?\(([^)]+)\)/);
+      if (!m) return 0;
+      var v = m[1].split(',');
+      return parseFloat(v.length > 6 ? v[12] : v[4]) || 0;
+    }
+
     /* --- クローン --- */
     /* 端をまたぐときに逆戻りして見えないよう、また両端に空白ができないよう、
        画面の端まで埋められる枚数だけ前後にクローンを置く */
@@ -2904,6 +2914,9 @@
 
     /* クローンの上で止まっていたら、実物の同じ絵へアニメーションなしで移す */
     function settle() {
+      /* ドラッグ中に割り込むと、指に追従させている移動量(moveX)を捨ててしまい
+         カードが指から離れて跳ねる。指を離したときに endDrag から整列させる */
+      if (dragging && locked) return;
       var want = index + edge;
       if (pos === want) return;
       pos = want;
@@ -2926,10 +2939,24 @@
 
     function go(n, fromUser) {
       var next = (n + count) % count;
-      /* 端をまたぐときだけ、進んでいる向きのままクローンへ動かす */
-      if (n >= count) pos = count + edge;      /* 最後 → 最初(そのまま前へ) */
-      else if (n < 0) pos = edge - 1;          /* 最初 → 最後(そのまま後ろへ) */
-      else pos = next + edge;
+      /* 移動先は「今トラックがいる位置(pos)からの相対」で決める。
+         端をまたいだ直後はクローンの上に留まっているので、論理番号(index)だけから
+         決めると逆向きに何枚も戻ってしまう(連打・連続スワイプでの飛び) */
+      var delta = n - index;
+      var target = pos + delta;
+      var last = count + 2 * edge - 1; /* クローンを含めたトラックの端 */
+      if (target < 0 || target > last) {
+        /* クローンを使い切るときは、同じ絵になる count 枚ぶん位置をずらす。
+           見えている位置も同じだけずらすので、アニメーションの途中でも継ぎ目は出ない */
+        var shift = target < 0 ? count : -count;
+        pos += shift;
+        target += shift;
+        track.classList.add('no-anim');
+        track.style.transform = 'translateX(' + (currentX() - shift * stepWidth()) + 'px)';
+        void track.offsetWidth; /* ずらした位置を確定させてからアニメーションを戻す */
+        track.classList.remove('no-anim');
+      }
+      pos = target;
       index = next;
       paint(true);
       marks();
