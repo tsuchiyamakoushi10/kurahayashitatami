@@ -1111,6 +1111,34 @@
       }
     }
 
+    /* スマホでは、中央のカードを画面幅いっぱい近くまで広げ、
+       矢印は写真に重ねず、カードの下に左右並べて置く */
+    @media (max-width: 599px) {
+      .case-carousel {
+        /* 写真セクションと同じやり方で .wrap の左右パディング(28px)を打ち消し、
+           カルーセルだけ画面幅いっぱいに広げる */
+        margin-left: -28px;
+        margin-right: -28px;
+        /* 中央カードを大きくしたぶん、両隣はさらに深く後ろへ重ね(--gap を負に)、
+           外側の縁だけを覗かせる。中央強調と両端の減光の指定はそのまま使う */
+        --card: 84%;
+        --gap: -57%;
+        --side-scale: .5;
+      }
+
+      /* 矢印をカードの外(下)へ。位置指定を外して通常の流れに戻し、左右に並べる */
+      .case-nav-layer {
+        position: static;
+        width: auto;
+        transform: none;
+        aspect-ratio: auto;
+        justify-content: center;
+        gap: 28px;
+        padding: 0;
+        margin-top: 16px;
+      }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .case-track,
       .case-slide,
