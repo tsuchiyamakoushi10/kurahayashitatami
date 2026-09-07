@@ -80,6 +80,34 @@
       background-size: 220px 220px;
     }
 
+    /* ============ 背景の装飾(イラスト1 / スクロールしても動かない) ============ */
+    /* 濃さの調整はこの1箇所だけ。目安は 0.10〜0.15 */
+    body::before {
+      content: "";
+      /* position: fixed 自体で画面に貼り付ける。
+         background-attachment: fixed を無視するモバイルブラウザ(iOS Safari など)でも
+         これで確実に固定されるため、JS は使っていない */
+      position: fixed;
+      inset: 0;
+      /* 本文より背面、下地の背景色より前面 */
+      z-index: -1;
+      pointer-events: none;
+      opacity: .12;
+      background-image: url("../../photos/output_photos/%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%EF%BC%91.png");
+      background-repeat: no-repeat;
+      background-position: center center;
+      /* 画面いっぱいに合わせ、四隅の装飾が画面の四隅に来るようにする */
+      background-size: 100% 100%;
+      background-attachment: fixed;
+    }
+
+    /* 下地の背景色は body 側の var(--washi) が受け持つ。
+       セクションが同じ色で塗りつぶすと装飾が隠れてしまうため、ここだけ透過させる
+       (色は body と同一の var(--washi) なので、装飾以外の見た目は変わらない) */
+    .washi-tex {
+      background: transparent;
+    }
+
     .section-head {
       max-width: 640px;
       margin-bottom: 56px;
