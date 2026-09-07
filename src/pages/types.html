@@ -106,6 +106,36 @@
       background: transparent;
     }
 
+    /* スマホ表示では、四隅の装飾(イラスト1)の代わりに
+       画面上部にイラスト2、画面下部にイラスト3を固定表示する。
+       PC表示(上のルール)には手を加えていない */
+    @media (max-width: 599px) {
+      /* 上部: イラスト2。差し替えるのは画像・位置・サイズだけで、
+         固定・重ね順・不透明度は上のルールをそのまま引き継ぐ */
+      body::before {
+        background-image: url("../../photos/output_photos/%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%EF%BC%92.png");
+        background-position: center top;
+        /* 画面幅いっぱい。高さは元の比率(3:2)のまま伸縮させない */
+        background-size: 100% auto;
+      }
+
+      /* 下部: イラスト3 */
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        /* 濃さは上部(イラスト2)と同じ。調整はこの2箇所を揃えて行う */
+        opacity: .12;
+        background-image: url("../../photos/output_photos/%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%EF%BC%93.png");
+        background-repeat: no-repeat;
+        background-position: center bottom;
+        background-size: 100% auto;
+        background-attachment: fixed;
+      }
+    }
+
     .section-head {
       max-width: 640px;
       margin-bottom: 56px;

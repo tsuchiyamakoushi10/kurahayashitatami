@@ -9,9 +9,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@300;400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../design/tokens.css">
   <link rel="stylesheet" href="../../design/components.css">
-  <!-- オープニングの和紙パネルに使う四隅の装飾(イラスト1)。
-       演出が始まる前に読み終えられるよう、CSSと並行して先に取得しておく -->
-  <link rel="preload" as="image" fetchpriority="high" href="../../photos/output_photos/%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%EF%BC%91.png">
+  <!-- オープニングの和紙パネルに使う装飾。演出が始まる前に読み終えられるよう、
+       CSSと並行して先に取得しておく。PC は四隅のイラスト1、スマホは上下のイラスト2・3 -->
+  <link rel="preload" as="image" fetchpriority="high" media="(min-width: 600px)" href="../../photos/output_photos/%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%EF%BC%91.png">
+  <link rel="preload" as="image" fetchpriority="high" media="(max-width: 599px)" href="../../photos/output_photos/%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%EF%BC%92.png">
+  <link rel="preload" as="image" fetchpriority="high" media="(max-width: 599px)" href="../../photos/output_photos/%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%EF%BC%93.png">
   <style>
     /* ============ RESET & BASE ============ */
     * {
@@ -360,6 +362,36 @@
        (色は body と同一の var(--washi) なので、装飾以外の見た目は変わらない) */
     .washi-tex {
       background: transparent;
+    }
+
+    /* スマホ表示では、四隅の装飾(イラスト1)の代わりに
+       画面上部にイラスト2、画面下部にイラスト3を固定表示する。
+       PC表示(上のルール)には手を加えていない */
+    @media (max-width: 599px) {
+      /* 上部: イラスト2。差し替えるのは画像・位置・サイズだけで、
+         固定・重ね順・不透明度は上のルールをそのまま引き継ぐ */
+      body::before {
+        background-image: url("../../photos/output_photos/%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%EF%BC%92.png");
+        background-position: center top;
+        /* 画面幅いっぱい。高さは元の比率(3:2)のまま伸縮させない */
+        background-size: 100% auto;
+      }
+
+      /* 下部: イラスト3 */
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        /* 濃さは上部(イラスト2)と同じ。調整はこの2箇所を揃えて行う */
+        opacity: .12;
+        background-image: url("../../photos/output_photos/%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%EF%BC%93.png");
+        background-repeat: no-repeat;
+        background-position: center bottom;
+        background-size: 100% auto;
+        background-attachment: fixed;
+      }
     }
 
     .section-head {
@@ -1994,6 +2026,35 @@
       left: 0;
     }
 
+    /* スマホ表示では、四隅の装飾(イラスト1)の代わりに
+       画面上部にイラスト2、画面下部にイラスト3を置く。
+       どちらも画面の横幅いっぱいに広げるため、PC版と同じく1枚の絵を
+       左右のパネルで半分ずつ受け持つ形にしている */
+    @media (max-width: 599px) {
+      .opening-panel {
+        /* 1枚目=イラスト2(上)、2枚目=イラスト3(下)。
+           パネル幅は画面の50%なので、その200% = 画面幅ちょうど。
+           高さは auto で元の比率(3:2)を保ち、潰れたり伸びたりしない */
+        background-size: 200% auto, 200% auto;
+      }
+
+      /* 左パネル: 2枚とも左半分を、パネルの左端(=画面の左端)に合わせる */
+      .opening-panel-l {
+        background-image:
+          url("../../photos/output_photos/%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%EF%BC%92.png"),
+          url("../../photos/output_photos/%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%EF%BC%93.png");
+        background-position: left top, left bottom;
+      }
+
+      /* 右パネル: 2枚とも右半分を、パネルの右端(=画面の右端)に合わせる */
+      .opening-panel-r {
+        background-image:
+          url("../../photos/output_photos/%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%EF%BC%92.png"),
+          url("../../photos/output_photos/%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%EF%BC%93.png");
+        background-position: right top, right bottom;
+      }
+    }
+
     /* 四隅の装飾の読み込みが終わるまで、演出を一時停止して待つ。
        (止めて再開するだけなので、演出の速度や順番は変わらない) */
     .opening:not(.opening-ready) .opening-panel,
@@ -2180,7 +2241,7 @@
   /* 演出中のスクロールを止める。終了時の解除は本文末尾のスクリプトで行う */
   document.documentElement.classList.add('opening-lock');
 
-  /* 和紙パネルの四隅の装飾(イラスト1)を先に読み込み、読み終えてから演出を始める。
+  /* 和紙パネルの装飾を先に読み込み、読み終えてから演出を始める。
      待っている間は CSS 側で animation-play-state: paused にしているだけなので、
      再開したあとの速度・順番は変わらない */
   (function () {
@@ -2190,7 +2251,13 @@
     var opening = document.getElementById('opening');
     if (!opening) return;
 
+    /* CSS の @media (max-width: 599px) と同じ条件で、待つ画像を切り替える */
+    var srcs = window.matchMedia('(max-width: 599px)').matches
+      ? ['../../photos/output_photos/%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%EF%BC%92.png', '../../photos/output_photos/%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%EF%BC%93.png']
+      : ['../../photos/output_photos/%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%EF%BC%91.png'];
+
     var started = false;
+    var remaining = srcs.length;
 
     function start() {
       if (started) return;
@@ -2198,13 +2265,20 @@
       opening.classList.add('opening-ready');
     }
 
-    var img = new Image();
-    img.onload = start;
-    /* 読み込みに失敗しても演出は必ず始める(演出が止まったままにならないように) */
-    img.onerror = start;
-    img.src = '../../photos/output_photos/%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%EF%BC%91.png';
-    /* すでにキャッシュにある場合は onload が来ないことがあるので、その場で開始する */
-    if (img.complete) start();
+    function done() {
+      remaining -= 1;
+      if (remaining <= 0) start();
+    }
+
+    srcs.forEach(function (src) {
+      var img = new Image();
+      img.onload = done;
+      /* 読み込みに失敗しても演出は必ず始める(演出が止まったままにならないように) */
+      img.onerror = done;
+      img.src = src;
+      /* すでにキャッシュにある場合は onload が来ないことがあるので、その場で数える */
+      if (img.complete) done();
+    });
 
     setTimeout(start, MAX_WAIT);
   })();
