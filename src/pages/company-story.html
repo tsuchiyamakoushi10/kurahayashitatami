@@ -64,12 +64,16 @@
       padding: 110px 0;
     }
 
-    .washi-tex {
+    /* 和紙色の下地。#strength(.igusa-soft) もここに合流させ、
+       白っぽい背景のセクションは全て同じ色・同じテクスチャで揃えている */
+    .washi-tex,
+    .igusa-soft {
       position: relative;
       background: var(--washi);
     }
 
-    .washi-tex::before {
+    .washi-tex::before,
+    .igusa-soft::before {
       content: "";
       position: absolute;
       inset: 0;
@@ -104,7 +108,8 @@
     /* 下地の背景色は body 側の var(--washi) が受け持つ。
        セクションが同じ色で塗りつぶすと装飾が隠れてしまうため、ここだけ透過させる
        (色は body と同一の var(--washi) なので、装飾以外の見た目は変わらない) */
-    .washi-tex {
+    .washi-tex,
+    .igusa-soft {
       background: transparent;
     }
 
@@ -583,21 +588,12 @@
       pointer-events: none;
     }
 
-    /* ============ 強み・こだわり (igusa を薄く敷いたカード) ============ */
-    .igusa-soft {
-      position: relative;
-      background: var(--washi);
-    }
-
-    .igusa-soft::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background: var(--igusa);
-      opacity: .12;
-    }
-
+    /* ============ 強み・こだわり (カード) ============ */
+    /* 以前はここで var(--washi) の上に var(--igusa) を 12% 重ねていたが、
+       (1) 他の和紙色セクション(.washi-tex)と色味がずれる
+       (2) 下地を塗りつぶすため body::before の唐草装飾まで隠してしまう
+       という2点があり、下地の指定は上の .washi-tex 側に合流させた。
+       ここには、このセクション固有の指定だけを残している */
     .igusa-soft .wrap {
       position: relative;
       z-index: 1;
