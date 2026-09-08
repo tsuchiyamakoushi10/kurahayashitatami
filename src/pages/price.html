@@ -231,111 +231,98 @@
     }
 
     /* ============ 料金 (PRICE) ============ */
-    .price-block {
+    /* 商品カテゴリ(国産い草 / 和紙表)の大枠。この中に作業ごとの料金を入れ子で置く */
+    .price-product {
       position: relative;
       z-index: 1;
-      margin-top: 48px;
-      padding-top: 48px;
-      border-top: 1px solid var(--washi-3);
+      margin-top: 44px;
+      border: 1px solid var(--igusa);
     }
 
-    /* 最初のブロックは見出し直後のため、区切り線と上余白を持たせない */
-    .section-head + .price-block {
+    /* 見出し直後の1枠目は上余白を持たせない */
+    .section-head + .price-product {
       margin-top: 0;
-      padding-top: 0;
-      border-top: none;
     }
 
-    .price-head {
-      display: flex;
-      align-items: baseline;
-      flex-wrap: wrap;
-      gap: 4px 14px;
+    .price-product-head {
+      padding: 18px 28px;
+      background: var(--igusa);
     }
 
-    .price-head .mark {
-      width: 9px;
-      height: 9px;
-      flex: 0 0 auto;
-      align-self: center;
-      background: var(--vermillion);
-      transform: rotate(45deg);
-    }
-
-    .price-head h3 {
+    .price-product-head h3 {
       font-family: var(--font-d);
       font-weight: 700;
       font-size: clamp(21px, 2.7vw, 27px);
       line-height: 1.5;
-      color: var(--ink);
+      letter-spacing: .06em;
+      color: var(--washi);
     }
 
-    .price-head .sub {
-      font-family: var(--font-b);
-      font-weight: 500;
-      font-size: 14px;
-      color: var(--ink-45);
+    /* 和紙表の枠は黄金色 */
+    .price-product.is-gold {
+      border-color: var(--gold);
     }
 
-    .price-lead {
-      margin-top: 14px;
-      max-width: 38em;
-      font-size: 15px;
-      color: var(--ink-70);
+    .price-product.is-gold .price-product-head {
+      background: var(--gold);
     }
 
-    .price-group {
-      margin-top: 30px;
+    .price-product-body {
+      padding: 28px;
     }
 
-    .price-group-name {
+    /* 作業(表替え / 新調)ごとの入れ子ブロック */
+    .price-work + .price-work {
+      margin-top: 34px;
+    }
+
+    .price-work-title {
       padding-bottom: 8px;
       border-bottom: 1px solid var(--washi-3);
       font-family: var(--font-d);
       font-weight: 700;
-      font-size: 17px;
-      letter-spacing: .04em;
-      color: var(--ink);
-    }
-
-    .price-row {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: center;
-      gap: 18px;
-      padding: 14px 4px;
-      border-bottom: 1px dashed var(--washi-3);
-    }
-
-    .price-row:last-child {
-      border-bottom: none;
-    }
-
-    .price-grade {
-      font-family: var(--font-b);
-      font-weight: 700;
-      font-size: 15px;
+      font-size: 1.25rem;
       letter-spacing: .04em;
       color: var(--igusa-deep);
     }
 
-    .price-grade.mid {
-      color: var(--ink-70);
+    /* グレード別の価格表(国産い草) */
+    .price-grade-table {
+      width: 100%;
+      border-collapse: collapse;
     }
 
-    .price-grade.top {
-      color: var(--vermillion);
+    .price-grade-table th,
+    .price-grade-table td {
+      padding: 13px 4px;
+      border-bottom: 1px dashed var(--washi-3);
     }
 
-    .price-amount {
+    .price-grade-table tr:last-child th,
+    .price-grade-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .price-grade-table th {
+      width: 30%;
+      text-align: left;
       font-family: var(--font-d);
       font-weight: 700;
-      font-size: clamp(18px, 2.4vw, 21px);
+      font-size: 1.05rem;
+      letter-spacing: .08em;
       color: var(--ink);
+    }
+
+    .price-grade-table td {
+      text-align: right;
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--igusa-deep);
       white-space: nowrap;
     }
 
-    .price-amount .unit {
+    .price-unit {
       margin-left: 4px;
       font-family: var(--font-b);
       font-weight: 500;
@@ -343,16 +330,91 @@
       color: var(--ink-45);
     }
 
-    .price-note {
+    /* 和紙表:種類(清流 / 銀白 / 市松)ごとのブロック */
+    .price-washi-type + .price-washi-type {
       margin-top: 18px;
-      font-size: 13.5px;
-      line-height: 1.85;
-      color: var(--ink-45);
     }
 
-    /* 裏返し（定額）カード */
+    .price-washi-type-head {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 2px 10px;
+      margin-top: 16px;
+      margin-bottom: 2px;
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: .08em;
+      color: var(--ink);
+    }
+
+    .price-washi-type-head .weave-note {
+      font-family: var(--font-b);
+      font-weight: 500;
+      font-size: 12.5px;
+      letter-spacing: 0;
+      color: var(--gold);
+    }
+
+    .price-weave-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 18px;
+      padding: 11px 4px;
+      border-bottom: 1px dashed var(--washi-3);
+    }
+
+    .price-weave-row:last-child {
+      border-bottom: none;
+    }
+
+    .price-weave-row .weave-tag {
+      font-size: 1.05rem;
+      color: var(--ink-70);
+    }
+
+    .price-weave-row .price {
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--igusa-deep);
+      white-space: nowrap;
+    }
+
+    /* 用語解説(引き目 / 目積) */
+    .price-glossary {
+      margin-top: 26px;
+      padding: 18px 22px;
+      background: rgba(166, 134, 79, .08);
+      border-left: 3px solid var(--gold);
+      font-size: 0.92rem;
+      line-height: 1.85;
+      color: var(--ink-70);
+    }
+
+    .price-glossary > div + div {
+      margin-top: 8px;
+    }
+
+    .price-glossary dt {
+      display: inline;
+      font-family: var(--font-d);
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .price-glossary dd {
+      display: inline;
+      margin: 0 0 0 6px;
+    }
+
+    /* 商品カテゴリの枠外に置く共通項目(裏返し・古畳の処分代) */
     .price-flat {
-      margin-top: 30px;
+      position: relative;
+      z-index: 1;
+      margin-top: 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -361,6 +423,11 @@
       padding: 30px 32px;
       background: var(--washi-2);
       border: 1px solid var(--washi-3);
+    }
+
+    /* 商品カテゴリ直後の1枚目は、枠との切れ目をはっきりさせる */
+    .price-product + .price-flat {
+      margin-top: 48px;
     }
 
     .price-flat .label {
@@ -393,48 +460,6 @@
       color: var(--ink-45);
     }
 
-    /* 6畳1間の目安 */
-    .price-model-grid {
-      margin-top: 30px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--washi-3);
-      border: 1px solid var(--washi-3);
-    }
-
-    .price-model-card {
-      background: var(--washi);
-      padding: 26px 22px;
-    }
-
-    .price-model-card .service {
-      font-size: 14px;
-      color: var(--ink-45);
-    }
-
-    .price-model-card .amount {
-      margin-top: 8px;
-      font-family: var(--font-d);
-      font-weight: 700;
-      font-size: clamp(21px, 2.6vw, 26px);
-      color: var(--ink);
-    }
-
-    .price-model-card .amount .unit {
-      margin-left: 3px;
-      font-family: var(--font-b);
-      font-weight: 500;
-      font-size: 12.5px;
-      color: var(--ink-45);
-    }
-
-    @media (max-width: 819px) {
-      .price-model-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
     /* ============ MOBILE ADJUST (599px以下) ============ */
     @media (max-width: 599px) {
       .page-head {
@@ -442,17 +467,32 @@
         padding-bottom: 0;
       }
 
-      .price-block {
-        margin-top: 38px;
-        padding-top: 38px;
+      .price-product {
+        margin-top: 34px;
+      }
+
+      .price-product-head {
+        padding: 15px 18px;
+      }
+
+      .price-product-body {
+        padding: 22px 18px;
+      }
+
+      .price-work + .price-work {
+        margin-top: 28px;
+      }
+
+      .price-glossary {
+        padding: 16px 16px;
       }
 
       .price-flat {
         padding: 24px 20px;
       }
 
-      .price-model-card {
-        padding: 22px 20px;
+      .price-product + .price-flat {
+        margin-top: 38px;
       }
     }
 
@@ -861,7 +901,9 @@
       box-shadow: 0 6px 18px rgba(0, 0, 0, .35);
     }
 
-    .insta-btn svg {
+    /* SVGのグリフから photos/output_photos/インスタ.png に差し替え。
+       見た目の大きさが変わらないよう、寸法は元の 22px のまま */
+    .insta-btn img {
       width: 22px;
       height: 22px;
       flex: 0 0 22px;
@@ -1039,7 +1081,7 @@
       opacity: 1;
     }
 
-    .insta-btn svg,
+    .insta-btn img,
     .insta-btn span {
       position: relative;
       z-index: 1;
@@ -1138,118 +1180,116 @@
       <h2 class="section-title reveal">各種料金</h2>
     </div>
 
-    <!-- 表替え -->
-    <div class="price-block reveal" style="--d:.12s">
-      <div class="price-head">
-        <span class="mark"></span>
-        <h3>表替え</h3>
-        <span class="sub">畳表のみを新しいものに交換</span>
+    <!-- ============ 国産い草 ============ -->
+    <div class="price-product reveal" style="--d:.12s">
+      <div class="price-product-head">
+        <h3>国産い草</h3>
       </div>
-      <p class="price-lead">畳床（芯材）はそのまま使い、表面の畳表だけを張り替えます。工賃はすべて価格に含まれています。</p>
+      <div class="price-product-body">
 
-      <div class="price-group">
-        <div class="price-group-name">国産い草</div>
-        <div class="price-row">
-          <span class="price-grade mid">中級</span>
-          <span class="price-amount">9,000円<span class="unit">/畳</span></span>
+        <div class="price-work">
+          <h4 class="price-work-title">表替え</h4>
+          <table class="price-grade-table">
+            <tbody>
+            <tr><th scope="row">特</th><td>15,000円<span class="price-unit">/畳</span></td></tr>
+            <tr><th scope="row">上</th><td>12,000円<span class="price-unit">/畳</span></td></tr>
+            <tr><th scope="row">中</th><td>10,000円<span class="price-unit">/畳</span></td></tr>
+            <tr><th scope="row">並</th><td>7,000円<span class="price-unit">/畳</span></td></tr>
+            </tbody>
+          </table>
         </div>
-        <div class="price-row">
-          <span class="price-grade">上級</span>
-          <span class="price-amount">12,000円<span class="unit">/畳</span></span>
-        </div>
-        <div class="price-row">
-          <span class="price-grade top">特上</span>
-          <span class="price-amount">15,000円<span class="unit">/畳</span></span>
-        </div>
-      </div>
 
-      <div class="price-group">
-        <div class="price-group-name">和紙表</div>
-        <div class="price-row">
-          <span class="price-grade mid">標準</span>
-          <span class="price-amount">9,000〜15,000円<span class="unit">/畳</span></span>
+        <div class="price-work">
+          <h4 class="price-work-title">新調</h4>
+          <table class="price-grade-table">
+            <tbody>
+            <tr><th scope="row">特</th><td>20,000円<span class="price-unit">/畳</span></td></tr>
+            <tr><th scope="row">上</th><td>17,000円<span class="price-unit">/畳</span></td></tr>
+            <tr><th scope="row">中</th><td>15,000円<span class="price-unit">/畳</span></td></tr>
+            <tr><th scope="row">並</th><td>12,000円<span class="price-unit">/畳</span></td></tr>
+            </tbody>
+          </table>
         </div>
-      </div>
 
-      <p class="price-note">畳縁の有無に関しては価格の変動がございますのでお問い合わせにて対応させていただきます。</p>
-    </div>
-
-    <!-- 新調 -->
-    <div class="price-block reveal" style="--d:.12s">
-      <div class="price-head">
-        <span class="mark"></span>
-        <h3>新調</h3>
-        <span class="sub">畳床から丸ごと新しく作り替え</span>
-      </div>
-      <p class="price-lead">畳床・畳表・畳縁をすべて新しくします。表替えよりも価格は高くなりますが、畳の芯からしっかりと作り直せます。</p>
-
-      <div class="price-group">
-        <div class="price-group-name">国産い草</div>
-        <div class="price-row">
-          <span class="price-grade mid">中級</span>
-          <span class="price-amount">12,000円<span class="unit">/畳</span></span>
-        </div>
-        <div class="price-row">
-          <span class="price-grade">上級</span>
-          <span class="price-amount">16,000円<span class="unit">/畳</span></span>
-        </div>
-        <div class="price-row">
-          <span class="price-grade top">特上</span>
-          <span class="price-amount">20,000円<span class="unit">/畳</span></span>
-        </div>
-      </div>
-
-      <div class="price-group">
-        <div class="price-group-name">和紙表</div>
-        <div class="price-row">
-          <span class="price-grade mid">標準</span>
-          <span class="price-amount">12,000〜25,000円<span class="unit">/畳</span></span>
-        </div>
-      </div>
-
-      <p class="price-note">※古い畳の引き上げ・処分費は別途申し受けます。金額はお問い合わせの際にご案内いたします。</p>
-    </div>
-
-    <!-- 裏返し -->
-    <div class="price-block reveal" style="--d:.12s">
-      <div class="price-head">
-        <span class="mark"></span>
-        <h3>裏返し</h3>
-        <span class="sub">畳表を裏返して再利用</span>
-      </div>
-      <p class="price-lead">今ある畳表をひっくり返して張り直します。材料をほとんど使わないため、種類やグレードに関わらず定額です。</p>
-
-      <div class="price-flat">
-        <div class="label">
-          <strong>畳表の種類・グレードにかかわらず一律</strong>
-          1畳あたりの料金
-        </div>
-        <div class="amount">4,500円<span class="unit">+税 /畳</span></div>
       </div>
     </div>
 
-    <!-- 6畳1間の目安 -->
-    <div class="price-block reveal" style="--d:.12s">
-      <div class="price-head">
-        <span class="mark"></span>
-        <h3>6畳1間の目安</h3>
-        <span class="sub">よくあるお部屋の広さで換算した概算金額</span>
+    <!-- ============ 和紙表 ============ -->
+    <div class="price-product is-gold reveal" style="--d:.12s">
+      <div class="price-product-head">
+        <h3>和紙表</h3>
       </div>
+      <div class="price-product-body">
 
-      <div class="price-model-grid">
-        <div class="price-model-card">
-          <div class="service">裏返し</div>
-          <div class="amount">17,000〜27,000円</div>
+        <div class="price-work">
+          <h4 class="price-work-title">表替え</h4>
+
+          <div class="price-washi-type">
+            <h5 class="price-washi-type-head">清流</h5>
+        <div class="price-weave-row"><span class="weave-tag">引き目</span><span class="price">13,000円<span class="price-unit">/畳</span></span></div>
+        <div class="price-weave-row"><span class="weave-tag">目積</span><span class="price">15,000円<span class="price-unit">/畳</span></span></div>
+          </div>
+
+          <div class="price-washi-type">
+            <h5 class="price-washi-type-head">銀白</h5>
+        <div class="price-weave-row"><span class="weave-tag">引き目</span><span class="price">13,000円<span class="price-unit">/畳</span></span></div>
+        <div class="price-weave-row"><span class="weave-tag">目積</span><span class="price">16,000円<span class="price-unit">/畳</span></span></div>
+          </div>
+
+          <div class="price-washi-type">
+            <h5 class="price-washi-type-head">市松 <span class="weave-note">引き目のみ</span></h5>
+        <div class="price-weave-row"><span class="weave-tag">引き目</span><span class="price">15,000円<span class="price-unit">/畳</span></span></div>
+          </div>
         </div>
-        <div class="price-model-card">
-          <div class="service">表替え（並〜上物）</div>
-          <div class="amount">30,000<span class="unit">円前後</span></div>
+
+        <div class="price-work">
+          <h4 class="price-work-title">新調</h4>
+
+          <div class="price-washi-type">
+            <h5 class="price-washi-type-head">清流</h5>
+        <div class="price-weave-row"><span class="weave-tag">引き目</span><span class="price">18,000円<span class="price-unit">/畳</span></span></div>
+        <div class="price-weave-row"><span class="weave-tag">目積</span><span class="price">20,000円<span class="price-unit">/畳</span></span></div>
+          </div>
+
+          <div class="price-washi-type">
+            <h5 class="price-washi-type-head">銀白</h5>
+        <div class="price-weave-row"><span class="weave-tag">引き目</span><span class="price">15,000円<span class="price-unit">/畳</span></span></div>
+        <div class="price-weave-row"><span class="weave-tag">目積</span><span class="price">20,000円<span class="price-unit">/畳</span></span></div>
+          </div>
+
+          <div class="price-washi-type">
+            <h5 class="price-washi-type-head">市松 <span class="weave-note">引き目のみ</span></h5>
+        <div class="price-weave-row"><span class="weave-tag">引き目</span><span class="price">20,000円<span class="price-unit">/畳</span></span></div>
+          </div>
         </div>
-        <div class="price-model-card">
-          <div class="service">新調（い草）</div>
-          <div class="amount">120,000<span class="unit">円前後</span></div>
-        </div>
+
+        <dl class="price-glossary">
+          <div>
+            <dt>引き目</dt>
+            <dd>畳表の織り目が横方向にまっすぐ通る、すっきりとした表情の織り方です。</dd>
+          </div>
+          <div>
+            <dt>目積(めせき)</dt>
+            <dd>織り目が細かく詰まった織り方で、畳の目が均一に美しく見えるのが特徴です。</dd>
+          </div>
+        </dl>
+
       </div>
+    </div>
+
+    <!-- ============ 裏返し・処分代(商品カテゴリ共通) ============ -->
+    <div class="price-flat reveal" style="--d:.12s">
+      <div class="label">
+        <strong>裏返し</strong>
+      </div>
+      <div class="amount">4,500円<span class="unit">/畳</span></div>
+    </div>
+
+    <div class="price-flat reveal" style="--d:.12s">
+      <div class="label">
+        <strong>古畳の処分代</strong>
+      </div>
+      <div class="amount">1,500円<span class="unit">/畳</span></div>
     </div>
   </div>
 </section>
@@ -1310,9 +1350,7 @@
     <!-- Instagram Button -->
     <div class="footer-instagram">
       <a class="insta-btn" href="https://www.instagram.com/kurahayashitatamiten/" target="_blank" rel="noopener noreferrer" aria-label="Instagramを開く">
-        <svg viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.69.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm4.965-10.322a1.44 1.44 0 1 1 2.881.001 1.44 1.44 0 0 1-2.881-.001z"/>
-        </svg>
+        <img class="insta-icon" src="../../photos/output_photos/%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF.png" alt="Instagram" width="22" height="22" loading="lazy" decoding="async">
         <span>Instagram</span>
       </a>
     </div>
