@@ -488,34 +488,7 @@
       line-height: 2;
     }
 
-    .badge-row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 14px 30px;
-      margin-top: 64px;
-    }
-
-    /* 枠線をやめてテキストだけの並びにしたので、枠のぶんの余白は列の gap で取る */
-    .badge {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-family: var(--font-d);
-      font-size: 16.5px;
-      letter-spacing: .05em;
-      color: var(--washi);
-    }
-
-    .badge .dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--vermillion);
-      flex: none;
-    }
-
-    /* 想いと歩みページへの導線。バッジ列と同じ 64px の間隔でセクション下部に置く */
+    /* 想いと歩みページへの導線。セクション下部に置く */
     .belief-cta {
       display: flex;
       justify-content: center;
@@ -529,34 +502,12 @@
         padding: 80px 0;
       }
 
-      /* スマホではバッジ列の上マージン(44px)と揃える */
       .belief-cta {
         margin-top: 44px;
       }
 
       .manifesto-line.small {
         margin-top: 28px;
-      }
-
-      /* スマホでは5枚を横幅いっぱいの縦一列に揃える(2枚並び・1枚単独の混在を解消) */
-      .badge-row {
-        flex-direction: column;
-        flex-wrap: nowrap;
-        align-items: stretch;
-        gap: 10px;
-        margin-top: 44px;
-      }
-
-      /* 2行目の上マージンをカード間の gap と同じ値にし、5枚すべての間隔を10pxで統一する */
-      .badge-row + .badge-row {
-        margin-top: 10px;
-      }
-
-      .badge {
-        /* 縦一列なので、ドットと文字は中央に見えるようそろえる */
-        justify-content: center;
-        font-size: 14px;
-        gap: 10px;
       }
     }
 
@@ -2419,16 +2370,7 @@
     <div class="eyebrow reveal">私たちの姿勢</div>
     <p class="manifesto-line big reveal">妥協はしない。<br>一枚一枚に、<br>確かな技術とこだわりを。</p>
     <p class="manifesto-line small reveal" style="--d:.12s">本気で仕事をした、その先にあるお客様の「きれいになった」「頼んでよかった」という言葉のために。<br>ひと目で違いがわかる仕上がりを、一つひとつの畳に積み重ねています。</p>
-    <div class="badge-row reveal" style="--d:.24s">
-      <div class="badge"><span class="dot"></span>創業83年</div>
-      <div class="badge"><span class="dot"></span>夜間対応</div>
-      <div class="badge"><span class="dot"></span>スピード対応</div>
-    </div>
-    <div style="--d:.36s" class="badge-row reveal" style="margin-top:14px;">
-      <div class="badge"><span class="dot"></span>国産い草へのこだわり</div>
-      <div class="badge"><span class="dot"></span>和紙表 取扱</div>
-    </div>
-    <div class="belief-cta reveal" style="--d:.48s">
+    <div class="belief-cta reveal" style="--d:.24s">
       <a class="btn-ghost" href="company-story.html">
         想いと歩みを見る
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
