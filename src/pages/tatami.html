@@ -660,6 +660,48 @@
       }
     }
 
+    /* ============ PAIN POINTS (concerns.html から移設) ============ */
+    .pain-list {
+      list-style: none;
+      display: grid;
+      gap: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pain-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 22px;
+      padding: 26px 0;
+      border-bottom: 1px solid var(--washi-3);
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: clamp(17px, 2.2vw, 22px);
+      color: var(--ink);
+    }
+
+    .pain-list li:first-child {
+      border-top: 1px solid var(--washi-3);
+    }
+
+    .pain-list .mark {
+      color: var(--vermillion);
+      font-size: 22px;
+      flex: none;
+    }
+
+    .pain-resolve {
+      margin-top: 44px;
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: clamp(20px, 2.8vw, 28px);
+      color: var(--vermillion);
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
     /* ============ SCROLL REVEAL (IntersectionObserver で .is-in を付与) ============ */
     .reveal {
       opacity: 0;
@@ -1266,7 +1308,7 @@
       <ul>
         <li><a href="top.html">TOP</a></li>
         <li><a href="company-story.html">想いと歩み</a></li>
-        <li><a href="service.html">サービス内容</a></li>
+        <li><a href="products.html">商品紹介</a></li>
         <li><a href="works.html">施工事例</a></li>
         <li><a href="tatami.html" aria-current="page">畳について</a></li>
         <li><a href="contact.html">お問い合わせ</a></li>
@@ -1298,7 +1340,7 @@
   <ul>
     <li><a href="top.html">TOP</a></li>
     <li><a href="company-story.html">想いと歩み</a></li>
-    <li><a href="service.html">サービス内容</a></li>
+    <li><a href="products.html">商品紹介</a></li>
     <li><a href="works.html">施工事例</a></li>
     <li><a href="tatami.html" aria-current="page">畳について</a></li>
     <li><a href="contact.html">お問い合わせ</a></li>
@@ -1500,6 +1542,23 @@
   </div>
 </section>
 
+<!-- ============ PAIN POINTS (concerns.html から移設) ============ -->
+<section class="washi-tex">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title reveal" style="--d:.12s">畳の"気になる"を、<br>そのままにしていませんか。</h2>
+    </div>
+
+    <ul class="pain-list">
+      <li style="--d:.24s"><span class="mark reveal">・</span>畳が色あせてお部屋が古く見える</li>
+      <li style="--d:.36s"><span class="mark reveal">・</span>費用や張り替え時期が分からず、そのままになっている</li>
+      <li style="--d:.48s"><span class="mark reveal">・</span>子どもが安心して遊べる部屋にしたい</li>
+    </ul>
+
+    <p class="pain-resolve reveal" style="--d:.60s">そのお悩み、畳を替えることで解決できます。</p>
+  </div>
+</section>
+
 <!-- ============ FAQ ============ -->
 <section id="faq" class="washi-tex">
   <div class="wrap faq-wrap">
@@ -1531,7 +1590,7 @@
 <section class="washi-tex">
   <div class="wrap">
     <div class="price-cta reveal">
-      <a class="cta-btn" href="price.html">
+      <a class="cta-btn" href="products.html#price">
         料金ページで詳しく見る
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>

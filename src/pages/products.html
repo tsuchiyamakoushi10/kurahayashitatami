@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>サービスについて | 倉林畳店</title>
+  <title>商品紹介 | 倉林畳店</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@300;400;500;700;900&display=swap" rel="stylesheet">
@@ -172,6 +172,13 @@
       margin-bottom: 0;
     }
 
+    /* ページ内リンクの飛び先が固定ヘッダー(76px)の下に潜らないようにする */
+    #types,
+    #services,
+    #price {
+      scroll-margin-top: 76px;
+    }
+
     /* ============ SERVICE TABS ============ */
     .service-tabs {
       position: relative;
@@ -236,6 +243,176 @@
         padding-bottom: 0;
       }
 
+      .type-block + .type-block {
+        margin-top: 64px;
+      }
+    }
+
+    /* ============ TYPES ============ */
+    .type-block {
+      display: grid;
+      gap: 40px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (min-width: 880px) {
+      .type-block {
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+      }
+    }
+
+    .type-block + .type-block {
+      margin-top: 90px;
+    }
+
+    .type-name {
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: clamp(22px, 2.6vw, 28px);
+      color: var(--ink);
+    }
+
+    .type-desc {
+      margin-top: 16px;
+      font-family: var(--font-b);
+      font-weight: 400;
+      font-size: 15.5px;
+      color: var(--ink-70);
+      line-height: 1.9;
+    }
+
+    .type-label {
+      margin-top: 22px;
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: .1em;
+      color: var(--vermillion);
+    }
+
+    .type-price {
+      margin-top: 26px;
+      font-family: var(--font-b);
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: .03em;
+      color: var(--vermillion);
+    }
+
+    .frame {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      border-radius: 2px;
+      overflow: hidden;
+      background: linear-gradient(150deg, var(--gold) 0%, var(--sumi-3) 40%, var(--sumi) 100%);
+    }
+
+    /* 本番写真: 枠の比率のままトリミング表示 */
+    .frame > img {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .frame::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: .5;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3'/></filter><rect width='100%25' height='100%25' filter='url(%23g)'/></svg>");
+    }
+
+    .frame-tatami {
+      background: linear-gradient(155deg, var(--igusa) 0%, var(--igusa-deep) 45%, var(--sumi) 100%);
+    }
+
+    .frame-washi {
+      background: linear-gradient(160deg, var(--washi-3) 0%, var(--gold) 55%, var(--sumi-3) 100%);
+    }
+
+    /* 左=写真 / 右=説明（スマホでは縦積み） */
+    .type-media {
+      order: -1;
+    }
+
+    .photo-scroller {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 12px;
+    }
+
+    .photo-scroller .frame {
+      flex: 0 0 100%;
+      scroll-snap-align: start;
+    }
+
+    .photo-scroller:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 4px;
+    }
+
+    .carousel-nav {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .carousel-btn {
+      width: 46px;
+      height: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--washi-3);
+      border-radius: 2px;
+      color: var(--ink);
+      transition: border-color .25s ease, color .25s ease, opacity .25s ease;
+    }
+
+    .carousel-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .carousel-btn:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+    }
+
+    .carousel-btn[disabled] {
+      opacity: .35;
+      cursor: default;
+    }
+
+    .carousel-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .types-note {
+      margin-top: 70px;
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: clamp(20px, 2.8vw, 28px);
+      color: var(--vermillion);
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 599px) {
       .case-body {
         padding: 22px 20px 26px;
       }
@@ -395,6 +572,272 @@
       width: 16px;
       height: 16px;
       flex: 0 0 16px;
+    }
+
+    /* ============ 料金 (PRICE) ============ */
+    /* 商品カテゴリ(国産い草 / 和紙表)の大枠。この中に作業ごとの料金を入れ子で置く */
+    .price-product {
+      position: relative;
+      z-index: 1;
+      margin-top: 44px;
+      border: 1px solid var(--igusa);
+    }
+
+    /* 見出し直後の1枠目は上余白を持たせない */
+    .section-head + .price-product {
+      margin-top: 0;
+    }
+
+    .price-product-head {
+      padding: 18px 28px;
+      background: var(--igusa);
+    }
+
+    .price-product-head h3 {
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: clamp(21px, 2.7vw, 27px);
+      line-height: 1.5;
+      letter-spacing: .06em;
+      color: var(--washi);
+    }
+
+    /* 和紙表の枠は黄金色 */
+    .price-product.is-gold {
+      border-color: var(--gold);
+    }
+
+    .price-product.is-gold .price-product-head {
+      background: var(--gold);
+    }
+
+    .price-product-body {
+      padding: 28px;
+    }
+
+    /* 作業(表替え / 新調)ごとの入れ子ブロック */
+    .price-work + .price-work {
+      margin-top: 34px;
+    }
+
+    .price-work-title {
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--washi-3);
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 1.25rem;
+      letter-spacing: .04em;
+      color: var(--igusa-deep);
+    }
+
+    /* グレード別の価格表(国産い草) */
+    .price-grade-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .price-grade-table th,
+    .price-grade-table td {
+      padding: 13px 4px;
+      border-bottom: 1px dashed var(--washi-3);
+    }
+
+    .price-grade-table tr:last-child th,
+    .price-grade-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .price-grade-table th {
+      width: 30%;
+      text-align: left;
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: .08em;
+      color: var(--ink);
+    }
+
+    .price-grade-table td {
+      text-align: right;
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--igusa-deep);
+      white-space: nowrap;
+    }
+
+    .price-unit {
+      margin-left: 4px;
+      font-family: var(--font-b);
+      font-weight: 500;
+      font-size: 12.5px;
+      color: var(--ink-45);
+    }
+
+    /* 和紙表:種類(清流 / 銀白 / 市松)ごとのブロック */
+    .price-washi-type + .price-washi-type {
+      margin-top: 18px;
+    }
+
+    .price-washi-type-head {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 2px 10px;
+      margin-top: 16px;
+      margin-bottom: 2px;
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: .08em;
+      color: var(--ink);
+    }
+
+    .price-washi-type-head .weave-note {
+      font-family: var(--font-b);
+      font-weight: 500;
+      font-size: 12.5px;
+      letter-spacing: 0;
+      color: var(--gold);
+    }
+
+    .price-weave-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 18px;
+      padding: 11px 4px;
+      border-bottom: 1px dashed var(--washi-3);
+    }
+
+    .price-weave-row:last-child {
+      border-bottom: none;
+    }
+
+    .price-weave-row .weave-tag {
+      font-size: 1.05rem;
+      color: var(--ink-70);
+    }
+
+    .price-weave-row .price {
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--igusa-deep);
+      white-space: nowrap;
+    }
+
+    /* 用語解説(引き目 / 目積) */
+    .price-glossary {
+      margin-top: 26px;
+      padding: 18px 22px;
+      background: rgba(166, 134, 79, .08);
+      border-left: 3px solid var(--gold);
+      font-size: 0.92rem;
+      line-height: 1.85;
+      color: var(--ink-70);
+    }
+
+    .price-glossary > div + div {
+      margin-top: 8px;
+    }
+
+    .price-glossary dt {
+      display: inline;
+      font-family: var(--font-d);
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .price-glossary dd {
+      display: inline;
+      margin: 0 0 0 6px;
+    }
+
+    /* 商品カテゴリの枠外に置く共通項目(裏返し・古畳の処分代) */
+    .price-flat {
+      position: relative;
+      z-index: 1;
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding: 30px 32px;
+      background: var(--washi-2);
+      border: 1px solid var(--washi-3);
+    }
+
+    /* 商品カテゴリ直後の1枚目は、枠との切れ目をはっきりさせる */
+    .price-product + .price-flat {
+      margin-top: 48px;
+    }
+
+    .price-flat .label {
+      font-size: 14.5px;
+      color: var(--ink-70);
+    }
+
+    .price-flat .label strong {
+      display: block;
+      margin-bottom: 4px;
+      font-family: var(--font-d);
+      font-weight: 700;
+      font-size: 17px;
+      color: var(--ink);
+    }
+
+    .price-flat .amount {
+      font-family: var(--font-d);
+      font-weight: 800;
+      font-size: clamp(28px, 4.4vw, 36px);
+      color: var(--igusa-deep);
+      white-space: nowrap;
+    }
+
+    .price-flat .amount .unit {
+      margin-left: 4px;
+      font-family: var(--font-b);
+      font-weight: 500;
+      font-size: 13.5px;
+      color: var(--ink-45);
+    }
+
+    /* ============ MOBILE ADJUST (599px以下) ============ */
+    @media (max-width: 599px) {
+      .page-head {
+        padding-top: 66px;
+        padding-bottom: 0;
+      }
+
+      .price-product {
+        margin-top: 34px;
+      }
+
+      .price-product-head {
+        padding: 15px 18px;
+      }
+
+      .price-product-body {
+        padding: 22px 18px;
+      }
+
+      .price-work + .price-work {
+        margin-top: 28px;
+      }
+
+      .price-glossary {
+        padding: 16px 16px;
+      }
+
+      .price-flat {
+        padding: 24px 20px;
+      }
+
+      .price-product + .price-flat {
+        margin-top: 38px;
+      }
     }
 
     /* ============ SCROLL REVEAL (IntersectionObserver で .is-in を付与) ============ */
@@ -971,16 +1414,6 @@
       border-bottom-color: var(--igusa);
     }
 
-    .price-cta .cta-btn {
-      transition: transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease;
-    }
-
-    /* い草色のCTAボタン → 黄金色（文字は視認性のため墨色へ） */
-    .price-cta .cta-btn:hover {
-      background: var(--gold);
-      color: var(--sumi);
-    }
-
   </style>
 </head>
 <body>
@@ -1000,7 +1433,7 @@
       <ul>
         <li><a href="top.html">TOP</a></li>
         <li><a href="company-story.html">想いと歩み</a></li>
-        <li><a href="service.html" aria-current="page">サービス内容</a></li>
+        <li><a href="products.html" aria-current="page">商品紹介</a></li>
         <li><a href="works.html">施工事例</a></li>
         <li><a href="tatami.html">畳について</a></li>
         <li><a href="contact.html">お問い合わせ</a></li>
@@ -1032,7 +1465,7 @@
   <ul>
     <li><a href="top.html">TOP</a></li>
     <li><a href="company-story.html">想いと歩み</a></li>
-    <li><a href="service.html" aria-current="page">サービス内容</a></li>
+    <li><a href="products.html" aria-current="page">商品紹介</a></li>
     <li><a href="works.html">施工事例</a></li>
     <li><a href="tatami.html">畳について</a></li>
     <li><a href="contact.html">お問い合わせ</a></li>
@@ -1047,17 +1480,73 @@
   </div>
 </section>
 
-<!-- ============ SERVICE TABS ============ -->
-<nav class="service-tabs washi-tex" aria-label="サービス内容">
+<!-- ============ ページ内リンク (旧 SERVICE TABS の型をそのまま使う) ============ -->
+<nav class="service-tabs washi-tex" aria-label="ページ内の目次">
   <div class="wrap">
     <ul>
-      <li><a href="service.html" aria-current="page">サービス<br class="sp-br">について</a></li>
-      <li><a href="concerns.html">お困りの方</a></li>
-      <li><a href="types.html">畳の種類</a></li>
-      <li><a href="price.html">料金<br class="sp-br">について</a></li>
+      <li><a href="#types">畳の種類</a></li>
+      <li><a href="#services">サービス<br class="sp-br">について</a></li>
+      <li><a href="#price">料金<br class="sp-br">について</a></li>
     </ul>
   </div>
 </nav>
+
+<!-- ============ TYPES ============ -->
+<section id="types" class="washi-tex">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title reveal">畳の種類</h2>
+    </div>
+    <div class="type-block reveal" style="--d:.12s">
+      <div class="type-text">
+        <h3 class="type-name">国産い草畳</h3>
+        <p class="type-desc">・香りが良く、色の変化を楽しめる<br>・青から茶色に変化していく</p>
+        <div class="type-label">こんな方におすすめ</div>
+        <p class="type-desc">・畳の香りを感じたい方<br>・和を感じたい方</p>
+        <div class="type-price">12,000〜20,000円 /1畳</div>
+      </div>
+      <div class="type-media">
+        <!-- 写真枠 P-08 / 国産い草畳 -->
+        <div class="frame frame-tatami"><img src="../../photos/output_photos/p-08-igusa-tatami-detail.jpg" alt="国産い草の畳表を間近で写した畳の目のアップ" loading="lazy"></div>
+      </div>
+    </div>
+
+    <div class="type-block type-block-stacked reveal" style="--d:.24s">
+      <div class="type-text">
+        <h3 class="type-name">和紙表</h3>
+        <p class="type-desc">・色の変化がない<br>・傷に強い<br>・シミになりにくくメンテナンスが楽<br>・カラーが選べる</p>
+        <div class="type-label">こんな方におすすめ</div>
+        <p class="type-desc">・ペットを飼っている方<br>・小さい子がいる方<br>・洋風な家にマッチさせたい方</p>
+        <div class="type-price">12,000〜25,000円 /1畳</div>
+      </div>
+      <div class="type-media">
+        <div class="photo-scroller" id="washiPhotos" tabindex="0" aria-label="和紙表のカラーバリエーション（横スクロール）">
+          <!-- 写真枠 P-13 / 藍 -->
+          <div class="frame frame-washi"><img src="../../photos/output_photos/p-13-washi-color-navy.jpg" alt="和紙表 藍色の畳表のアップ" loading="lazy"></div>
+          <!-- 写真枠 P-14 / 焦茶 -->
+          <div class="frame frame-washi"><img src="../../photos/output_photos/p-14-washi-color-brown.jpg" alt="和紙表 焦茶色の畳表のアップ" loading="lazy"></div>
+          <!-- 写真枠 P-15 / 若草 -->
+          <div class="frame frame-washi"><img src="../../photos/output_photos/p-15-washi-color-wakakusa.jpg" alt="和紙表 若草色の畳表のアップ" loading="lazy"></div>
+          <!-- 写真枠 P-16 / 生成り -->
+          <div class="frame frame-washi"><img src="../../photos/output_photos/p-16-washi-color-kinari.jpg" alt="和紙表 生成り色の畳表のアップ" loading="lazy"></div>
+          <!-- 写真枠 P-29 -->
+          <div class="frame frame-washi"><img src="../../photos/output_photos/p-29-washi-color-yellow.jpg" alt="和紙表 黄色（山吹）の畳表のアップ" loading="lazy"></div>
+          <!-- 写真枠 P-30 -->
+          <div class="frame frame-washi"><img src="../../photos/output_photos/p-30-washi-color-pink.jpg" alt="和紙表 桃色の畳表のアップ" loading="lazy"></div>
+        </div>
+        <div class="carousel-nav">
+          <button class="carousel-btn" type="button" data-dir="-1" aria-label="前の写真を見る">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="carousel-btn" type="button" data-dir="1" aria-label="次の写真を見る">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <p class="types-note reveal" style="--d:.36s">そのほかも、ご要望に応じて対応いたします。</p>
+  </div>
+</section>
 
 <!-- ============ SERVICES ============ -->
 <section id="services" class="washi-tex">
@@ -1124,6 +1613,127 @@
         <h3>家具の移動もお任せ</h3>
         <p>重たい家具の移動もスタッフが対応いたします。<br>お客様に無理をお願いすることはありませんので、ご安心ください。</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 料金 ============ -->
+<section id="price" class="washi-tex">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title reveal">各種料金</h2>
+    </div>
+
+    <!-- ============ 国産い草 ============ -->
+    <div class="price-product reveal" style="--d:.12s">
+      <div class="price-product-head">
+        <h3>国産い草</h3>
+      </div>
+      <div class="price-product-body">
+
+        <div class="price-work">
+          <h4 class="price-work-title">表替え</h4>
+          <table class="price-grade-table">
+            <tbody>
+            <tr><th scope="row">特</th><td>15,000円<span class="price-unit">/畳</span></td></tr>
+            <tr><th scope="row">上</th><td>12,000円<span class="price-unit">/畳</span></td></tr>
+            <tr><th scope="row">中</th><td>10,000円<span class="price-unit">/畳</span></td></tr>
+            <tr><th scope="row">並</th><td>7,000円<span class="price-unit">/畳</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="price-work">
+          <h4 class="price-work-title">新調</h4>
+          <table class="price-grade-table">
+            <tbody>
+            <tr><th scope="row">特</th><td>20,000円<span class="price-unit">/畳</span></td></tr>
+            <tr><th scope="row">上</th><td>17,000円<span class="price-unit">/畳</span></td></tr>
+            <tr><th scope="row">中</th><td>15,000円<span class="price-unit">/畳</span></td></tr>
+            <tr><th scope="row">並</th><td>12,000円<span class="price-unit">/畳</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ============ 和紙表 ============ -->
+    <div class="price-product is-gold reveal" style="--d:.12s">
+      <div class="price-product-head">
+        <h3>和紙表</h3>
+      </div>
+      <div class="price-product-body">
+
+        <div class="price-work">
+          <h4 class="price-work-title">表替え</h4>
+
+          <div class="price-washi-type">
+            <h5 class="price-washi-type-head">清流</h5>
+        <div class="price-weave-row"><span class="weave-tag">引き目</span><span class="price">13,000円<span class="price-unit">/畳</span></span></div>
+        <div class="price-weave-row"><span class="weave-tag">目積</span><span class="price">15,000円<span class="price-unit">/畳</span></span></div>
+          </div>
+
+          <div class="price-washi-type">
+            <h5 class="price-washi-type-head">銀白</h5>
+        <div class="price-weave-row"><span class="weave-tag">引き目</span><span class="price">13,000円<span class="price-unit">/畳</span></span></div>
+        <div class="price-weave-row"><span class="weave-tag">目積</span><span class="price">16,000円<span class="price-unit">/畳</span></span></div>
+          </div>
+
+          <div class="price-washi-type">
+            <h5 class="price-washi-type-head">市松 <span class="weave-note">引き目のみ</span></h5>
+        <div class="price-weave-row"><span class="weave-tag">引き目</span><span class="price">15,000円<span class="price-unit">/畳</span></span></div>
+          </div>
+        </div>
+
+        <div class="price-work">
+          <h4 class="price-work-title">新調</h4>
+
+          <div class="price-washi-type">
+            <h5 class="price-washi-type-head">清流</h5>
+        <div class="price-weave-row"><span class="weave-tag">引き目</span><span class="price">18,000円<span class="price-unit">/畳</span></span></div>
+        <div class="price-weave-row"><span class="weave-tag">目積</span><span class="price">20,000円<span class="price-unit">/畳</span></span></div>
+          </div>
+
+          <div class="price-washi-type">
+            <h5 class="price-washi-type-head">銀白</h5>
+        <div class="price-weave-row"><span class="weave-tag">引き目</span><span class="price">15,000円<span class="price-unit">/畳</span></span></div>
+        <div class="price-weave-row"><span class="weave-tag">目積</span><span class="price">20,000円<span class="price-unit">/畳</span></span></div>
+          </div>
+
+          <div class="price-washi-type">
+            <h5 class="price-washi-type-head">市松 <span class="weave-note">引き目のみ</span></h5>
+        <div class="price-weave-row"><span class="weave-tag">引き目</span><span class="price">20,000円<span class="price-unit">/畳</span></span></div>
+          </div>
+        </div>
+
+        <dl class="price-glossary">
+          <div>
+            <dt>引き目</dt>
+            <dd>畳表の織り目が横方向にまっすぐ通る、すっきりとした表情の織り方です。</dd>
+          </div>
+          <div>
+            <dt>目積(めせき)</dt>
+            <dd>織り目が細かく詰まった織り方で、畳の目が均一に美しく見えるのが特徴です。</dd>
+          </div>
+        </dl>
+
+      </div>
+    </div>
+
+    <!-- ============ 裏返し・処分代(商品カテゴリ共通) ============ -->
+    <div class="price-flat reveal" style="--d:.12s">
+      <div class="label">
+        <strong>裏返し</strong>
+      </div>
+      <div class="amount">4,500円<span class="unit">/畳</span></div>
+    </div>
+
+    <div class="price-flat reveal" style="--d:.12s">
+      <div class="label">
+        <strong>古畳の処分代</strong>
+      </div>
+      <div class="amount">1,500円<span class="unit">/畳</span></div>
     </div>
   </div>
 </section>
@@ -1195,6 +1805,33 @@
   </div>
 </footer>
 
+<script>
+  // 和紙表の写真の横スクロール（矢印で1枚ずつ）
+  (function () {
+    const track = document.getElementById('washiPhotos');
+    const btns = document.querySelectorAll('.carousel-btn');
+    const step = () => {
+      const photo = track.querySelector('.frame');
+      const gap = parseFloat(getComputedStyle(track).gap) || 0;
+      return photo.getBoundingClientRect().width + gap;
+    };
+    btns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        track.scrollBy({ left: Number(btn.dataset.dir) * step(), behavior: 'smooth' });
+      });
+    });
+    const update = () => {
+      const max = track.scrollWidth - track.clientWidth;
+      btns.forEach(btn => {
+        const dir = Number(btn.dataset.dir);
+        btn.disabled = dir < 0 ? track.scrollLeft <= 1 : track.scrollLeft >= max - 1;
+      });
+    };
+    track.addEventListener('scroll', update);
+    window.addEventListener('resize', update);
+    update();
+  })();
+</script>
 
 <!-- ============ HEADER SCRIPT (共通コンポーネント header.html) ============ -->
 <script>

@@ -15,24 +15,12 @@
       "destination": "/src/pages/tatami.html"
     },
     {
+      "source": "/products",
+      "destination": "/src/pages/products.html"
+    },
+    {
       "source": "/works",
       "destination": "/src/pages/works.html"
-    },
-    {
-      "source": "/price",
-      "destination": "/src/pages/price.html"
-    },
-    {
-      "source": "/service",
-      "destination": "/src/pages/service.html"
-    },
-    {
-      "source": "/concerns",
-      "destination": "/src/pages/concerns.html"
-    },
-    {
-      "source": "/types",
-      "destination": "/src/pages/types.html"
     },
     {
       "source": "/company-story",
@@ -66,22 +54,22 @@
     },
     {
       "source": "/price.html",
-      "destination": "/price",
+      "destination": "/products#price",
       "permanent": true
     },
     {
       "source": "/service.html",
-      "destination": "/service",
+      "destination": "/products",
       "permanent": true
     },
     {
       "source": "/concerns.html",
-      "destination": "/concerns",
+      "destination": "/tatami#faq",
       "permanent": true
     },
     {
       "source": "/types.html",
-      "destination": "/types",
+      "destination": "/products#types",
       "permanent": true
     },
     {
@@ -92,6 +80,26 @@
     {
       "source": "/company",
       "destination": "/company-story#info",
+      "permanent": true
+    },
+    {
+      "source": "/price",
+      "destination": "/products#price",
+      "permanent": true
+    },
+    {
+      "source": "/service",
+      "destination": "/products",
+      "permanent": true
+    },
+    {
+      "source": "/types",
+      "destination": "/products#types",
+      "permanent": true
+    },
+    {
+      "source": "/concerns",
+      "destination": "/tatami#faq",
       "permanent": true
     },
     {
