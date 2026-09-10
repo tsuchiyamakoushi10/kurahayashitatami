@@ -247,6 +247,18 @@
       }
     }
 
+    /* スマホは中央カードを画面幅いっぱい近くまで広げ、その横幅を使って
+       カードの中身を横並びにする(縦に長くなりすぎるのを防ぐ)。
+       両隣はさらに小さく縮めて中央カードの後ろへ回し、画面端で切られず
+       外側の縁まで見えている状態は保つ */
+    @media (max-width: 599px) {
+      .cases-carousel {
+        --card: 80%;
+        --gap: -44%;
+        --side-scale: .34;
+      }
+    }
+
     .cases-viewport {
       overflow: hidden;
       /* 中央のカードを拡大しても上下が切れないよう、クリップ範囲に余白を持たせる */
@@ -636,17 +648,51 @@
         margin-top: 28px;
       }
 
+      /* 写真は前後2枚の横並びのまま、高さを抑えるため 4:3 でトリミングする */
+      .case-card .frame {
+        aspect-ratio: 4 / 3;
+      }
+
+      .frame .tag {
+        left: 10px;
+        bottom: 10px;
+        font-size: 11px;
+        padding: 3px 7px;
+      }
+
       .case-body {
-        padding: 22px 20px 26px;
+        padding: 16px 16px 20px;
+      }
+
+      .case-body .cat {
+        font-size: 16px;
+      }
+
+      /* 4項目を縦一列に積まず、2列のグリッドに並べて横幅を使う */
+      .case-detail {
+        margin-top: 10px;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px 12px;
       }
 
       .case-detail li {
         flex-direction: column;
-        gap: 4px;
+        gap: 2px;
+        font-size: 13.5px;
+        line-height: 1.6;
       }
 
       .case-detail li span:first-child {
         width: auto;
+        font-size: 12px;
+        letter-spacing: .04em;
+      }
+
+      .case-body blockquote {
+        margin-top: 12px;
+        padding-left: 12px;
+        font-size: 15px;
+        line-height: 1.7;
       }
 
       .price-cta .cta-btn {
