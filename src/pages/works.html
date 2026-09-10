@@ -161,8 +161,11 @@
     }
 
     /* ============ PAGE TITLE ============ */
+    /* 題字と最初の事例カードの間は、下端の 110px と #cases の 110px が重なって
+       220px も空いていた。ここは下端を持たせず、#cases 側だけで間隔を取る */
     .page-head {
       padding-top: 140px;
+      padding-bottom: 0;
       text-align: center;
     }
 
@@ -231,6 +234,10 @@
       z-index: 1;
     }
 
+
+    #cases {
+      padding-top: 72px;
+    }
 
     /* ============ CASE CARDS (TOPの .case-card の型) ============ */
     /* 事例は縦に積んで並べる。PCは2枚ずつ、スマホは1枚ずつ */
@@ -479,6 +486,10 @@
     @media (max-width: 599px) {
       .page-head {
         padding-top: 110px;
+      }
+
+      #cases {
+        padding-top: 48px;
       }
 
       .page-logo {
