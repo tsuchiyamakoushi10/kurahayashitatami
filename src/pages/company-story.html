@@ -1011,6 +1011,63 @@
       flex: 0 0 13px;
     }
 
+    /* ============ COMPANY INFO (罫線で区切った台帳形式 / company.html から移設) ============ */
+    .info-table {
+      width: 100%;
+      border-collapse: collapse;
+      position: relative;
+      z-index: 1;
+      font-family: var(--font-b);
+      /* 上下の締めだけ細い金の罫 */
+      border-top: 1px solid var(--gold);
+      border-bottom: 1px solid var(--gold);
+    }
+
+    .info-table th,
+    .info-table td {
+      text-align: left;
+      vertical-align: top;
+      padding: 17px 0;
+      border-bottom: 1px solid var(--washi-3);
+      line-height: 1.9;
+    }
+
+    .info-table tr:last-child th,
+    .info-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .info-table th {
+      width: 200px;
+      padding-right: 28px;
+      border-right: 1px solid var(--washi-3);
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: .1em;
+      color: var(--ink-70);
+      white-space: nowrap;
+    }
+
+    .info-table td {
+      padding-left: 28px;
+      font-weight: 500;
+      font-size: 15px;
+      color: var(--ink);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .info-table td a:hover {
+      color: var(--vermillion);
+    }
+
+    .info-table rt {
+      font-family: var(--font-b);
+      font-weight: 400;
+      font-size: 10.5px;
+      letter-spacing: .04em;
+      color: var(--ink-70);
+    }
+
     /* ============ FINAL CTA (TOPの .final-cta の型) ============ */
     .igusa-tex {
       position: relative;
@@ -1169,6 +1226,33 @@
 
       .price-cta .cta-btn {
         width: 100%;
+      }
+
+      /* 台帳は項目名を値の上に積む */
+      .info-table tr {
+        display: block;
+        border-bottom: 1px solid var(--washi-3);
+      }
+
+      .info-table tr:last-child {
+        border-bottom: 0;
+      }
+
+      .info-table th,
+      .info-table td {
+        display: block;
+        width: auto;
+        border: 0;
+        padding: 0;
+        white-space: normal;
+      }
+
+      .info-table th {
+        padding-top: 15px;
+      }
+
+      .info-table td {
+        padding-bottom: 15px;
       }
 
       .final-cta {
@@ -1702,7 +1786,6 @@
         <li><a href="service.html">サービス内容</a></li>
         <li><a href="works.html">施工事例</a></li>
         <li><a href="tatami.html">畳について</a></li>
-        <li><a href="company.html">会社概要</a></li>
         <li><a href="contact.html">お問い合わせ</a></li>
       </ul>
     </nav>
@@ -1735,7 +1818,6 @@
     <li><a href="service.html">サービス内容</a></li>
     <li><a href="works.html">施工事例</a></li>
     <li><a href="tatami.html">畳について</a></li>
-    <li><a href="company.html">会社概要</a></li>
     <li><a href="contact.html">お問い合わせ</a></li>
   </ul>
 </nav>
@@ -1792,7 +1874,7 @@
   </div>
 </section>
 
-<!-- ============ 4. 創業からの歩み (背景 washi / 縦のタイムライン) ============ -->
+<!-- ============ 3. 創業からの歩み (背景 washi / 縦のタイムライン) ============ -->
 <section id="history" class="washi-tex">
   <div class="wrap">
     <div class="section-head">
@@ -1833,19 +1915,7 @@
   </div>
 </section>
 
-<!-- ============ 5. 会社概要ページへの導線 ============ -->
-<section class="washi-tex">
-  <div class="wrap">
-    <div class="price-cta reveal" style="margin-top:0;">
-      <a class="cta-btn" href="company.html">
-        会社概要ページを見る
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 6. 職人紹介(店主・後継者) 左右対の二枚看板 ============ -->
+<!-- ============ 4. 職人紹介(店主・後継者) 左右対の二枚看板 ============ -->
 <section id="craftspeople" class="washi-tex">
   <div class="wrap">
     <div class="section-head">
@@ -1922,7 +1992,7 @@
   </div>
 </section>
 
-<!-- ============ 7. HP制作協力 ============ -->
+<!-- ============ 5. HP制作協力 ============ -->
 <section id="credit" class="washi-tex">
   <div class="wrap">
     <div class="section-head">
@@ -1944,7 +2014,30 @@
   </div>
 </section>
 
-<!-- ============ 8. お問い合わせ (TOPの .final-cta の型) ============ -->
+<!-- ============ 6. 会社概要(基本情報 / company.html から移設) ============ -->
+<section id="info" class="washi-tex">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title reveal" style="--d:.12s">会社概要</h2>
+    </div>
+    <table class="info-table reveal" style="--d:.24s">
+      <tbody>
+        <tr><th scope="row">店名・屋号</th><td>倉林畳店</td></tr>
+        <tr><th scope="row">代表者名</th><td><ruby>倉林俊之<rt>くらはやしとしゆき</rt></ruby></td></tr>
+        <tr><th scope="row">所在地</th><td>〒367-0301<br>埼玉県児玉郡神川町渡瀬638-7</td></tr>
+        <tr><th scope="row">電話番号</th><td><a href="tel:0274522966">TEL・FAX 0274-52-2966</a></td></tr>
+        <tr><th scope="row">受付時間</th><td>8時〜20時</td></tr>
+        <tr><th scope="row">定休日・営業日</th><td>不定休　お客様の要望に合わせて対応可能</td></tr>
+        <tr><th scope="row">対応エリア</th><td>関東圏内　交通費は問い合わせにて</td></tr>
+        <tr><th scope="row">資格・加盟団体</th><td>本庄児玉畳商工組合</td></tr>
+        <tr><th scope="row">支払い方法</th><td>振り込み、現金</td></tr>
+        <tr><th scope="row">駐車場・アクセス</th><td>丹荘駅から車で15分<br>駐車場3台</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 7. お問い合わせ (TOPの .final-cta の型) ============ -->
 <section id="contact" class="igusa-tex final-cta">
   <div class="wrap">
     <p class="catch2 reveal">畳のことなら<br>なんでもお答えさせて<br>いただきます。</p>
@@ -1958,7 +2051,7 @@
   </div>
 </section>
 
-<!-- ============ 9. FOOTER (共通コンポーネント footer.html) ============ -->
+<!-- ============ 8. FOOTER (共通コンポーネント footer.html) ============ -->
 <footer>
   <div class="footer-wrap">
     <!-- Footer Grid -->
@@ -1990,7 +2083,6 @@
       <div class="footer-col-2">
         <h4>会社情報</h4>
         <ul class="footer-links">
-          <li><a href="company.html">会社概要</a></li>
           <li><a href="company-story.html">想いと歩み</a></li>
           <li><a href="https://www.google.com/maps/place/%E5%80%89%E6%9E%97%E7%95%B3%E5%BA%97/@36.171459,139.0607641,17z/data=!3m1!4b1!4m6!3m5!1s0x601ec05dda129be5:0x60b5bc5057f51a4!8m2!3d36.171459!4d139.063339!16s%2Fg%2F1tfjfmjk?entry=ttu&amp;g_ep=EgoyMDI2MDcyMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">アクセス</a></li>
         </ul>

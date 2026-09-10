@@ -35,10 +35,6 @@
       "destination": "/src/pages/types.html"
     },
     {
-      "source": "/company",
-      "destination": "/src/pages/company.html"
-    },
-    {
       "source": "/company-story",
       "destination": "/src/pages/company-story.html"
     },
@@ -90,7 +86,12 @@
     },
     {
       "source": "/company.html",
-      "destination": "/company",
+      "destination": "/company-story#info",
+      "permanent": true
+    },
+    {
+      "source": "/company",
+      "destination": "/company-story#info",
       "permanent": true
     },
     {
