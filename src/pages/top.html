@@ -2262,9 +2262,6 @@
   </style>
 </noscript>
 <script>
-  /* 演出中のスクロールを止める。終了時の解除は本文末尾のスクリプトで行う */
-  document.documentElement.classList.add('opening-lock');
-
   /* 和紙パネルの装飾を先に読み込み、読み終えてから演出を始める。
      待っている間は CSS 側で animation-play-state: paused にしているだけなので、
      再開したあとの速度・順番は変わらない */
@@ -2274,6 +2271,26 @@
     var MAX_WAIT = 2000;
     var opening = document.getElementById('opening');
     if (!opening) return;
+
+    /* 同じタブで一度見た人には演出を繰り返さない。ヘッダーのロゴや戻るボタンで
+       TOPに戻るたびに再生されるとしつこいため。sessionStorage はタブを閉じると
+       消えるので、次に訪れたときは改めて演出から始まる。
+       プライベートモード等で sessionStorage が使えない場合は、
+       これまでどおり毎回再生する */
+    var SEEN_KEY = 'kt-opening-seen';
+    var seen = false;
+    try { seen = window.sessionStorage.getItem(SEEN_KEY) === '1'; } catch (e) {}
+
+    if (seen) {
+      /* この要素が消えることで、本文末尾の後始末スクリプトも何もせずに終わる */
+      if (opening.parentNode) opening.parentNode.removeChild(opening);
+      return;
+    }
+
+    try { window.sessionStorage.setItem(SEEN_KEY, '1'); } catch (e) {}
+
+    /* 演出中のスクロールを止める。終了時の解除は本文末尾のスクリプトで行う */
+    document.documentElement.classList.add('opening-lock');
 
     /* CSS の @media (max-width: 599px) と同じ条件で、待つ画像を切り替える */
     var srcs = window.matchMedia('(max-width: 599px)').matches
