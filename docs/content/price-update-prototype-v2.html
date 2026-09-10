@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>各種料金｜倉林畳店</title>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sumi: #15120d;
+    --washi: #f2ead9;
+    --vermillion: #9c3b26;
+    --igusa: #4c5a2b;
+    --igusa-deep: #37411d;
+    --gold: #a6864f;
+    --ink: #15120d;
+    --font-d: 'Shippori Mincho', serif;
+    --font-b: 'Zen Kaku Gothic New', sans-serif;
+  }
+  *{ box-sizing:border-box; }
+  body{
+    margin:0;
+    background: var(--washi);
+    color: var(--ink);
+    font-family: var(--font-b);
+    line-height: 1.85;
+  }
+  .wrap{ max-width: 900px; margin:0 auto; padding: 60px 28px 100px; }
+
+  h1{
+    font-family: var(--font-d);
+    font-weight: 700;
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    margin: 0 0 48px;
+    text-align: center;
+  }
+
+  /* ---------- 商品カテゴリ(大枠) ---------- */
+  .product{
+    border: 1px solid var(--igusa);
+    margin-bottom: 48px;
+  }
+  .product-head{
+    background: var(--igusa);
+    color: var(--washi);
+    padding: 18px 24px;
+  }
+  .product-head h2{
+    font-family: var(--font-d); font-weight:700; font-size:1.5rem; margin:0;
+  }
+  .product-head-gold{ background: var(--gold); }
+  .product-gold{ border-color: var(--gold); }
+  .product-body{ padding: 24px; }
+
+  /* ---------- 作業ごとのサブセクション ---------- */
+  .work{ margin-bottom: 28px; }
+  .work:last-child{ margin-bottom: 0; }
+  .work-title{
+    font-family: var(--font-d); font-weight:600; font-size:1.1rem;
+    color: var(--igusa-deep);
+    border-bottom: 1px solid #c9bd97;
+    padding-bottom: 6px; margin-bottom: 10px;
+  }
+
+  .grade-table{ width:100%; border-collapse: collapse; }
+  .grade-table td{ padding: 8px 6px; border-bottom: 1px dashed #ddd3ae; }
+  .grade-table td.grade{ font-family: var(--font-d); font-weight:600; width: 30%; }
+  .grade-table td.price{ text-align:right; font-family: var(--font-d); font-size:1.05rem; font-weight:700; color: var(--igusa-deep); }
+  .grade-table td.price small{ font-family: var(--font-b); font-size:.65rem; font-weight:400; color:#55503f; margin-left:2px; }
+
+  /* ---------- 和紙表:種類ごとのブロック ---------- */
+  .washi-type{ margin-bottom: 18px; }
+  .washi-type:last-child{ margin-bottom: 0; }
+  .washi-type-head{
+    display:flex; align-items:baseline; gap:8px;
+    font-family: var(--font-d); font-weight:600; font-size:.98rem;
+    margin-bottom: 6px;
+  }
+  .washi-type-head .weave-note{ font-family: var(--font-b); font-weight:400; font-size:.72rem; color: var(--gold); }
+
+  .weave-row{
+    display:grid; grid-template-columns: 1fr auto; gap:12px;
+    padding: 6px 4px; border-bottom: 1px dashed #ddd3ae;
+    align-items:center;
+  }
+  .weave-row .weave-tag{ font-size:.85rem; color:#55503f; }
+  .weave-row .price{ font-family: var(--font-d); font-weight:700; font-size:1rem; color: var(--igusa-deep); }
+  .weave-row .price small{ font-family: var(--font-b); font-size:.65rem; font-weight:400; color:#55503f; }
+
+  .glossary{
+    background: rgba(166,134,79,0.08);
+    border-left: 3px solid var(--gold);
+    padding: 14px 18px; margin-top: 16px; font-size:.8rem; color:#55503f;
+  }
+  .glossary div{ margin-bottom:6px; }
+  .glossary div:last-child{ margin-bottom:0; }
+  .glossary dt{ font-family: var(--font-d); font-weight:600; color: var(--ink); display:inline; }
+  .glossary dd{ display:inline; margin:0 0 0 6px; }
+
+  /* ---------- 単価カード(裏返し・処分代) ---------- */
+  .flat-card{
+    background: rgba(76,90,43,0.06);
+    border: 1px solid #c9bd97;
+    padding: 22px 24px;
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px;
+    margin-bottom: 20px;
+  }
+  .flat-card:last-child{ margin-bottom: 0; }
+  .flat-card .label strong{ display:block; font-family: var(--font-d); font-size:1rem; margin-bottom:4px; }
+  .flat-card .amount{ font-family: var(--font-d); font-size:1.6rem; font-weight:700; color: var(--vermillion); }
+  .flat-card .amount small{ font-family: var(--font-b); font-size:.7rem; font-weight:400; color:#55503f; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>各種料金</h1>
+
+  <!-- ============ 国産い草 ============ -->
+  <div class="product">
+    <div class="product-head"><h2>国産い草</h2></div>
+    <div class="product-body">
+
+      <div class="work">
+        <div class="work-title">表替え</div>
+        <table class="grade-table">
+          <tr><td class="grade">特</td><td class="price">15,000円<small>/畳</small></td></tr>
+          <tr><td class="grade">上</td><td class="price">12,000円<small>/畳</small></td></tr>
+          <tr><td class="grade">中</td><td class="price">10,000円<small>/畳</small></td></tr>
+          <tr><td class="grade">並</td><td class="price">7,000円<small>/畳</small></td></tr>
+        </table>
+      </div>
+
+      <div class="work">
+        <div class="work-title">新調</div>
+        <table class="grade-table">
+          <tr><td class="grade">特</td><td class="price">20,000円<small>/畳</small></td></tr>
+          <tr><td class="grade">上</td><td class="price">17,000円<small>/畳</small></td></tr>
+          <tr><td class="grade">中</td><td class="price">15,000円<small>/畳</small></td></tr>
+          <tr><td class="grade">並</td><td class="price">12,000円<small>/畳</small></td></tr>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============ 和紙表 ============ -->
+  <div class="product product-gold">
+    <div class="product-head product-head-gold"><h2>和紙表</h2></div>
+    <div class="product-body">
+
+      <div class="work">
+        <div class="work-title">表替え</div>
+
+        <div class="washi-type">
+          <div class="washi-type-head">清流</div>
+          <div class="weave-row"><span class="weave-tag">引き目</span><span class="price">13,000円<small>/畳</small></span></div>
+          <div class="weave-row"><span class="weave-tag">目積</span><span class="price">15,000円<small>/畳</small></span></div>
+        </div>
+
+        <div class="washi-type">
+          <div class="washi-type-head">銀白</div>
+          <div class="weave-row"><span class="weave-tag">引き目</span><span class="price">13,000円<small>/畳</small></span></div>
+          <div class="weave-row"><span class="weave-tag">目積</span><span class="price">16,000円<small>/畳</small></span></div>
+        </div>
+
+        <div class="washi-type">
+          <div class="washi-type-head">市松 <span class="weave-note">引き目のみ</span></div>
+          <div class="weave-row"><span class="weave-tag">引き目</span><span class="price">15,000円<small>/畳</small></span></div>
+        </div>
+      </div>
+
+      <div class="work">
+        <div class="work-title">新調</div>
+
+        <div class="washi-type">
+          <div class="washi-type-head">清流</div>
+          <div class="weave-row"><span class="weave-tag">引き目</span><span class="price">18,000円<small>/畳</small></span></div>
+          <div class="weave-row"><span class="weave-tag">目積</span><span class="price">20,000円<small>/畳</small></span></div>
+        </div>
+
+        <div class="washi-type">
+          <div class="washi-type-head">銀白</div>
+          <div class="weave-row"><span class="weave-tag">引き目</span><span class="price">15,000円<small>/畳</small></span></div>
+          <div class="weave-row"><span class="weave-tag">目積</span><span class="price">20,000円<small>/畳</small></span></div>
+        </div>
+
+        <div class="washi-type">
+          <div class="washi-type-head">市松 <span class="weave-note">引き目のみ</span></div>
+          <div class="weave-row"><span class="weave-tag">引き目</span><span class="price">20,000円<small>/畳</small></span></div>
+        </div>
+      </div>
+
+      <div class="glossary">
+        <div><dt>引き目</dt><dd>畳表の織り目が横方向にまっすぐ通る、すっきりとした表情の織り方です。</dd></div>
+        <div><dt>目積(めせき)</dt><dd>織り目が細かく詰まった織り方で、畳の目が均一に美しく見えるのが特徴です。引き目よりも手間がかかるため、価格がやや高くなります。</dd></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============ 裏返し・処分代(共通) ============ -->
+  <div class="flat-card">
+    <div class="label"><strong>裏返し</strong></div>
+    <div class="amount">4,500円<small>+税 /畳</small></div>
+  </div>
+
+  <div class="flat-card">
+    <div class="label"><strong>古畳の処分代</strong></div>
+    <div class="amount">1,500円<small>/畳</small></div>
+  </div>
+
+</div>
+</body>
+</html>
