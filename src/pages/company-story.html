@@ -236,6 +236,14 @@
       justify-content: space-between;
     }
 
+    /* PCでは見出しだけが上端に離れて浮いて見えるので、
+       導入文と一緒に下端へ寄せてひとまとまりにする */
+    @media (min-width: 600px) {
+      .hero-inner {
+        justify-content: flex-end;
+      }
+    }
+
     .hero .catch {
       color: var(--washi);
       font-family: var(--font-d);
@@ -1992,7 +2000,30 @@
   </div>
 </section>
 
-<!-- ============ 5. HP制作協力 ============ -->
+<!-- ============ 5. 基本情報 (company.html から移設) ============ -->
+<section id="info" class="washi-tex">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title reveal" style="--d:.12s">基本情報</h2>
+    </div>
+    <table class="info-table reveal" style="--d:.24s">
+      <tbody>
+        <tr><th scope="row">店名・屋号</th><td>倉林畳店</td></tr>
+        <tr><th scope="row">代表者名</th><td><ruby>倉林俊之<rt>くらはやしとしゆき</rt></ruby></td></tr>
+        <tr><th scope="row">所在地</th><td>〒367-0301<br>埼玉県児玉郡神川町渡瀬638-7</td></tr>
+        <tr><th scope="row">電話番号</th><td><a href="tel:0274522966">TEL・FAX 0274-52-2966</a></td></tr>
+        <tr><th scope="row">受付時間</th><td>8時〜20時</td></tr>
+        <tr><th scope="row">定休日・営業日</th><td>不定休　お客様の要望に合わせて対応可能</td></tr>
+        <tr><th scope="row">対応エリア</th><td>関東圏内　交通費は問い合わせにて</td></tr>
+        <tr><th scope="row">資格・加盟団体</th><td>本庄児玉畳商工組合</td></tr>
+        <tr><th scope="row">支払い方法</th><td>振り込み、現金</td></tr>
+        <tr><th scope="row">駐車場・アクセス</th><td>丹荘駅から車で15分<br>駐車場3台</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 6. HP制作協力 ============ -->
 <section id="credit" class="washi-tex">
   <div class="wrap">
     <div class="section-head">
@@ -2011,29 +2042,6 @@
         </a>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- ============ 6. 会社概要(基本情報 / company.html から移設) ============ -->
-<section id="info" class="washi-tex">
-  <div class="wrap">
-    <div class="section-head">
-      <h2 class="section-title reveal" style="--d:.12s">会社概要</h2>
-    </div>
-    <table class="info-table reveal" style="--d:.24s">
-      <tbody>
-        <tr><th scope="row">店名・屋号</th><td>倉林畳店</td></tr>
-        <tr><th scope="row">代表者名</th><td><ruby>倉林俊之<rt>くらはやしとしゆき</rt></ruby></td></tr>
-        <tr><th scope="row">所在地</th><td>〒367-0301<br>埼玉県児玉郡神川町渡瀬638-7</td></tr>
-        <tr><th scope="row">電話番号</th><td><a href="tel:0274522966">TEL・FAX 0274-52-2966</a></td></tr>
-        <tr><th scope="row">受付時間</th><td>8時〜20時</td></tr>
-        <tr><th scope="row">定休日・営業日</th><td>不定休　お客様の要望に合わせて対応可能</td></tr>
-        <tr><th scope="row">対応エリア</th><td>関東圏内　交通費は問い合わせにて</td></tr>
-        <tr><th scope="row">資格・加盟団体</th><td>本庄児玉畳商工組合</td></tr>
-        <tr><th scope="row">支払い方法</th><td>振り込み、現金</td></tr>
-        <tr><th scope="row">駐車場・アクセス</th><td>丹荘駅から車で15分<br>駐車場3台</td></tr>
-      </tbody>
-    </table>
   </div>
 </section>
 
