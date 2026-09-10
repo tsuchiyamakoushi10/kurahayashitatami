@@ -492,17 +492,15 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 14px;
+      gap: 14px 30px;
       margin-top: 64px;
     }
 
+    /* 枠線をやめてテキストだけの並びにしたので、枠のぶんの余白は列の gap で取る */
     .badge {
       display: flex;
       align-items: center;
       gap: 12px;
-      border: 1px solid var(--gold);
-      padding: 16px 26px;
-      border-radius: 2px;
       font-family: var(--font-d);
       font-size: 16.5px;
       letter-spacing: .05em;
@@ -536,10 +534,6 @@
         margin-top: 44px;
       }
 
-      .belief-cta .btn-ghost {
-        width: 100%;
-      }
-
       .manifesto-line.small {
         margin-top: 28px;
       }
@@ -559,9 +553,8 @@
       }
 
       .badge {
-        /* 枠が横幅いっぱいになるため、ドットと文字は従来どおり中央に見えるようそろえる */
+        /* 縦一列なので、ドットと文字は中央に見えるようそろえる */
         justify-content: center;
-        padding: 13px 18px;
         font-size: 14px;
         gap: 10px;
       }
@@ -1230,8 +1223,7 @@
       z-index: 1;
     }
 
-    .cases-cta .btn-ghost,
-    .belief-cta .btn-ghost {
+    .cases-cta .btn-ghost {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -1247,15 +1239,13 @@
       transition: transform .25s ease, border-color .25s ease, background .25s ease;
     }
 
-    .cases-cta .btn-ghost:hover,
-    .belief-cta .btn-ghost:hover {
+    .cases-cta .btn-ghost:hover {
       transform: translateY(-2px);
       border-color: var(--washi);
       background: var(--sumi-3);
     }
 
-    .cases-cta .btn-ghost:active,
-    .belief-cta .btn-ghost:active {
+    .cases-cta .btn-ghost:active {
       transform: translateY(0);
     }
 
@@ -1264,6 +1254,25 @@
       width: 16px;
       height: 16px;
       flex: 0 0 16px;
+    }
+
+    /* 想いと歩みへの導線は枠線・背景なしのテキストリンク。
+       ホバーでは矢印ごと右に寄せて金色にする */
+    .belief-cta .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--washi);
+      font-family: var(--font-b);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: .03em;
+      transition: transform .25s ease, color .25s ease;
+    }
+
+    .belief-cta .btn-ghost:hover {
+      transform: translateX(3px);
+      color: var(--gold);
     }
 
     @media (max-width: 599px) {
@@ -2202,13 +2211,11 @@
 
     /* 枠線のみのボタン → い草色 */
     .cases-cta .btn-ghost,
-    .belief-cta .btn-ghost,
     .btn-ghost {
       transition: transform .25s ease, border-color .25s ease, background .25s ease, color .25s ease;
     }
 
     .cases-cta .btn-ghost:hover,
-    .belief-cta .btn-ghost:hover,
     .btn-ghost:hover {
       background: var(--igusa);
       border-color: var(--igusa);
