@@ -767,10 +767,18 @@
 
     .color-dots {
       display: flex;
-      gap: 12px;
+      gap: 18px;
       margin-top: 20px;
-      align-items: center;
+      align-items: flex-start;
       flex-wrap: wrap;
+    }
+
+    /* 色の丸と、その真下に置く色名をひとまとまりにする */
+    .color-swatch {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
     }
 
     .color-dots button {
@@ -797,20 +805,15 @@
       box-shadow: 0 0 0 3px var(--sumi), 0 0 0 4px var(--gold);
     }
 
-    .color-label {
-      margin-top: 14px;
+    /* 色名は畳表の色に合わせる(値は各要素の style で指定)。ただし墨色の背景では
+       藍や焦茶をそのまま使うと沈んで読めないため、色相はそのままに
+       明るさだけ上げた値を当てている */
+    .color-name {
       font-family: var(--font-b);
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
       letter-spacing: .05em;
-      color: var(--paper-70);
-    }
-
-    .color-label .id {
-      color: var(--gold);
-      font-family: var(--font-b);
-      font-size: 12px;
-      margin-left: 8px;
+      white-space: nowrap;
     }
 
     .price-note {
@@ -2416,12 +2419,23 @@
           <h3>和紙表</h3>
           <p>色あせ・汚れ・日焼けに強く、美しい見た目を長く保てる和紙表。</p>
           <div class="color-dots" role="group" aria-label="和紙表のカラーバリエーション">
-            <button type="button" style="background:#3d4a6b;" data-name="藍" data-id="P-13" data-src="../../photos/output_photos/p-13-washi-color-navy.jpg" data-alt="和紙表 藍色の畳表のアップ" aria-pressed="true" aria-label="藍"></button>
-            <button type="button" style="background:#7a5c3d;" data-name="焦茶" data-id="P-14" data-src="../../photos/output_photos/p-14-washi-color-brown.jpg" data-alt="和紙表 焦茶色の畳表のアップ" aria-pressed="false" aria-label="焦茶"></button>
-            <button type="button" style="background:#8b9a6b;" data-name="若草" data-id="P-15" data-src="../../photos/output_photos/p-15-washi-color-wakakusa.jpg" data-alt="和紙表 若草色の畳表のアップ" aria-pressed="false" aria-label="若草"></button>
-            <button type="button" style="background:#c9c2ad;" data-name="生成り" data-id="P-16" data-src="../../photos/output_photos/p-16-washi-color-kinari.jpg" data-alt="和紙表 生成り色の畳表のアップ" aria-pressed="false" aria-label="生成り"></button>
+            <div class="color-swatch">
+              <button type="button" style="background:#3d4a6b;" data-name="藍" data-id="P-13" data-src="../../photos/output_photos/p-13-washi-color-navy.jpg" data-alt="和紙表 藍色の畳表のアップ" aria-pressed="true" aria-label="藍"></button>
+              <span class="color-name" style="color:#8fa0c9;">藍</span>
+            </div>
+            <div class="color-swatch">
+              <button type="button" style="background:#7a5c3d;" data-name="焦茶" data-id="P-14" data-src="../../photos/output_photos/p-14-washi-color-brown.jpg" data-alt="和紙表 焦茶色の畳表のアップ" aria-pressed="false" aria-label="焦茶"></button>
+              <span class="color-name" style="color:#c49a6c;">焦茶</span>
+            </div>
+            <div class="color-swatch">
+              <button type="button" style="background:#8b9a6b;" data-name="若草" data-id="P-15" data-src="../../photos/output_photos/p-15-washi-color-wakakusa.jpg" data-alt="和紙表 若草色の畳表のアップ" aria-pressed="false" aria-label="若草"></button>
+              <span class="color-name" style="color:#b3c48c;">若草</span>
+            </div>
+            <div class="color-swatch">
+              <button type="button" style="background:#c9c2ad;" data-name="生成り" data-id="P-16" data-src="../../photos/output_photos/p-16-washi-color-kinari.jpg" data-alt="和紙表 生成り色の畳表のアップ" aria-pressed="false" aria-label="生成り"></button>
+              <span class="color-name" style="color:#c9c2ad;">生成り</span>
+            </div>
           </div>
-          <div class="color-label">藍</div>
           <p class="note">※上記は一部の色味です。他のカラーも<br>ございますので、お気軽にご相談ください。</p>
         </div>
       </div>
@@ -2657,14 +2671,14 @@
 </script>
 
 <script>
-  // 和紙表のカラードット: クリックで写真とラベルを切り替える
+  // 和紙表のカラードット: クリックで写真を切り替える
+  // (色名は各色の真下に常に出ているので、差し替えるのは写真だけ)
   (function () {
     const dots = document.querySelectorAll('.color-dots button');
     if (!dots.length) return;
     const card = dots[0].closest('.product-card');
     const photo = card.querySelector('.product-swatch img');
-    const label = card.querySelector('.color-label');
-    if (!photo || !label) return;
+    if (!photo) return;
 
     // 初回クリック時のちらつきを防ぐため、他の色を先読みしておく
     dots.forEach(function (dot) {
@@ -2681,7 +2695,6 @@
         });
         photo.src = dot.dataset.src;
         photo.alt = dot.dataset.alt;
-        label.firstChild.nodeValue = dot.dataset.name;
       });
     });
   })();
