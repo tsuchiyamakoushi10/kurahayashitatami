@@ -201,6 +201,15 @@
       z-index: 1;
     }
 
+    /* 内容が短く右側が大きく空いてしまうので、PCではこの2つだけ
+       本文の列を 640px に絞って画面の中央に置く */
+    @media (min-width: 600px) {
+      #timing .wrap,
+      #care .wrap {
+        max-width: 696px;
+      }
+    }
+
     .body-note {
       max-width: 640px;
       margin-top: 34px;
@@ -676,48 +685,6 @@
       .price-cta .cta-btn {
         width: 100%;
       }
-    }
-
-    /* ============ PAIN POINTS (concerns.html から移設) ============ */
-    .pain-list {
-      list-style: none;
-      display: grid;
-      gap: 0;
-      position: relative;
-      z-index: 1;
-    }
-
-    .pain-list li {
-      display: flex;
-      align-items: baseline;
-      gap: 22px;
-      padding: 26px 0;
-      border-bottom: 1px solid var(--washi-3);
-      font-family: var(--font-d);
-      font-weight: 700;
-      font-size: clamp(17px, 2.2vw, 22px);
-      color: var(--ink);
-    }
-
-    .pain-list li:first-child {
-      border-top: 1px solid var(--washi-3);
-    }
-
-    .pain-list .mark {
-      color: var(--vermillion);
-      font-size: 22px;
-      flex: none;
-    }
-
-    .pain-resolve {
-      margin-top: 44px;
-      font-family: var(--font-d);
-      font-weight: 700;
-      font-size: clamp(20px, 2.8vw, 28px);
-      color: var(--vermillion);
-      text-align: center;
-      position: relative;
-      z-index: 1;
     }
 
     /* ============ SCROLL REVEAL (IntersectionObserver で .is-in を付与) ============ */
@@ -1372,7 +1339,7 @@
     <div class="section-head">
       <h1 class="section-title reveal" style="--d:.12s">畳について</h1>
     </div>
-    <p class="lead lead-mincho reveal" style="--d:.24s">畳は日本の暮らしに寄り添い続けてきた伝統的な床材であり、<br>暮らしを快適にするさまざまな魅力があります。</p>
+    <p class="lead lead-mincho reveal" style="--d:.24s">畳は日本の暮らしに寄り添い続けてきた<br class="pc-br">伝統的な床材であり、<br>暮らしを快適にするさまざまな魅力があります。</p>
   </div>
 </section>
 
@@ -1562,23 +1529,6 @@
   </div>
 </section>
 
-<!-- ============ PAIN POINTS (concerns.html から移設) ============ -->
-<section class="washi-tex">
-  <div class="wrap">
-    <div class="section-head">
-      <h2 class="section-title reveal" style="--d:.12s">畳の"気になる"を、<br>そのままにしていませんか。</h2>
-    </div>
-
-    <ul class="pain-list">
-      <li style="--d:.24s"><span class="mark reveal">・</span>畳が色あせてお部屋が古く見える</li>
-      <li style="--d:.36s"><span class="mark reveal">・</span>費用や張り替え時期が分からず、そのままになっている</li>
-      <li style="--d:.48s"><span class="mark reveal">・</span>子どもが安心して遊べる部屋にしたい</li>
-    </ul>
-
-    <p class="pain-resolve reveal" style="--d:.60s">そのお悩み、畳を替えることで解決できます。</p>
-  </div>
-</section>
-
 <!-- ============ FAQ ============ -->
 <section id="faq" class="washi-tex">
   <div class="wrap faq-wrap">
@@ -1587,18 +1537,30 @@
     </div>
     <div class="faq-list">
       <div class="faq-item reveal" data-open="false" style="--d:.12s">
+        <button class="faq-q" type="button">畳が色あせて、部屋が古く見えます。きれいになりますか？<span class="plus">+</span></button>
+        <div class="faq-a"><p>畳表を新しくすることで、お部屋の印象は大きく変わります。実際に「新築になったみたい」「部屋も明るくなりました」というお声をいただいています。<br>傷みが表面だけであれば、畳表を裏返して使う「裏返し」で対応できる場合もあります。</p></div>
+      </div>
+      <div class="faq-item reveal" data-open="false" style="--d:.24s">
+        <button class="faq-q" type="button">費用や張り替えの時期が分からず、そのままになっています。<span class="plus">+</span></button>
+        <div class="faq-a"><p>お見積りは無料です。畳の状態を確認したうえで、裏返し・表替え・新調のどれが適しているかをご提案します。<br>目安は、新品から約3〜5年で裏返し、約5〜10年で表替え、約15〜20年以上で新調です。</p></div>
+      </div>
+      <div class="faq-item reveal" data-open="false" style="--d:.36s">
+        <button class="faq-q" type="button">子どもが安心して遊べる部屋にしたいのですが。<span class="plus">+</span></button>
+        <div class="faq-a"><p>畳には適度な弾力があり、転んだときの衝撃をやわらげてくれます。<br>傷や汚れが気になる場合は、色あせやシミに強くお手入れが楽な和紙表もおすすめです。カラーもお選びいただけます。</p></div>
+      </div>
+      <div class="faq-item reveal" data-open="false" style="--d:.48s">
         <button class="faq-q" type="button">畳の下に新聞紙を敷いても大丈夫ですか？<span class="plus">+</span></button>
         <div class="faq-a"><p>おすすめしていません。<br>新聞紙は湿気をため込みやすく、カビやシロアリが発生する原因になることがあります。<br>畳本来の調湿機能を活かすためにも、畳の下には何も敷かないことをおすすめします。</p></div>
       </div>
-      <div class="faq-item reveal" data-open="false" style="--d:.24s">
+      <div class="faq-item reveal" data-open="false" style="--d:.60s">
         <button class="faq-q" type="button">市販のカビ止めを使っても大丈夫ですか？<span class="plus">+</span></button>
         <div class="faq-a"><p>使用しても問題ありません。<br>当店では施工時にカビ対策を施していますので、基本的には追加で使用する必要はありません。<br>湿気対策としては、お部屋の換気を心がけていただくことも大切です。</p></div>
       </div>
-      <div class="faq-item reveal" data-open="false" style="--d:.36s">
+      <div class="faq-item reveal" data-open="false" style="--d:.72s">
         <button class="faq-q" type="button">畳の上に上敷きやカーペットを敷いてもいいですか？<span class="plus">+</span></button>
         <div class="faq-a"><p>あまりおすすめしていません。<br>畳と上敷きの間に入り込んだホコリが擦れることで、畳表を傷めたりツヤが失われたりする原因になります。<br>また、湿気がこもりやすくなるため、畳を長持ちさせるためにも、そのままお使いいただくことをおすすめします。</p></div>
       </div>
-      <div class="faq-item reveal" data-open="false" style="--d:.48s">
+      <div class="faq-item reveal" data-open="false" style="--d:.84s">
         <button class="faq-q" type="button">表替えをお願いする場合、家具や荷物は移動しておいた方がいいですか？<span class="plus">+</span></button>
         <div class="faq-a"><p>そのままで大丈夫です。<br>家具や荷物の移動は当店で対応いたしますので、お客様に事前に動かしていただく必要はありません。安心してお任せください。</p></div>
       </div>
@@ -1610,8 +1572,8 @@
 <section class="washi-tex">
   <div class="wrap">
     <div class="price-cta reveal">
-      <a class="cta-btn" href="products.html#price">
-        料金ページで詳しく見る
+      <a class="cta-btn" href="products.html">
+        商品を詳しく見る
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
     </div>
