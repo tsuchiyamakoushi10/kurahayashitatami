@@ -218,183 +218,18 @@
 
 
     /* ============ CASE CARDS (TOPの .case-card の型) ============ */
-    /* --- 施工事例カルーセル(画面幅いっぱい / 中央のカードを強調) --- */
-    .cases-carousel {
+    /* 事例は縦に積んで並べる。PCは2枚ずつ、スマホは1枚ずつ */
+    .cases-grid {
+      display: grid;
+      gap: 40px;
       position: relative;
       z-index: 1;
-      /* .wrap の左右余白を打ち消して画面幅いっぱいに広げる。
-         100vw はスクロールバーを含むため、その幅(--sbw)をスクリプトから受け取って差し引く */
-      margin-left: calc(50% - 50vw + var(--sbw, 0px) / 2);
-      margin-right: calc(50% - 50vw + var(--sbw, 0px) / 2);
-      /* カード1枚の幅と、カード間の余白(いずれも画面幅に対する割合)。
-         スマホは幅が足りないため、両隣のカードを中央カードの後ろに重ね(--gap を負に)、
-         カードが画面端で切られず、外側の縁まで見えている状態にする */
-      --card: 60%;
-      --gap: -27%;
-      /* 中央のカードを拡大したときの倍率と、両端カードの倍率・明るさ。
-         スマホは両隣を大きく縮めることで、3枚とも画面内に収める */
-      --focus-scale: 1.03;
-      --side-scale: .45;
-      --side-opacity: .5;
     }
 
-    /* 幅に余裕がある画面では、両隣のカードを重ねずゆったり並べる */
     @media (min-width: 820px) {
-      .cases-carousel {
-        --card: 29%;
-        --gap: 3.5%;
-        --side-scale: .9;
-      }
-    }
-
-    /* スマホは中央カードを画面幅いっぱい近くまで広げ、その横幅を使って
-       カードの中身を横並びにする(縦に長くなりすぎるのを防ぐ)。
-       両隣はさらに小さく縮めて中央カードの後ろへ回し、画面端で切られず
-       外側の縁まで見えている状態は保つ */
-    @media (max-width: 599px) {
-      .cases-carousel {
-        --card: 80%;
-        --gap: -44%;
-        --side-scale: .34;
-      }
-    }
-
-    .cases-viewport {
-      overflow: hidden;
-      /* 中央のカードを拡大しても上下が切れないよう、クリップ範囲に余白を持たせる */
-      padding: 26px 0;
-      /* 縦スクロールはブラウザに任せ、横方向のドラッグだけをスクリプトで拾う */
-      touch-action: pan-y;
-      cursor: grab;
-    }
-
-    .cases-viewport.is-dragging {
-      cursor: grabbing;
-    }
-
-    .cases-track {
-      display: flex;
-      align-items: stretch;
-      transition: transform .6s cubic-bezier(.4, 0, .2, 1);
-      will-change: transform;
-    }
-
-    /* ドラッグ中と、画面幅の変化で位置を取り直すときはアニメーションを切る */
-    .cases-track.is-dragging,
-    .cases-track.no-anim {
-      transition: none;
-    }
-
-    /* 通常は奥に引いた状態。中央に来たカードだけ手前に出す */
-    .cases-slide {
-      flex: 0 0 var(--card);
-      min-width: 0;
-      display: flex;
-      /* gap ではなく左右のマージンで間隔をとる(負の値=重ねる、を使えるようにするため) */
-      margin-inline: calc(var(--gap) / 2);
-      transform: scale(var(--side-scale));
-      opacity: var(--side-opacity);
-      transition: transform .6s cubic-bezier(.4, 0, .2, 1), opacity .6s ease;
-    }
-
-    .cases-slide.is-focus {
-      transform: scale(var(--focus-scale));
-      opacity: 1;
-      /* 拡大した分、隣のカードより手前に重ねる */
-      z-index: 2;
-    }
-
-    .cases-slide > .case-card {
-      width: 100%;
-      transition: box-shadow .6s ease;
-    }
-
-    .cases-slide.is-focus > .case-card {
-      box-shadow: 0 18px 44px rgba(21, 18, 13, .18);
-    }
-
-    /* ドラッグ中に写真のゴーストや文字選択が出ないようにする */
-    .cases-track img {
-      -webkit-user-drag: none;
-      user-select: none;
-    }
-
-    .cases-viewport.is-dragging,
-    .cases-viewport.is-dragging * {
-      user-select: none;
-    }
-
-    /* 矢印とドットは、カードの下に一列で置く */
-    .cases-nav {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 12px;
-    }
-
-    .cases-btn {
-      width: 52px;
-      height: 52px;
-      flex: 0 0 52px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid var(--washi-3);
-      border-radius: 50%;
-      background: var(--washi);
-      color: var(--ink);
-      font-family: var(--font-b);
-      font-size: 28px;
-      line-height: 1;
-      padding-bottom: 3px; /* ‹ › の字面が上寄りなので光学的に中央へ寄せる */
-      transition: background .25s ease, color .25s ease, border-color .25s ease, transform .25s ease;
-    }
-
-    .cases-btn:hover {
-      background: var(--igusa);
-      border-color: var(--igusa);
-      color: var(--washi);
-    }
-
-    .cases-btn:active {
-      transform: scale(.94);
-    }
-
-    .cases-dots {
-      display: flex;
-      justify-content: center;
-      gap: 0;
-    }
-
-    /* 見た目は9pxのドット、タップ領域は44px角で確保する */
-    .cases-dot {
-      width: 44px;
-      height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .cases-dot::before {
-      content: "";
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      border: 1px solid var(--ink-45);
-      transition: background .25s ease, border-color .25s ease;
-    }
-
-    .cases-dot[aria-selected="true"]::before {
-      background: var(--vermillion);
-      border-color: var(--vermillion);
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .cases-track,
-      .cases-slide,
-      .cases-slide > .case-card {
-        transition: none;
+      .cases-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 48px;
       }
     }
 
@@ -1359,106 +1194,87 @@
 <!-- ============ CASES ============ -->
 <section id="cases" class="washi-tex">
   <div class="wrap">
-    <div class="cases-carousel reveal" role="group" aria-roledescription="カルーセル" aria-label="施工事例">
-      <div class="cases-viewport">
-        <div class="cases-track">
-        <div class="cases-slide" role="group" aria-roledescription="スライド" aria-label="1 / 5">
-          <article class="case-card">
-            <div class="case-photos">
-              <button type="button" class="frame" data-photo="施工前" aria-label="施工前の写真を拡大表示"><img src="../../photos/output_photos/p-31-case-tearoom-before.jpg" alt="事例1 施工前：日焼けと傷みが目立つ和室の畳" loading="lazy"></button>
-              <button type="button" class="frame" data-photo="施工後" aria-label="施工後の写真を拡大表示"><img src="../../photos/output_photos/p-32-case-tearoom-after.jpg" alt="事例1 施工後：新しい畳表に張り替えられた和室の畳" loading="lazy"></button>
-            </div>
-            <div class="case-body">
-              <div class="cat">事例1</div>
-              <ul class="case-detail">
-                <li><span>お客様</span><span>藤岡市　茶道の先生</span></li>
-                <li><span>きっかけ</span><span>4代目の出身校<br>茶道の先生の師匠</span></li>
-                <li><span>施工内容</span><span>国産い草　表替え<br>黒の純綿畳へり付き<br>8畳</span></li>
-                <li><span>費用感・期間</span><span>８万円<br>スピード対応　4日</span></li>
-              </ul>
-              <blockquote>他の畳屋さんと<br class="sp-br">仕事の仕方が違う<br>とても良かった</blockquote>
-            </div>
-          </article>
+    <div class="cases-grid">
+      <article class="case-card reveal">
+        <div class="case-photos">
+          <button type="button" class="frame" data-photo="施工前" aria-label="施工前の写真を拡大表示"><img src="../../photos/output_photos/p-31-case-tearoom-before.jpg" alt="事例1 施工前：日焼けと傷みが目立つ和室の畳" loading="lazy"></button>
+          <button type="button" class="frame" data-photo="施工後" aria-label="施工後の写真を拡大表示"><img src="../../photos/output_photos/p-32-case-tearoom-after.jpg" alt="事例1 施工後：新しい畳表に張り替えられた和室の畳" loading="lazy"></button>
         </div>
-        <div class="cases-slide" role="group" aria-roledescription="スライド" aria-label="2 / 5">
-          <article class="case-card">
-            <div class="case-photos">
-              <button type="button" class="frame" data-photo="施工前" aria-label="施工前の写真を拡大表示"><img src="../../photos/output_photos/p-33-case-innkeeper-before.jpg" alt="事例2 施工前：日焼けと傷みが目立つ和室の畳" loading="lazy"></button>
-              <button type="button" class="frame" data-photo="施工後" aria-label="施工後の写真を拡大表示"><img src="../../photos/output_photos/p-34-case-innkeeper-after.jpg" alt="事例2 施工後：新しい畳表に張り替えられた和室の畳" loading="lazy"></button>
-            </div>
-            <div class="case-body">
-              <div class="cat">事例2</div>
-              <ul class="case-detail">
-                <li><span>お客様</span><span>宿泊施設の所長さん</span></li>
-                <li><span>きっかけ</span><span>宿泊施設に入れたときに<br>とても良かったので<br>ぜひうちにも入れてほしい</span></li>
-                <li><span>施工内容</span><span>和紙表　表替え<br>6畳</span></li>
-                <li><span>費用感・期間</span><span>６万円<br>10日</span></li>
-              </ul>
-              <blockquote>綺麗な畳をありがとうございます</blockquote>
-            </div>
-          </article>
+        <div class="case-body">
+          <div class="cat">事例1</div>
+          <ul class="case-detail">
+            <li><span>お客様</span><span>藤岡市　茶道の先生</span></li>
+            <li><span>きっかけ</span><span>4代目の出身校<br>茶道の先生の師匠</span></li>
+            <li><span>施工内容</span><span>国産い草　表替え<br>黒の純綿畳へり付き<br>8畳</span></li>
+            <li><span>費用感・期間</span><span>８万円<br>スピード対応　4日</span></li>
+          </ul>
+          <blockquote>他の畳屋さんと<br class="sp-br">仕事の仕方が違う<br>とても良かった</blockquote>
         </div>
-        <div class="cases-slide" role="group" aria-roledescription="スライド" aria-label="3 / 5">
-          <article class="case-card">
-            <div class="case-photos">
-              <button type="button" class="frame" data-photo="施工前" aria-label="施工前の写真を拡大表示"><img src="../../photos/output_photos/p-18-case-builder-manager-before.jpg" alt="事例3 施工前：日焼けと傷みが目立つ和室の畳" loading="lazy"></button>
-              <button type="button" class="frame" data-photo="施工後" aria-label="施工後の写真を拡大表示"><img src="../../photos/output_photos/p-19-case-builder-manager-after.jpg" alt="事例3 施工後：新しい畳表に張り替えられた和室の畳" loading="lazy"></button>
-            </div>
-            <div class="case-body">
-              <div class="cat">事例3</div>
-              <ul class="case-detail">
-                <li><span>お客様</span><span>上里町　お世話になっている建設屋の部長さん</span></li>
-                <li><span>きっかけ</span><span>現場などでお世話になっていて<br>うちにもぜひと言われた</span></li>
-                <li><span>施工内容</span><span>国産い草　表替え<br>4畳半</span></li>
-                <li><span>費用感・期間</span><span>４万円<br>1日、スピード対応</span></li>
-              </ul>
-              <blockquote>新築になったみたい<br>匂いがとてもいい</blockquote>
-            </div>
-          </article>
+      </article>
+      <article class="case-card reveal" style="--d:.12s">
+        <div class="case-photos">
+          <button type="button" class="frame" data-photo="施工前" aria-label="施工前の写真を拡大表示"><img src="../../photos/output_photos/p-33-case-innkeeper-before.jpg" alt="事例2 施工前：日焼けと傷みが目立つ和室の畳" loading="lazy"></button>
+          <button type="button" class="frame" data-photo="施工後" aria-label="施工後の写真を拡大表示"><img src="../../photos/output_photos/p-34-case-innkeeper-after.jpg" alt="事例2 施工後：新しい畳表に張り替えられた和室の畳" loading="lazy"></button>
         </div>
-        <div class="cases-slide" role="group" aria-roledescription="スライド" aria-label="4 / 5">
-          <article class="case-card">
-            <div class="case-photos">
-              <button type="button" class="frame" data-photo="施工前" aria-label="施工前の写真を拡大表示"><img src="../../photos/output_photos/p-20-case-izakaya-before.jpg" alt="事例4 施工前：日焼けと傷みが目立つ和室の畳" loading="lazy"></button>
-              <button type="button" class="frame" data-photo="施工後" aria-label="施工後の写真を拡大表示"><img src="../../photos/output_photos/p-21-case-izakaya-after.jpg" alt="事例4 施工後：新しい畳表に張り替えられた和室の畳" loading="lazy"></button>
-            </div>
-            <div class="case-body">
-              <div class="cat">事例4</div>
-              <ul class="case-detail">
-                <li><span>お客様</span><span>本庄市　居酒屋のママ</span></li>
-                <li><span>きっかけ</span><span>お世話になっている<br>社長さんからの紹介</span></li>
-                <li><span>施工内容</span><span>和紙表　表替え<br>半畳１２枚</span></li>
-                <li><span>費用感・期間</span><span>１２万円<br>2日、スピード対応</span></li>
-              </ul>
-              <blockquote>倉林さんにやってもらえて良かった</blockquote>
-            </div>
-          </article>
+        <div class="case-body">
+          <div class="cat">事例2</div>
+          <ul class="case-detail">
+            <li><span>お客様</span><span>宿泊施設の所長さん</span></li>
+            <li><span>きっかけ</span><span>宿泊施設に入れたときに<br>とても良かったので<br>ぜひうちにも入れてほしい</span></li>
+            <li><span>施工内容</span><span>和紙表　表替え<br>6畳</span></li>
+            <li><span>費用感・期間</span><span>６万円<br>10日</span></li>
+          </ul>
+          <blockquote>綺麗な畳をありがとうございます</blockquote>
         </div>
-        <div class="cases-slide" role="group" aria-roledescription="スライド" aria-label="5 / 5">
-          <article class="case-card">
-            <div class="case-photos">
-              <button type="button" class="frame" data-photo="施工前" aria-label="施工前の写真を拡大表示"><img src="../../photos/output_photos/p-22-case-longtime-customer-before.jpg" alt="事例5 施工前：日焼けと傷みが目立つ和室の畳" loading="lazy"></button>
-              <button type="button" class="frame" data-photo="施工後" aria-label="施工後の写真を拡大表示"><img src="../../photos/output_photos/p-23-case-longtime-customer-after.jpg" alt="事例5 施工後：新しい畳表に張り替えられた和室の畳" loading="lazy"></button>
-            </div>
-            <div class="case-body">
-              <div class="cat">事例5</div>
-              <ul class="case-detail">
-                <li><span>お客様</span><span>神川町　2代目の頃からのお得意様</span></li>
-                <li><span>きっかけ</span><span>2階で子供達が寝れるように<br>したい</span></li>
-                <li><span>施工内容</span><span>国産い草　表替え<br>6畳2間　12畳</span></li>
-                <li><span>費用感・期間</span><span>１１万円<br>2日、スピード対応</span></li>
-              </ul>
-              <blockquote>また頼みたい</blockquote>
-            </div>
-          </article>
+      </article>
+      <article class="case-card reveal" style="--d:.24s">
+        <div class="case-photos">
+          <button type="button" class="frame" data-photo="施工前" aria-label="施工前の写真を拡大表示"><img src="../../photos/output_photos/p-18-case-builder-manager-before.jpg" alt="事例3 施工前：日焼けと傷みが目立つ和室の畳" loading="lazy"></button>
+          <button type="button" class="frame" data-photo="施工後" aria-label="施工後の写真を拡大表示"><img src="../../photos/output_photos/p-19-case-builder-manager-after.jpg" alt="事例3 施工後：新しい畳表に張り替えられた和室の畳" loading="lazy"></button>
         </div>
+        <div class="case-body">
+          <div class="cat">事例3</div>
+          <ul class="case-detail">
+            <li><span>お客様</span><span>上里町　お世話になっている建設屋の部長さん</span></li>
+            <li><span>きっかけ</span><span>現場などでお世話になっていて<br>うちにもぜひと言われた</span></li>
+            <li><span>施工内容</span><span>国産い草　表替え<br>4畳半</span></li>
+            <li><span>費用感・期間</span><span>４万円<br>1日、スピード対応</span></li>
+          </ul>
+          <blockquote>新築になったみたい<br>匂いがとてもいい</blockquote>
         </div>
-      </div>
-      <div class="cases-nav">
-        <button type="button" class="cases-btn cases-prev" aria-label="前の施工事例を表示">‹</button>
-        <div class="cases-dots" role="tablist" aria-label="施工事例の切り替え"></div>
-        <button type="button" class="cases-btn cases-next" aria-label="次の施工事例を表示">›</button>
-      </div>
+      </article>
+      <article class="case-card reveal" style="--d:.36s">
+        <div class="case-photos">
+          <button type="button" class="frame" data-photo="施工前" aria-label="施工前の写真を拡大表示"><img src="../../photos/output_photos/p-20-case-izakaya-before.jpg" alt="事例4 施工前：日焼けと傷みが目立つ和室の畳" loading="lazy"></button>
+          <button type="button" class="frame" data-photo="施工後" aria-label="施工後の写真を拡大表示"><img src="../../photos/output_photos/p-21-case-izakaya-after.jpg" alt="事例4 施工後：新しい畳表に張り替えられた和室の畳" loading="lazy"></button>
+        </div>
+        <div class="case-body">
+          <div class="cat">事例4</div>
+          <ul class="case-detail">
+            <li><span>お客様</span><span>本庄市　居酒屋のママ</span></li>
+            <li><span>きっかけ</span><span>お世話になっている<br>社長さんからの紹介</span></li>
+            <li><span>施工内容</span><span>和紙表　表替え<br>半畳１２枚</span></li>
+            <li><span>費用感・期間</span><span>１２万円<br>2日、スピード対応</span></li>
+          </ul>
+          <blockquote>倉林さんにやってもらえて良かった</blockquote>
+        </div>
+      </article>
+      <article class="case-card reveal" style="--d:.48s">
+        <div class="case-photos">
+          <button type="button" class="frame" data-photo="施工前" aria-label="施工前の写真を拡大表示"><img src="../../photos/output_photos/p-22-case-longtime-customer-before.jpg" alt="事例5 施工前：日焼けと傷みが目立つ和室の畳" loading="lazy"></button>
+          <button type="button" class="frame" data-photo="施工後" aria-label="施工後の写真を拡大表示"><img src="../../photos/output_photos/p-23-case-longtime-customer-after.jpg" alt="事例5 施工後：新しい畳表に張り替えられた和室の畳" loading="lazy"></button>
+        </div>
+        <div class="case-body">
+          <div class="cat">事例5</div>
+          <ul class="case-detail">
+            <li><span>お客様</span><span>神川町　2代目の頃からのお得意様</span></li>
+            <li><span>きっかけ</span><span>2階で子供達が寝れるように<br>したい</span></li>
+            <li><span>施工内容</span><span>国産い草　表替え<br>6畳2間　12畳</span></li>
+            <li><span>費用感・期間</span><span>１１万円<br>2日、スピード対応</span></li>
+          </ul>
+          <blockquote>また頼みたい</blockquote>
+        </div>
+      </article>
     </div>
   </div>
 </section>
@@ -1616,341 +1432,6 @@
       closeLightbox();
     }
   });
-</script>
-
-<!-- ============ 施工事例カルーセル (画面幅いっぱい / 中央のカードを強調) ============ -->
-<script>
-  (function () {
-    const carousel = document.querySelector('.cases-carousel');
-    if (!carousel) return;
-
-    const viewport = carousel.querySelector('.cases-viewport');
-    const track = carousel.querySelector('.cases-track');
-    const slides = Array.from(carousel.querySelectorAll('.cases-slide'));
-    const dotsBox = carousel.querySelector('.cases-dots');
-    const prevBtn = carousel.querySelector('.cases-prev');
-    const nextBtn = carousel.querySelector('.cases-next');
-    if (!track || slides.length < 2) return;
-
-    const INTERVAL = 5000; /* 自動で次のカードへ切り替わる間隔 */
-    const SWIPE = 40;      /* スワイプと判定する最小の横移動量(px) */
-    const total = slides.length;
-
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    const originals = slides.slice();
-    let clones = [];
-    let edge = 0;     /* 左右それぞれに置くクローンの枚数 */
-    let index = 0;    /* 中央に置いているカード番号 */
-    let pos = 0;      /* クローンを含めたトラック上の位置 */
-    let timer = null;
-    let paused = false;
-    let settleTimer = null;
-
-    /* 画面幅いっぱいに広げるとき、スクロールバーのぶんだけ中心がずれるので補正する */
-    function syncBleed() {
-      const sb = window.innerWidth - document.documentElement.clientWidth;
-      carousel.style.setProperty('--sbw', Math.max(0, sb) + 'px');
-    }
-
-    /* --- 位置の計算 --- */
-    /* カードは拡大・縮小しているため、見た目の幅(getBoundingClientRect)ではなく
-       変形前のレイアウト上の幅を使う */
-    function slideWidth() {
-      const pct = parseFloat(getComputedStyle(carousel).getPropertyValue('--card'));
-      if (pct) return track.clientWidth * pct / 100;
-      return originals[0].offsetWidth;
-    }
-
-    function stepWidth() {
-      /* 間隔は左右マージンで取っている(重ねるために負の値も使う) */
-      const cs = getComputedStyle(originals[0]);
-      const gap = (parseFloat(cs.marginLeft) || 0) + (parseFloat(cs.marginRight) || 0);
-      return slideWidth() + gap;
-    }
-
-    /* 中央のカードが画面の中央に来る位置。
-       先頭カードの左マージンぶんトラック全体がずれるので、それも差し引く */
-    function offsetFor(p) {
-      const lead = parseFloat(getComputedStyle(originals[0]).marginLeft) || 0;
-      return -p * stepWidth() - lead + (track.clientWidth - slideWidth()) / 2;
-    }
-
-    /* --- クローン --- */
-    /* 端をまたぐときに逆戻りして見えないよう、また両端に空白ができないよう、
-       画面の半分を埋められる枚数だけ前後にクローンを置く */
-    function neededEdge() {
-      const step = stepWidth();
-      const need = Math.ceil(((track.clientWidth - slideWidth()) / 2) / step) + 1;
-      return Math.max(1, Math.min(total, need));
-    }
-
-    function buildClones() {
-      clones.forEach(function (c) { c.remove(); });
-      clones = [];
-      edge = neededEdge();
-      for (let i = 0; i < edge; i++) {
-        const head = originals[total - edge + i].cloneNode(true);
-        const tail = originals[i % total].cloneNode(true);
-        [head, tail].forEach(function (c) {
-          c.classList.remove('is-focus');
-          c.setAttribute('aria-hidden', 'true');
-          c.removeAttribute('role');
-          c.removeAttribute('aria-roledescription');
-          c.removeAttribute('aria-label');
-          /* 控えの表示なのでキーボードの移動先にはしない */
-          c.querySelectorAll('button, a, input, textarea, select').forEach(function (el) {
-            el.setAttribute('tabindex', '-1');
-          });
-        });
-        clones.push(head, tail);
-        track.insertBefore(head, track.children[i]);
-        track.appendChild(tail);
-      }
-    }
-
-    function buildDots() {
-      dotsBox.textContent = '';
-      originals.forEach(function (_, i) {
-        const dot = document.createElement('button');
-        dot.type = 'button';
-        dot.className = 'cases-dot';
-        dot.setAttribute('role', 'tab');
-        dot.setAttribute('aria-label', (i + 1) + '件目を表示');
-        dot.addEventListener('click', function () { go(i, true); });
-        dotsBox.appendChild(dot);
-      });
-    }
-
-    /* --- 描画 --- */
-    function paint(animate) {
-      if (animate === false) track.classList.add('no-anim');
-      track.style.transform = 'translateX(' + offsetFor(pos) + 'px)';
-      if (animate === false) {
-        void track.offsetWidth; /* 位置を確定させてからアニメーションを戻す */
-        track.classList.remove('no-anim');
-      }
-    }
-
-    /* 中央に来ているカードだけを強調する */
-    function marks() {
-      Array.from(track.children).forEach(function (el, i) {
-        el.classList.toggle('is-focus', i === pos);
-        /* 重ねて表示する幅のとき、中央に近いカードほど手前に置く */
-        el.style.zIndex = String(20 - Math.abs(i - pos));
-      });
-      originals.forEach(function (el, i) {
-        /* 中央と、その左右に見えているカードは読み上げの対象に残す */
-        const near = Math.min(Math.abs(i - index), total - Math.abs(i - index));
-        el.setAttribute('aria-hidden', near <= 1 ? 'false' : 'true');
-      });
-      Array.from(dotsBox.children).forEach(function (el, i) {
-        el.setAttribute('aria-selected', i === index ? 'true' : 'false');
-      });
-    }
-
-    function render(animate) {
-      pos = index + edge;
-      paint(animate);
-      marks();
-    }
-
-    /* クローンの上で止まっていたら、実物の同じ絵へアニメーションなしで移す */
-    function settle() {
-      const want = index + edge;
-      if (pos === want) return;
-      pos = want;
-      paint(false);
-      marks();
-    }
-
-    function scheduleSettle() {
-      clearTimeout(settleTimer);
-      if (pos === index + edge) return;
-      const dur = parseFloat(getComputedStyle(track).transitionDuration) || 0;
-      if (dur === 0) settle(); /* アニメーションしない設定のときは即座に */
-      else settleTimer = setTimeout(settle, dur * 1000 + 100);
-    }
-
-    track.addEventListener('transitionend', function (e) {
-      if (e.target !== track || e.propertyName !== 'transform') return;
-      settle();
-    });
-
-    function go(n, fromUser) {
-      const next = (n + total) % total;
-      /* 端をまたぐときだけ、進んでいる向きのままクローンへ動かす */
-      if (n >= total) pos = total + edge;      /* 最後 → 最初(そのまま前へ) */
-      else if (n < 0) pos = edge - 1;          /* 最初 → 最後(そのまま後ろへ) */
-      else pos = next + edge;
-      index = next;
-      paint(true);
-      marks();
-      scheduleSettle();
-      /* 手動で送った直後は、次の自動送りまでの時間を測り直す */
-      if (fromUser) { stop(); start(); }
-    }
-
-    function start() {
-      if (reduceMotion || paused || timer) return;
-      timer = setInterval(function () { go(index + 1); }, INTERVAL);
-    }
-
-    function stop() {
-      if (timer) { clearInterval(timer); timer = null; }
-    }
-
-    prevBtn.addEventListener('click', function () { go(index - 1, true); });
-    nextBtn.addEventListener('click', function () { go(index + 1, true); });
-
-    carousel.addEventListener('mouseenter', function () { paused = true; stop(); });
-    carousel.addEventListener('mouseleave', function () { paused = false; start(); });
-    carousel.addEventListener('focusin', function () { paused = true; stop(); });
-    carousel.addEventListener('focusout', function () { paused = false; start(); });
-
-    /* --- スマホの指スワイプ / PC のドラッグ (指の動きにカードが追従する) --- */
-    let dragging = false; /* ポインタを押している最中か */
-    let locked = false;   /* 横方向のドラッグと確定したか */
-    let startX = 0;
-    let startY = 0;
-    let moveX = 0;
-    let pointerId = null;
-    let suppressClick = false; /* ドラッグ直後の写真タップで拡大表示が開かないように */
-
-    function onDown(e) {
-      if (e.pointerType === 'mouse' && e.button !== 0) return;
-      dragging = true;
-      locked = false;
-      moveX = 0;
-      suppressClick = false;
-      pointerId = e.pointerId;
-      startX = e.clientX;
-      startY = e.clientY;
-      stop();
-    }
-
-    function onMove(e) {
-      if (!dragging || e.pointerId !== pointerId) return;
-      const dx = e.clientX - startX;
-      const dy = e.clientY - startY;
-
-      if (!locked) {
-        /* 動きが小さいうちは、縦スクロールかドラッグかを判定しない */
-        if (Math.abs(dx) < 6 && Math.abs(dy) < 6) return;
-        /* 縦の動きが勝っていれば、ページのスクロールとしてそのまま流す */
-        if (Math.abs(dy) >= Math.abs(dx)) { endDrag(false); return; }
-        locked = true;
-        if (viewport.setPointerCapture) viewport.setPointerCapture(pointerId);
-        track.classList.add('is-dragging');
-        viewport.classList.add('is-dragging');
-      }
-
-      moveX = dx;
-      track.style.transform = 'translateX(' + (offsetFor(pos) + dx) + 'px)';
-    }
-
-    function endDrag(commit) {
-      if (!dragging) return;
-      dragging = false;
-
-      if (locked) {
-        if (viewport.releasePointerCapture && viewport.hasPointerCapture && viewport.hasPointerCapture(pointerId)) {
-          viewport.releasePointerCapture(pointerId);
-        }
-        track.classList.remove('is-dragging');
-        viewport.classList.remove('is-dragging');
-      }
-
-      const dx = moveX;
-      const wasLocked = locked;
-      moveX = 0;
-      locked = false;
-      pointerId = null;
-
-      if (wasLocked && Math.abs(dx) > 6) suppressClick = true;
-
-      /* 1枚の幅の18%かSWIPE(40px)のどちらか小さい方を超えたら隣のカードへ送る */
-      const threshold = Math.min(SWIPE, stepWidth() * 0.18);
-      if (commit && wasLocked && Math.abs(dx) > threshold) {
-        go(index + (dx < 0 ? 1 : -1), true);
-      } else {
-        paint(true); /* 動かした分を元の位置へ戻す */
-        scheduleSettle();
-        stop();
-        start();
-      }
-    }
-
-    if (window.PointerEvent) {
-      viewport.addEventListener('pointerdown', onDown);
-      viewport.addEventListener('pointermove', onMove);
-      window.addEventListener('pointerup', function () { endDrag(true); });
-      window.addEventListener('pointercancel', function () { endDrag(false); });
-      /* 写真をつかんだときのブラウザ既定のドラッグを抑える */
-      viewport.addEventListener('dragstart', function (e) { e.preventDefault(); });
-      /* ドラッグで終わった操作は、写真の拡大表示のクリックとして扱わない */
-      viewport.addEventListener('click', function (e) {
-        if (!suppressClick) return;
-        suppressClick = false;
-        e.preventDefault();
-        e.stopPropagation();
-      }, true);
-    } else {
-      /* PointerEvent 非対応の古いブラウザ向け(しきい値だけのスワイプ) */
-      let touchX = null;
-      let touchY = null;
-
-      viewport.addEventListener('touchstart', function (e) {
-        touchX = e.touches[0].clientX;
-        touchY = e.touches[0].clientY;
-        stop();
-      }, { passive: true });
-
-      viewport.addEventListener('touchend', function (e) {
-        if (touchX === null) return;
-        const dx = e.changedTouches[0].clientX - touchX;
-        const dy = e.changedTouches[0].clientY - touchY;
-        if (Math.abs(dx) > SWIPE && Math.abs(dx) > Math.abs(dy)) go(index + (dx < 0 ? 1 : -1));
-        touchX = null;
-        touchY = null;
-        start();
-      }, { passive: true });
-    }
-
-    /* 別タブに移っている間は動かさない */
-    document.addEventListener('visibilitychange', function () {
-      if (document.hidden) stop(); else start();
-    });
-
-    /* 画面幅が変わったらカードの幅・クローンの枚数・位置を取り直す */
-    let resizeTimer = null;
-    let lastWidth = 0;
-    function relayout() {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(function () {
-        /* 高さだけの変化(写真の遅延読み込み等)では組み直さない。
-           組み直すと高さがまた動き、監視が止まらなくなるため */
-        syncBleed();
-        if (track.clientWidth === lastWidth) return;
-        lastWidth = track.clientWidth;
-        buildClones();
-        render(false);
-      }, 150);
-    }
-
-    window.addEventListener('resize', relayout);
-
-    /* 読み込み途中にスクロールバーが出る等で幅が変わっても中央がずれないよう、
-       ビューポートの寸法そのものを見張る */
-    if (window.ResizeObserver) new ResizeObserver(relayout).observe(viewport);
-
-    buildDots();
-    syncBleed();
-    buildClones();
-    render(false);
-    lastWidth = track.clientWidth;
-    start();
-  })();
 </script>
 
 <!-- ============ SCROLL REVEAL SCRIPT ============ -->
