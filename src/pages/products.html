@@ -343,62 +343,56 @@
       order: -1;
     }
 
-    .photo-scroller {
+    /* 和紙表のカラーボタン (TOPの .color-dots と同じ仕組み。
+       ただし背景が和紙色で明るいので、枠と押した印を暗い側の色で取る) */
+    .color-dots {
       display: flex;
-      gap: 12px;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
-      padding-bottom: 12px;
+      gap: 18px;
+      margin-top: 20px;
+      align-items: flex-start;
+      flex-wrap: wrap;
     }
 
-    .photo-scroller .frame {
-      flex: 0 0 100%;
-      scroll-snap-align: start;
-    }
-
-    .photo-scroller:focus-visible {
-      outline: 2px solid var(--gold);
-      outline-offset: 4px;
-    }
-
-    .carousel-nav {
+    /* 色の丸と、その真下に置く色名をひとまとまりにする */
+    .color-swatch {
       display: flex;
-      gap: 12px;
-      margin-top: 16px;
-    }
-
-    .carousel-btn {
-      width: 46px;
-      height: 46px;
-      display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      border: 1px solid var(--washi-3);
-      border-radius: 2px;
-      color: var(--ink);
-      transition: border-color .25s ease, color .25s ease, opacity .25s ease;
+      gap: 8px;
     }
 
-    .carousel-btn:hover {
-      border-color: var(--gold);
-      color: var(--gold);
+    .color-dots button {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 2px solid var(--ink-45);
+      padding: 0;
+      position: relative;
+      transition: transform .2s ease, border-color .2s ease;
     }
 
-    .carousel-btn:focus-visible {
+    .color-dots button:hover {
+      transform: translateY(-2px);
+    }
+
+    .color-dots button:focus-visible {
       outline: 2px solid var(--gold);
       outline-offset: 3px;
     }
 
-    .carousel-btn[disabled] {
-      opacity: .35;
-      cursor: default;
+    .color-dots button[aria-pressed="true"] {
+      border-color: var(--ink);
+      box-shadow: 0 0 0 3px var(--washi), 0 0 0 4px var(--gold);
     }
 
-    .carousel-btn svg {
-      width: 18px;
-      height: 18px;
+    /* 色名は畳表の色に合わせる(値は各要素の style で指定)。ただし和紙色の背景では
+       淡い色がそのままだと読めないため、色相はそのままに暗くした値を当てている */
+    .color-name {
+      font-family: var(--font-b);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .05em;
+      white-space: nowrap;
     }
 
     .types-note {
@@ -1520,27 +1514,33 @@
         <div class="type-price">12,000〜25,000円 /1畳</div>
       </div>
       <div class="type-media">
-        <div class="photo-scroller" id="washiPhotos" tabindex="0" aria-label="和紙表のカラーバリエーション（横スクロール）">
-          <!-- 写真枠 P-13 / 藍 -->
-          <div class="frame frame-washi"><img src="../../photos/output_photos/p-13-washi-color-navy.jpg" alt="和紙表 藍色の畳表のアップ" loading="lazy"></div>
-          <!-- 写真枠 P-14 / 焦茶 -->
-          <div class="frame frame-washi"><img src="../../photos/output_photos/p-14-washi-color-brown.jpg" alt="和紙表 焦茶色の畳表のアップ" loading="lazy"></div>
-          <!-- 写真枠 P-15 / 若草 -->
-          <div class="frame frame-washi"><img src="../../photos/output_photos/p-15-washi-color-wakakusa.jpg" alt="和紙表 若草色の畳表のアップ" loading="lazy"></div>
-          <!-- 写真枠 P-16 / 生成り -->
-          <div class="frame frame-washi"><img src="../../photos/output_photos/p-16-washi-color-kinari.jpg" alt="和紙表 生成り色の畳表のアップ" loading="lazy"></div>
-          <!-- 写真枠 P-29 -->
-          <div class="frame frame-washi"><img src="../../photos/output_photos/p-29-washi-color-yellow.jpg" alt="和紙表 黄色（山吹）の畳表のアップ" loading="lazy"></div>
-          <!-- 写真枠 P-30 -->
-          <div class="frame frame-washi"><img src="../../photos/output_photos/p-30-washi-color-pink.jpg" alt="和紙表 桃色の畳表のアップ" loading="lazy"></div>
-        </div>
-        <div class="carousel-nav">
-          <button class="carousel-btn" type="button" data-dir="-1" aria-label="前の写真を見る">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
-          </button>
-          <button class="carousel-btn" type="button" data-dir="1" aria-label="次の写真を見る">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </button>
+        <!-- 写真枠 P-13〜P-16 / P-29 / P-30 。下のカラーボタンで差し替える -->
+        <div class="frame frame-washi"><img id="washiPhoto" src="../../photos/output_photos/p-13-washi-color-navy.jpg" alt="和紙表 藍色の畳表のアップ" loading="lazy"></div>
+        <div class="color-dots" role="group" aria-label="和紙表のカラーバリエーション">
+            <div class="color-swatch">
+              <button type="button" style="background:#3d4a6b;" data-src="../../photos/output_photos/p-13-washi-color-navy.jpg" data-alt="和紙表 藍色の畳表のアップ" aria-pressed="true" aria-label="藍"></button>
+              <span class="color-name" style="color:#3d4a6b;">藍</span>
+            </div>
+            <div class="color-swatch">
+              <button type="button" style="background:#7a5c3d;" data-src="../../photos/output_photos/p-14-washi-color-brown.jpg" data-alt="和紙表 焦茶色の畳表のアップ" aria-pressed="false" aria-label="焦茶"></button>
+              <span class="color-name" style="color:#7a5c3d;">焦茶</span>
+            </div>
+            <div class="color-swatch">
+              <button type="button" style="background:#8b9a6b;" data-src="../../photos/output_photos/p-15-washi-color-wakakusa.jpg" data-alt="和紙表 若草色の畳表のアップ" aria-pressed="false" aria-label="若草"></button>
+              <span class="color-name" style="color:#636e4b;">若草</span>
+            </div>
+            <div class="color-swatch">
+              <button type="button" style="background:#c9c2ad;" data-src="../../photos/output_photos/p-16-washi-color-kinari.jpg" data-alt="和紙表 生成り色の畳表のアップ" aria-pressed="false" aria-label="生成り"></button>
+              <span class="color-name" style="color:#73694c;">生成り</span>
+            </div>
+            <div class="color-swatch">
+              <button type="button" style="background:#b8974a;" data-src="../../photos/output_photos/p-29-washi-color-yellow.jpg" data-alt="和紙表 山吹色の畳表のアップ" aria-pressed="false" aria-label="山吹"></button>
+              <span class="color-name" style="color:#7b6530;">山吹</span>
+            </div>
+            <div class="color-swatch">
+              <button type="button" style="background:#b98d8a;" data-src="../../photos/output_photos/p-30-washi-color-pink.jpg" data-alt="和紙表 桃色の畳表のアップ" aria-pressed="false" aria-label="桃"></button>
+              <span class="color-name" style="color:#915a57;">桃</span>
+            </div>
         </div>
       </div>
     </div>
@@ -1806,30 +1806,30 @@
 </footer>
 
 <script>
-  // 和紙表の写真の横スクロール（矢印で1枚ずつ）
+  // 和紙表のカラーボタン: クリックで写真を切り替える (TOPと同じ仕組み)
+  // 色名は各色の真下に常に出ているので、差し替えるのは写真だけ
   (function () {
-    const track = document.getElementById('washiPhotos');
-    const btns = document.querySelectorAll('.carousel-btn');
-    const step = () => {
-      const photo = track.querySelector('.frame');
-      const gap = parseFloat(getComputedStyle(track).gap) || 0;
-      return photo.getBoundingClientRect().width + gap;
-    };
-    btns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        track.scrollBy({ left: Number(btn.dataset.dir) * step(), behavior: 'smooth' });
+    const dots = document.querySelectorAll('.color-dots button');
+    const photo = document.getElementById('washiPhoto');
+    if (!dots.length || !photo) return;
+
+    // 初回クリック時のちらつきを防ぐため、他の色を先読みしておく
+    dots.forEach(function (dot) {
+      if (dot.dataset.src !== photo.getAttribute('src')) {
+        const pre = new Image();
+        pre.src = dot.dataset.src;
+      }
+    });
+
+    dots.forEach(function (dot) {
+      dot.addEventListener('click', function () {
+        dots.forEach(function (d) {
+          d.setAttribute('aria-pressed', String(d === dot));
+        });
+        photo.src = dot.dataset.src;
+        photo.alt = dot.dataset.alt;
       });
     });
-    const update = () => {
-      const max = track.scrollWidth - track.clientWidth;
-      btns.forEach(btn => {
-        const dir = Number(btn.dataset.dir);
-        btn.disabled = dir < 0 ? track.scrollLeft <= 1 : track.scrollLeft >= max - 1;
-      });
-    };
-    track.addEventListener('scroll', update);
-    window.addEventListener('resize', update);
-    update();
   })();
 </script>
 
