@@ -395,11 +395,28 @@
       z-index: 1;
     }
 
-    .section-head .eyebrow {
+    /* 各セクションの内容が一目で分かるようにする小見出し。
+       .section-head / .split-text / 中央寄せセクションのどこに置いても同じ見た目にする */
+    .eyebrow {
       color: var(--vermillion);
       margin-bottom: 16px;
       font-family: var(--font-d);
       font-weight: 700;
+      font-size: 14px;
+      letter-spacing: .32em;
+    }
+
+    /* 墨色・い草色の暗い背景では朱色が沈むので washi 系に置き換える */
+    .sumi-tex .eyebrow,
+    .igusa-tex .eyebrow {
+      color: var(--washi-3);
+    }
+
+    /* 中央寄せのセクションでは、最後の文字の後ろに付く字送りの分だけ左に寄って
+       見えるので、同じ量を字下げして光学的な中央に戻す */
+    .manifesto .eyebrow,
+    .final-cta .eyebrow {
+      text-indent: .32em;
     }
 
     .section-title {
@@ -605,15 +622,6 @@
       padding: 5px 10px;
       border-radius: 2px;
       backdrop-filter: blur(3px);
-    }
-
-    .split-text .eyebrow {
-      font-family: var(--font-d);
-      font-weight: 700;
-      font-size: 14px;
-      letter-spacing: .32em;
-      color: var(--vermillion);
-      margin-bottom: 16px;
     }
 
     .split-text .body-text {
@@ -2376,6 +2384,7 @@
 <!-- ============ MANIFESTO ============ -->
 <section id="belief" class="sumi-tex manifesto">
   <div class="wrap">
+    <div class="eyebrow reveal">私たちの姿勢</div>
     <p class="manifesto-line big reveal">妥協はしない。<br>一枚一枚に、<br>確かな技術とこだわりを。</p>
     <p class="manifesto-line small reveal" style="--d:.12s">本気で仕事をした、その先にあるお客様の「きれいになった」「頼んでよかった」という言葉のために。<br>ひと目で違いがわかる仕上がりを、一つひとつの畳に積み重ねています。</p>
     <div class="badge-row reveal" style="--d:.24s">
@@ -2407,6 +2416,7 @@
         </div>
       </div>
       <div class="split-text">
+        <div class="eyebrow reveal">畳について</div>
         <h2 class="section-title reveal" style="--d:.12s">畳表・畳床・畳縁から<span class="nw">できる、<br class="pc-br">畳の構造。</span></h2>
         <p class="body-text reveal" style="--d:.24s">見た目や香りだけでなく、クッション性や耐久性まで、<br>畳は幾つもの部材が重なって出来ています。<br>仕組みを知ると、選び方も変わってきます。</p>
         <div class="tatami-diagram reveal" style="--d:.36s">
@@ -2430,6 +2440,7 @@
 <section id="price" class="washi-tex">
   <div class="wrap">
     <div class="section-head">
+      <div class="eyebrow reveal">商品紹介</div>
       <h2 class="section-title reveal" style="--d:.12s">い草畳と和紙表、<br>あなたの暮らしに合う一枚を。</h2>
     </div>
     <div class="product-grid">
@@ -2552,6 +2563,7 @@
 <section id="craftspeople" class="washi-tex">
   <div class="wrap">
     <div class="section-head">
+      <div class="eyebrow reveal">職人紹介</div>
       <h2 class="section-title reveal" style="--d:.12s">この道を歩む、<br>ふたりの職人。</h2>
     </div>
     <div class="crafts-grid">
@@ -2587,6 +2599,7 @@
 <!-- ============ FINAL CTA ============ -->
 <section id="contact" class="igusa-tex final-cta">
   <div class="wrap">
+    <div class="eyebrow reveal">お問い合わせ</div>
     <p class="catch2 reveal">畳のことなら、<br>どんなに小さなことでも<br><span>お気軽にご相談ください。</span></p>
     <p class="cta-sub reveal" style="--d:.12s">見積もりは無料です。まずはお電話でお声がけください。</p>
     <a class="big-tel reveal" href="tel:0274522966" style="--d:.24s">
