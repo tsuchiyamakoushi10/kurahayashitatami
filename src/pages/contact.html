@@ -556,23 +556,14 @@
     }
 
     /* ============ 8. 信頼ブロック ============ */
+    /* 写真枠を削除して1カラム構成になったため、文言とリンクを中央に揃える */
     .trust {
       display: grid;
-      gap: 44px;
       align-items: center;
+      justify-items: center;
+      text-align: center;
       position: relative;
       z-index: 1;
-    }
-
-    @media (min-width: 880px) {
-      .trust {
-        grid-template-columns: .85fr 1.15fr;
-        gap: 72px;
-      }
-    }
-
-    .trust .frame {
-      aspect-ratio: 4 / 5;
     }
 
     /* 「創業83年」を削除したことで先頭要素になったため、上の余白を打ち消す */
@@ -595,6 +586,7 @@
       display: flex;
       flex-wrap: wrap;
       align-items: center;
+      justify-content: center;
       gap: 16px 26px;
     }
 
@@ -611,40 +603,6 @@
     .text-link:hover {
       color: var(--vermillion);
       border-bottom-color: var(--vermillion);
-    }
-
-    /* ============ PHOTO FRAME (TOPの .frame の型) ============ */
-    .frame {
-      position: relative;
-      aspect-ratio: 4 / 5;
-      border-radius: 2px;
-      overflow: hidden;
-      background: linear-gradient(150deg, var(--gold) 0%, var(--sumi-3) 40%, var(--sumi) 100%);
-    }
-
-    .frame::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      opacity: .5;
-      mix-blend-mode: overlay;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3'/></filter><rect width='100%25' height='100%25' filter='url(%23g)'/></svg>");
-    }
-
-    .frame .tag {
-      position: absolute;
-      left: 16px;
-      bottom: 16px;
-      z-index: 2;
-      color: var(--paper-70);
-      font-family: var(--font-b);
-      font-size: 13px;
-      letter-spacing: .08em;
-      border: 1px solid var(--paper-45);
-      padding: 5px 10px;
-      border-radius: 2px;
-      backdrop-filter: blur(3px);
-      line-height: 1.7;
     }
 
     /* ============ CTA (共通コンポーネント .cta-btn に準拠) ============ */
@@ -1140,12 +1098,15 @@
       text-align: center;
     }
 
+    /* ブランドのグラデーション背景は廃止。フッター内の他のリンクと揃えて、
+       枠線だけの控えめな見た目にする(枠線は .footer-bottom の区切り線と同系統の washi 系) */
     .insta-btn {
       width: 150px;
       height: 52px;
       border-radius: 8px;
-      background: radial-gradient(circle at 30% 110%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
-      color: #fff;
+      background: transparent;
+      border: 1px solid rgba(242, 234, 217, .22);
+      color: var(--washi);
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -1470,15 +1431,10 @@
   </div>
 </section>
 
-<!-- ============ 4. 信頼ブロック (写真＋関連リンク) ============ -->
+<!-- ============ 4. 信頼ブロック (関連リンク) ============ -->
 <section id="trust" class="washi-tex">
   <div class="wrap">
     <div class="trust">
-      <div class="reveal">
-        <!-- 写真枠 P-06 -->
-        <div class="frame">
-        </div>
-      </div>
       <div class="reveal" style="--d:.14s">
         <p class="trust-copy">まずはお気軽にご相談ください</p>
         <div class="trust-actions">
