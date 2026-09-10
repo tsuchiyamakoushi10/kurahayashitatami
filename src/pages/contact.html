@@ -872,6 +872,90 @@
       }
     }
 
+    /* ============ MAIL BUTTON (Googleフォームへの導線 / 現在は準備中) ============ */
+    /* 電話ボタンが い草色の塗り、こちらは枠線のみ。サイトの他の枠線ボタンと同じく
+       ホバーで い草色に反転する */
+    .mail-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: transparent;
+      border: 1px solid var(--paper-45);
+      color: var(--washi);
+      padding: 9px 17px;
+      border-radius: 3px;
+      font-family: var(--font-b);
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: .03em;
+      white-space: nowrap;
+      transition: transform .25s ease, background .25s ease, border-color .25s ease, color .25s ease;
+    }
+
+    .mail-btn:hover {
+      transform: translateY(-2px);
+      background: var(--igusa);
+      border-color: var(--igusa);
+      color: var(--washi);
+    }
+
+    .mail-btn svg {
+      width: 16px;
+      height: 16px;
+      flex: 0 0 16px;
+    }
+
+    /* 狭い画面ではアイコンだけにする。電話ボタンより文字数が多く 600px 付近では
+       ヘッダーに収まらないので、電話ボタンより遅く文字を出す */
+    .mail-btn .label {
+      display: none;
+    }
+
+    @media (min-width: 700px) {
+      .mail-btn .label {
+        display: inline;
+      }
+    }
+
+    /* ============ NOTICE (準備中の案内) ============ */
+    .notice {
+      position: fixed;
+      top: 88px;
+      left: 50%;
+      z-index: 200;
+      max-width: calc(100% - 32px);
+      padding: 14px 20px;
+      border-radius: 3px;
+      background: var(--sumi-2);
+      border: 1px solid var(--gold);
+      color: var(--washi);
+      font-family: var(--font-b);
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 1.7;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .45);
+      pointer-events: none;
+      opacity: 0;
+      transform: translateX(-50%) translateY(-8px);
+      transition: opacity .25s ease, transform .25s ease;
+    }
+
+    .notice[hidden] {
+      display: none;
+    }
+
+    .notice.is-open {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .notice {
+        transition: none;
+      }
+    }
+
     /* ============ HAMBURGER MENU (Mobile) ============ */
     .menu-btn {
       width: 44px;
@@ -1318,6 +1402,15 @@
 
     <!-- Header Right Section -->
     <div class="header-right">
+      <!-- Mail Button (Googleフォームの用意ができるまでは案内だけ出す) -->
+      <button class="mail-btn" type="button" id="mailBtn" aria-label="メールで問い合わせ">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/>
+          <path d="m22 6-10 7L2 6"/>
+        </svg>
+        <span class="label">メールで問い合わせ</span>
+      </button>
+
       <!-- CTA(1) Contact Button -->
       <a class="contact-btn" href="tel:0274522966" aria-label="電話をかける">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1335,6 +1428,9 @@
     </div>
   </div>
 </header>
+
+<!-- ============ 準備中の案内 (メールでの問い合わせ) ============ -->
+<div class="notice" id="mailNotice" role="status" hidden>お問い合わせフォームは準備中です。<br>お急ぎの方はお電話にてご連絡ください。</div>
 
 <!-- ============ MOBILE NAV OVERLAY ============ -->
 <nav class="nav-overlay" id="navOverlay">
@@ -1484,6 +1580,33 @@
     </div>
   </div>
 </footer>
+
+<!-- ============ MAIL BUTTON SCRIPT (準備中の案内) ============ -->
+<script>
+  // Googleフォームの用意ができるまでは、押しても遷移せず案内だけを出す
+  (function () {
+    var btn = document.getElementById('mailBtn');
+    var notice = document.getElementById('mailNotice');
+    if (!btn || !notice) return;
+
+    var hideTimer = null;
+    var removeTimer = null;
+
+    btn.addEventListener('click', function () {
+      clearTimeout(hideTimer);
+      clearTimeout(removeTimer);
+      notice.hidden = false;
+      // hidden を外した直後にクラスを付けても変化前の状態が無いので、1フレーム待つ
+      requestAnimationFrame(function () {
+        notice.classList.add('is-open');
+      });
+      hideTimer = setTimeout(function () {
+        notice.classList.remove('is-open');
+        removeTimer = setTimeout(function () { notice.hidden = true; }, 300);
+      }, 3600);
+    });
+  })();
+</script>
 
 <!-- ============ HEADER SCRIPT (共通コンポーネント header.html) ============ -->
 <script>
