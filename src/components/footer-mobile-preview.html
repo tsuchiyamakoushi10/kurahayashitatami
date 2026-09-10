@@ -166,12 +166,15 @@
       text-align: center;
     }
 
+    /* ブランドのグラデーション背景は廃止。フッター内の他のリンクと揃えて、
+       枠線だけの控えめな見た目にする(枠線は .footer-bottom の区切り線と同系統の washi 系) */
     .insta-btn {
       width: 150px;
       height: 52px;
       border-radius: 8px;
-      background: radial-gradient(circle at 30% 110%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
-      color: #fff;
+      background: transparent;
+      border: 1px solid rgba(242, 234, 217, .22);
+      color: var(--washi);
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -180,8 +183,7 @@
       font-weight: 700;
       font-size: 15px;
       letter-spacing: .02em;
-      transition: transform .25s ease, box-shadow .25s ease;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, .35);
+      transition: transform .25s ease, background .25s ease, border-color .25s ease;
     }
 
     /* SVGのグリフから photos/output_photos/instagram-icon-v2.png に差し替え。

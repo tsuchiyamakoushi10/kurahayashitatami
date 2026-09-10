@@ -1115,8 +1115,7 @@
       font-weight: 700;
       font-size: 15px;
       letter-spacing: .02em;
-      transition: transform .25s ease, box-shadow .25s ease;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, .35);
+      transition: transform .25s ease, background .25s ease, border-color .25s ease;
     }
 
     /* SVGのグリフから photos/output_photos/instagram-icon-v2.png に差し替え。
@@ -1129,7 +1128,8 @@
 
     .insta-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 10px 24px rgba(0, 0, 0, .4);
+      background: rgba(242, 234, 217, .08);
+      border-color: rgba(242, 234, 217, .5);
     }
 
     /* ============ FOOTER BOTTOM ============ */
@@ -1270,32 +1270,6 @@
     .menu-btn:hover {
       background: var(--igusa);
       border-color: var(--igusa);
-    }
-
-    /* Instagram（ブランドのグラデーション）→ い草色をフェードで重ねる */
-    .insta-btn {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .insta-btn::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      background: var(--igusa);
-      opacity: 0;
-      transition: opacity .28s ease;
-    }
-
-    .insta-btn:hover::after {
-      opacity: 1;
-    }
-
-    .insta-btn img,
-    .insta-btn span {
-      position: relative;
-      z-index: 1;
     }
 
     .tel-cta .cta-btn {
