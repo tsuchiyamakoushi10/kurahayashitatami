@@ -57,9 +57,11 @@
     }
 
     /* ============ SECTION BASE ============ */
+    /* 節はすべて同じ和紙色の背景で、上下の余白がそのまま節の間隔になる。
+       110px だと節の間が 220px 空くため、ここを詰める */
     section {
       position: relative;
-      padding: 110px 0;
+      padding: 60px 0;
     }
 
     .washi-tex {
@@ -161,9 +163,15 @@
     }
 
     /* ============ PAGE TITLE ============ */
+    /* 題字の下は #basics 側だけで間隔を取る(下端を持たせると二重になる) */
     .page-head {
       padding-top: 140px;
+      padding-bottom: 0;
       text-align: center;
+    }
+
+    #basics {
+      padding-top: 72px;
     }
 
     /* ページ最上部の題字に使うロゴ。素材は白抜きなので、和紙色の背景で見えるよう
@@ -655,6 +663,10 @@
     @media (max-width: 599px) {
       .page-head {
         padding-top: 110px;
+      }
+
+      #basics {
+        padding-top: 48px;
       }
 
       .page-logo {
@@ -1208,7 +1220,7 @@
 
     @media (max-width: 599px) {
       section {
-        padding: 80px 0;
+        padding: 44px 0;
       }
     }
 
