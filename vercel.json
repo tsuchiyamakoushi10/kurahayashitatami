@@ -53,6 +53,11 @@
       "permanent": true
     },
     {
+      "source": "/products.html",
+      "destination": "/products",
+      "permanent": true
+    },
+    {
       "source": "/price.html",
       "destination": "/products#price",
       "permanent": true
