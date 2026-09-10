@@ -1473,13 +1473,12 @@
       flex: 0 0 16px;
     }
 
-    /* 狭い画面ではアイコンだけにする。電話ボタンより文字数が多く 600px 付近では
-       ヘッダーに収まらないので、電話ボタンより遅く文字を出す */
+    /* 狭い画面ではアイコンだけにする(電話ボタンと同じ扱い) */
     .mail-btn .label {
       display: none;
     }
 
-    @media (min-width: 700px) {
+    @media (min-width: 600px) {
       .mail-btn .label {
         display: inline;
       }
@@ -1878,19 +1877,19 @@
         <li><a href="tatami.html">畳について</a></li>
         <li><a href="products.html">商品紹介</a></li>
         <li><a href="works.html">施工事例</a></li>
-        <li><a href="contact.html">お問い合わせ</a></li>
+        <li><a href="contact.html" data-prep>お問い合わせ</a></li>
       </ul>
     </nav>
 
     <!-- Header Right Section -->
     <div class="header-right">
       <!-- Mail Button (Googleフォームの用意ができるまでは案内だけ出す) -->
-      <button class="mail-btn" type="button" id="mailBtn" aria-label="メールで問い合わせ">
+      <button class="mail-btn" type="button" data-prep aria-label="メールでお問い合わせ">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/>
           <path d="m22 6-10 7L2 6"/>
         </svg>
-        <span class="label">メールで問い合わせ</span>
+        <span class="label">お問い合わせ</span>
       </button>
 
       <!-- CTA(1) Contact Button -->
@@ -1922,7 +1921,7 @@
     <li><a href="tatami.html">畳について</a></li>
     <li><a href="products.html">商品紹介</a></li>
     <li><a href="works.html">施工事例</a></li>
-    <li><a href="contact.html">お問い合わせ</a></li>
+    <li><a href="contact.html" data-prep>お問い合わせ</a></li>
   </ul>
 </nav>
 
@@ -2208,18 +2207,20 @@
   </div>
 </footer>
 
-<!-- ============ MAIL BUTTON SCRIPT (準備中の案内) ============ -->
+<!-- ============ 準備中の案内 (メールボタン / お問い合わせへの導線) ============ -->
 <script>
-  // Googleフォームの用意ができるまでは、押しても遷移せず案内だけを出す
+  // Googleフォームと問い合わせページの用意ができるまでは、
+  // data-prep の付いた導線は遷移させず、案内だけを出す。
+  // JavaScript が無い環境では href のとおり問い合わせページへ進む
   (function () {
-    var btn = document.getElementById('mailBtn');
     var notice = document.getElementById('mailNotice');
-    if (!btn || !notice) return;
+    var triggers = document.querySelectorAll('[data-prep]');
+    if (!notice || !triggers.length) return;
 
     var hideTimer = null;
     var removeTimer = null;
 
-    btn.addEventListener('click', function () {
+    function show() {
       clearTimeout(hideTimer);
       clearTimeout(removeTimer);
       notice.hidden = false;
@@ -2231,6 +2232,13 @@
         notice.classList.remove('is-open');
         removeTimer = setTimeout(function () { notice.hidden = true; }, 300);
       }, 3600);
+    }
+
+    Array.prototype.forEach.call(triggers, function (el) {
+      el.addEventListener('click', function (e) {
+        e.preventDefault();
+        show();
+      });
     });
   })();
 </script>
