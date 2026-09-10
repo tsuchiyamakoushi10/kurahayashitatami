@@ -1252,11 +1252,14 @@
       }
     }
 
+    /* 写真の下に役職・名前・職人歴を積む縦並び。
+       横並びだった頃は写真が 220px に収まっていたが、縦並びなら幅を使える */
     .craft-card {
       display: flex;
-      gap: 32px;
+      flex-direction: column;
+      gap: 24px;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
     }
 
     /* 代/役職・名前・職人歴の各行を左右中央に揃える */
@@ -1266,7 +1269,8 @@
 
     /* 3:4 のままなので写真のトリミングは変わらない */
     .craft-photo {
-      width: 220px;
+      width: 100%;
+      max-width: 340px;
       aspect-ratio: 3 / 4;
       flex: none;
       border-radius: 2px;
@@ -1361,35 +1365,11 @@
 
     @media (max-width: 599px) {
       .craft-card {
-        gap: 20px;
-      }
-
-      .craft-photo {
-        width: 156px;
-      }
-
-      /* 写真を大きくしたぶん、狭い画面では代/役職だけ1段抑えて折り返しを防ぐ */
-      .craft-role {
-        font-size: 16px;
+        gap: 18px;
       }
 
       .crafts-cta .cta-btn {
         width: 100%;
-      }
-    }
-
-    /* 360px 未満の端末では「4代目・修行中」が折り返すので、そこだけ一段詰める */
-    @media (max-width: 359px) {
-      .craft-card {
-        gap: 16px;
-      }
-
-      .craft-photo {
-        width: 132px;
-      }
-
-      .craft-role {
-        font-size: 15.5px;
       }
     }
 
