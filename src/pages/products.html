@@ -162,14 +162,26 @@
 
     /* ============ PAGE TITLE ============ */
     .page-head {
-      /* 見出しを置かないため、タブ上端が従来の見出し上端と同じ位置(140px)に来るよう
-         タブ側の上余白 44px を差し引く */
-      padding-top: 96px;
+      padding-top: 140px;
       padding-bottom: 0;
+      text-align: center;
+    }
+
+    /* ページ最上部の題字に使うロゴ。素材は白抜きなので、和紙色の背景で見えるよう
+       反転して墨色にする(不透明部分は純白のみなので、反転すると黒になる) */
+    .page-logo {
+      display: block;
+      height: 84px;
+      width: auto;
+      margin: 0 auto 30px;
+      filter: invert(1);
+      position: relative;
+      z-index: 1;
     }
 
     .page-head .section-head {
       margin-bottom: 0;
+      margin-inline: auto;
     }
 
     /* ページ内リンクの飛び先が固定ヘッダー(76px)の下に潜らないようにする */
@@ -238,11 +250,6 @@
     }
 
     @media (max-width: 599px) {
-      .page-head {
-        padding-top: 66px;
-        padding-bottom: 0;
-      }
-
       .type-block + .type-block {
         margin-top: 64px;
       }
@@ -801,8 +808,13 @@
     /* ============ MOBILE ADJUST (599px以下) ============ */
     @media (max-width: 599px) {
       .page-head {
-        padding-top: 66px;
+        padding-top: 110px;
         padding-bottom: 0;
+      }
+
+      .page-logo {
+        height: 58px;
+        margin-bottom: 22px;
       }
 
       .price-product {
@@ -1469,7 +1481,9 @@
 <!-- ============ PAGE TITLE ============ -->
 <section class="washi-tex page-head">
   <div class="wrap">
+    <img class="page-logo reveal" src="../../logo-white-transparent.png" alt="倉林畳店" width="1220" height="930">
     <div class="section-head">
+      <h1 class="section-title reveal" style="--d:.12s">商品紹介</h1>
     </div>
   </div>
 </section>

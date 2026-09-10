@@ -163,16 +163,29 @@
     /* ============ PAGE TITLE ============ */
     .page-head {
       padding-top: 140px;
+      text-align: center;
+    }
+
+    /* ページ最上部の題字に使うロゴ。素材は白抜きなので、和紙色の背景で見えるよう
+       反転して墨色にする(不透明部分は純白のみなので、反転すると黒になる) */
+    .page-logo {
+      display: block;
+      height: 84px;
+      width: auto;
+      margin: 0 auto 30px;
+      filter: invert(1);
+      position: relative;
+      z-index: 1;
     }
 
     .page-head .section-head {
       margin-bottom: 0;
-      /* 640px の制限があると 1 行目が途中で折り返すため、この導入部だけ幅の制限を外す */
-      max-width: none;
+      margin-inline: auto;
     }
 
     .page-head .lead {
       margin-top: 40px;
+      margin-inline: auto;
     }
 
     /* ============ TEXT ============ */
@@ -633,6 +646,11 @@
     @media (max-width: 599px) {
       .page-head {
         padding-top: 110px;
+      }
+
+      .page-logo {
+        height: 58px;
+        margin-bottom: 22px;
       }
 
       .page-head .lead {
@@ -1350,9 +1368,11 @@
 <!-- ============ PAGE TITLE ============ -->
 <section class="washi-tex page-head">
   <div class="wrap">
+    <img class="page-logo reveal" src="../../logo-white-transparent.png" alt="倉林畳店" width="1220" height="930">
     <div class="section-head">
-      <h1 class="section-title reveal">畳は日本の暮らしに寄り添い続けてきた伝統的な床材であり、<br>暮らしを快適にするさまざまな魅力があります。</h1>
+      <h1 class="section-title reveal" style="--d:.12s">畳について</h1>
     </div>
+    <p class="lead lead-mincho reveal" style="--d:.24s">畳は日本の暮らしに寄り添い続けてきた伝統的な床材であり、<br>暮らしを快適にするさまざまな魅力があります。</p>
   </div>
 </section>
 
