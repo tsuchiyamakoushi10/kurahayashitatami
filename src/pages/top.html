@@ -206,6 +206,14 @@
       text-shadow: 0 6px 30px rgba(0, 0, 0, .5);
     }
 
+    /* 「信頼をつくる」を金色で独立した行にする。display:block が改行を作るので
+       直前に <br> は要らない */
+    .catch em {
+      font-style: normal;
+      color: #c9a24a;
+      display: block;
+    }
+
     .hero .sub {
       margin-top: 26px;
       max-width: 520px;
@@ -2366,7 +2374,7 @@
     </div>
 
     <h1 class="catch reveal" style="--d:.12s">
-      妥協しない<br>一枚が信頼をつくる
+      妥協しない<br>一枚が<em>信頼をつくる</em>
     </h1>
 
     <p class="sub reveal" style="--d:.24s">
