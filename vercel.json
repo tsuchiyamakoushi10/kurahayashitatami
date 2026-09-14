@@ -25,6 +25,10 @@
     {
       "source": "/company-story",
       "destination": "/src/pages/company-story.html"
+    },
+    {
+      "source": "/privacy",
+      "destination": "/src/pages/privacy.html"
     }
   ],
   "redirects": [
@@ -106,6 +110,11 @@
     {
       "source": "/company-story.html",
       "destination": "/company-story",
+      "permanent": true
+    },
+    {
+      "source": "/privacy.html",
+      "destination": "/privacy",
       "permanent": true
     },
     {

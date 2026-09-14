@@ -1243,6 +1243,7 @@
   </style>
 
 
+
   <!-- 計測タグ ここから -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-KVKT0B8MTK"></script>
   <script>
@@ -1250,6 +1251,23 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-KVKT0B8MTK');
+
+    // 電話ボタンのタップを計測する。設置場所も一緒に送るので、
+    // ヘッダー・最終CTA・フッターのどれが押されているかが分かる。
+    document.addEventListener('click', function (e) {
+      var a = e.target && e.target.closest && e.target.closest('a[href^="tel:"]');
+      if (!a) return;
+      gtag('event', 'tel_tap', {
+        tel_location: a.dataset.telLocation
+                    || (a.closest('.site-header') ? 'header'
+                     :  a.closest('.final-cta')   ? 'cta'
+                     :  a.closest('footer')       ? 'footer'
+                     :  a.closest('table')        ? 'company_info'
+                     :  'other'),
+        link_url: a.getAttribute('href'),
+        page_path: location.pathname
+      });
+    }, true);
   </script>
   <!-- 計測タグ ここまで -->
 </head>
@@ -1270,6 +1288,7 @@
       <ul>
         <li><a href="/">TOP</a></li>
         <li><a href="/company-story">想いと歩み</a></li>
+          <li><a href="/privacy">プライバシーポリシー</a></li>
         <li><a href="/tatami">畳について</a></li>
         <li><a href="/products">商品紹介</a></li>
         <li><a href="/works" aria-current="page">施工事例</a></li>

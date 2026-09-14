@@ -1877,6 +1877,7 @@
   </noscript>
 
 
+
   <!-- 計測タグ ここから -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-KVKT0B8MTK"></script>
   <script>
@@ -1884,6 +1885,23 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-KVKT0B8MTK');
+
+    // 電話ボタンのタップを計測する。設置場所も一緒に送るので、
+    // ヘッダー・最終CTA・フッターのどれが押されているかが分かる。
+    document.addEventListener('click', function (e) {
+      var a = e.target && e.target.closest && e.target.closest('a[href^="tel:"]');
+      if (!a) return;
+      gtag('event', 'tel_tap', {
+        tel_location: a.dataset.telLocation
+                    || (a.closest('.site-header') ? 'header'
+                     :  a.closest('.final-cta')   ? 'cta'
+                     :  a.closest('footer')       ? 'footer'
+                     :  a.closest('table')        ? 'company_info'
+                     :  'other'),
+        link_url: a.getAttribute('href'),
+        page_path: location.pathname
+      });
+    }, true);
   </script>
   <!-- 計測タグ ここまで -->
 </head>
@@ -2176,7 +2194,7 @@
     <p class="catch2 reveal">畳のことなら<br>なんでもお答えさせて<br>いただきます。</p>
     <p class="cta-sub reveal" style="--d:.12s">どんな些細なことでもまずはお問い合わせください。</p>
 
-    <a class="big-tel reveal" href="tel:0274-52-2966" style="--d:.24s">
+    <a class="big-tel reveal" href="tel:0274522966" style="--d:.24s">
       <span class="label">TEL / FAX</span>
       <span class="number">0274-52-2966</span>
       <span class="hours">受付時間 8時〜20時</span>
@@ -2217,6 +2235,7 @@
         <h4>会社情報</h4>
         <ul class="footer-links">
           <li><a href="/company-story">想いと歩み</a></li>
+          <li><a href="/privacy">プライバシーポリシー</a></li>
           <li><a href="https://www.google.com/maps/place/%E5%80%89%E6%9E%97%E7%95%B3%E5%BA%97/@36.171459,139.0607641,17z/data=!3m1!4b1!4m6!3m5!1s0x601ec05dda129be5:0x60b5bc5057f51a4!8m2!3d36.171459!4d139.063339!16s%2Fg%2F1tfjfmjk?entry=ttu&amp;g_ep=EgoyMDI2MDcyMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">アクセス</a></li>
         </ul>
       </div>
