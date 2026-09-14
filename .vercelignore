@@ -1,0 +1,7 @@
+# 公開サイトに配信しない内部資料。
+# design/tokens.css と design/components.css は各ページが読み込むので配信対象のまま残す。
+docs/
+design/reference/
+design/tokens.md
+README.md
+プロンプト_追加原稿の保存.md
