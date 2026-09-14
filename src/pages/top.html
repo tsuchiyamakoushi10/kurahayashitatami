@@ -24,52 +24,18 @@
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "HomeAndConstructionBusiness",
-    "@id": "https://www.kurahayashi-tatami.com/#business",
-    "name": "倉林畳店",
-    "alternateName": "KURAHAYASHI TATAMI TEN",
-    "description": "創業83年、埼玉県児玉郡神川町の畳店。い草畳と和紙表の新調・表替え・裏返しを承ります。",
-    "url": "https://www.kurahayashi-tatami.com/",
-    "image": "https://www.kurahayashi-tatami.com/og-image.jpg",
-    "logo": "https://www.kurahayashi-tatami.com/icon-512.png",
-    "telephone": "+81-274-52-2966",
-    "faxNumber": "+81-274-52-2966",
-    "foundingDate": "1943",
-    "address": {
-      "@type": "PostalAddress",
-      "postalCode": "367-0301",
-      "addressCountry": "JP",
-      "addressRegion": "埼玉県",
-      "addressLocality": "児玉郡神川町",
-      "streetAddress": "渡瀬638-7"
-    },
-    "openingHoursSpecification": [{
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-      "opens": "08:00",
-      "closes": "20:00"
-    }],
-    "areaServed": { "@type": "Place", "name": "関東圏内" },
-    "paymentAccepted": "現金, 銀行振込",
-    "currenciesAccepted": "JPY",
-    "knowsLanguage": "ja"
-  }
-  </script>
 
   <title>倉林畳店 | 妥協しない一枚が信頼をつくる</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../design/tokens.css">
   <link rel="stylesheet" href="../../design/components.css">
   <!-- オープニングの和紙パネルに使う装飾。演出が始まる前に読み終えられるよう、
        CSSと並行して先に取得しておく。PC は四隅のイラスト1、スマホは上下のイラスト2・3 -->
-  <link rel="preload" as="image" fetchpriority="high" media="(min-width: 600px)" href="../../photos/output_photos/%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%EF%BC%91.png">
-  <link rel="preload" as="image" fetchpriority="high" media="(max-width: 599px)" href="../../photos/output_photos/%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%EF%BC%92.png">
-  <link rel="preload" as="image" fetchpriority="high" media="(max-width: 599px)" href="../../photos/output_photos/%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%EF%BC%93.png">
+  <link rel="preload" as="image" fetchpriority="high" media="(min-width: 600px)" href="../../photos/output_photos/illust-1.webp">
+  <link rel="preload" as="image" fetchpriority="high" media="(max-width: 599px)" href="../../photos/output_photos/illust-2.webp">
+  <link rel="preload" as="image" fetchpriority="high" media="(max-width: 599px)" href="../../photos/output_photos/illust-3.webp">
   <style>
     /* ============ RESET & BASE ============ */
     * {
@@ -407,7 +373,7 @@
       z-index: -1;
       pointer-events: none;
       opacity: .12;
-      background-image: url("../../photos/output_photos/%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%EF%BC%91.png");
+      background-image: url("../../photos/output_photos/illust-1.webp");
       background-repeat: no-repeat;
       background-position: center center;
       /* 画面いっぱいに合わせ、四隅の装飾が画面の四隅に来るようにする */
@@ -429,7 +395,7 @@
       /* 上部: イラスト2。差し替えるのは画像・位置・サイズだけで、
          固定・重ね順・不透明度は上のルールをそのまま引き継ぐ */
       body::before {
-        background-image: url("../../photos/output_photos/%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%EF%BC%92.png");
+        background-image: url("../../photos/output_photos/illust-2.webp");
         background-position: center top;
         /* 画面幅いっぱい。高さは元の比率(3:2)のまま伸縮させない */
         background-size: 100% auto;
@@ -444,7 +410,7 @@
         pointer-events: none;
         /* 濃さは上部(イラスト2)と同じ。調整はこの2箇所を揃えて行う */
         opacity: .12;
-        background-image: url("../../photos/output_photos/%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%EF%BC%93.png");
+        background-image: url("../../photos/output_photos/illust-3.webp");
         background-repeat: no-repeat;
         background-position: center bottom;
         background-size: 100% auto;
@@ -1880,7 +1846,7 @@
            (他ページの HERO の暗幕と同程度の濃さ) */
         linear-gradient(rgba(21, 18, 13, .86), rgba(21, 18, 13, .86)),
         /* 2枚目: 背景写真 P-046 */
-        url("../../photos/output_photos/p-046.jpg") 50% 50% / cover no-repeat,
+        url("../../photos/output_photos/p-046.webp") 50% 50% / cover no-repeat,
         /* 3枚目: 写真が読み込めないときのフォールバック(従来の背景色) */
         var(--sumi-2);
       color: rgba(242, 234, 217, .7);
@@ -2001,7 +1967,7 @@
       transition: transform .25s ease, background .25s ease, border-color .25s ease;
     }
 
-    /* SVGのグリフから photos/output_photos/instagram-icon-v2.png に差し替え。
+    /* SVGのグリフから photos/output_photos/instagram-icon-v2.webp に差し替え。
        見た目の大きさが変わらないよう、寸法は元の 22px のまま */
     .insta-btn img {
       width: 22px;
@@ -2095,7 +2061,7 @@
       background-color: var(--washi);
       /* 四隅の装飾(イラスト1)。1枚の画像を左右のパネルで半分ずつ受け持つ。
          パネルが閉じている状態では2枚が並んで1枚の絵になり、四隅が画面の四隅に揃う */
-      background-image: url("../../photos/output_photos/%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%EF%BC%91.png");
+      background-image: url("../../photos/output_photos/illust-1.webp");
       background-repeat: no-repeat;
       /* パネル幅は画面の50%。その200% = 画面幅ちょうど、高さは画面いっぱい。
          左右で同じ指定なので、片側だけ拡大率がずれることがない */
@@ -2167,16 +2133,16 @@
       /* 左パネル: 2枚とも左半分を、パネルの左端(=画面の左端)に合わせる */
       .opening-panel-l {
         background-image:
-          url("../../photos/output_photos/%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%EF%BC%92.png"),
-          url("../../photos/output_photos/%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%EF%BC%93.png");
+          url("../../photos/output_photos/illust-2.webp"),
+          url("../../photos/output_photos/illust-3.webp");
         background-position: left top, left bottom;
       }
 
       /* 右パネル: 2枚とも右半分を、パネルの右端(=画面の右端)に合わせる */
       .opening-panel-r {
         background-image:
-          url("../../photos/output_photos/%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%EF%BC%92.png"),
-          url("../../photos/output_photos/%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%EF%BC%93.png");
+          url("../../photos/output_photos/illust-2.webp"),
+          url("../../photos/output_photos/illust-3.webp");
         background-position: right top, right bottom;
       }
     }
@@ -2343,6 +2309,99 @@
     }, true);
   </script>
   <!-- 計測タグ ここまで -->
+
+  <!-- 構造化データ ここから -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HomeAndConstructionBusiness",
+    "@id": "https://www.kurahayashi-tatami.com/#business",
+    "name": "倉林畳店",
+    "alternateName": "KURAHAYASHI TATAMI TEN",
+    "description": "創業83年、埼玉県児玉郡神川町の畳店。い草畳と和紙表の新調・表替え・裏返しを承ります。",
+    "url": "https://www.kurahayashi-tatami.com/",
+    "image": [
+      "https://www.kurahayashi-tatami.com/og-image.jpg"
+    ],
+    "logo": "https://www.kurahayashi-tatami.com/icon-512.png",
+    "telephone": "+81-274-52-2966",
+    "faxNumber": "+81-274-52-2966",
+    "foundingDate": "1943",
+    "slogan": "妥協しない一枚が信頼をつくる",
+    "address": {
+      "@type": "PostalAddress",
+      "postalCode": "367-0301",
+      "addressCountry": "JP",
+      "addressRegion": "埼玉県",
+      "addressLocality": "児玉郡神川町",
+      "streetAddress": "渡瀬638-7"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 36.171459,
+      "longitude": 139.063339
+    },
+    "hasMap": "https://www.google.com/maps/place/%E5%80%89%E6%9E%97%E7%95%B3%E5%BA%97/@36.171459,139.0607641,17z",
+    "sameAs": [
+      "https://www.instagram.com/kurahayashitatamiten/"
+    ],
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "08:00",
+        "closes": "20:00"
+      }
+    ],
+    "areaServed": {
+      "@type": "Place",
+      "name": "関東圏内"
+    },
+    "paymentAccepted": "現金, 銀行振込",
+    "currenciesAccepted": "JPY",
+    "priceRange": "¥¥",
+    "knowsLanguage": "ja",
+    "memberOf": {
+      "@type": "Organization",
+      "name": "本庄児玉畳商工組合"
+    },
+    "makesOffer": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "畳の表替え",
+          "description": "畳床はそのままに、畳表と畳縁を新しくする施工。"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "畳の裏返し",
+          "description": "今の畳表を裏返して使う施工。傷みが表面だけの場合に対応できる。"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "畳の新調",
+          "description": "畳床から新しくつくり替える施工。"
+        }
+      }
+    ]
+  }
+  </script>
+  <!-- 構造化データ ここまで -->
 </head>
 <body>
 
@@ -2397,8 +2456,8 @@
 
     /* CSS の @media (max-width: 599px) と同じ条件で、待つ画像を切り替える */
     var srcs = window.matchMedia('(max-width: 599px)').matches
-      ? ['../../photos/output_photos/%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%EF%BC%92.png', '../../photos/output_photos/%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%EF%BC%93.png']
-      : ['../../photos/output_photos/%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%EF%BC%91.png'];
+      ? ['../../photos/output_photos/illust-2.webp', '../../photos/output_photos/illust-3.webp']
+      : ['../../photos/output_photos/illust-1.webp'];
 
     var started = false;
     var remaining = srcs.length;
@@ -2499,10 +2558,10 @@
 <section class="hero">
   <div class="hero-photo" role="img" aria-label="倉林畳店の職人が畳をつくる仕事風景">
     <!-- スライドショー: P-01 → p-059 → p-094 → p-069 の順に4秒ごとクロスフェードし、最後はP-01へ戻ってループ -->
-    <div class="hero-slide hero-slide-flip is-active" style="background-image: url('../../photos/output_photos/p-01-hero-craftsman-sewing.jpg'); background-position: 32% 50%;"></div>
-    <div class="hero-slide" style="background-image: url('../../photos/output_photos/p-059.jpg'); background-position: 40% 50%;"></div>
-    <div class="hero-slide" style="background-image: url('../../photos/output_photos/p-094.jpg'); background-position: 45% 50%;"></div>
-    <div class="hero-slide" style="background-image: url('../../photos/output_photos/p-069.jpg'); background-position: 55% 50%;"></div>
+    <div class="hero-slide hero-slide-flip is-active" style="background-image: url('../../photos/output_photos/p-01-hero-craftsman-sewing.webp'); background-position: 32% 50%;"></div>
+    <div class="hero-slide" style="background-image: url('../../photos/output_photos/p-059.webp'); background-position: 40% 50%;"></div>
+    <div class="hero-slide" style="background-image: url('../../photos/output_photos/p-094.webp'); background-position: 45% 50%;"></div>
+    <div class="hero-slide" style="background-image: url('../../photos/output_photos/p-069.webp'); background-position: 55% 50%;"></div>
     <div class="grain"></div>
   </div>
 
@@ -2549,7 +2608,7 @@
     <div class="split">
       <div>
         <div class="frame frame-tatami">
-          <img src="../../photos/output_photos/p-37-tatami-detail-alt.jpg" alt="畳表の目と畳縁の質感が分かるクローズアップ" loading="lazy" style="object-position: 25% 50%;">
+          <img src="../../photos/output_photos/p-37-tatami-detail-alt.webp" alt="畳表の目と畳縁の質感が分かるクローズアップ" loading="lazy" style="object-position: 25% 50%;">
         </div>
       </div>
       <div class="split-text">
@@ -2583,7 +2642,7 @@
     <div class="product-grid">
       <div class="product-card reveal" style="--d:.24s">
         <div class="product-swatch swatch-igusa">
-          <img src="../../photos/output_photos/p-08-igusa-tatami-detail.jpg" alt="国産い草の畳表のアップ" loading="lazy">
+          <img src="../../photos/output_photos/p-08-igusa-tatami-detail.webp" alt="国産い草の畳表のアップ" loading="lazy">
         </div>
         <div class="product-body">
           <h3>い草畳</h3>
@@ -2592,26 +2651,26 @@
       </div>
       <div class="product-card reveal" style="--d:.36s">
         <div class="product-swatch swatch-washi">
-          <img src="../../photos/output_photos/p-13-washi-color-navy.jpg" alt="和紙表 藍色の畳表のアップ" loading="lazy">
+          <img src="../../photos/output_photos/p-13-washi-color-navy.webp" alt="和紙表 藍色の畳表のアップ" loading="lazy">
         </div>
         <div class="product-body">
           <h3>和紙表</h3>
           <p>色あせ・汚れ・日焼けに強く、美しい見た目を長く保てる和紙表。</p>
           <div class="color-dots" role="group" aria-label="和紙表のカラーバリエーション">
             <div class="color-swatch">
-              <button type="button" style="background:#3d4a6b;" data-name="藍" data-id="P-13" data-src="../../photos/output_photos/p-13-washi-color-navy.jpg" data-alt="和紙表 藍色の畳表のアップ" aria-pressed="true" aria-label="藍"></button>
+              <button type="button" style="background:#3d4a6b;" data-name="藍" data-id="P-13" data-src="../../photos/output_photos/p-13-washi-color-navy.webp" data-alt="和紙表 藍色の畳表のアップ" aria-pressed="true" aria-label="藍"></button>
               <span class="color-name" style="color:#8fa0c9;">藍</span>
             </div>
             <div class="color-swatch">
-              <button type="button" style="background:#7a5c3d;" data-name="焦茶" data-id="P-14" data-src="../../photos/output_photos/p-14-washi-color-brown.jpg" data-alt="和紙表 焦茶色の畳表のアップ" aria-pressed="false" aria-label="焦茶"></button>
+              <button type="button" style="background:#7a5c3d;" data-name="焦茶" data-id="P-14" data-src="../../photos/output_photos/p-14-washi-color-brown.webp" data-alt="和紙表 焦茶色の畳表のアップ" aria-pressed="false" aria-label="焦茶"></button>
               <span class="color-name" style="color:#c49a6c;">焦茶</span>
             </div>
             <div class="color-swatch">
-              <button type="button" style="background:#8b9a6b;" data-name="若草" data-id="P-15" data-src="../../photos/output_photos/p-15-washi-color-wakakusa.jpg" data-alt="和紙表 若草色の畳表のアップ" aria-pressed="false" aria-label="若草"></button>
+              <button type="button" style="background:#8b9a6b;" data-name="若草" data-id="P-15" data-src="../../photos/output_photos/p-15-washi-color-wakakusa.webp" data-alt="和紙表 若草色の畳表のアップ" aria-pressed="false" aria-label="若草"></button>
               <span class="color-name" style="color:#b3c48c;">若草</span>
             </div>
             <div class="color-swatch">
-              <button type="button" style="background:#c9c2ad;" data-name="生成り" data-id="P-16" data-src="../../photos/output_photos/p-16-washi-color-kinari.jpg" data-alt="和紙表 生成り色の畳表のアップ" aria-pressed="false" aria-label="生成り"></button>
+              <button type="button" style="background:#c9c2ad;" data-name="生成り" data-id="P-16" data-src="../../photos/output_photos/p-16-washi-color-kinari.webp" data-alt="和紙表 生成り色の畳表のアップ" aria-pressed="false" aria-label="生成り"></button>
               <span class="color-name" style="color:#c9c2ad;">生成り</span>
             </div>
           </div>
@@ -2641,7 +2700,7 @@
         <div class="case-track">
           <div class="case-slide" role="group" aria-roledescription="スライド" aria-label="1 / 3">
             <div class="case-card">
-              <div class="frame"><img src="../../photos/output_photos/p-23-case-longtime-customer-after.jpg" alt="施工後：国産い草の畳表に張り替えられた和室" loading="lazy"></div>
+              <div class="frame"><img src="../../photos/output_photos/p-23-case-longtime-customer-after.webp" alt="施工後：国産い草の畳表に張り替えられた和室" loading="lazy"></div>
               <div class="case-body">
                 <div class="cat">表替え</div>
                 <div class="work">国産い草</div>
@@ -2655,7 +2714,7 @@
           </div>
           <div class="case-slide" role="group" aria-roledescription="スライド" aria-label="2 / 3">
             <div class="case-card">
-              <div class="frame"><img src="../../photos/output_photos/p-25-case-customer2-after-alt.jpg" alt="施工後：和紙表に張り替えた10畳の和室" loading="lazy"></div>
+              <div class="frame"><img src="../../photos/output_photos/p-25-case-customer2-after-alt.webp" alt="施工後：和紙表に張り替えた10畳の和室" loading="lazy"></div>
               <div class="case-body">
                 <div class="cat">表替え</div>
                 <div class="work">和紙表</div>
@@ -2669,7 +2728,7 @@
           </div>
           <div class="case-slide" role="group" aria-roledescription="スライド" aria-label="3 / 3">
             <div class="case-card">
-              <div class="frame"><img src="../../photos/output_photos/p-32-case-tearoom-after.jpg" alt="施工後：国産い草の畳表に張り替えられた8畳の和室" loading="lazy"></div>
+              <div class="frame"><img src="../../photos/output_photos/p-32-case-tearoom-after.webp" alt="施工後：国産い草の畳表に張り替えられた8畳の和室" loading="lazy"></div>
               <div class="case-body">
                 <div class="cat">表替え</div>
                 <div class="work">国産い草</div>
@@ -2713,7 +2772,7 @@
     <div class="crafts-grid">
       <div class="craft-card reveal" style="--d:.24s">
         <!-- 写真枠 P-04 / 代表・3代目 倉林俊之 -->
-        <div class="craft-photo p1"><img src="../../photos/output_photos/p-04-owner-portrait.jpg" alt="代表・3代目 倉林俊之が作業場で笑顔で立つ人物カット" loading="lazy"></div>
+        <div class="craft-photo p1"><img src="../../photos/output_photos/p-04-owner-portrait.webp" alt="代表・3代目 倉林俊之が作業場で笑顔で立つ人物カット" loading="lazy"></div>
         <div class="craft-info">
           <div class="craft-role">3代目・代表</div>
           <div class="craft-name">倉林 俊之</div>
@@ -2722,7 +2781,7 @@
       </div>
       <div class="craft-card reveal" style="--d:.36s">
         <!-- 写真枠 P-05 / 4代目 倉林尚輝 -->
-        <div class="craft-photo p2"><img src="../../photos/output_photos/p-099.jpg" alt="4代目 倉林尚輝が作業場で笑顔で立つ人物カット" loading="lazy" style="object-position: 40% 50%;"></div>
+        <div class="craft-photo p2"><img src="../../photos/output_photos/p-099.webp" alt="4代目 倉林尚輝が作業場で笑顔で立つ人物カット" loading="lazy" style="object-position: 40% 50%;"></div>
         <div class="craft-info">
           <div class="craft-role">4代目・修行中</div>
           <div class="craft-name">倉林 尚輝</div>
@@ -2797,7 +2856,7 @@
     <!-- Instagram Button -->
     <div class="footer-instagram">
       <a class="insta-btn" href="https://www.instagram.com/kurahayashitatamiten/" target="_blank" rel="noopener noreferrer" aria-label="Instagramを開く">
-        <img class="insta-icon" src="../../photos/output_photos/instagram-icon-v2.png" alt="Instagram" width="22" height="22" loading="lazy" decoding="async">
+        <img class="insta-icon" src="../../photos/output_photos/instagram-icon-v2.webp" alt="Instagram" width="22" height="22" loading="lazy" decoding="async">
         <span>Instagram</span>
       </a>
     </div>
@@ -2894,12 +2953,36 @@
     const photo = card.querySelector('.product-swatch img');
     if (!photo) return;
 
-    // 初回クリック時のちらつきを防ぐため、他の色を先読みしておく
-    dots.forEach(function (dot) {
-      if (dot.dataset.src !== photo.getAttribute('src')) {
-        const pre = new Image();
-        pre.src = dot.dataset.src;
-      }
+    // 初回クリック時のちらつきを防ぐため他の色を先読みするが、
+    // ページを開いた全員に降らせると重いので、色見本が画面に入ってからにする。
+    // (色見本は画面下方にあるため、初期表示の読み込みから外れる)
+    let preloaded = false;
+    const preload = function () {
+      if (preloaded) return;
+      preloaded = true;
+      dots.forEach(function (dot) {
+        if (dot.dataset.src !== photo.getAttribute('src')) {
+          const pre = new Image();
+          pre.src = dot.dataset.src;
+        }
+      });
+    };
+
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(function (entries) {
+        if (entries.some(function (e) { return e.isIntersecting; })) {
+          preload();
+          io.disconnect();
+        }
+      }, { rootMargin: '200px' });
+      io.observe(dots[0].closest('.color-dots'));
+    } else {
+      preload();
+    }
+    // 画面に入る前に触られた場合にも備える
+    dots.forEach(function (d) {
+      d.addEventListener('pointerenter', preload, { once: true });
+      d.addEventListener('focus', preload, { once: true });
     });
 
     dots.forEach(function (dot) {

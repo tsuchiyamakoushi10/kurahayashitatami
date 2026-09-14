@@ -6,7 +6,7 @@
   <title>Footer Component - 倉林畳店</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     /* ============ DESIGN TOKENS ============ */
     :root {
@@ -61,7 +61,7 @@
            (他ページの HERO の暗幕と同程度の濃さ) */
         linear-gradient(rgba(21, 18, 13, .86), rgba(21, 18, 13, .86)),
         /* 2枚目: 背景写真 P-046 */
-        url("../../photos/output_photos/p-046.jpg") 50% 50% / cover no-repeat,
+        url("../../photos/output_photos/p-046.webp") 50% 50% / cover no-repeat,
         /* 3枚目: 写真が読み込めないときのフォールバック(従来の背景色) */
         var(--sumi-2);
       color: rgba(242, 234, 217, .7);
@@ -182,7 +182,7 @@
       transition: transform .25s ease, background .25s ease, border-color .25s ease;
     }
 
-    /* SVGのグリフから photos/output_photos/instagram-icon-v2.png に差し替え。
+    /* SVGのグリフから photos/output_photos/instagram-icon-v2.webp に差し替え。
        見た目の大きさが変わらないよう、寸法は元の 22px のまま */
     .insta-btn img {
       width: 22px;
@@ -303,7 +303,7 @@
     <!-- Instagram Button -->
     <div class="footer-instagram">
       <a class="insta-btn" href="https://www.instagram.com/kurahayashitatamiten/" target="_blank" rel="noopener noreferrer" aria-label="Instagramを開く">
-        <img class="insta-icon" src="../../photos/output_photos/instagram-icon-v2.png" alt="Instagram" width="22" height="22" loading="lazy" decoding="async">
+        <img class="insta-icon" src="../../photos/output_photos/instagram-icon-v2.webp" alt="Instagram" width="22" height="22" loading="lazy" decoding="async">
         <span>Instagram</span>
       </a>
     </div>

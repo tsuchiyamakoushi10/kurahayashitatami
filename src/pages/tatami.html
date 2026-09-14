@@ -27,7 +27,7 @@
   <title>畳について | 倉林畳店</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../design/tokens.css">
   <link rel="stylesheet" href="../../design/components.css">
   <style>
@@ -114,7 +114,7 @@
       z-index: -1;
       pointer-events: none;
       opacity: .12;
-      background-image: url("../../photos/output_photos/%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%EF%BC%91.png");
+      background-image: url("../../photos/output_photos/illust-1.webp");
       background-repeat: no-repeat;
       background-position: center center;
       /* 画面いっぱいに合わせ、四隅の装飾が画面の四隅に来るようにする */
@@ -136,7 +136,7 @@
       /* 上部: イラスト2。差し替えるのは画像・位置・サイズだけで、
          固定・重ね順・不透明度は上のルールをそのまま引き継ぐ */
       body::before {
-        background-image: url("../../photos/output_photos/%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%EF%BC%92.png");
+        background-image: url("../../photos/output_photos/illust-2.webp");
         background-position: center top;
         /* 画面幅いっぱい。高さは元の比率(3:2)のまま伸縮させない */
         background-size: 100% auto;
@@ -151,7 +151,7 @@
         pointer-events: none;
         /* 濃さは上部(イラスト2)と同じ。調整はこの2箇所を揃えて行う */
         opacity: .12;
-        background-image: url("../../photos/output_photos/%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88%EF%BC%93.png");
+        background-image: url("../../photos/output_photos/illust-3.webp");
         background-repeat: no-repeat;
         background-position: center bottom;
         background-size: 100% auto;
@@ -1089,7 +1089,7 @@
            (他ページの HERO の暗幕と同程度の濃さ) */
         linear-gradient(rgba(21, 18, 13, .86), rgba(21, 18, 13, .86)),
         /* 2枚目: 背景写真 P-046 */
-        url("../../photos/output_photos/p-046.jpg") 50% 50% / cover no-repeat,
+        url("../../photos/output_photos/p-046.webp") 50% 50% / cover no-repeat,
         /* 3枚目: 写真が読み込めないときのフォールバック(従来の背景色) */
         var(--sumi-2);
       color: rgba(242, 234, 217, .7);
@@ -1210,7 +1210,7 @@
       transition: transform .25s ease, background .25s ease, border-color .25s ease;
     }
 
-    /* SVGのグリフから photos/output_photos/instagram-icon-v2.png に差し替え。
+    /* SVGのグリフから photos/output_photos/instagram-icon-v2.webp に差し替え。
        見た目の大きさが変わらないよう、寸法は元の 22px のまま */
     .insta-btn img {
       width: 22px;
@@ -1420,6 +1420,93 @@
     }, true);
   </script>
   <!-- 計測タグ ここまで -->
+
+  <!-- 構造化データ ここから -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "ホーム",
+        "item": "https://www.kurahayashi-tatami.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "畳について",
+        "item": "https://www.kurahayashi-tatami.com/tatami"
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "畳が色あせて、部屋が古く見えます。きれいになりますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "畳表を新しくすることで、お部屋の印象は大きく変わります。実際に「新築になったみたい」「部屋も明るくなりました」というお声をいただいています。 傷みが表面だけであれば、畳表を裏返して使う「裏返し」で対応できる場合もあります。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "費用や張り替えの時期が分からず、そのままになっています。",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "お見積りは無料です。畳の状態を確認したうえで、裏返し・表替え・新調のどれが適しているかをご提案します。 目安は、新品から約3〜5年で裏返し、約5〜10年で表替え、約15〜20年以上で新調です。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "子どもが安心して遊べる部屋にしたいのですが。",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "畳には適度な弾力があり、転んだときの衝撃をやわらげてくれます。 傷や汚れが気になる場合は、色あせやシミに強くお手入れが楽な和紙表もおすすめです。カラーもお選びいただけます。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "畳の下に新聞紙を敷いても大丈夫ですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "おすすめしていません。 新聞紙は湿気をため込みやすく、カビやシロアリが発生する原因になることがあります。 畳本来の調湿機能を活かすためにも、畳の下には何も敷かないことをおすすめします。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "市販のカビ止めを使っても大丈夫ですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "使用しても問題ありません。 当店では施工時にカビ対策を施していますので、基本的には追加で使用する必要はありません。 湿気対策としては、お部屋の換気を心がけていただくことも大切です。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "畳の上に上敷きやカーペットを敷いてもいいですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "あまりおすすめしていません。 畳と上敷きの間に入り込んだホコリが擦れることで、畳表を傷めたりツヤが失われたりする原因になります。 また、湿気がこもりやすくなるため、畳を長持ちさせるためにも、そのままお使いいただくことをおすすめします。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "表替えをお願いする場合、家具や荷物は移動しておいた方がいいですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "そのままで大丈夫です。 家具や荷物の移動は当店で対応いたしますので、お客様に事前に動かしていただく必要はありません。安心してお任せください。"
+        }
+      }
+    ]
+  }
+  </script>
+  <!-- 構造化データ ここまで -->
 </head>
 <body>
 
@@ -1509,7 +1596,7 @@
       <p class="lead lead-mincho reveal" style="--d:.12s">畳は、大きく3つの部材でできています。</p>
     </div>
     <figure class="tatami-structure reveal" style="--d:.18s">
-      <img src="../../photos/output_photos/p-113.jpg"
+      <img src="../../photos/output_photos/p-113.webp"
            alt="畳の断面構造。表面の畳表（たたみおもて）、芯となる畳床（たたみどこ）、端を保護する畳縁（たたみべり）の3つの部材からなることを示すイラスト"
            width="1536" height="1024" loading="lazy" decoding="async">
     </figure>
@@ -1793,7 +1880,7 @@
     <!-- Instagram Button -->
     <div class="footer-instagram">
       <a class="insta-btn" href="https://www.instagram.com/kurahayashitatamiten/" target="_blank" rel="noopener noreferrer" aria-label="Instagramを開く">
-        <img class="insta-icon" src="../../photos/output_photos/instagram-icon-v2.png" alt="Instagram" width="22" height="22" loading="lazy" decoding="async">
+        <img class="insta-icon" src="../../photos/output_photos/instagram-icon-v2.webp" alt="Instagram" width="22" height="22" loading="lazy" decoding="async">
         <span>Instagram</span>
       </a>
     </div>

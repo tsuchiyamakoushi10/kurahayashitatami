@@ -1,4 +1,58 @@
+# 倉林畳店 https://www.kurahayashi-tatami.com
+
+# 検索エンジン・AIクローラーとも全ページの巡回を許可する。
+# 会員向けページや非公開領域は無く、内部資料は .vercelignore で配信自体を止めている。
 User-agent: *
+Allow: /
+
+# --- AI検索・生成AIのクローラー ---
+# 明示的に許可することで、AIの回答に店舗情報や畳の解説が引用されうるようにする。
+# 引用されたくなくなった場合は、該当行を Disallow: / に変えれば個別に止められる。
+
+# OpenAI (ChatGPT)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic (Claude)
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+# Google (Gemini / AI Overviews)
+User-agent: Google-Extended
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Microsoft (Copilot)
+User-agent: bingbot
+Allow: /
+
+# Apple (Siri / Spotlight)
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Common Crawl (多くのAIの学習元)
+User-agent: CCBot
 Allow: /
 
 Sitemap: https://www.kurahayashi-tatami.com/sitemap.xml
