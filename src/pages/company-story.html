@@ -1813,6 +1813,23 @@
       text-align: center;
     }
 
+    .footer-bottom a {
+      color: inherit;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color .28s ease;
+    }
+
+    .footer-bottom a:hover,
+    .footer-bottom a:focus-visible {
+      color: var(--gold);
+    }
+
+    .footer-bottom .copyright {
+      display: block;
+      margin-top: 10px;
+    }
+
     /* ============ 改行位置の調整（スマホ表示を優先） ============ */
     /* .nw: 意味の切れ目でない位置での改行を防ぐ */
     .nw {
@@ -2258,7 +2275,6 @@
         <h4>会社情報</h4>
         <ul class="footer-links">
           <li><a href="/company-story">想いと歩み</a></li>
-          <li><a href="/privacy">プライバシーポリシー</a></li>
           <li><a href="https://www.google.com/maps/place/%E5%80%89%E6%9E%97%E7%95%B3%E5%BA%97/@36.171459,139.0607641,17z/data=!3m1!4b1!4m6!3m5!1s0x601ec05dda129be5:0x60b5bc5057f51a4!8m2!3d36.171459!4d139.063339!16s%2Fg%2F1tfjfmjk?entry=ttu&amp;g_ep=EgoyMDI2MDcyMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">アクセス</a></li>
         </ul>
       </div>
@@ -2274,7 +2290,8 @@
 
     <!-- Copyright -->
     <div class="footer-bottom">
-      © 2026 Kurahayashi Tatami. All Rights Reserved.
+      <a href="/privacy">プライバシーポリシー</a>
+      <span class="copyright">© 2026 Kurahayashi Tatami. All Rights Reserved.</span>
     </div>
   </div>
 </footer>

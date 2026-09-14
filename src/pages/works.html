@@ -1084,6 +1084,23 @@
       text-align: center;
     }
 
+    .footer-bottom a {
+      color: inherit;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color .28s ease;
+    }
+
+    .footer-bottom a:hover,
+    .footer-bottom a:focus-visible {
+      color: var(--gold);
+    }
+
+    .footer-bottom .copyright {
+      display: block;
+      margin-top: 10px;
+    }
+
     /* ============ 信頼セクション (TOPの .final-cta の型) ============ */
     .igusa-tex {
       position: relative;
@@ -1311,7 +1328,6 @@
       <ul>
         <li><a href="/">TOP</a></li>
         <li><a href="/company-story">想いと歩み</a></li>
-          <li><a href="/privacy">プライバシーポリシー</a></li>
         <li><a href="/tatami">畳について</a></li>
         <li><a href="/products">商品紹介</a></li>
         <li><a href="/works" aria-current="page">施工事例</a></li>
@@ -1519,7 +1535,8 @@
 
     <!-- Copyright -->
     <div class="footer-bottom">
-      © 2026 Kurahayashi Tatami. All Rights Reserved.
+      <a href="/privacy">プライバシーポリシー</a>
+      <span class="copyright">© 2026 Kurahayashi Tatami. All Rights Reserved.</span>
     </div>
   </div>
 </footer>
